@@ -1,0 +1,48 @@
+# Invisible files
+.*
+!.gitignore
+!.devctl
+!.gitattributes
+
+# Vim project files
+!.vimproject
+
+# Built files
+a.out
+*.o
+*.so
+*.so.*
+*.dylib
+*.dll
+*.lib
+*.exe
+*.app
+
+test/QumulusTestExe
+test/QumulusTestExe.exe
+
+# Generated documenation
+docs/html/**
+docs/latex/**
+docs/xml/**
+
+# Backup and patch files
+*~
+*.bak
+*.orig
+*.rej
+*.patch
+*.tmp
+*.swp
+
+# CMake generated files
+CMakeCache.txt
+CMakeFiles/**
+Makefile
+cmake_install.cmake
+build/**
+build-*/**
+
+# OS Specific
+.DS_Store
+Thumbs.db
