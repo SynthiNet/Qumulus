@@ -1,0 +1,327 @@
+" Project vimrc file for Qumulus
+" Author: Frank Erens
+
+" Options {{{1
+
+" Helper functions {{{2
+fun! s:GitInfo(flag)
+  return substitute(system("git config ".a:flag), '.$', '', '')
+endfun
+" }}}
+
+
+if !exists("g:QumulusName")
+  let g:LibSylphName = s:GitInfo("user.name")
+endif
+
+if !exists("g:QumulusEmail")
+  let g:LibSylphEmail = s:GitInfo("user.email")
+endif
+" }}}
+
+exe "set makeprg=cd\\ ".g:ProjectRoot.";\\ ./developers.sh\\ cmake;\\ make\\ -C\\ ".
+    \ g:ProjectRoot."/build"
+
+exe "set path+=".g:ProjectRoot."/deps"
+
+" Plugin settings {{{1
+let g:clang_user_options = '-std=c++11 -stdlib=libc++ -I./src' . 
+    \ '-I./deps/gtest/include -DGTEST_USE_OWN_TR1_TUPLE'
+" }}}
+
+" Helpers {{{1
+
+fun! s:DefaultCompiler() 
+  if has("macunix")
+    return "clang++"
+  else
+    return "g++"
+  endif
+endfun
+
+fun! s:SuffixForCompiler(compiler) 
+  if match(a:compiler, 'clang') != -1
+    return 'clang'
+  elseif match(a:compiler, 'g++') != -1
+    return 'gcc'
+  elseif match(a:compiler, '/') != -1
+    return fnamemodify(a:compiler, ':h')
+  elseif match(a:compiler, 'default') != -1
+    return ''
+  else
+    return a:compiler
+  endif
+endfun
+
+fun! s:CMake(...)
+  if a:0 == 1
+    let l:compiler = a:1
+    let l:suffix = '-'.s:SuffixForCompiler(a:1)
+  else
+    let l:compiler = s:DefaultCompiler()
+    let l:suffix = ''
+  endif
+
+  exe "lcd ".g:ProjectRoot
+  exe "!rm -rf build".l:suffix."; mkdir -p build".l:suffix.";"
+        \ "cd build".l:suffix."; " . 
+        \ "cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_COMPILER=".l:compiler.
+        \ " .."
+endfun
+
+fun! s:ToRelativePath(path)
+  return substitute(a:path, g:ProjectRoot, '', '')
+endfun
+
+fun! s:InProject(path)
+  return match(a:path, "^".g:ProjectRoot) != -1
+endfun
+
+fun! s:EditInProject(path)
+  exe "e ".g:ProjectRoot.a:path
+endfun
+
+fun! s:WarningMsg(msg)
+  echohl WarningMsg
+  echo a:msg
+  echohl NONE
+endfun
+
+" }}}
+
+" Templates {{{1
+
+fun! s:GenerateHeaderGuard()
+  let l:file = s:ToRelativePath(expand("%:p"))
+  
+  return 
+        \ substitute(
+        \ substitute(
+        \ substitute(
+        \ substitute(l:file, "^/src/", "", ""),
+        \            "/", "_", 'g'),
+        \            ".h$", "", ""),
+        \            ".*", "\\U&", "")."_H_"
+endfun
+
+fun! s:GenerateHeaderName()
+  let l:file = s:ToRelativePath(expand("%:p"))
+
+  if match(l:file, "^/test", "") != -1
+    return substitute(
+         \ substitute(l:file, "^/test", "Qumulus", ''),
+         \            "\.cpp$", ".h", '')
+  else
+    return expand("%:t:r").".h"
+  endif
+endfun
+
+" Note: this function is global as snippets call it
+fun! g:GenerateTestName()
+  return "Test".expand("%:t:r")
+endfun
+
+fun! s:ReadTemplateHelper(tpl)
+  let l:author = g:LibSylphName 
+  let l:email = g:LibSylphEmail
+  let l:year = strftime("%Y")
+
+  exe "0r ".g:ProjectRoot."/.vimproject/tpl/".a:tpl
+  exe "silent %s/COPYRIGHT HERE/Author: ".l:author
+
+  exe "silent! %s/HEADER_GUARD_HERE/".s:GenerateHeaderGuard()
+  exe "silent! %s/HEADER_HERE/".escape(s:GenerateHeaderName(), '/')
+  exe "silent! %s/TEST_NAME_HERE/".g:GenerateTestName()
+
+  exe "silent! ?Code here"
+
+  nohl
+  set modified
+endfun
+
+fun! s:ReadTemplate(exists)
+  if !s:InProject(expand("%:p"))
+    return
+  endif
+
+  if !a:exists || getfsize(expand("%:p")) <= 2
+    let l:file = s:ToRelativePath(expand("%:p"))
+
+    if match(l:file, "^/src/Qumulus", "") != -1
+      if match(l:file, "\.h$", "") != -1
+        call s:ReadTemplateHelper("tpl.h")
+      elseif match(l:file, "^\.cpp$", "") != -1
+        call s:ReadTemplateHelper("tpl.cpp")
+      endif
+    elseif match(l:file, "^/test", "") != -1 && 
+          \ match(l:file, "\.cpp$", "") != -1
+      call s:ReadTemplateHelper("test.tpl.cpp")
+    endif
+  endif
+endfun
+
+" }}}
+
+" Build & Run {{{1
+fun! s:RunTests(...)
+  if a:0 == 1
+    let l:suffix = '-'.s:SuffixForCompiler(a:1)
+  else
+    let l:suffix = ''
+  endif
+
+  exe "bel 16new"
+  exe "lcd ".g:ProjectRoot."/build".l:suffix
+  set buftype=nofile
+  set bufhidden=hide
+  setlocal noswapfile
+  setlocal filetype=gtest
+  setlocal nospell
+  exe "0r !make test"
+endfun
+
+fun! s:SwitchCompiler(compiler)
+  if a:compiler == 'default'
+    let l:suffix = ''
+  else
+    let l:suffix = '-'.s:SuffixForCompiler(a:compiler)
+  endif
+
+  exe "set makeprg=make\\ -C\\ ".g:ProjectRoot."/build".l:suffix
+  echo "Now building in /build".l:suffix
+endfun
+" }}}
+
+" Go To commands {{{1
+
+fun! s:FindHeader()
+  let l:file = s:ToRelativePath(expand("%:p"))
+
+  if match(l:file, "^/src/Qumulus", "") != -1
+    if match(l:file, "\.h$", "") != -1
+      call s:WarningMsg("Already in header file.")
+      return ""
+    elseif match(l:file, "\.cpp$", "") != -1
+      return substitute(l:file, "\.cpp$", ".h", "")
+    else
+      call s:WarningMsg("Not in a source file.")
+      return ""
+    endif
+  elseif match(l:file, "^/test.*\.cpp$", "") != -1
+    return substitute(
+                       \ substitute(l:file, "\.cpp$", ".h", ""),
+                       \            "^/test", "/src/Qumulus", "")
+  else
+    call s:WarningMsg("Not in a source file.")
+    return ""
+  endif
+endfun
+
+fun! s:FindSource()
+  let l:file = s:ToRelativePath(expand("%:p"))
+
+  if match(l:file, "^/src/Qumulus", "") != -1
+    if match(l:file, "\.cpp$", "") != -1
+      call s:WarningMsg("Already in source file.")
+      return ""
+    elseif match(l:file, "\.h$", "") != -1
+      return substitute(l:file, "\.h$", ".cpp", "") 
+    else
+      call s:WarningMsg("Not in a source file.")
+      return ""
+    endif
+  elseif match(l:file, "^/test.*\.cpp$", "") != -1
+    return substitute(l:file, "^/test", "/src/Qumulus", "") 
+  else
+    call s:WarningMsg("Not in a source file.")
+    return ""
+  endif
+endfun
+
+fun! s:FindTest()
+  let l:file = s:ToRelativePath(expand("%:p"))
+
+  if match(l:file, "^/test.*\.cpp$", "") != -1
+      call s:WarningMsg("Already in test file.")
+      retur ""
+  elseif match(l:file, "^/src/Qumulus", "") != -1
+    if match(l:file, "\.cpp$", "") != -1
+      return substitute(l:file, "^/src/Qumulus", "/test", "")
+    elseif match(l:file, "\.h$", "") != -1
+      return substitute(
+                         \ substitute(l:file, "\.h$", ".cpp", ""),
+                         \            "^/src/Qumulus", "/test", "")
+    else
+      call s:WarningMsg("Not in a source file.")
+    endif
+  else
+    call s:WarningMsg("Not in a source file.")
+  endif
+endfun
+
+fun! s:GoToHeader()
+  let l:file = s:FindHeader() 
+  if l:file != ""
+    call s:EditInProject(l:file)
+  endif
+endfun
+
+fun! s:GoToSource()
+  let l:file = s:FindSource() 
+  if l:file != ""
+    call s:EditInProject(l:file)
+  endif
+endfun
+
+fun! s:GoToTest()
+  let l:file = s:FindTest() 
+  if l:file != ""
+    call s:EditInProject(l:file)
+  endif
+endfun
+
+fun! g:Header()
+  let l:file = s:FindHeader()
+  if l:file == ""
+    return ""
+  else
+    return g:ProjectRoot.l:file
+  endif
+endfun
+
+fun! g:Source()
+  let l:file = s:FindSource()
+  if l:file == ""
+    return ""
+  else
+    return g:ProjectRoot.l:file
+  endif
+endfun
+
+fun! g:Test()
+  let l:file = s:FindTest()
+  if l:file == ""
+    return ""
+  else
+    return g:ProjectRoot.l:file
+  endif
+endfun
+
+" }}}
+
+" Commands {{{
+command! -nargs=? CMake call s:CMake(<f-args>)
+command! -nargs=? RunTests call s:RunTests(<f-args>)
+command! -nargs=1 SwitchCompiler call s:SwitchCompiler(<f-args>)
+
+command! Header call s:GoToHeader()
+command! Source call s:GoToSource()
+command! Test   call s:GoToTest()
+
+au! BufWinEnter * call s:ReadTemplate(1)
+
+" }}}
+
+let b:ProjectFileSuccessfullyLoaded = 1
+
+" vim: fdm=marker
