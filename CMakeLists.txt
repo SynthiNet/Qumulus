@@ -24,8 +24,8 @@ find_package(Qt5Xml REQUIRED)
 find_package(Qt5XmlPatterns REQUIRED)
 find_package(Qt5Help REQUIRED)
 find_package(Qt5Svg REQUIRED)
-find_package(Qt5Webkit REQUIRED)
-find_package(Qt5WebkitWidgets REQUIRED)
+find_package(Qt5WebKit REQUIRED)
+find_package(Qt5WebKitWidgets REQUIRED)
 
 # Gtest options -- does not compile on Clang without these.
 set(GTEST_USE_OWN_TR1_TUPLE 1)
