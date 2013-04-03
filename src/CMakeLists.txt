@@ -14,6 +14,8 @@ set(QUML_ALL_SRC ${QUMULUS_LIB_ALL_SRC} ${QUMULUS_UML_ALL_SRC})
 add_library(quml STATIC ${QUML_ALL_SRC})
 qt5_use_modules(quml Core)
 
-add_executable(qumulus main.cpp ${QUMULUS_GUI_ALL_SRC})
-target_link_libraries(qumulus quml)
-qt5_use_modules(qumulus Widgets)
+add_executable(${QUMULUS} main.cpp ${QUMULUS_GUI_ALL_SRC})
+target_link_libraries(${QUMULUS} quml)
+qt5_use_modules(${QUMULUS} Widgets)
+
+install(TARGETS ${QUMULUS} RUNTIME DESTINATION ${BINARY_PATH})
