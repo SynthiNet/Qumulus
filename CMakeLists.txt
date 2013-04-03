@@ -23,6 +23,7 @@ if(WIN32)
 elseif(APPLE)
     set(CPACK_PACKAGE_FILE_NAME 
         "Qumulus-${CPACK_PACKAGE_VERSION_MAJOR}.${CPACK_PACKAGE_VERSION_MINOR}")
+    set(CPACK_DMG_VOLUME_NAME "Qumulus")
     set(CPACK_GENERATOR "DragNDrop")
 
     set(PLIST_PATH "${CMAKE_SOURCE_DIR}/Info.plist")
