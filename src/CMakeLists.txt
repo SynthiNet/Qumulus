@@ -16,9 +16,12 @@ qt5_use_modules(quml Core)
 
 add_executable(${QUMULUS} MACOSX_BUNDLE main.cpp ${QUMULUS_GUI_ALL_SRC})
 target_link_libraries(${QUMULUS} quml)
-set_target_properties(${QUMULUS} PROPERTIES
-    MACOSX_BUNDLE_INFO_PLIST ${PLIST_PATH})
 qt5_use_modules(${QUMULUS} Widgets)
+
+if(APPLE)
+    set_target_properties(${QUMULUS} PROPERTIES
+        MACOSX_BUNDLE_INFO_PLIST ${PLIST_PATH})
+endif()
 
 install(TARGETS ${QUMULUS} 
     RUNTIME DESTINATION ${BINARY_PATH} 
