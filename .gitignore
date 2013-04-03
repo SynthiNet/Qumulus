@@ -7,6 +7,9 @@
 # Vim project files
 !.vimproject
 
+# CMake configure script
+cmake.sh
+
 # Built files
 a.out
 *.o

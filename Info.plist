@@ -27,7 +27,7 @@
   <key>CFBundleGetInfoString</key>
   <string>Qumulus 0.1</string>
   <key>CFBundleIconFile</key>
-  <string>Qumulus</string>
+  <string>qumulus</string>
   <key>CFBundleIdentifier</key>
   <string>net.synthi.Qumulus</string>
   <key>CFBundleInfoDictionaryVersion</key>

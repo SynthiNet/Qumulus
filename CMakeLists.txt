@@ -23,12 +23,11 @@ if(WIN32)
 elseif(APPLE)
     set(CPACK_PACKAGE_FILE_NAME 
         "Qumulus-${CPACK_PACKAGE_VERSION_MAJOR}.${CPACK_PACKAGE_VERSION_MINOR}")
-    set(CPACK_GENERATOR "Bundle")
-    set(CPACK_BUNDLE_NAME "Qumulus")
-    set(CPACK_BUNDLE_PLIST "${CMAKE_SOURCE_DIR}/Info.plist")
-    set(CPACK_BUNDLE_ICON "${CMAKE_SOURCE_DIR}/logo/qumulus.icns")
+    set(CPACK_GENERATOR "DragNDrop")
 
-    set(BINARY_PATH "../MacOS")
+    set(PLIST_PATH "${CMAKE_SOURCE_DIR}/Info.plist")
+    set(BINARY_PATH ".")
+    set(RESOURCE_PATH "Qumulus.app/Contents/Resources")
 
     set(QUMULUS "Qumulus")
 elseif(UNIX AND NOT APPLE)
@@ -69,5 +68,6 @@ add_subdirectory(test)
 
 # UML file icon for OS X
 if(APPLE)
-    install(FILES "logo/uml/uml-mac.icns" DESTINATION .)
+    install(FILES "logo/qumulus.icns" DESTINATION ${RESOURCE_PATH})
+    install(FILES "logo/uml/uml-mac.icns" DESTINATION ${RESOURCE_PATH})
 endif()
