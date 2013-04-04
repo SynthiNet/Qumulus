@@ -24,11 +24,16 @@ else()
 endif()
 
 if(WIN32)
+    set(CPACK_PACKAGE_FILE_NAME
+        "Qumulus-${QUMULUS_VERSION}")
+    set(CPACK_NSIS_INSTALLED_ICON_NAME qumulus.exe)
+    set(CPACK_GENERATOR "NSIS")
+
     set(QUMULUS "qumulus")
 
     set(BINARY_DEST ".")
     set(RESOURCE_DEST "data")
-
+    set(QT_PLUGIN_DEST_DIR ".")
 elseif(APPLE)
     set(CPACK_PACKAGE_FILE_NAME 
         "Qumulus-${QUMULUS_VERSION}")
