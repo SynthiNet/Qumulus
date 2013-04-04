@@ -71,10 +71,10 @@ elseif(WIN32)
 
     include(GetPrerequisites)
 
-    get_prerequisites(\${CMAKE_INSTALL_PREFIX}/${QUMULUS}.exe 
+    get_prerequisites(${CMAKE_INSTALL_PREFIX}/${QUMULUS}.exe 
         WINDOWS_LIBRARIES 0 1 \"\" \"\")
 
-    install(FILES \${WINDOWS_LIBRARIES} ${BINARY_PATH})
+    install(FILES ${WINDOWS_LIBRARIES} DESTINATION ${BINARY_PATH})
 
 endif()
 
