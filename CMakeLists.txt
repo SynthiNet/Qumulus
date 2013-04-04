@@ -33,7 +33,7 @@ elseif(APPLE)
 
     set(BINARY_DEST ".")
     set(RESOURCE_DEST "${QUMULUS_BUNDLE_ROOT}/Resources")
-    set(QT_PLUGIN_DEST_DIR "${QUMULUS_BUNDLE_ROOT}/Frameworks/plugins")
+    set(QT_PLUGIN_DEST_DIR "${QUMULUS_BUNDLE_ROOT}/plugins")
     set(QT_CONFIG_DEST_DIR "${RESOURCE_DEST}")
 
 elseif(UNIX AND NOT APPLE)
@@ -66,7 +66,7 @@ find_package(Qt5WebKitWidgets REQUIRED)
 
 # Qt doesn't provide this for us anymore...
 set(QT5_PLUGIN_DIR ${_qt5Core_install_prefix}/plugins)
-message(${QT5_PLUGIN_DIR})
+set(QT5_LIBRARY_DIR ${_qt5Core_install_prefix}/lib)
 
 # Gtest options -- does not compile on Clang without these.
 set(GTEST_USE_OWN_TR1_TUPLE 1)

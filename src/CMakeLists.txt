@@ -27,22 +27,43 @@ add_executable(${QUMULUS} MACOSX_BUNDLE
 )
 
 target_link_libraries(${QUMULUS} quml)
-qt5_use_modules(${QUMULUS} Widgets)
+qt5_use_modules(${QUMULUS} Widgets PrintSupport Svg Xml)
 
 if(APPLE)
     set_target_properties(${QUMULUS} PROPERTIES
         MACOSX_BUNDLE_INFO_PLIST ${PLIST_PATH})
 endif()
 
+# Installation
+install(TARGETS ${QUMULUS} 
+    RUNTIME DESTINATION ${BINARY_DEST} 
+    BUNDLE DESTINATION ${BINARY_DEST})
+
 # Deployment
 if(APPLE)
     # Install Qt plugins
-    # TODO
+    install(DIRECTORY "${QT5_PLUGIN_DIR}/imageformats" 
+        DESTINATION ${QT_PLUGIN_DEST_DIR} COMPONENT Runtime)
+    install(DIRECTORY "${QT5_PLUGIN_DIR}/platforms" 
+        DESTINATION ${QT_PLUGIN_DEST_DIR} COMPONENT Runtime)
+    install(DIRECTORY "${QT5_PLUGIN_DIR}/printsupport" 
+        DESTINATION ${QT_PLUGIN_DEST_DIR} COMPONENT Runtime)
+
+    # Install qt.conf file
+    INSTALL(CODE "
+        file(WRITE 
+            \"\${CMAKE_INSTALL_PREFIX}/${QT_CONFIG_DEST_DIR}/qt.conf\" 
+            \"
+            \")
+        " COMPONENT Runtime)
 
     # Fix library references
     install(CODE "
+        file(GLOB_RECURSE QTPLUGINS
+            \"\${CMAKE_INSTALL_PREFIX}/${QT_PLUGIN_DEST_DIR}/*${CMAKE_SHARED_LIBRARY_SUFFIX}\")
         include(BundleUtilities)
-        fixup_bundle(${CMAKE_BINARY_DIR}/src/${QUMULUS}.app \"\" \"\")
+        fixup_bundle(${CMAKE_BINARY_DIR}/${QUMULUS}.app 
+            \"\${QTPLUGINS}\" \"${QT5_LIBRARY_DIR}\")
         " COMPONENT Runtime)
 elseif(WIN32)
     # XXX: experimental code!
@@ -50,13 +71,10 @@ elseif(WIN32)
     install(CODE "
         include(GetPrerequisites)
 
-        get_prerequisites(${QUMULUS}.exe WINDOWS_LIBRARIES 1 1 \"\" \"\")
-        install(FILES $\{WINDOWS_LIBRARIES\} ${BINARY_PATH})
+        get_prerequisites(\${CMAKE_INSTALL_PREFIX}/${QUMULUS}.exe WINDOWS_LIBRARIES 1 1 \"\" \"\")
+        install(FILES \${WINDOWS_LIBRARIES} ${BINARY_PATH})
         " COMPONENT Runtime)
 
 endif()
 
-# Installation
-install(TARGETS ${QUMULUS} 
-    RUNTIME DESTINATION ${BINARY_DEST} 
-    BUNDLE DESTINATION ${BINARY_DEST})
+
