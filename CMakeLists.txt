@@ -9,13 +9,15 @@ cmake_minimum_required(VERSION 2.8.8)
 project(Qumulus)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake")
 
-# CPack
+# Package info
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Qumulus UML editor")
 set(CPACK_PACKAGE_VENDOR "Frank Erens and Randy Thiemann")
 set(CPACK_PACKAGE_VERSION_MAJOR "0")
 set(CPACK_PACKAGE_VERSION_MINOR "1")
 set(CPACK_PACKAGE_VERSION_PATCH "0")
 
+# Nightlies
+option(QUMULUS_NIGHTLY "Enable Nightly Build mode")
 if(NOT ${QUMULUS_NIGHTLY})
     set(QUMULUS_VERSION
         "${CPACK_PACKAGE_VERSION_MAJOR}.${CPACK_PACKAGE_VERSION_MINOR}")
@@ -23,9 +25,11 @@ else()
     set(QUMULUS_VERSION "nightly")
 endif()
 
+# CPack
 if(WIN32)
     set(CPACK_PACKAGE_FILE_NAME
         "Qumulus-${QUMULUS_VERSION}")
+    set(CPACK_NSIS_DISPLAY_NAME "Qumulus")
     set(CPACK_NSIS_INSTALLED_ICON_NAME qumulus.exe)
     set(CPACK_GENERATOR "NSIS")
 
@@ -33,7 +37,8 @@ if(WIN32)
 
     set(BINARY_DEST ".")
     set(RESOURCE_DEST "data")
-    set(QT_PLUGIN_DEST_DIR ".")
+    set(QT_PLUGIN_DEST_DIR "plugins")
+    set(QT_CONFIG_DEST_DIR ".")
 elseif(APPLE)
     set(CPACK_PACKAGE_FILE_NAME 
         "Qumulus-${QUMULUS_VERSION}")

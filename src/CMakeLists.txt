@@ -26,7 +26,7 @@ add_executable(${QUMULUS} MACOSX_BUNDLE
     ${QUMULUS_RSC_RCC}
 )
 
-target_link_libraries(${QUMULUS} quml)
+target_link_libraries(${QUMULUS} quml ${Qt5Core_QTMAIN_LIBRARIES})
 qt5_use_modules(${QUMULUS} Widgets PrintSupport Svg Xml)
 
 if(APPLE)
