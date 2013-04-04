@@ -17,9 +17,11 @@ SET(CPACK_PACKAGE_VERSION_MINOR "1")
 SET(CPACK_PACKAGE_VERSION_PATCH "0")
 
 if(WIN32)
-    set(BINARY_PATH ".")
-
     set(QUMULUS "qumulus")
+
+    set(BINARY_DEST ".")
+    set(RESOURCE_DEST "data")
+
 elseif(APPLE)
     set(CPACK_PACKAGE_FILE_NAME 
         "Qumulus-${CPACK_PACKAGE_VERSION_MAJOR}.${CPACK_PACKAGE_VERSION_MINOR}")
@@ -37,9 +39,10 @@ elseif(APPLE)
     set(QT_CONFIG_DEST_DIR "${RESOURCE_DEST}")
 
 elseif(UNIX AND NOT APPLE)
-    set(BINARY_PATH "./bin")
-
     set(QUMULUS "qumulus")
+
+    set(BINARY_DEST "bin")
+    set(RESOURCE_DEST "share")
 endif()
 
 # This needs to be done after we set all options
