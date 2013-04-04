@@ -40,21 +40,23 @@ install(TARGETS ${QUMULUS}
     RUNTIME DESTINATION ${BINARY_DEST} 
     BUNDLE DESTINATION ${BINARY_DEST})
 
+if(UNIX AND NOT APPLE)
 # Install Qt plugins
-install(DIRECTORY "${QT5_PLUGIN_DIR}/imageformats" 
-    DESTINATION ${QT_PLUGIN_DEST_DIR} COMPONENT Runtime)
-install(DIRECTORY "${QT5_PLUGIN_DIR}/platforms" 
-    DESTINATION ${QT_PLUGIN_DEST_DIR} COMPONENT Runtime)
-install(DIRECTORY "${QT5_PLUGIN_DIR}/printsupport" 
-    DESTINATION ${QT_PLUGIN_DEST_DIR} COMPONENT Runtime)
+    install(DIRECTORY "${QT5_PLUGIN_DIR}/imageformats" 
+        DESTINATION ${QT_PLUGIN_DEST_DIR} COMPONENT Runtime)
+    install(DIRECTORY "${QT5_PLUGIN_DIR}/platforms" 
+        DESTINATION ${QT_PLUGIN_DEST_DIR} COMPONENT Runtime)
+    install(DIRECTORY "${QT5_PLUGIN_DIR}/printsupport" 
+        DESTINATION ${QT_PLUGIN_DEST_DIR} COMPONENT Runtime)
 
 # Install qt.conf file
-INSTALL(CODE "
-    file(WRITE 
-        \"\${CMAKE_INSTALL_PREFIX}/${QT_CONFIG_DEST_DIR}/qt.conf\" 
-        \"
-        \")
-    " COMPONENT Runtime)
+    INSTALL(CODE "
+        file(WRITE 
+            \"\${CMAKE_INSTALL_PREFIX}/${QT_CONFIG_DEST_DIR}/qt.conf\" 
+            \"
+            \")
+        " COMPONENT Runtime)
+endif()
 
 # Deployment
 if(APPLE)
