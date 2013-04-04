@@ -20,10 +20,11 @@ add_library(quml STATIC ${QUML_ALL_SRC})
 qt5_use_modules(quml Core)
 
 # Qumulus application
-add_executable(${QUMULUS} MACOSX_BUNDLE
+add_executable(${QUMULUS} WIN32 MACOSX_BUNDLE
     main.cpp
     ${QUMULUS_GUI_ALL_SRC}
     ${QUMULUS_RSC_RCC}
+    ${QUMULUS_WINICON}
 )
 
 target_link_libraries(${QUMULUS} quml ${Qt5Core_QTMAIN_LIBRARIES})
@@ -39,24 +40,24 @@ install(TARGETS ${QUMULUS}
     RUNTIME DESTINATION ${BINARY_DEST} 
     BUNDLE DESTINATION ${BINARY_DEST})
 
+# Install Qt plugins
+install(DIRECTORY "${QT5_PLUGIN_DIR}/imageformats" 
+    DESTINATION ${QT_PLUGIN_DEST_DIR} COMPONENT Runtime)
+install(DIRECTORY "${QT5_PLUGIN_DIR}/platforms" 
+    DESTINATION ${QT_PLUGIN_DEST_DIR} COMPONENT Runtime)
+install(DIRECTORY "${QT5_PLUGIN_DIR}/printsupport" 
+    DESTINATION ${QT_PLUGIN_DEST_DIR} COMPONENT Runtime)
+
+# Install qt.conf file
+INSTALL(CODE "
+    file(WRITE 
+        \"\${CMAKE_INSTALL_PREFIX}/${QT_CONFIG_DEST_DIR}/qt.conf\" 
+        \"
+        \")
+    " COMPONENT Runtime)
+
 # Deployment
 if(APPLE)
-    # Install Qt plugins
-    install(DIRECTORY "${QT5_PLUGIN_DIR}/imageformats" 
-        DESTINATION ${QT_PLUGIN_DEST_DIR} COMPONENT Runtime)
-    install(DIRECTORY "${QT5_PLUGIN_DIR}/platforms" 
-        DESTINATION ${QT_PLUGIN_DEST_DIR} COMPONENT Runtime)
-    install(DIRECTORY "${QT5_PLUGIN_DIR}/printsupport" 
-        DESTINATION ${QT_PLUGIN_DEST_DIR} COMPONENT Runtime)
-
-    # Install qt.conf file
-    INSTALL(CODE "
-        file(WRITE 
-            \"\${CMAKE_INSTALL_PREFIX}/${QT_CONFIG_DEST_DIR}/qt.conf\" 
-            \"
-            \")
-        " COMPONENT Runtime)
-
     # Fix library references
     install(CODE "
         file(GLOB_RECURSE QTPLUGINS
@@ -68,12 +69,12 @@ if(APPLE)
 elseif(WIN32)
     # XXX: experimental code!
 
-    install(CODE "
-        include(GetPrerequisites)
+    include(GetPrerequisites)
 
-        get_prerequisites(\${CMAKE_INSTALL_PREFIX}/${QUMULUS}.exe WINDOWS_LIBRARIES 1 1 \"\" \"\")
-        install(FILES \${WINDOWS_LIBRARIES} ${BINARY_PATH})
-        " COMPONENT Runtime)
+    get_prerequisites(\${CMAKE_INSTALL_PREFIX}/${QUMULUS}.exe 
+        WINDOWS_LIBRARIES 0 1 \"\" \"\")
+
+    install(FILES \${WINDOWS_LIBRARIES} ${BINARY_PATH})
 
 endif()
 
