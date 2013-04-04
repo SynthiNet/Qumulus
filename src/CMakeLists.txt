@@ -62,7 +62,7 @@ if(APPLE)
         file(GLOB_RECURSE QTPLUGINS
             \"\${CMAKE_INSTALL_PREFIX}/${QT_PLUGIN_DEST_DIR}/*${CMAKE_SHARED_LIBRARY_SUFFIX}\")
         include(BundleUtilities)
-        fixup_bundle(${CMAKE_BINARY_DIR}/${QUMULUS}.app 
+        fixup_bundle(\${CMAKE_INSTALL_PREFIX}/${QUMULUS}.app 
             \"\${QTPLUGINS}\" \"${QT5_LIBRARY_DIR}\")
         " COMPONENT Runtime)
 elseif(WIN32)
