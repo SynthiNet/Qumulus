@@ -1,7 +1,9 @@
 <!DOCTYPE RCC>
-<!-- vim: syntax=xml -->
 <RCC version="1.0">
   <qresource>
     <file>logo/qumulus-256.png</file>
   </qresource>
 </RCC>
+<!--
+  vim: syntax=xml
+-->

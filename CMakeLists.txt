@@ -26,11 +26,16 @@ elseif(APPLE)
     set(CPACK_DMG_VOLUME_NAME "Qumulus")
     set(CPACK_GENERATOR "DragNDrop")
 
-    set(PLIST_PATH "${CMAKE_SOURCE_DIR}/Info.plist")
-    set(BINARY_PATH ".")
-    set(RESOURCE_PATH "Qumulus.app/Contents/Resources")
-
     set(QUMULUS "Qumulus")
+    set(QUMULUS_BUNDLE_ROOT "${QUMULUS}.app/Contents")
+
+    set(PLIST_PATH "${CMAKE_SOURCE_DIR}/Info.plist")
+
+    set(BINARY_DEST ".")
+    set(RESOURCE_DEST "${QUMULUS_BUNDLE_ROOT}/Resources")
+    set(QT_PLUGIN_DEST_DIR "${QUMULUS_BUNDLE_ROOT}/Frameworks/plugins")
+    set(QT_CONFIG_DEST_DIR "${RESOURCE_DEST}")
+
 elseif(UNIX AND NOT APPLE)
     set(BINARY_PATH "./bin")
 
@@ -59,6 +64,10 @@ find_package(Qt5Svg REQUIRED)
 find_package(Qt5WebKit REQUIRED)
 find_package(Qt5WebKitWidgets REQUIRED)
 
+# Qt doesn't provide this for us anymore...
+set(QT5_PLUGIN_DIR ${_qt5Core_install_prefix}/plugins)
+message(${QT5_PLUGIN_DIR})
+
 # Gtest options -- does not compile on Clang without these.
 set(GTEST_USE_OWN_TR1_TUPLE 1)
 set(GTEST_HAS_TR1_TUPLE 0)
@@ -69,6 +78,6 @@ add_subdirectory(test)
 
 # UML file icon for OS X
 if(APPLE)
-    install(FILES "logo/qumulus.icns" DESTINATION ${RESOURCE_PATH})
-    install(FILES "logo/uml/uml-mac.icns" DESTINATION ${RESOURCE_PATH})
+    install(FILES "logo/qumulus.icns" DESTINATION ${RESOURCE_DEST})
+    install(FILES "logo/uml/uml-mac.icns" DESTINATION ${RESOURCE_DEST})
 endif()
