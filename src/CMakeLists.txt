@@ -92,8 +92,10 @@ elseif(WIN32)
             file(INSTALL \"\${lib_path_\${lib}}\" 
                 DESTINATION \${CMAKE_INSTALL_PREFIX}/${BINARY_DEST})
         endforeach()
+
         " COMPONENT RUNTIME)
 
+    install(FILES ${QT5_LIBRARY_DIR}/libEGL.dll .)
 endif()
 
 

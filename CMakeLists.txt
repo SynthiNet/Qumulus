@@ -90,7 +90,11 @@ find_package(Qt5WebKitWidgets REQUIRED)
 
 # Qt doesn't provide this for us anymore...
 set(QT5_PLUGIN_DIR ${_qt5Core_install_prefix}/plugins)
-set(QT5_LIBRARY_DIR ${_qt5Core_install_prefix}/lib)
+if(WIN32)
+    set(QT5_LIBRARY_DIR ${_qt5Core_install_prefix}/bin)
+else()
+    set(QT5_LIBRARY_DIR ${_qt5Core_install_prefix}/lib)
+endif()
 
 # Gtest options -- does not compile on Clang without these.
 set(GTEST_USE_OWN_TR1_TUPLE 1)
