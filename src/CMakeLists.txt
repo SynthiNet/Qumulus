@@ -20,7 +20,7 @@ if(WIN32)
     add_custom_command(OUTPUT ${CMAKE_BINARY_DIR}/winicon.o
         COMMAND windres.exe "-I${CMAKE_SOURCE_DIR}"
         "-i${CMAKE_SOURCE_DIR}/logo/winicon.rc"
-        "-o ${CMAKE_BINARY_DIR}/winicon.o" )
+        "-o${CMAKE_BINARY_DIR}/winicon.o" )
 endif()
 
 # quml library
@@ -80,15 +80,21 @@ if(APPLE)
             \"\${QTPLUGINS}\" \"${QT5_LIBRARY_DIR}\")
         " COMPONENT Runtime)
 elseif(WIN32)
-    # XXX: experimental code!
+    # Install required libraries
+    install(CODE "
+        include(GetPrerequisites)
 
-    include(GetPrerequisites)
-
-    get_prerequisites(${CMAKE_INSTALL_PREFIX}/${QUMULUS}.exe 
-        WINDOWS_LIBRARIES 0 1 \"\" \"\")
-
-    install(FILES ${WINDOWS_LIBRARIES} DESTINATION ${BINARY_PATH})
+        get_prerequisites(\${CMAKE_INSTALL_PREFIX}/${QUMULUS}.exe 
+            WINDOWS_LIBRARIES 1 1 \"\" \"\")
+        
+        foreach(lib \${WINDOWS_LIBRARIES})
+            find_program(lib_path_\${lib} \${lib})
+            file(INSTALL \"\${lib_path_\${lib}}\" 
+                DESTINATION \${CMAKE_INSTALL_PREFIX}/${BINARY_DEST})
+        endforeach()
+        " COMPONENT RUNTIME)
 
 endif()
+
 
 

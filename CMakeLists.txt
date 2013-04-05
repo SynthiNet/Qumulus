@@ -32,9 +32,7 @@ if(WIN32)
     set(CPACK_NSIS_DISPLAY_NAME "Qumulus")
     set(CPACK_PACKAGE_INSTALL_DIRECTORY "Qumulus")
     set(CPACK_NSIS_INSTALLED_ICON_NAME qumulus.exe)
-    set(CPACK_NSIS_CREATE_ICONS "CreateShortCut
-        '\$SMPROGRAMS\\\\$STARTMENU_FOLDER\\\\Qumulus UML editor.lnk'
-        '\$INSTDIR\\\\qumulus.exe'")
+    set(CPACK_NSIS_CREATE_ICONS "CreateShortCut '\$SMPROGRAMS\\\\$STARTMENU_FOLDER\\\\Qumulus UML editor.lnk' '\$INSTDIR\\\\qumulus.exe'")
     set(CPACK_GENERATOR "NSIS")
 
     set(QUMULUS "qumulus")
@@ -107,3 +105,4 @@ if(APPLE)
     install(FILES "logo/qumulus.icns" DESTINATION ${RESOURCE_DEST})
     install(FILES "logo/uml/uml-mac.icns" DESTINATION ${RESOURCE_DEST})
 endif()
+
