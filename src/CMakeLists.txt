@@ -95,7 +95,7 @@ elseif(WIN32)
 
         " COMPONENT RUNTIME)
 
-    install(FILES ${QT5_LIBRARY_DIR}/libEGL.dll .)
+    install(FILES ${QT5_LIBRARY_DIR}/libEGL.dll DESTINATION .)
 endif()
 
 
