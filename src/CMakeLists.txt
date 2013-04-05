@@ -18,9 +18,9 @@ qt5_add_resources(QUMULUS_RSC_RCC ${QUMULUS_RSC})
 if(WIN32)
     # MinGW icon resource
     add_custom_command(OUTPUT ${CMAKE_BINARY_DIR}/winicon.o
-        COMMAND windres.exe -I${CMAKE_SOURCE_DIR} 
-        -i${CMAKE_SOURCE_DIR}/logo/winicon.rc 
-        -o ${CMAKE_BINARY_DIR}/winicon.o )
+        COMMAND windres.exe "-I${CMAKE_SOURCE_DIR}"
+        "-i${CMAKE_SOURCE_DIR}/logo/winicon.rc"
+        "-o ${CMAKE_BINARY_DIR}/winicon.o" )
 endif()
 
 # quml library
