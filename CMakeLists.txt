@@ -34,7 +34,7 @@ if(WIN32)
     set(CPACK_NSIS_INSTALLED_ICON_NAME qumulus.exe)
     set(CPACK_NSIS_CREATE_ICONS "CreateShortCut
         '\$SMPROGRAMS\\\\$STARTMENU_FOLDER\\\\Qumulus UML editor.lnk'
-        '\$INSTDIR\\\\qumulus.exe'"
+        '\$INSTDIR\\\\qumulus.exe'")
     set(CPACK_GENERATOR "NSIS")
 
     set(QUMULUS "qumulus")
