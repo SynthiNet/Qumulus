@@ -32,6 +32,9 @@ if(WIN32)
     set(CPACK_NSIS_DISPLAY_NAME "Qumulus")
     set(CPACK_PACKAGE_INSTALL_DIRECTORY "Qumulus")
     set(CPACK_NSIS_INSTALLED_ICON_NAME qumulus.exe)
+    set(CPACK_NSIS_CREATE_ICONS "CreateShortCut
+        '\$SMPROGRAMS\\\\$STARTMENU_FOLDER\\\\Qumulus UML editor.lnk'
+        '\$INSTDIR\\\\qumulus.exe'"
     set(CPACK_GENERATOR "NSIS")
 
     set(QUMULUS "qumulus")
@@ -41,13 +44,7 @@ if(WIN32)
     set(QT_PLUGIN_DEST_DIR "plugins")
     set(QT_CONFIG_DEST_DIR ".")
 
-    # MinGW icon resource
-    add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/winicon.o
-        COMMAND windres.exe -I${CMAKE_CURRENT_SOURCE_DIR} 
-        -i${CMAKE_CURRENT_SOURCE_DIR}/logo/winicon.rc 
-        -o ${CMAKE_CURRENT_BINARY_DIR}/winicon.o )
-
-    set(QUMULUS_WINICON ${CMAKE_CURRENT_BINARY_DIR}/winicon.o)
+    set(QUMULUS_WINICON ${CMAKE_BINARY_DIR}/winicon.o)
 elseif(APPLE)
     set(CPACK_PACKAGE_FILE_NAME 
         "Qumulus-${QUMULUS_VERSION}")
