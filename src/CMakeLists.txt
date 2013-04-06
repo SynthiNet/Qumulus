@@ -11,6 +11,9 @@ include(Qumulus/Uml/SourcesList.txt)
 
 set(QUML_ALL_SRC ${QUMULUS_LIB_ALL_SRC} ${QUMULUS_UML_ALL_SRC})
 
+# Include path
+include_directories(Qumulus)
+
 # Compiled-in resources
 set(QUMULUS_RSC ${CMAKE_SOURCE_DIR}/resources.qrc)
 qt5_add_resources(QUMULUS_RSC_RCC ${QUMULUS_RSC})
