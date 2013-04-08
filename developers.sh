@@ -56,12 +56,20 @@ do-cmake() {
         echo >> SourcesList.txt
         echo "SET ( ${SRCNAME}_ALL_SRC " >> SourcesList.txt
     
-        for x in `find * | grep '\.cpp$'`; do
-            echo -n "$x " >> SourcesList.txt
-        done
+        if [ -n "$SRCPREFIX" ]; then
+            for x in `find * | grep '\.cpp$'`; do
+                echo -n "$SRCPREFIX/$x " >> SourcesList.txt
+            done
+        else
+            for x in `find * | grep '\.cpp$'`; do
+                echo -n "$x " >> SourcesList.txt
+            done
+        fi
 
         echo ' )' >> SourcesList.txt
         popd
+
+        SRCPREFIX=""
     done
     log 'Done!'
 }
