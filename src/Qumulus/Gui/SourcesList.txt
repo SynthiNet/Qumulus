@@ -2,4 +2,4 @@
 # the main source directory. DO NOT EDIT MANUALLY!
 
 SET ( QUMULUS_GUI_ALL_SRC 
- )
+Qumulus/Gui/Core/Nyi.cpp  )
