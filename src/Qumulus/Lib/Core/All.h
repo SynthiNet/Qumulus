@@ -14,6 +14,7 @@
 #include "Nyi.h"
 #include "Optional.h"
 #include "Ptr.h"
+#include "Unlimited.h"
 
 #endif /* QUMULUS_LIB_CORE_ALL_H_ */
 
