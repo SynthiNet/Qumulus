@@ -23,7 +23,7 @@ public:
     Unlimited() : mValue(0), mUnlimited(false) {}
     Unlimited(unsigned value) : mValue(value), mUnlimited(false) {}
 
-    Unlimited(const char c[2]) {
+    Unlimited(const char c[2]) : Unlimited() {
         if(c[0] == '*' && c[1] == '\0') {
             mUnlimited = true;
         } else {
@@ -31,7 +31,7 @@ public:
         }
     }
 
-    explicit Unlimited(const QString& s) {
+    explicit Unlimited(const QString& s) : Unlimited() {
         if(s == "*") {
             mUnlimited = true;
         } else {
@@ -57,7 +57,7 @@ private:
     bool mUnlimited;
 };
 
-bool unltd(const Unlimited& u) {
+inline bool unltd(const Unlimited& u) {
     return u.mUnlimited;
 }
 

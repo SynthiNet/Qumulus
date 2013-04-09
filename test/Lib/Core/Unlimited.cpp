@@ -27,6 +27,7 @@ namespace {
     TEST_F(TestUnlimited, testCreateQString) {
         QuLC::Unlimited u(QString("33"));
         EXPECT_EQ((unsigned)u, 33);
+        EXPECT_FALSE(QuLC::unltd(u));
     }
 
     TEST_F(TestUnlimited, testCreateQStringUnlimited) {
