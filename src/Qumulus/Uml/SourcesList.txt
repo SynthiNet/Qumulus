@@ -2,4 +2,4 @@
 # the main source directory. DO NOT EDIT MANUALLY!
 
 SET ( QUMULUS_UML_ALL_SRC 
- )
+Qumulus/Uml/Core/Abstractions/Element.cpp  )
