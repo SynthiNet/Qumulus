@@ -22,7 +22,7 @@ public:
     const void* operator&() const { return &data; }
     void* operator&() { return &data; }
 private:
-    unsigned char data[sizeof(T)] alignas(alignof(T));
+    unsigned char data[sizeof(T)] __attribute__((aligned(__alignof__(T))));
 };
 
 template<class T>
