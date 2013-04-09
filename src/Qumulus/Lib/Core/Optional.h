@@ -63,7 +63,7 @@ public:
 
     const T& operator*() const throw(NullException) {
         if(!mInitialized) throw NullException();
-        return *static_cast<T*>(&mStorage);
+        return *static_cast<const T*>(&mStorage);
     }
 
     T& operator->() throw(NullException) { return **this; }
