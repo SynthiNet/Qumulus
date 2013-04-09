@@ -16,11 +16,11 @@ public:
     Clonable() {}
     virtual ~Clonable() {}
 
-    virtual Clonable* clone() = 0;
+    virtual Clonable* clone() const = 0;
 };
 
 #define QUML_CLONABLE(Class) \
-    virtual Class* clone() { \
+    virtual Class* clone() const override { \
         return new Class(*this); \
     }
 
