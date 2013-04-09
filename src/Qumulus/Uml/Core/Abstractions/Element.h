@@ -12,25 +12,35 @@
 #include <Lib/Core/Clonable.h>
 #include <Lib/Core/Ptr.h>
 
-#include <set>
+#include <unordered_set>
 
 QUML_BEGIN_NAMESPACE_UCA
 
 class Element : public QuLC::Clonable {
 public:
     Element(const Element& other);
+    Element(Element&& other);
     
     virtual bool mustBeOwned() const {
         return true;
     }
 
-    const std::set<uptr<Element>>& ownedElements() const {
+    const std::unordered_set<uptr<Element>>& ownedElements() const {
         return mOwnedElements;
     }
 
+    void addElement(uptr<Element> other);
+    void removeElement(const uptr<Element>& other);
+
+    std::size_t size() const;
+    void clear();
+
+    bool contains(const uptr<Element>& other) const;
+    bool containsRecursive(const uptr<Element>& other) const;
+
     QUML_CLONABLE(Element)
 private:
-    std::set<uptr<Element>> mOwnedElements;
+    std::unordered_set<uptr<Element>> mOwnedElements;
 };
 
 QUML_END_NAMESPACE_UCA
