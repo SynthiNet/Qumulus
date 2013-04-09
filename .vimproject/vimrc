@@ -98,7 +98,7 @@ fun! s:GenerateHeaderGuard()
         \ substitute(
         \ substitute(
         \ substitute(
-        \ substitute(l:file, "^/src/", "", ""),
+        \ substitute(l:file, "^/src/Qumulus/", "", ""),
         \            "/", "_", 'g'),
         \            ".h$", "", ""),
         \            ".*", "\\U&", "")."_H_" 
