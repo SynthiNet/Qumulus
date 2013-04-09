@@ -10,7 +10,9 @@
 #include "internal_base.h"
 
 #include "Clonable.h"
+#include "Exception.h"
 #include "Nyi.h"
+#include "Optional.h"
 #include "Ptr.h"
 
 #endif /* QUMULUS_LIB_CORE_ALL_H_ */
