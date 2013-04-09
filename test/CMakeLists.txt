@@ -8,7 +8,7 @@
 include(SourcesList.txt)
 include(AddFileDependencies)
 
-include_directories(${CMAKE_SOURCE_DIR}/src 
+include_directories(${CMAKE_SOURCE_DIR}/src/Qumulus 
         ${CMAKE_SOURCE_DIR}/deps/gtest/include)
 
 # Use this for building gtest with clang
