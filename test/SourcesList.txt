@@ -2,4 +2,4 @@
 # the main source directory. DO NOT EDIT MANUALLY!
 
 SET ( QUMLTEST_ALL_SRC 
-Lib/Core/Optional.cpp main.cpp  )
+Lib/Core/Optional.cpp Lib/Core/Unlimited.cpp main.cpp  )
