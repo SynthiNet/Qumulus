@@ -14,7 +14,7 @@
 
 #include <Lib/Core/Optional.h>
 
-#include <QtCore/QString.h>
+#include <QtCore/QString>
 
 QUML_BEGIN_NAMESPACE_UCA
 
