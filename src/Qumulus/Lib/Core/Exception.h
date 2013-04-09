@@ -21,7 +21,7 @@ public:
         std::strcpy(mReason, reason);
     }
 
-    virtual ~Exception() {
+    virtual ~Exception() noexcept {
         delete mReason;
     }
 
