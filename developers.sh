@@ -54,6 +54,8 @@ do-cmake() {
         echo '# the main source directory. DO NOT EDIT MANUALLY!' \
                 >> SourcesList.txt
         echo >> SourcesList.txt
+
+        # C++
         echo "SET ( ${SRCNAME}_ALL_SRC " >> SourcesList.txt
     
         if [ -n "$SRCPREFIX" ]; then
@@ -67,6 +69,22 @@ do-cmake() {
         fi
 
         echo ' )' >> SourcesList.txt
+
+        # Objective C++
+        echo "SET ( ${SRCNAME}_ALL_MM_SRC " >> SourcesList.txt
+    
+        if [ -n "$SRCPREFIX" ]; then
+            for x in `find * | grep '\.mm$'`; do
+                echo -n "$SRCPREFIX/$x " >> SourcesList.txt
+            done
+        else
+            for x in `find * | grep '\.mm$'`; do
+                echo -n "$x " >> SourcesList.txt
+            done
+        fi
+
+        echo ' )' >> SourcesList.txt
+
         popd
 
         SRCPREFIX=""

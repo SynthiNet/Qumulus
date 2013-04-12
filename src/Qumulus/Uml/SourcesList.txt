@@ -3,3 +3,5 @@
 
 SET ( QUMULUS_UML_ALL_SRC 
 Qumulus/Uml/Core/Abstractions/Element.cpp Qumulus/Uml/Core/Abstractions/NamedElement.cpp Qumulus/Uml/Core/Abstractions/Namespace.cpp  )
+SET ( QUMULUS_UML_ALL_MM_SRC 
+ )

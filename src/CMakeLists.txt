@@ -11,6 +11,11 @@ include(Qumulus/Uml/SourcesList.txt)
 
 set(QUML_ALL_SRC ${QUMULUS_LIB_ALL_SRC} ${QUMULUS_UML_ALL_SRC})
 
+# No Obj-C++ on non-OS X
+if(NOT APPLE)
+    set(QUMULUS_GUI_ALL_MM_SRC "")
+endif()
+
 # Include path
 include_directories(Qumulus ${QTMACEXTRAS_INCLUDE_DIRS})
 
@@ -34,6 +39,7 @@ qt5_use_modules(quml Core)
 add_executable(${QUMULUS} WIN32 MACOSX_BUNDLE
     main.cpp
     ${QUMULUS_GUI_ALL_SRC}
+    ${QUMULUS_GUI_ALL_MM_SRC}
     ${QUMULUS_RSC_RCC}
     ${QUMULUS_WINICON}
 )

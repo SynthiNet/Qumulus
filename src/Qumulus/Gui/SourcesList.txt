@@ -3,3 +3,5 @@
 
 SET ( QUMULUS_GUI_ALL_SRC 
 Qumulus/Gui/Core/Nyi.cpp  )
+SET ( QUMULUS_GUI_ALL_MM_SRC 
+ )
