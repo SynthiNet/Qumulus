@@ -12,7 +12,7 @@ include(Qumulus/Uml/SourcesList.txt)
 set(QUML_ALL_SRC ${QUMULUS_LIB_ALL_SRC} ${QUMULUS_UML_ALL_SRC})
 
 # Include path
-include_directories(Qumulus)
+include_directories(Qumulus ${QTMACEXTRAS_INCLUDE_DIRS})
 
 # Compiled-in resources
 set(QUMULUS_RSC ${CMAKE_SOURCE_DIR}/resources.qrc)
@@ -38,7 +38,9 @@ add_executable(${QUMULUS} WIN32 MACOSX_BUNDLE
     ${QUMULUS_WINICON}
 )
 
-target_link_libraries(${QUMULUS} quml ${Qt5Core_QTMAIN_LIBRARIES})
+target_link_libraries(${QUMULUS} quml 
+    ${Qt5Core_QTMAIN_LIBRARIES}
+    ${QTMACEXTRAS_LIBRARIES})
 qt5_use_modules(${QUMULUS} Widgets PrintSupport Svg Xml)
 
 if(APPLE)
@@ -80,7 +82,8 @@ if(APPLE)
             \"\${CMAKE_INSTALL_PREFIX}/${QT_PLUGIN_DEST_DIR}/*${CMAKE_SHARED_LIBRARY_SUFFIX}\")
         include(BundleUtilities)
         fixup_bundle(\${CMAKE_INSTALL_PREFIX}/${QUMULUS}.app 
-            \"\${QTPLUGINS}\" \"${QT5_LIBRARY_DIR}\")
+            \"\${QTPLUGINS}\" 
+            \"${QT5_LIBRARY_DIR};${QTMACEXTRAS_LIBRARY_DIR}\")
         " COMPONENT Runtime)
 elseif(WIN32)
     # Install required libraries

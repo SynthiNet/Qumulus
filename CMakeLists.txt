@@ -56,6 +56,7 @@ elseif(APPLE)
 
     set(BINARY_DEST ".")
     set(RESOURCE_DEST "${QUMULUS_BUNDLE_ROOT}/Resources")
+    set(LIBRARY_DEST "${QUMULUS_BUNDLE_ROOT}/Frameworks")
     set(QT_PLUGIN_DEST_DIR "${QUMULUS_BUNDLE_ROOT}/plugins")
     set(QT_CONFIG_DEST_DIR "${RESOURCE_DEST}")
 
@@ -99,6 +100,14 @@ endif()
 # Gtest options -- does not compile on Clang without these.
 set(GTEST_USE_OWN_TR1_TUPLE 1)
 set(GTEST_HAS_TR1_TUPLE 0)
+
+# Qt Mac Extras
+if(APPLE)
+    add_subdirectory(deps/QtMacExtras)
+    set(QTMACEXTRAS_LIBRARIES QtMacExtras)
+    set(QTMACEXTRAS_INCLUDE_DIRS ${CMAKE_SOURCE_DIR}/deps)
+    set(QTMACEXTRAS_LIBRARY_DIR ${CMAKE_BINARY_DIR}/deps/QtMacExtras)
+endif()
 
 add_subdirectory(src)
 add_subdirectory(deps/gtest EXCLUDE_FROM_ALL)
