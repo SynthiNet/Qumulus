@@ -12,9 +12,10 @@
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QSplitter>
 #include <QtWidgets/QStatusBar>
-#include <Gui/Widgets/ToolBar.h>
-#include <Gui/Widgets/SideBar.h>
 #include <Lib/Core/Ptr.h>
+
+#include "ToolBar.h"
+#include "SideBar.h"
 
 QUML_BEGIN_NAMESPACE_GW
 
@@ -23,6 +24,11 @@ class MainWindow : public QMainWindow {
 
 public:
     MainWindow();
+
+private:
+#ifdef Q_OS_MAC
+    void setContentBorderOnMac();
+#endif
 
 private:
     ToolBar* mToolBar;

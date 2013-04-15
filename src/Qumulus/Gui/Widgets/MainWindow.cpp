@@ -50,6 +50,11 @@ MainWindow::MainWindow() :
 
     // Add the status bar.
     setStatusBar(mStatusBar);
+
+    // Set border on OS X
+#ifdef Q_OS_MAC
+    this->setContentBorderOnMac();
+#endif
 }
 
 QUML_END_NAMESPACE_GW

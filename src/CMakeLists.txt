@@ -17,7 +17,11 @@ if(NOT APPLE)
 endif()
 
 # Include path
-include_directories(Qumulus ${QTMACEXTRAS_INCLUDE_DIRS})
+include_directories(
+    Qumulus 
+    ${QTMACEXTRAS_INCLUDE_DIRS}
+    ${Qt5Gui_PRIVATE_INCLUDE_DIRS}
+)
 
 # Compiled-in resources
 set(QUMULUS_RSC ${CMAKE_SOURCE_DIR}/resources.qrc)
