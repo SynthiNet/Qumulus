@@ -20,7 +20,7 @@ void ToolBar::showInWindow(MainWindow* w) {
 #ifdef Q_OS_MAC
     mToolBar->showInWindowForWidget(w);
 #else
-    w->addToolBar(mToolBar);
+    w->addToolBar(mToolBar.get());
 #endif
 }
 
