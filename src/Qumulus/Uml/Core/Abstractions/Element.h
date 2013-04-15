@@ -11,6 +11,7 @@
 
 #include <Lib/Core/Clonable.h>
 #include <Lib/Core/Ptr.h>
+#include <Lib/Core/Hash.h>
 
 #include <unordered_set>
 
