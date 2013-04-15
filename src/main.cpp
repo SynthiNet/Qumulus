@@ -15,7 +15,5 @@ int main(int argc, char** argv) {
     app.setMainWindow(&w);
     w.show();
 
-    NYI();
-
     return app.exec();
 }
