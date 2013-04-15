@@ -15,7 +15,7 @@
 
 QUML_BEGIN_NAMESPACE_UCA
 
-class Namespace : public NamedElement {
+class Namespace : public virtual NamedElement {
 public:
     Namespace() = default;
     Namespace(const Namespace& n);
