@@ -44,7 +44,7 @@
 
 #include "qmacextrasglobal.h"
 
-#include <QString>
+#include <QtCore/QString>
 
 class QToolBar;
 class QWidget;
@@ -54,9 +54,9 @@ Q_MACEXTRAS_EXPORT QMacUnifiedToolBar* setUnifiedTitleAndToolBarOnMac(QToolBar *
 Q_MACEXTRAS_EXPORT QMacUnifiedToolBar* setUnifiedTitleAndToolBarOnMac(QToolBar *toolbar, const QString &identifier, bool on = true);
 
 #include "qmactoolbutton.h"
-#include <QObject>
-#include <QIcon>
-#include <QVariant>
+#include <QtCore/QObject>
+#include <QtGui/QIcon>
+#include <QtCore/QVariant>
 
 class QAction;
 class QWindow;
