@@ -20,7 +20,7 @@ public:
     Namespace() = default;
     Namespace(const Namespace& n);
 
-    const std::unordered_map<QString, uptr<NamedElement>>& 
+    const std::unordered_map<QString, NamedElement*>& 
             ownedMembers() const {
         return mOwnedMembers;
     }
@@ -30,7 +30,7 @@ public:
 
     QUML_CLONABLE(Namespace)
 private:
-    std::unordered_map<QString, uptr<NamedElement>> mOwnedMembers;
+    std::unordered_map<QString, NamedElement*> mOwnedMembers;
 };
 
 QUML_END_NAMESPACE_UCA
