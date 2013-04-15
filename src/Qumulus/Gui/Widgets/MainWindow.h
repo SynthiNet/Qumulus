@@ -9,7 +9,11 @@
 
 #include "internal_base.h"
 #include <QtWidgets/QMainWindow>
+#include <QtWidgets/QGridLayout>
+#include <QtWidgets/QSplitter>
+#include <QtWidgets/QStatusBar>
 #include <Gui/Widgets/ToolBar.h>
+#include <Gui/Widgets/SideBar.h>
 #include <Lib/Core/Ptr.h>
 
 QUML_BEGIN_NAMESPACE_GW
@@ -21,7 +25,10 @@ public:
     MainWindow();
 
 private:
-    uptr<ToolBar> mToolBar;
+    ToolBar* mToolBar;
+    SideBar* mSideBar;
+    QSplitter* mSplitter;
+    QStatusBar* mStatusBar;
 };
 
 QUML_END_NAMESPACE_GW
