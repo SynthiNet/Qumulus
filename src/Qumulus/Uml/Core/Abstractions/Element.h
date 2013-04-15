@@ -19,6 +19,8 @@ QUML_BEGIN_NAMESPACE_UCA
 
 class Element : public QuLC::Clonable {
 public:
+    Element() = default;
+
     Element(const Element& other);
     Element(Element&& other);
     

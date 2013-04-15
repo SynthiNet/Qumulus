@@ -15,6 +15,7 @@ QUML_BEGIN_NAMESPACE_UCA
 
 class LiteralSpecification : public ValueSpecification {
 public:
+    LiteralSpecification() = default;
     bool isComputable() const override { return true; }
 };
 

@@ -22,6 +22,7 @@ class Namespace;
 
 class NamedElement : public Element {
 public:
+    NamedElement() = default;
 
     QString separator() const {
         // TODO: do not assume C++.
