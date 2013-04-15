@@ -12,6 +12,7 @@ int main(int argc, char** argv) {
     QuGC::QumulusApplication app(argc, argv);
 
     QuGW::MainWindow w;
+    app.setMainWindow(&w);
     w.show();
 
     NYI();
