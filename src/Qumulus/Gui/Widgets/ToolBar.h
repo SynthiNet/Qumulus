@@ -24,8 +24,10 @@ QUML_BEGIN_NAMESPACE_GW
 class MainWindow;
 
 class ToolBar : public QObject {
+    Q_OBJECT
+
 public:
-    ToolBar();
+    ToolBar(QObject* parent = 0);
     void showInWindow(MainWindow* w);
     MainWindow* window();
     QAction* addAction(const QIcon& icon, const QString& text);

@@ -10,9 +10,11 @@
 QUML_BEGIN_NAMESPACE_GW
 
 #ifdef Q_OS_MAC
-ToolBar::ToolBar() : mToolBar(new QMacUnifiedToolBar()) {}
+ToolBar::ToolBar(QObject* parent) : QObject(parent),
+    mToolBar(new QMacUnifiedToolBar()) {}
 #else
-ToolBar::ToolBar() : mToolBar(new QToolBar()) {}
+ToolBar::ToolBar(QObject* parent) : QObject(parent),
+    mToolBar(new QToolBar()) {}
 #endif
 
 void ToolBar::showInWindow(MainWindow* w) {
