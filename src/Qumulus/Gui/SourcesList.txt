@@ -2,6 +2,6 @@
 # the main source directory. DO NOT EDIT MANUALLY!
 
 SET ( QUMULUS_GUI_ALL_SRC 
-Qumulus/Gui/Core/Nyi.cpp  )
+Qumulus/Gui/Core/Nyi.cpp Qumulus/Gui/Core/QumulusApplication.cpp Qumulus/Gui/Core/ResourceLoader.cpp Qumulus/Gui/Widgets/MainWindow.cpp  )
 SET ( QUMULUS_GUI_ALL_MM_SRC 
  )

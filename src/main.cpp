@@ -4,15 +4,14 @@
  * Author: Frank Erens
  */
 
-#include <QtWidgets/QApplication>
-#include <QtWidgets/QWidget>
-
 #include <Lib/Core/Nyi.h>
+#include <Gui/Core/QumulusApplication.h>
+#include <Gui/Widgets/MainWindow.h>
 
 int main(int argc, char** argv) {
-    QApplication app(argc, argv);
+    QuGC::QumulusApplication app(argc, argv);
 
-    QWidget w;
+    QuGW::MainWindow w;
     w.show();
 
     NYI();
