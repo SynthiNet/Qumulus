@@ -18,6 +18,10 @@ QUML_BEGIN_NAMESPACE_UCA
 
 class MultiplicityElement : public Element {
 public:
+    bool isMultivalued() const;
+    bool includesCardinatity(unsigned i) const;
+    bool includedMultiplicity(MultiplicityElement* m) const;
+
     QuLC::Optional<unsigned> lowerBound() const {
         return mLower;
     }

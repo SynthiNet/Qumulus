@@ -18,29 +18,31 @@ QUML_BEGIN_NAMESPACE_UCA
 
 class ValueSpecification : public Element {
 public:
+    ValueSpecification() = default;
+
     virtual bool isComputable() const = 0;
 
-    virtual QuLC::Optional<int> intValue() {
+    virtual QuLC::Optional<int> intValue() const {
         return nullptr;
     }
 
-    virtual QuLC::Optional<double> realValue() {
+    virtual QuLC::Optional<double> realValue() const {
         return nullptr;
     }
 
-    virtual QuLC::Optional<bool> boolValue() {
+    virtual QuLC::Optional<bool> boolValue() const {
         return nullptr;
     }
 
-    virtual QuLC::Optional<QString> stringValue() {
+    virtual QuLC::Optional<QString> stringValue() const {
         return nullptr;
     }
 
-    virtual QuLC::Optional<QuLC::Unlimited> unlimitedValue() {
+    virtual QuLC::Optional<QuLC::Unlimited> unlimitedValue() const {
         return nullptr;
     }
 
-    virtual bool isNull() = 0;
+    virtual bool isNull() const = 0;
 };
 
 QUML_END_NAMESPACE_UCA
