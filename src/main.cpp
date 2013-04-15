@@ -4,13 +4,13 @@
  * Author: Frank Erens
  */
 
-#include <QtWidgets/QApplication>
 #include <QtWidgets/QWidget>
 
 #include <Lib/Core/Nyi.h>
+#include <Gui/Core/QumulusApplication.h>
 
 int main(int argc, char** argv) {
-    QApplication app(argc, argv);
+    QumulusApplication app(argc, argv);
 
     QWidget w;
     w.show();
