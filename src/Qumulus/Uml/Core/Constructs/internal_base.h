@@ -7,15 +7,15 @@
 #ifndef UML_CORE_CONSTRUCTS_INTERNAL_BASE_H_
 #define UML_CORE_CONSTRUCTS_INTERNAL_BASE_H_
 
-#define QUML_BEGIN_NAMESPACE_UCA \
+#define QUML_BEGIN_NAMESPACE_UCC \
     namespace Qumulus { namespace Uml { namespace Core { \
         namespace Constructs { 
-#define QUML_END_NAMESPACE_UCA }}}}
+#define QUML_END_NAMESPACE_UCC }}}}
 
-QUML_BEGIN_NAMESPACE_UCA
-QUML_END_NAMESPACE_UCA
+QUML_BEGIN_NAMESPACE_UCC
+QUML_END_NAMESPACE_UCC
 
-namespace QuUCA = Qumulus::Uml::Core::Constructs;
+namespace QuUCC = Qumulus::Uml::Core::Constructs;
 
 #endif /* UML_CORE_CONSTRUCTS_INTERNAL_BASE_H_ */
 
