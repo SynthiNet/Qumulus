@@ -23,10 +23,34 @@ MainWindow* SideBar::window() {
 void SideBar::setStyleType(StyleType s) {
     switch(s) {
     case StyleType::Active:
-        setStyleSheet("background-color: rgb(222, 228, 234); selection-color: white; selection-background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(110, 165, 218), stop: 1 rgb(33, 108, 183))");
+        setStyleSheet(
+            "background-color: qlineargradient("
+                    "spread:pad, x1:0, y1:0, x2:0, y2:1,"
+                    "stop:0 rgba(232, 236, 241, 255),"
+                    "stop:1 rgba(209,216,226, 255));"
+            "selection-color: white;"
+            "selection-background-color: qlineargradient("
+                    "x1: 0, y1: 0, x2: 0, y2: 1,"
+                    "stop: 0 rgb(110, 165, 218),"
+                    "stop: 1 rgb(33, 108, 183));"
+            "border-top: 1px solid silver;"
+            "border-bottom: 1px solid silver;"
+        );
         break;
     case StyleType::Inactive:
-        setStyleSheet("background-color: rgb(222, 228, 234); selection-color: white; selection-background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(110, 165, 218), stop: 1 rgb(33, 108, 183))");
+        setStyleSheet(
+            "background-color: qlineargradient("
+            "spread:pad, x1:0, y1:0, x2:0, y2:1,"
+            "stop:0 rgba(247, 247, 247, 255),"
+            "stop:1 rgba(235, 235, 235, 255));"
+            "selection-color: white;"
+            "selection-background-color: qlineargradient("
+                    "x1: 0, y1: 0, x2: 0, y2: 1,"
+                    "stop: 0 rgb(110, 165, 218),"
+                    "stop: 1 rgb(33, 108, 183));"
+            "border-top: 1px solid silver;"
+            "border-bottom: 1px solid silver;"
+        );
         break;
     }
 }

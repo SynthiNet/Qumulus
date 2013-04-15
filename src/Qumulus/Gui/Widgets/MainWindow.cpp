@@ -14,7 +14,15 @@ MainWindow::MainWindow() :
         mSideBar(new SideBar(this)),
         mSplitter(new QSplitter(this)),
         mStatusBar(new QStatusBar(this)) {
-    setMinimumSize(640, 480);
+
+    constexpr unsigned kWidth = 700, kHeight = 480, kSideWidth = 220;
+
+    // Size constraints
+    setMinimumSize(400, 300);
+    resize(kWidth, kHeight);
+
+    // Title
+    setWindowTitle("Qumulus");
 
     // Add toolbar
     mToolBar->showInWindow(this);
@@ -25,12 +33,7 @@ MainWindow::MainWindow() :
     mSplitter->setChildrenCollapsible(false);
 
     // Add the treeview.
-    mSideBar->setStyleSheet(
-            "background-color: rgb(222, 228, 234);"
-            "selection-color: white;"
-            "selection-background-color:"
-                "qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, "
-                "stop: 0 rgb(110, 165, 218), stop: 1 rgb(33, 108, 183))");
+    mSideBar->setStyleType(SideBar::StyleType::Active);
     mSideBar->setAttribute(Qt::WA_MacShowFocusRect, false);
     mSideBar->setMinimumWidth(100);
     QSizePolicy sideBarSizePolicy = mSideBar->sizePolicy();
@@ -45,8 +48,10 @@ MainWindow::MainWindow() :
     mEditorView->setSizePolicy(editorViewPolicy);
     mSplitter->addWidget(mEditorView);
 
-    // Force the treeview at minimum size.
-    mSplitter->setSizes(QList<int>{0, 99999});
+    // Force the treeview an appropriate size.
+    mSplitter->setSizes({kSideWidth, kWidth - kSideWidth});
+    mSplitter->setStretchFactor(0, 0);
+    mSplitter->setStretchFactor(1, 1);
 
     // Add the status bar.
     setStatusBar(mStatusBar);

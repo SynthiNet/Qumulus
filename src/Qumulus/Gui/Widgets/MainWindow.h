@@ -25,6 +25,8 @@ class MainWindow : public QMainWindow {
 public:
     MainWindow();
 
+    ToolBar* toolBar() const { return mToolBar; }
+    SideBar* sideBar() const { return mSideBar; }
 private:
 #ifdef Q_OS_MAC
     void setContentBorderOnMac();
