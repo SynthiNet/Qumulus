@@ -18,10 +18,6 @@ QUML_BEGIN_NAMESPACE_UCC
 class Package : public QuUCA::Namespace, public PackageableElement {
 public:
 
-    Package* package() const {
-        return mPackage;
-    }
-
     const std::unordered_map<QString, Package*>& nestedPackages() const {
         return mNestedPackages;
     }
