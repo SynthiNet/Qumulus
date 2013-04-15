@@ -22,7 +22,7 @@ public:
         return mPackage;
     }
 
-    std::unordered_map<QString, Package*>& nestedPackages() const {
+    const std::unordered_map<QString, Package*>& nestedPackages() const {
         return mNestedPackages;
     }
 
