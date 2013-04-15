@@ -11,6 +11,7 @@
 
 #include <Lib/Core/Clonable.h>
 #include <Lib/Core/Ptr.h>
+#include <Lib/Core/Hash.h>
 
 #include <unordered_set>
 
@@ -18,6 +19,8 @@ QUML_BEGIN_NAMESPACE_UCA
 
 class Element : public QuLC::Clonable {
 public:
+    Element() = default;
+
     Element(const Element& other);
     Element(Element&& other);
     

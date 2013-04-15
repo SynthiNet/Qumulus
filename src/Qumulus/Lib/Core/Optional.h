@@ -41,11 +41,6 @@ public:
         new(&mStorage) T(t);
     }
 
-    template<class... A>
-    explicit Optional(A&&... a) : mInitialized(true) {
-        new(&mStorage) T(std::forward<A>(a)...);
-    }
-
     Optional(const Optional<T>& o) : mInitialized(o.mInitialized) {
         if(mInitialized)
             new(&mStorage) T(*o);
