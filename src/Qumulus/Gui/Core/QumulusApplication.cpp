@@ -7,6 +7,7 @@
 #include "QumulusApplication.h"
 #include <Gui/Widgets/StyleType.h>
 #include <Gui/Widgets/SideBar.h>
+#include <Gui/Widgets/StatusBar.h>
 
 QUML_BEGIN_NAMESPACE_GC
 
@@ -26,12 +27,15 @@ QuGW::MainWindow* QumulusApplication::mainWindow() {
 
 void QumulusApplication::onFocusChanged(QWidget* old, QWidget* now) {
 #ifdef Q_OS_MAC
-    QuGW::SideBar* s = mainWindow()->sideBar();
+    QuGW::SideBar* sideBar = mainWindow()->sideBar();
+    QuGW::StatusBar* statusBar = mainWindow()->statusBar();
 
     if(old == nullptr) {
-        s->setStyleType(QuGW::StyleType::Active);
+        statusBar->setStyleType(QuGW::StyleType::Active);
+        sideBar->setStyleType(QuGW::StyleType::Active);
     } else if(now == nullptr) {
-        s->setStyleType(QuGW::StyleType::Inactive);
+        statusBar->setStyleType(QuGW::StyleType::Inactive);
+        sideBar->setStyleType(QuGW::StyleType::Inactive);
     }
 #endif
 }
