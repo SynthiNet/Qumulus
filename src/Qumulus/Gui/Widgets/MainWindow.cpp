@@ -29,11 +29,15 @@ MainWindow::MainWindow() :
 
     // Create main view.
     setCentralWidget(mSplitter);
+
+#ifdef Q_OS_MAC
     mSplitter->setHandleWidth(0);
+#endif
+
     mSplitter->setChildrenCollapsible(false);
 
     // Add the treeview.
-    mSideBar->setStyleType(SideBar::StyleType::Active);
+    mSideBar->setStyleType(StyleType::Active);
     mSideBar->setAttribute(Qt::WA_MacShowFocusRect, false);
     mSideBar->setMinimumWidth(100);
     QSizePolicy sideBarSizePolicy = mSideBar->sizePolicy();

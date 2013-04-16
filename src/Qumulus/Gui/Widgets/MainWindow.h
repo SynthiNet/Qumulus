@@ -13,9 +13,9 @@
 #include <QtWidgets/QSplitter>
 #include <QtWidgets/QStatusBar>
 #include <Lib/Core/Ptr.h>
-
-#include "ToolBar.h"
-#include "SideBar.h"
+#include <Gui/Widgets/SideBar.h>
+#include <Gui/Widgets/ToolBar.h>
+#include <Gui/Widgets/StyleType.h>
 
 QUML_BEGIN_NAMESPACE_GW
 
@@ -27,6 +27,7 @@ public:
 
     ToolBar* toolBar() const { return mToolBar; }
     SideBar* sideBar() const { return mSideBar; }
+
 private:
 #ifdef Q_OS_MAC
     void setContentBorderOnMac();
