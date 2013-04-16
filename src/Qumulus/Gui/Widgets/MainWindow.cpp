@@ -13,8 +13,7 @@ MainWindow::MainWindow() :
         mToolBar(new ToolBar(this)), 
         mSideBar(new SideBar(this)),
         mSplitter(new QSplitter(this)),
-        mStatusBar(new QStatusBar(this)) {
-
+        mStatusBar(new StatusBar(this)) {
     constexpr unsigned kWidth = 700, kHeight = 480, kSideWidth = 220;
 
     // Size constraints
@@ -37,12 +36,6 @@ MainWindow::MainWindow() :
     mSplitter->setChildrenCollapsible(false);
 
     // Add the treeview.
-    mSideBar->setStyleType(StyleType::Active);
-    mSideBar->setAttribute(Qt::WA_MacShowFocusRect, false);
-    mSideBar->setMinimumWidth(100);
-    QSizePolicy sideBarSizePolicy = mSideBar->sizePolicy();
-    sideBarSizePolicy.setHorizontalPolicy(QSizePolicy::Minimum);
-    mSideBar->setSizePolicy(sideBarSizePolicy);
     mSplitter->addWidget(mSideBar);
 
     // Add the Editor view.
@@ -60,9 +53,9 @@ MainWindow::MainWindow() :
     // Add the status bar.
     setStatusBar(mStatusBar);
 
-    // Set border on OS X
 #ifdef Q_OS_MAC
-    this->setContentBorderOnMac();
+    // Set border on OS X
+    setContentBorderOnMac();
 #endif
 }
 

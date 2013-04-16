@@ -11,11 +11,11 @@
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QSplitter>
-#include <QtWidgets/QStatusBar>
 #include <Lib/Core/Ptr.h>
 #include <Gui/Widgets/SideBar.h>
 #include <Gui/Widgets/ToolBar.h>
 #include <Gui/Widgets/StyleType.h>
+#include <Gui/Widgets/StatusBar.h>
 
 QUML_BEGIN_NAMESPACE_GW
 
@@ -26,6 +26,7 @@ public:
     MainWindow();
 
     ToolBar* toolBar() const { return mToolBar; }
+    StatusBar* statusBar() const { return mStatusBar; }
     SideBar* sideBar() const { return mSideBar; }
 
 private:
@@ -37,7 +38,7 @@ private:
     ToolBar* mToolBar;
     SideBar* mSideBar;
     QSplitter* mSplitter;
-    QStatusBar* mStatusBar;
+    StatusBar* mStatusBar;
 };
 
 QUML_END_NAMESPACE_GW
