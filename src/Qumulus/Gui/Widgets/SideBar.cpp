@@ -9,7 +9,16 @@
 
 QUML_BEGIN_NAMESPACE_GW
 
-SideBar::SideBar(QWidget* parent) : QTreeView(parent) {}
+SideBar::SideBar(QWidget* parent) : QTreeView(parent) {
+#ifdef Q_OS_MAC
+    setStyleType(StyleType::Active);
+    setAttribute(Qt::WA_MacShowFocusRect, false);
+#endif
+    setMinimumWidth(100);
+    QSizePolicy sideBarSizePolicy = sizePolicy();
+    sideBarSizePolicy.setHorizontalPolicy(QSizePolicy::Minimum);
+    setSizePolicy(sideBarSizePolicy);
+}
     
 void SideBar::setWindow(MainWindow* w) {
     mWindow = w;
