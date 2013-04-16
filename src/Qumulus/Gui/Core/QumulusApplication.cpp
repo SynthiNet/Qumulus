@@ -5,7 +5,7 @@
  */
 
 #include "QumulusApplication.h"
-
+#include <Gui/Widgets/StyleType.h>
 #include <Gui/Widgets/SideBar.h>
 
 QUML_BEGIN_NAMESPACE_GC
@@ -25,13 +25,15 @@ QuGW::MainWindow* QumulusApplication::mainWindow() {
 }
 
 void QumulusApplication::onFocusChanged(QWidget* old, QWidget* now) {
+#ifdef Q_OS_MAC
     QuGW::SideBar* s = mainWindow()->sideBar();
 
     if(old == nullptr) {
-        s->setStyleType(QuGW::SideBar::StyleType::Active);
+        s->setStyleType(QuGW::StyleType::Active);
     } else if(now == nullptr) {
-        s->setStyleType(QuGW::SideBar::StyleType::Inactive);
+        s->setStyleType(QuGW::StyleType::Inactive);
     }
+#endif
 }
 
 QUML_END_NAMESPACE_GC

@@ -9,6 +9,7 @@
 
 #include "internal_base.h"
 #include <QtWidgets/QTreeView>
+#include <Gui/Widgets/StyleType.h>
 #include <Lib/Core/Ptr.h>
 
 QUML_BEGIN_NAMESPACE_GW
@@ -17,14 +18,6 @@ class MainWindow;
 
 class SideBar : public QTreeView {
     Q_OBJECT
-
-#ifdef Q_OS_MAC
-public:
-    enum class StyleType {
-        Active,
-        Inactive
-    };
-#endif
 
 public:
     SideBar(QWidget* parent = 0);
