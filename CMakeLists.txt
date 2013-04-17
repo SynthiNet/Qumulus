@@ -116,6 +116,6 @@ add_subdirectory(test)
 # UML file icon for OS X
 if(APPLE)
     install(FILES "logo/qumulus.icns" DESTINATION ${RESOURCE_DEST})
-    install(FILES "logo/uml/uml-mac.icns" DESTINATION ${RESOURCE_DEST})
+    install(FILES "logo/uml/xmi-mac.icns" DESTINATION ${RESOURCE_DEST})
 endif()
 
