@@ -9,10 +9,10 @@
     <dict>
       <key>CFBundleTypeExtensions</key>
       <array>
-        <string>uml</string>
+        <string>xmi</string>
       </array>
       <key>CFBundleTypeIconFile</key>
-      <string>uml-mac</string>
+      <string>xmi-mac</string>
       <key>CFBundleTypeName</key>
       <string>UML Diagram</string>
       <key>CFBundleTypeRole</key>
