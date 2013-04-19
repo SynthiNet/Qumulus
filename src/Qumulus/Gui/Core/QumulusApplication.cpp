@@ -17,25 +17,33 @@ QumulusApplication::QumulusApplication(int& argc, char** argv) :
             this, &QumulusApplication::onFocusChanged);
 }
 
-void QumulusApplication::setMainWindow(QuGW::MainWindow* m) {
-    mMainWindow = m;
+QuGW::MainWindow* QumulusApplication::mainWindowForWidget(QWidget* w) const {
+    QuGW::MainWindow* mw;
+    while(w != nullptr) {
+        w = w->parentWidget();
+        if((mw = dynamic_cast<QuGW::MainWindow*>(w)))
+            return mw;
+    }
+
+    return nullptr;
 }
 
-QuGW::MainWindow* QumulusApplication::mainWindow() {
-    return mMainWindow;
-}
 
 void QumulusApplication::onFocusChanged(QWidget* old, QWidget* now) {
 #ifdef Q_OS_MAC
-    QuGW::SideBar* sideBar = mainWindow()->sideBar();
-    QuGW::StatusBar* statusBar = mainWindow()->statusBar();
+    QuGW::MainWindow* w1 = mainWindowForWidget(old);
+    QuGW::MainWindow* w2 = mainWindowForWidget(now);
 
-    if(old == nullptr) {
-        statusBar->setStyleType(QuGW::StyleType::Active);
-        sideBar->setStyleType(QuGW::StyleType::Active);
-    } else if(now == nullptr) {
-        statusBar->setStyleType(QuGW::StyleType::Inactive);
-        sideBar->setStyleType(QuGW::StyleType::Inactive);
+    if(w1 == w2) return;
+
+    if(w1 != nullptr) {
+        w1->sideBar()->setStyleType(QuGW::StyleType::Inactive);
+        w1->statusBar()->setStyleType(QuGW::StyleType::Inactive);
+    }
+
+    if(w2 != nullptr) {
+        w2->sideBar()->setStyleType(QuGW::StyleType::Active);
+        w2->statusBar()->setStyleType(QuGW::StyleType::Active);
     }
 #endif
 }

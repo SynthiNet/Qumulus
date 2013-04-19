@@ -1,5 +1,6 @@
 /*
  * Qumulus UML editor
+ * Author: Frank Erens
  * Author: Randy Thiemann
  *
  */
@@ -23,8 +24,7 @@ class QumulusApplication : public QApplication {
 
 public:
     QumulusApplication(int& argc, char** argv);
-    void setMainWindow(QuGW::MainWindow* m);
-    QuGW::MainWindow* mainWindow();
+    QuGW::MainWindow* mainWindowForWidget(QWidget* w) const;
 
 public slots:
     void onFocusChanged(QWidget* old, QWidget* now);
