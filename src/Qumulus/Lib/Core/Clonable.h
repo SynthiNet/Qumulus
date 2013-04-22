@@ -24,6 +24,9 @@ public:
         return new Class(*this); \
     }
 
+#define QUML_CLONABLE_ABSTRACT(Class) \
+    virtual Class* clone() const = 0;
+
 QUML_END_NAMESPACE_LC
 
 #endif /* QUMULUS_LIB_CORE_CLONABLE_H_ */
