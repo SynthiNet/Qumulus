@@ -18,6 +18,7 @@
 #include <QtWidgets/QToolBar>
 #endif
 #include <Lib/Core/Ptr.h>
+#include <Gui/Widgets/ToolBarItem.h>
 
 QUML_BEGIN_NAMESPACE_GW
 
@@ -31,6 +32,7 @@ public:
     void showInWindow(MainWindow* w);
     MainWindow* window();
     QAction* addAction(const QIcon& icon, const QString& text);
+    QAction* addWidget(ToolBarItem* item);
     void addSeparator();
 #ifdef Q_OS_MAC
     void addFlexibleSpace();

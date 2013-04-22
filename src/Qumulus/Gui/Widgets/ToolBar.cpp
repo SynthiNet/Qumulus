@@ -34,6 +34,12 @@ QAction* ToolBar::addAction(const QIcon& icon, const QString& text) {
     return mToolBar->addAction(icon, text);
 }
 
+#ifndef Q_OS_MAC
+QAction* ToolBar::addWidget(ToolBarItem* item) {
+    return mToolBar->addWidget(item);
+}
+#endif
+
 void ToolBar::addSeparator() {
     mToolBar->addSeparator();
 }
