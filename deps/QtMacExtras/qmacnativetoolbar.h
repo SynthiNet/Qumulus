@@ -57,9 +57,9 @@ Q_MACEXTRAS_EXPORT QMacNativeToolBar* setNativeToolBar(QToolBar *toolbar, const 
 }
 
 #include "qmactoolbutton.h"
-#include <QObject>
-#include <QIcon>
-#include <QVariant>
+#include <QtCore/QObject>
+#include <QtGui/QIcon>
+#include <QtCore/QVariant>
 
 class QAction;
 class QWindow;
