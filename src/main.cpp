@@ -14,8 +14,5 @@ int main(int argc, char** argv) {
     QuGW::MainWindow w;
     w.show();
 
-    QuGW::MainWindow w2;
-    w2.show();
-
     return app.exec();
 }
