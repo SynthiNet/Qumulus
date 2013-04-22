@@ -16,7 +16,7 @@
 
 QUML_BEGIN_NAMESPACE_UCA
 
-class ValueSpecification : public Element {
+class ValueSpecification : public virtual Element {
 public:
     ValueSpecification() = default;
 

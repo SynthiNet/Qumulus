@@ -20,7 +20,7 @@ QUML_BEGIN_NAMESPACE_UCA
 
 class Namespace;
 
-class NamedElement : public Element {
+class NamedElement : public virtual Element {
 public:
     NamedElement() = default;
 
