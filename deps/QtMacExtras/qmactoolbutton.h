@@ -42,7 +42,7 @@
 #ifndef QMACTOOLBUTTON_H
 #define QMACTOOLBUTTON_H
 
-#include <QtCore/QObject>
+#include <QObject>
 
 class QAction;
 

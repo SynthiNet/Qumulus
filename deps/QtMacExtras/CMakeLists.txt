@@ -6,13 +6,13 @@
 ###############################################################################
 
 set(QTMACEXTRAS_SRC
-    qmaccocoaviewcontainer.mm
     qmacfunctions.mm
+    qmacfunctions_mac.mm
+    qmacnativetoolbar.mm
     qmacnativewidget.mm
     qmacpasteboardmime.mm
     qmactoolbardelegate.mm
     qmactoolbutton.mm
-    qmacunifiedtoolbar.mm
     qnstoolbar.mm
 )
 

@@ -39,72 +39,30 @@
 **
 ****************************************************************************/
 
-#ifndef QMACFUNCTIONS_H
-#define QMACFUNCTIONS_H
+#ifndef QMACFUNCTIONS_P_H
+#define QMACFUNCTIONS_P_H
 
-#if 0
-#pragma qt_class(QtMacFunctions)
-#endif
-
-#include "qmacextrasglobal.h"
-
-typedef struct CGImage *CGImageRef;
-typedef struct CGContext *CGContextRef;
-
-#ifdef __OBJC__
-@class NSData;
-@class NSImage;
-@class NSString;
-@class NSMenu;
-@class NSURL;
-#else
-typedef struct objc_object NSData;
-typedef struct objc_object NSImage;
-typedef struct objc_object NSString;
-typedef struct objc_object NSMenu;
-typedef struct objc_object NSURL;
-#endif
+#include "qmacfunctions.h"
 
 QT_BEGIN_NAMESPACE
 
-class QByteArray;
-class QMenu;
-class QMenuBar;
-class QPixmap;
-class QString;
-class QUrl;
+#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
+#include <QtCore/QDebug>
+#include <QtGui/QGuiApplication>
+#include <qpa/qplatformnativeinterface.h>
 
-namespace QtMacExtras
+inline QPlatformNativeInterface::NativeResourceForIntegrationFunction resolvePlatformFunction(const QByteArray &functionName)
 {
-Q_MACEXTRAS_EXPORT NSString* toNSString(const QString &string);
-Q_MACEXTRAS_EXPORT QString fromNSString(const NSString *string);
-
-Q_MACEXTRAS_EXPORT NSURL* toNSURL(const QUrl &url);
-Q_MACEXTRAS_EXPORT QUrl fromNSURL(const NSURL *url);
-
-Q_MACEXTRAS_EXPORT NSData* toNSData(const QByteArray &data);
-Q_MACEXTRAS_EXPORT QByteArray fromNSData(const NSData *data);
-
-Q_MACEXTRAS_EXPORT CGImageRef toCGImageRef(const QPixmap &pixmap);
-Q_MACEXTRAS_EXPORT QPixmap fromCGImageRef(CGImageRef image);
-
-Q_MACEXTRAS_EXPORT CGContextRef currentCGContext();
-
-#ifndef Q_OS_IOS
-Q_MACEXTRAS_EXPORT NSImage* toNSImage(const QPixmap &pixmap);
-
-Q_MACEXTRAS_EXPORT NSMenu* toNSMenu(QMenu *menu);
-Q_MACEXTRAS_EXPORT NSMenu* toNSMenu(QMenuBar *menubar);
-
-Q_MACEXTRAS_EXPORT void setDockMenu(QMenu *menu);
-#endif
+    QPlatformNativeInterface *nativeInterface = QGuiApplication::platformNativeInterface();
+    QPlatformNativeInterface::NativeResourceForIntegrationFunction function =
+        nativeInterface->nativeResourceFunctionForIntegration(functionName);
+    if (!function)
+         qWarning() << "Qt could not resolve function" << functionName
+                    << "from QGuiApplication::platformNativeInterface()->nativeResourceFunctionForIntegration()";
+    return function;
 }
-
-#ifndef Q_OS_IOS
-// ### Qt 4 compatibility; remove in Qt 6
-inline void qt_mac_set_dock_menu(QMenu *menu) { QtMacExtras::setDockMenu(menu); }
 #endif
 
 QT_END_NAMESPACE
 
-#endif // QMACFUNCTIONS_H
+#endif // QMACFUNCTIONS_P_H

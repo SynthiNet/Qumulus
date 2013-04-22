@@ -40,78 +40,14 @@
 ****************************************************************************/
 
 #include "qmacfunctions.h"
-#ifdef Q_OS_IOS
+#include "qmacfunctions_p.h"
+#include <QByteArray>
+#include <QPixmap>
+#include <QUrl>
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CoreGraphics.h>
-#else
-#import <Cocoa/Cocoa.h>
-#endif
 
 QT_BEGIN_NAMESPACE
-
-#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
-#include <QtCore/qDebug.h>
-#include <QtGui/QGuiApplication>
-#include <QtWidgets/QMenu>
-#include <QtWidgets/QMenuBar>
-#include <qpa/qplatformmenu.h>
-#include <qpa/qplatformnativeinterface.h>
-
-QPlatformNativeInterface::NativeResourceForIntegrationFunction resolvePlatformFunction(const QByteArray &functionName)
-{
-    QPlatformNativeInterface *nativeInterface = QGuiApplication::platformNativeInterface();
-    QPlatformNativeInterface::NativeResourceForIntegrationFunction function =
-        nativeInterface->nativeResourceFunctionForIntegration(functionName);
-    if (!function)
-         qWarning() << "Qt could not resolve function" << functionName
-                    << "from QGuiApplication::platformNativeInterface()->nativeResourceFunctionForIntegration()";
-    return function;
-}
-
-#ifndef Q_OS_IOS
-void qt_mac_set_dock_menu(QMenu *menu)
-{
-    // Get the platform menu, which will be a QCocoaMenu
-    QPlatformMenu *platformMenu = menu->platformMenu();
-
-    // Get the setDockMenu function and call it.
-    QPlatformNativeInterface::NativeResourceForIntegrationFunction function = resolvePlatformFunction("setdockmenu");
-    if (function) {
-        typedef void (*SetDockMenuFunction)(QPlatformMenu *platformMenu);
-        reinterpret_cast<SetDockMenuFunction>(function)(platformMenu);
-    }
-}
-
-NSMenu *QtMacExtras::toNSMenu(QMenu *menu)
-{
-    // Get the platform menu, which will be a QCocoaMenu
-    QPlatformMenu *platformMenu = menu->platformMenu();
-
-    // Get the qMenuToNSMenu function and call it.
-    QPlatformNativeInterface::NativeResourceForIntegrationFunction function = resolvePlatformFunction("qmenutonsmenu");
-    if (function) {
-        typedef void* (*QMenuToNSMenuFunction)(QPlatformMenu *platformMenu);
-        return reinterpret_cast<NSMenu *>(reinterpret_cast<QMenuToNSMenuFunction>(function)(platformMenu));
-    }
-    return nil;
-}
-#endif
-
-NSMenu *QtMacExtras::toNSMenu(QMenuBar *menubar)
-{
-    // Get the platform menubar, which will be a QCocoaMenuBar
-    QPlatformMenuBar *platformMenuBar = menubar->platformMenuBar();
-
-    // Get the qMenuBarToNSMenu function and call it.
-    QPlatformNativeInterface::NativeResourceForIntegrationFunction function = resolvePlatformFunction("qmenubartonsmenu");
-    if (function) {
-        typedef void* (*QMenuBarToNSMenuFunction)(QPlatformMenuBar *platformMenuBar);
-        return reinterpret_cast<NSMenu *>(reinterpret_cast<QMenuBarToNSMenuFunction>(function)(platformMenuBar));
-    }
-    return nil;
-}
-
-#endif
 
 namespace QtMacExtras
 {
@@ -133,6 +69,29 @@ QString fromNSString(const NSString *string)
     return qstring;
 }
 
+NSURL* toNSURL(const QUrl &url)
+{
+    return [NSURL URLWithString:toNSString(url.toString())];
+}
+
+QUrl fromNSURL(const NSURL *url)
+{
+    return QUrl(fromNSString([url absoluteString]));
+}
+
+NSData* toNSData(const QByteArray &data)
+{
+    return [NSData dataWithBytes:data.constData() length:data.size()];
+}
+
+QByteArray fromNSData(const NSData *data)
+{
+    QByteArray ba;
+    ba.resize([data length]);
+    [data getBytes:ba.data() length:ba.size()];
+    return ba;
+}
+
 /*!
     Creates a \c CGImageRef equivalent to the QPixmap. Returns the \c CGImageRef handle.
 
@@ -141,42 +100,31 @@ QString fromNSString(const NSString *string)
 
     This function is not available in Qt 5.x until 5.0.2 and will return NULL in earlier versions.
 
-    \sa fromMacCGImageRef()
+    \sa fromCGImageRef()
 */
-CGImageRef toMacCGImageRef(const QPixmap &pixmap)
+CGImageRef toCGImageRef(const QPixmap &pixmap)
 {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
     QPlatformNativeInterface::NativeResourceForIntegrationFunction function = resolvePlatformFunction("qimagetocgimage");
     if (function) {
-        typedef CGImageRef (*QImageToCGIamgeFunction)(const QImage &image);
-        return reinterpret_cast<QImageToCGIamgeFunction>(function)(pixmap.toImage());
+        typedef CGImageRef (*QImageToCGImageFunction)(const QImage &image);
+        return reinterpret_cast<QImageToCGImageFunction>(function)(pixmap.toImage());
     }
 
     return NULL;
 #else
-    return pixmap.toMacCGImageRef();
+    return pixmap.toCGImageRef();
 #endif
 }
-
-#ifndef Q_OS_IOS
-NSImage* toMacNSImage(const QPixmap &pixmap)
-{
-    NSBitmapImageRep *bitmapRep = [[NSBitmapImageRep alloc] initWithCGImage:toMacCGImageRef(pixmap)];
-    NSImage *image = [[NSImage alloc] init];
-    [image addRepresentation:bitmapRep];
-    [bitmapRep release];
-    return image;
-}
-#endif
 
 /*!
     Returns a QPixmap that is equivalent to the given \a image.
 
     This function is not available in Qt 5.x until 5.0.2 and will return a null pixmap in earlier versions.
 
-    \sa toMacCGImageRef(), {QPixmap#Pixmap Conversion}{Pixmap Conversion}
+    \sa toCGImageRef(), {QPixmap#Pixmap Conversion}{Pixmap Conversion}
 */
-QPixmap fromMacCGImageRef(CGImageRef image)
+QPixmap fromCGImageRef(CGImageRef image)
 {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
     QPlatformNativeInterface::NativeResourceForIntegrationFunction function = resolvePlatformFunction("cgimagetoqimage");
@@ -187,7 +135,7 @@ QPixmap fromMacCGImageRef(CGImageRef image)
 
     return QPixmap();
 #else
-    return QPixmap::fromMacCGImageRef(image);
+    return QPixmap::fromCGImageRef(image);
 #endif
 }
 
