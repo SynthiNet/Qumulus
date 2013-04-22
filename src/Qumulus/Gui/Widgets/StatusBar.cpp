@@ -9,11 +9,15 @@
 
 QUML_BEGIN_NAMESPACE_GW
 
-StatusBar::StatusBar(QWidget* parent) : QStatusBar(parent) {
+StatusBar::StatusBar(QWidget* parent) : QStatusBar(parent), 
+    mZoom(new ZoomSlider()), mSpacer(new Spacer(this)) {
+    setFixedHeight(24);
 #ifdef Q_OS_MAC
     setSizeGripEnabled(false);
     setStyleType(StyleType::Active);
 #endif
+    addPermanentWidget(mZoom);
+    addPermanentWidget(mSpacer);
 }
 
 MainWindow* StatusBar::window() {

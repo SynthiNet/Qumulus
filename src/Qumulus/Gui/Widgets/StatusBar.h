@@ -9,7 +9,10 @@
 
 #include "internal_base.h"
 #include <QtWidgets/QStatusBar>
+#include <QtWidgets/QSpacerItem>
 #include <Gui/Widgets/StyleType.h>
+#include <Gui/Widgets/ZoomSlider.h>
+#include <Gui/Widgets/Spacer.h>
 
 QUML_BEGIN_NAMESPACE_GW
 
@@ -25,6 +28,10 @@ public:
 #ifdef Q_OS_MAC
     void setStyleType(StyleType s);
 #endif
+
+private:
+    ZoomSlider* mZoom;
+    Spacer* mSpacer;
 };
 
 QUML_END_NAMESPACE_GW
