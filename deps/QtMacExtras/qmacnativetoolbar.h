@@ -44,7 +44,7 @@
 
 #include "qmacextrasglobal.h"
 
-#include <QString>
+#include <QtCore/QString>
 
 class QToolBar;
 class QWidget;

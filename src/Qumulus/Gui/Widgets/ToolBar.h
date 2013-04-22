@@ -13,7 +13,7 @@
 #include <QtWidgets/QAction>
 #include <QtGui/QIcon>
 #ifdef Q_OS_MAC
-#include <QtMacExtras/QMacUnifiedToolBar>
+#include <QtMacExtras/QMacNativeToolBar>
 #else
 #include <QtWidgets/QToolBar>
 #endif
@@ -38,7 +38,7 @@ public:
 
 private:
 #ifdef Q_OS_MAC
-    uptr<QMacUnifiedToolBar> mToolBar;
+    uptr<QMacNativeToolBar> mToolBar;
 #else
     uptr<QToolBar> mToolBar;
 #endif

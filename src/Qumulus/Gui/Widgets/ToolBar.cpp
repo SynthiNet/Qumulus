@@ -11,7 +11,7 @@ QUML_BEGIN_NAMESPACE_GW
 
 #ifdef Q_OS_MAC
 ToolBar::ToolBar(QObject* parent) : QObject(parent),
-    mToolBar(new QMacUnifiedToolBar()) {}
+    mToolBar(new QMacNativeToolBar()) {}
 #else
 ToolBar::ToolBar(QObject* parent) : QObject(parent),
     mToolBar(new QToolBar()) {}
