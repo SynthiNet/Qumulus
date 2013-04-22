@@ -24,6 +24,7 @@ class StatusBar : public QStatusBar {
 public:
     StatusBar(QWidget* parent = 0);
     MainWindow* window();
+    ZoomSlider* slider() { return mZoom; }
 
 #ifdef Q_OS_MAC
     void setStyleType(StyleType s);
