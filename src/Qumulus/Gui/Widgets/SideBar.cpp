@@ -20,12 +20,8 @@ SideBar::SideBar(QWidget* parent) : QTreeView(parent) {
     setSizePolicy(sideBarSizePolicy);
 }
     
-void SideBar::setWindow(MainWindow* w) {
-    mWindow = w;
-}
-    
 MainWindow* SideBar::window() {
-    return mWindow;
+    return static_cast<MainWindow*>(parent());
 }
 
 #ifdef Q_OS_MAC
