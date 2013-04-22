@@ -12,7 +12,7 @@ void MainWindow::setContentBorderOnMac() {
         QGuiApplication::platformNativeInterface()->nativeResourceForWindow(
             "nswindow", this->windowHandle()));
 
-    [macWindow setContentBorderThickness: 16 forEdge: NSMinYEdge];
+    /*[macWindow setContentBorderThickness: 16 forEdge: NSMinYEdge];*/
 }
 
 QUML_END_NAMESPACE_GW
