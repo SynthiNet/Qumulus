@@ -16,12 +16,8 @@ StatusBar::StatusBar(QWidget* parent) : QStatusBar(parent) {
 #endif
 }
 
-void StatusBar::setWindow(MainWindow* w) {
-    mWindow = w;
-}
-
 MainWindow* StatusBar::window() {
-    return mWindow;
+    return static_cast<MainWindow*>(parent());
 }
 
 #ifdef Q_OS_MAC

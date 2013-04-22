@@ -20,15 +20,11 @@ class StatusBar : public QStatusBar {
 
 public:
     StatusBar(QWidget* parent = 0);
-    void setWindow(MainWindow* w);
     MainWindow* window();
 
 #ifdef Q_OS_MAC
     void setStyleType(StyleType s);
 #endif
-
-private:
-    MainWindow* mWindow;
 };
 
 QUML_END_NAMESPACE_GW
