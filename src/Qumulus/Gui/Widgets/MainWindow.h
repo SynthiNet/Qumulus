@@ -9,15 +9,17 @@
 
 #include "internal_base.h"
 #include <QtWidgets/QMainWindow>
-#include <QtWidgets/QGridLayout>
-#include <QtWidgets/QSplitter>
-#include <Lib/Core/Ptr.h>
-#include <Gui/Widgets/SideBar.h>
-#include <Gui/Widgets/ToolBar.h>
-#include <Gui/Widgets/StyleType.h>
-#include <Gui/Widgets/StatusBar.h>
+
+class QMenu;
+class QSplitter;
+class QAction;
 
 QUML_BEGIN_NAMESPACE_GW
+
+class StatusBar;
+class EditorView;
+class ToolBar;
+class SideBar;
 
 class MainWindow : public QMainWindow {
     Q_OBJECT
@@ -33,12 +35,46 @@ private:
 #ifdef Q_OS_MAC
     void setContentBorderOnMac();
 #endif
+    void createMenus();
 
 private:
     ToolBar* mToolBar;
     SideBar* mSideBar;
     QSplitter* mSplitter;
     StatusBar* mStatusBar;
+    EditorView* mEditorView;
+
+    QMenu* mFileMenu;
+    QMenu* mEditMenu;
+    QMenu* mInsertMenu;
+    QMenu* mViewMenu;
+    QMenu* mHelpMenu;
+
+    // Application Menu
+    QAction* mPrefsAction;
+    QAction* mQuitAction;
+
+    // File Menu
+    QAction* mNewAction;
+    QAction* mOpenAction;
+    QAction* mCloseAction;
+    QAction* mPrintAction;
+    
+    // Edit Menu
+    QAction* mUndoAction;
+    QAction* mRedoAction;
+    QAction* mCutAction;
+    QAction* mCopyAction;
+    QAction* mPasteAction;
+    QAction* mDeleteAction;
+    QAction* mDuplicateAction;
+
+    // Insert Menu
+     
+    // View Menu
+    
+    // Help Menu
+    QAction* mAboutAction;
 };
 
 QUML_END_NAMESPACE_GW
