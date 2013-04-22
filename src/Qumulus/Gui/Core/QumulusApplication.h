@@ -15,7 +15,7 @@
 #ifdef qApp
 #undef qApp
 #endif
-#define qApp static_cast<QumulusApplication*>(QCoreApplication::instance())
+#define qApp static_cast<QuGC::QumulusApplication*>(QCoreApplication::instance())
 
 QUML_BEGIN_NAMESPACE_GC
 
