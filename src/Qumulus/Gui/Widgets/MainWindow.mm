@@ -1,6 +1,6 @@
 #include "MainWindow.h"
 
-#include <QGuiApplication>
+#include <QtGui/QGuiApplication>
 #include <qpa/qplatformnativeinterface.h>
 
 #import <AppKit/AppKit.h>

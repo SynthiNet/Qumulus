@@ -44,7 +44,7 @@
 
 #include "qmacextrasglobal.h"
 
-#include <QWidget>
+#include <QtWidgets/QWidget>
 #import <Availability.h>
 
 QT_BEGIN_HEADER
