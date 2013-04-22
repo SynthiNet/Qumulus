@@ -8,6 +8,7 @@
     <file>data/img/toolbar/package.png</file>
     <file>data/img/toolbar/primitive-type.png</file>
     <file>data/img/toolbar/template-class.png</file>
+    <file>data/img/toolbar/dropdown.png</file>
   </qresource>
 </RCC>
 <!--
