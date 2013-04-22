@@ -2,8 +2,14 @@
 <RCC version="1.0">
   <qresource>
     <file>logo/qumulus-256.png</file>
+    <file>data/img/toolbar/class.png</file>
+    <file>data/img/toolbar/enum.png</file>
+    <file>data/img/toolbar/interface.png</file>
+    <file>data/img/toolbar/package.png</file>
+    <file>data/img/toolbar/primitive-type.png</file>
+    <file>data/img/toolbar/template-class.png</file>
   </qresource>
 </RCC>
 <!--
-  vim: syntax=xml
+  vim: ft=xml
 -->
