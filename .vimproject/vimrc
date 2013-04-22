@@ -146,8 +146,6 @@ fun! s:ReadTemplate(exists)
 
   if !a:exists || getfsize(expand("%:p")) <= 2
     let l:file = s:ToRelativePath(expand("%:p"))
-    echoe l:file
-
 
     if match(l:file, "^/src/Qumulus", "") != -1
       if match(l:file, "\.h$") != -1
