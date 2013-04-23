@@ -30,13 +30,16 @@ class ToolBarItem : public QWidget {
 public:
     ToolBarItem(ToolBar* parent = 0);
     void setIcon(const QIcon& icon);
-    void setText(const QString& text);
     void setMenu(QMenu* menu);
+
+    void setText(const QString& text);
+    const QString& text() const;
 
 private:
     QHBoxLayout* mLayout;
     QPushButton* mButton;
     QPushButton* mDropdown;
+    QString mText;
 };
 
 QUML_END_NAMESPACE_GW

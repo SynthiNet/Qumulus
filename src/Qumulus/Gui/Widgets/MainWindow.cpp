@@ -38,6 +38,13 @@ MainWindow::MainWindow() :
     // Add toolbar
     mToolBar->showInWindow(this);
 
+    // Add toolbar item
+    // TODO separate this and store classItem?
+    ToolBarItem* classItem = new ToolBarItem(mToolBar);
+    classItem->setIcon(QIcon(":/data/img/toolbar/class.png"));
+    classItem->setText("Class");
+    mToolBar->addWidget(classItem);
+
     // Create main view.
     setCentralWidget(mSplitter);
 

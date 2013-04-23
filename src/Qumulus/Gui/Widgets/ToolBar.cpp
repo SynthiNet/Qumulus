@@ -12,19 +12,21 @@ QUML_BEGIN_NAMESPACE_GW
 #ifdef Q_OS_MAC_disabled
 ToolBar::ToolBar(QObject* parent) : QObject(parent),
         mToolBar(new QMacNativeToolBar()) {
-    mToolBar->setToolButtonStyle(Qt::ToolButtonIconOnly);
 }
 #else
 ToolBar::ToolBar(QObject* parent) : QObject(parent),
-        mToolBar(new QToolBar()) {}
+        mToolBar(new QToolBar()) {
+}
 #endif
 
 void ToolBar::showInWindow(MainWindow* w) {
     mWindow = w;
 #ifdef Q_OS_MAC_disabled
     mToolBar->showInWindowForWidget(w);
+    mToolBar->setToolButtonStyle(Qt::ToolButtonIconOnly);
 #else
     w->addToolBar(mToolBar.get());
+    mToolBar->setToolButtonStyle(Qt::ToolButtonIconOnly);
 #endif
 }
 
