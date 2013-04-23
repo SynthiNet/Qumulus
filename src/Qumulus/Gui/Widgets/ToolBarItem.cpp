@@ -6,14 +6,11 @@
 
 #include "ToolBarItem.h"
 
+#include "ToolBar.h"
+
 QUML_BEGIN_NAMESPACE_GW
 
-ToolBarItem::ToolBarItem(QWidget* parent) : 
-//#ifndef Q_OS_MAC
-    QWidget(parent) {
-//#else
-//    QMacNativeWidget(parent) {
-//#endif
+ToolBarItem::ToolBarItem(ToolBar* parent) {
     mLayout = new QHBoxLayout(this);
     mButton = new QPushButton(this);
     mDropdown = new QPushButton(this);

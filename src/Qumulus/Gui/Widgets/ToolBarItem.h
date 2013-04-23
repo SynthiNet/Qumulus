@@ -22,16 +22,13 @@
 QUML_BEGIN_NAMESPACE_GW
 
 class MainWindow;
+class ToolBar;
 
-//#ifndef Q_OS_MAC
 class ToolBarItem : public QWidget {
-//#else
-//class ToolBarItem : public QMacNativeWidget {
-//#endif
     Q_OBJECT
 
 public:
-    ToolBarItem(QWidget* parent = 0);
+    ToolBarItem(ToolBar* parent = 0);
     void setIcon(const QIcon& icon);
     void setText(const QString& text);
     void setMenu(QMenu* menu);

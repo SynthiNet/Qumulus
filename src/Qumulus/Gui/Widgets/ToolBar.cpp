@@ -9,17 +9,19 @@
 
 QUML_BEGIN_NAMESPACE_GW
 
-#ifdef Q_OS_MAC
+#ifdef Q_OS_MAC_disabled
 ToolBar::ToolBar(QObject* parent) : QObject(parent),
-    mToolBar(new QMacNativeToolBar()) {}
+        mToolBar(new QMacNativeToolBar()) {
+    mToolBar->setToolButtonStyle(Qt::ToolButtonIconOnly);
+}
 #else
 ToolBar::ToolBar(QObject* parent) : QObject(parent),
-    mToolBar(new QToolBar()) {}
+        mToolBar(new QToolBar()) {}
 #endif
 
 void ToolBar::showInWindow(MainWindow* w) {
     mWindow = w;
-#ifdef Q_OS_MAC
+#ifdef Q_OS_MAC_disabled
     mToolBar->showInWindowForWidget(w);
 #else
     w->addToolBar(mToolBar.get());
@@ -30,21 +32,17 @@ QuGW::MainWindow* ToolBar::window() {
     return mWindow;
 }
 
-QAction* ToolBar::addAction(const QIcon& icon, const QString& text) {
-    return mToolBar->addAction(icon, text);
+// #ifndef Q_OS_MAC
+void ToolBar::addWidget(ToolBarItem* item) {
+    mToolBar->addWidget(item);
 }
-
-#ifndef Q_OS_MAC
-QAction* ToolBar::addWidget(ToolBarItem* item) {
-    return mToolBar->addWidget(item);
-}
-#endif
+// #endif
 
 void ToolBar::addSeparator() {
     mToolBar->addSeparator();
 }
 
-#ifdef Q_OS_MAC
+#ifdef Q_OS_MAC_disabled
 void ToolBar::addFlexibleSpace() {
     mToolBar->addStandardItem(QMacToolButton::FlexibleSpace);
 }

@@ -12,11 +12,11 @@
 #include <QtCore/QString>
 #include <QtWidgets/QAction>
 #include <QtGui/QIcon>
-#ifdef Q_OS_MAC
-#include <QtMacExtras/QMacNativeToolBar>
-#else
+// #ifdef Q_OS_MAC
+// #include <QtMacExtras/QMacNativeToolBar>
+// #else
 #include <QtWidgets/QToolBar>
-#endif
+// #endif
 #include <Lib/Core/Ptr.h>
 #include <Gui/Widgets/ToolBarItem.h>
 
@@ -31,15 +31,18 @@ public:
     ToolBar(QObject* parent = 0);
     void showInWindow(MainWindow* w);
     MainWindow* window();
-    QAction* addAction(const QIcon& icon, const QString& text);
-    QAction* addWidget(ToolBarItem* item);
+
+    // TODO: make this return QAction*
+    void addWidget(ToolBarItem* item);
     void addSeparator();
-#ifdef Q_OS_MAC
+
+#ifdef Q_OS_MAC_disabled
     void addFlexibleSpace();
+    NSToolbar* nativeToolbar() const { return mToolBar->nativeToolbar(); }
 #endif
 
 private:
-#ifdef Q_OS_MAC
+#ifdef Q_OS_MAC_disabled
     uptr<QMacNativeToolBar> mToolBar;
 #else
     uptr<QToolBar> mToolBar;
