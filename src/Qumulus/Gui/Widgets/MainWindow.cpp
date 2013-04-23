@@ -64,11 +64,6 @@ MainWindow::MainWindow() :
     // Add the status bar.
     setStatusBar(mStatusBar);
 
-#ifdef Q_OS_MAC
-    // Set border on OS X
-    setContentBorderOnMac();
-#endif
-
     createMenus();
 
     connect(mStatusBar->slider(), &ZoomSlider::valueChanged,

@@ -32,9 +32,6 @@ public:
     SideBar* sideBar() const { return mSideBar; }
 
 private:
-#ifdef Q_OS_MAC
-    void setContentBorderOnMac();
-#endif
     void createMenus();
 
 private:
