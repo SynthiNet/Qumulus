@@ -13,7 +13,11 @@
 #include <Uml/Core/Abstractions/Namespace.h>
 #include "Type.h"
 
+#include <list>
+
 QUML_BEGIN_NAMESPACE_UCC
+
+class Property;
 
 class Classifier : public Type, public QuUCA::Namespace {
 public:
@@ -31,9 +35,20 @@ public:
 
     bool final() const { return mFinal; }
     void setFinal(bool f) { mFinal = f; }
+
+    const std::unordered_set<Classifier*>& generalizations() const {
+        return mGeneralizations;
+    }
+
+    const std::list<Property*>& properties() const {
+        return mProperties;
+    }
+
 private:
     bool mAbstract;
     bool mFinal;
+    std::unordered_set<Classifier*> mGeneralizations;
+    std::list<Property*> mProperties;
 
 };
 
