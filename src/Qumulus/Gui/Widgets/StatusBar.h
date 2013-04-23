@@ -32,7 +32,9 @@ public:
 
 private:
     ZoomSlider* mZoom;
+#ifdef Q_OS_MAC
     Spacer* mSpacer;
+#endif
 };
 
 QUML_END_NAMESPACE_GW
