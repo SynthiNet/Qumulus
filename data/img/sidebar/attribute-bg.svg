@@ -15,12 +15,23 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.2 r9819"
-   sodipodi:docname="package-bg.svg"
-   inkscape:export-filename="/Users/frank/Unief/B2/qumulus/data/img/sidebar/package.png"
+   sodipodi:docname="operation-bg.svg"
+   inkscape:export-filename="/Users/frank/Unief/B2/qumulus/data/img/sidebar/operation.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90">
   <defs
      id="defs4">
+    <linearGradient
+       id="linearGradient3758">
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="0"
+         id="stop3760" />
+      <stop
+         style="stop-color:#ffe081;stop-opacity:1;"
+         offset="1"
+         id="stop3762" />
+    </linearGradient>
     <linearGradient
        id="linearGradient3757">
       <stop
@@ -41,6 +52,15 @@
        x2="15"
        y2="15"
        gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3758"
+       id="linearGradient3764"
+       x1="0"
+       y1="0"
+       x2="16"
+       y2="16"
+       gradientUnits="userSpaceOnUse" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -50,13 +70,13 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="16"
-     inkscape:cx="1.0845174"
+     inkscape:cx="-2.5458806"
      inkscape:cy="8.1473193"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:window-width="1280"
-     inkscape:window-height="682"
+     inkscape:window-height="684"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1">
@@ -85,14 +105,15 @@
      inkscape:groupmode="layer"
      id="layer1"
      transform="translate(0,-1036.3622)">
-    <rect
-       style="fill:url(#linearGradient3763);fill-opacity:1.0;stroke:none"
-       id="rect2987"
-       width="16"
-       height="16"
-       x="0"
-       y="0"
-       transform="translate(0,1036.3622)"
-       ry="4" />
+    <path
+       sodipodi:type="arc"
+       style="fill:url(#linearGradient3764);fill-opacity:1;stroke:none;stroke-opacity:1"
+       id="path2988"
+       sodipodi:cx="8"
+       sodipodi:cy="8"
+       sodipodi:rx="8"
+       sodipodi:ry="8"
+       d="M 16,8 A 8,8 0 1 1 0,8 8,8 0 1 1 16,8 z"
+       transform="translate(0,1036.3622)" />
   </g>
 </svg>
