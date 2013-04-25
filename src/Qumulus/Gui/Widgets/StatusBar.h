@@ -12,7 +12,6 @@
 #include <QtWidgets/QSpacerItem>
 #include <Gui/Widgets/StyleType.h>
 #include <Gui/Widgets/ZoomSlider.h>
-#include <Gui/Widgets/Spacer.h>
 
 QUML_BEGIN_NAMESPACE_GW
 
@@ -33,7 +32,7 @@ public:
 private:
     ZoomSlider* mZoom;
 #ifdef Q_OS_MAC
-    Spacer* mSpacer;
+    QWidget* mSpacer;
 #endif
 };
 

@@ -2,6 +2,6 @@
 # the main source directory. DO NOT EDIT MANUALLY!
 
 SET ( QUMULUS_GUI_ALL_SRC 
-Qumulus/Gui/Core/Nyi.cpp Qumulus/Gui/Core/QumulusApplication.cpp Qumulus/Gui/Core/ResourceLoader.cpp Qumulus/Gui/Widgets/EditorView.cpp Qumulus/Gui/Widgets/MainWindow.cpp Qumulus/Gui/Widgets/SideBar.cpp Qumulus/Gui/Widgets/Spacer.cpp Qumulus/Gui/Widgets/StatusBar.cpp Qumulus/Gui/Widgets/ToolBar.cpp Qumulus/Gui/Widgets/ToolBarItem.cpp Qumulus/Gui/Widgets/ZoomSlider.cpp  )
+Qumulus/Gui/Core/Nyi.cpp Qumulus/Gui/Core/QumulusApplication.cpp Qumulus/Gui/Core/ResourceLoader.cpp Qumulus/Gui/Widgets/EditorView.cpp Qumulus/Gui/Widgets/MainWindow.cpp Qumulus/Gui/Widgets/SideBar.cpp Qumulus/Gui/Widgets/StatusBar.cpp Qumulus/Gui/Widgets/ToolBar.cpp Qumulus/Gui/Widgets/ToolBarItem.cpp Qumulus/Gui/Widgets/ZoomSlider.cpp  )
 SET ( QUMULUS_GUI_ALL_MM_SRC 
 Qumulus/Gui/Widgets/ToolBar.mm  )

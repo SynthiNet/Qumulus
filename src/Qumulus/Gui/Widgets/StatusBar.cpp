@@ -11,9 +11,12 @@ QUML_BEGIN_NAMESPACE_GW
 
 StatusBar::StatusBar(QWidget* parent) : QStatusBar(parent),
 #ifdef Q_OS_MAC
-    mZoom(new ZoomSlider()), mSpacer(new Spacer(this)) {
+    mZoom(new ZoomSlider()), mSpacer(new QWidget(this)) {
     setSizeGripEnabled(false);
     setStyleType(StyleType::Active);
+
+    mSpacer->setStyleSheet("border: 0; background: transparent;");
+    mSpacer->setMinimumWidth(5);
 #else
     mZoom(new ZoomSlider()) {
 #endif
