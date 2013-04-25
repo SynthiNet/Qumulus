@@ -1,11 +1,14 @@
 /*
  * Qumulus UML editor
+ * Author: Frank Erens
  * Author: Randy Thiemann
  *
  */
 
 #include "StatusBar.h"
 #include <Gui/Widgets/MainWindow.h>
+
+#include <QtGui/QMouseEvent>
 
 QUML_BEGIN_NAMESPACE_GW
 
@@ -54,6 +57,24 @@ void StatusBar::setStyleType(StyleType s) {
         break;
     }
 }
+#endif
+
+#ifdef Q_OS_MAC
+void StatusBar::mouseMoveEvent(QMouseEvent *event) {
+     if(event->buttons() & Qt::LeftButton) {
+         window()->move(event->globalPos() - mDragPosition);
+         event->accept();
+     }
+}
+
+void StatusBar::mousePressEvent(QMouseEvent *event) {
+     if(event->button() == Qt::LeftButton) {
+         mDragPosition = event->globalPos() - 
+                window()->frameGeometry().topLeft();
+         event->accept();
+     }
+}
+
 #endif
 
 QUML_END_NAMESPACE_GW

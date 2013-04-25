@@ -29,10 +29,17 @@ public:
     void setStyleType(StyleType s);
 #endif
 
+protected:
+#ifdef Q_OS_MAC
+    void mouseMoveEvent(QMouseEvent *event) override;
+    void mousePressEvent(QMouseEvent *event) override;
+#endif
+
 private:
     ZoomSlider* mZoom;
 #ifdef Q_OS_MAC
     QWidget* mSpacer;
+    QPoint mDragPosition;
 #endif
 };
 
