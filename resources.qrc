@@ -9,7 +9,7 @@
     <file>data/img/toolbar/interface.png</file>
     <file>data/img/toolbar/package.png</file>
     <file>data/img/toolbar/comment.png</file>
-    <file>data/img/toolbar/primitive-type.png</file>
+    <file>data/img/toolbar/primitive.png</file>
     <file>data/img/toolbar/template-class.png</file>
     <file>data/img/toolbar/dropdown.png</file>
 
@@ -19,6 +19,14 @@
     <file>data/img/sidebar/primitive.png</file>
     <file>data/img/sidebar/operation.png</file>
     <file>data/img/sidebar/attribute.png</file>
+
+    <file>data/img/cursor/class.png</file>
+    <file>data/img/cursor/comment.png</file>
+    <file>data/img/cursor/enum.png</file>
+    <file>data/img/cursor/interface.png</file>
+    <file>data/img/cursor/package.png</file>
+    <file>data/img/cursor/primitive.png</file>
+    <file>data/img/cursor/template-class.png</file>
   </qresource>
 </RCC>
 <!--
