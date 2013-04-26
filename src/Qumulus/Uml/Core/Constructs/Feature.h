@@ -9,6 +9,8 @@
 
 #include "internal_base.h"
 
+#include "RedefinableElement.h"
+
 #include <Uml/Core/Abstractions/NamedElement.h>
 
 #include <unordered_set>
@@ -17,7 +19,9 @@ QUML_BEGIN_NAMESPACE_UCC
 
 class Classifier;
 
-class Feature : public virtual QuUCA::NamedElement {
+class Feature : 
+        public virtual QuUCA::NamedElement,
+        public RedefinableElement {
 public:
 private:
     std::unordered_set<Classifier*> mFeaturingClassifiers;
