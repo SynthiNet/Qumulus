@@ -27,6 +27,9 @@
     <file>data/img/cursor/package.png</file>
     <file>data/img/cursor/primitive.png</file>
     <file>data/img/cursor/template-class.png</file>
+
+    <file>data/img/editor/add-attribute.png</file>
+    <file>data/img/editor/add-operation.png</file>
   </qresource>
 </RCC>
 <!--
