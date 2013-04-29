@@ -16,6 +16,8 @@ ToolBar::ToolBar(QObject* parent) : QObject(parent),
 #else
 ToolBar::ToolBar(QObject* parent) : QObject(parent),
         mToolBar(new QToolBar()) {
+    mToolBar->setFloatable(false);
+    mToolBar->setMovable(false);
 }
 #endif
 
