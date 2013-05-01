@@ -11,6 +11,8 @@
 
 #include "Classifier.h"
 
+#include <list>
+
 QUML_BEGIN_NAMESPACE_UCC
 
 class Property;
@@ -19,11 +21,11 @@ class Operation;
 class Class : public Classifier {
 public:
     
-    const std::set<Property*>& ownedAttributes() const {
+    const std::list<Property*>& ownedAttributes() const {
         return mOwnedAttributes;
     }
 
-    const std::set<Operation*>& ownedOperations() const {
+    const std::list<Operation*>& ownedOperations() const {
         return mOwnedOperations;
     }
 
