@@ -13,11 +13,14 @@
 #include <Gui/Widgets/StatusBar.h>
 #include <Gui/Widgets/EditorView.h>
 #include <Gui/Widgets/ElementItem.h>
+#include <Gui/Widgets/ToolBarMenu.h>
 #include <Gui/Core/QumulusApplication.h>
 #include <QtWidgets/QSplitter>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QAction>
 #include <QtWidgets/QMessageBox>
+#include <QtGui/QCursor>
+#include <QtGui/QPixmap>
 
 QUML_BEGIN_NAMESPACE_GW
 
@@ -28,6 +31,7 @@ MainWindow::MainWindow() :
         mStatusBar(new StatusBar(this)),
         mEditorView(new EditorView(this)) {
     constexpr unsigned kWidth = 700, kHeight = 480, kSideWidth = 220;
+    createCursors();
 
     // Size constraints
     setMinimumSize(400, 300);
@@ -36,17 +40,8 @@ MainWindow::MainWindow() :
     // Title
     setWindowTitle("Qumulus");
 
-    // Add toolbar
-    mToolBar->showInWindow(this);
-
-    // Add toolbar item
-    // TODO separate this and store classItem?
-    ElementItem eli("Class", QIcon(":/data/img/toolbar/class.png"), 
-            QKeySequence(tr("C")));
-    ToolBarItem* classItem = new ToolBarItem(eli);
-    //classItem->setIcon(QIcon(":/data/img/toolbar/class.png"));
-    //classItem->setText("Class");
-    mToolBar->addWidget(classItem);
+    // Create and populate the toolbar.
+    populateToolbar();
 
     // Create main view.
     setCentralWidget(mSplitter);
@@ -74,10 +69,138 @@ MainWindow::MainWindow() :
     // Add the status bar.
     setStatusBar(mStatusBar);
 
+    // Create the main menus.
     createMenus();
 
     connect(mStatusBar->slider(), &ZoomSlider::valueChanged,
             mEditorView, &EditorView::zoom);
+}
+
+void MainWindow::populateToolbar() {
+    mToolBar->showInWindow(this);
+
+
+    // Class and submenu.
+    mClassItem = new ToolBarItem(
+            ElementItem("Class", 
+                    QIcon(":/data/img/toolbar/class.png"), 
+                    QKeySequence(tr("C")),
+                    [&]{mEditorView->setCursor(mCursors["class"]);})
+            );
+
+    mClassMenu = new ToolBarMenu();
+    mClassMenu->addItem(
+            ElementItem("Template Class", 
+                    QIcon(":/data/img/toolbar/template-class.png"),
+                    QKeySequence(tr("T")),
+                    [&]{QMessageBox::information(this, "", "Template Class");}));
+    mClassMenu->addItem(
+            ElementItem("Enum", 
+                    QIcon(":/data/img/toolbar/enum.png"),
+                    QKeySequence(tr("E")),
+                    [&]{QMessageBox::information(this, "", "Enum");}));
+    mClassMenu->addItem(
+            ElementItem("Primitive Datatype", 
+                    QIcon(":/data/img/toolbar/primitive.png"),
+                    QKeySequence(tr("D")), 
+                    [&]{QMessageBox::information(this, "", "Primitive Datatype");}));
+    mClassItem->setMenu(mClassMenu);
+    mToolBar->addWidget(mClassItem);
+
+
+    // Package and submenu.
+    mPackageItem = new ToolBarItem(
+            ElementItem("Package", 
+                    QIcon(":/data/img/toolbar/package.png"), 
+                    QKeySequence(tr("P")),
+                    [&]{QMessageBox::information(this, "", "Package");})
+            );
+
+    mPackageMenu = new ToolBarMenu();
+    mPackageMenu->addItem(
+            ElementItem("Comment", 
+                    QIcon(":/data/img/toolbar/comment.png"),
+                    QKeySequence(tr("H")),
+                    [&]{QMessageBox::information(this, "", "Comment");}));
+    mPackageItem->setMenu(mPackageMenu);
+    mToolBar->addWidget(mPackageItem);
+
+
+    mToolBar->addSeparator();
+
+
+    // Inheritance and submenu.
+    mInheritanceItem = new ToolBarItem(
+            ElementItem("Inheritance", 
+                    QIcon(":/data/img/toolbar/inheritance.png"), 
+                    QKeySequence(tr("I")),
+                    [&]{QMessageBox::information(this, "", "Inheritance");})
+            );
+
+    mInheritanceMenu = new ToolBarMenu();
+    mInheritanceMenu->addItem(
+            ElementItem("Template Specialization", 
+                    QIcon(":/data/img/toolbar/template-specialization.png"),
+                    QKeySequence(tr("S")),
+                    [&]{QMessageBox::information(this, "", "Template Specialization");}));
+    mInheritanceItem->setMenu(mInheritanceMenu);
+    mToolBar->addWidget(mInheritanceItem);
+
+
+    // Aggregation and submenu.
+    mAggregationItem = new ToolBarItem(
+            ElementItem("Aggregation", 
+                    QIcon(":/data/img/toolbar/aggregation.png"), 
+                    QKeySequence(tr("G")),
+                    [&]{QMessageBox::information(this, "", "Aggregation");})
+            );
+
+    mAggregationMenu = new ToolBarMenu();
+    mAggregationMenu->addItem(
+            ElementItem("Containment", 
+                    QIcon(":/data/img/toolbar/containment.png"),
+                    QKeySequence(tr("N")),
+                    [&]{QMessageBox::information(this, "", "Containment");}));
+    mAggregationItem->setMenu(mAggregationMenu);
+    mToolBar->addWidget(mAggregationItem);
+
+
+    // Relationship and submenu.
+    mRelationshipItem = new ToolBarItem(
+            ElementItem("Relationship", 
+                    QIcon(":/data/img/toolbar/relationship.png"), 
+                    QKeySequence(tr("R")),
+                    [&]{QMessageBox::information(this, "", "Relationship");})
+            );
+
+    mRelationshipMenu = new ToolBarMenu();
+    mRelationshipMenu->addItem(
+            ElementItem("Package Membership", 
+                    QIcon(":/data/img/toolbar/package-membership.png"),
+                    QKeySequence(tr("M")),
+                    [&]{QMessageBox::information(this, "", "Package Membership");}));
+    mRelationshipItem->setMenu(mRelationshipMenu);
+    mToolBar->addWidget(mRelationshipItem);
+
+
+    mToolBar->addSeparator();
+
+
+    // Operations and attributes.
+    mOperationItem = new ToolBarItem(
+            ElementItem("Operation", 
+                    QIcon(":/data/img/toolbar/operation.png"), 
+                    QKeySequence(tr("O")),
+                    [&]{QMessageBox::information(this, "", "Operation");})
+            );
+    mToolBar->addWidget(mOperationItem);
+    mAttributeItem = new ToolBarItem(
+            ElementItem("Attribute", 
+                    QIcon(":/data/img/toolbar/Attribute.png"), 
+                    QKeySequence(tr("A")),
+                    [&]{QMessageBox::information(this, "", "Attribute");})
+            );
+    mToolBar->addWidget(mAttributeItem);
 }
 
 void MainWindow::createMenus() {
@@ -159,6 +282,16 @@ void MainWindow::createMenus() {
             this->setWindowIcon(QIcon(""));});
 
     mHelpMenu->addAction(mAboutAction);
+}
+
+void MainWindow::createCursors() {
+    mCursors["class"] = QCursor(QPixmap(":/data/img/cursor/class.png"), -1, -1);
+    mCursors["comment"] = QCursor(QPixmap(":/data/img/cursor/comment.png"), -1, -1);
+    mCursors["enum"] = QCursor(QPixmap(":/data/img/cursor/enum.png"), -1, -1);
+    mCursors["interface"] = QCursor(QPixmap(":/data/img/cursor/interface.png"), -1, -1);
+    mCursors["package"] = QCursor(QPixmap(":/data/img/cursor/package.png"), -1, -1);
+    mCursors["primitive"] = QCursor(QPixmap(":/data/img/cursor/primitive.png"), -1, -1);
+    mCursors["template-class"] = QCursor(QPixmap(":/data/img/cursor/template-class.png"), -1, -1);
 }
 
 QUML_END_NAMESPACE_GW
