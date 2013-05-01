@@ -35,6 +35,13 @@
     <file>data/img/cursor/primitive.png</file>
     <file>data/img/cursor/template-class.png</file>
 
+    <file>data/img/cursor/inheritance.png</file>
+    <file>data/img/cursor/template-specialization.png</file>
+    <file>data/img/cursor/aggregation.png</file>
+    <file>data/img/cursor/containment.png</file>
+    <file>data/img/cursor/relationship.png</file>
+    <file>data/img/cursor/package-membership.png</file>
+
     <file>data/img/editor/add-attribute.png</file>
     <file>data/img/editor/add-operation.png</file>
   </qresource>
