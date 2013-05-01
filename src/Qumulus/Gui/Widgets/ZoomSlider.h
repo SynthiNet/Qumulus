@@ -17,6 +17,9 @@ class ZoomSlider : public QSlider {
 
 public:
     ZoomSlider(QWidget* parent = 0);
+
+signals:
+    void zoomChanged(double value);
 };
 
 QUML_END_NAMESPACE_GW
