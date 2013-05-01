@@ -10,7 +10,7 @@
 
 QUML_BEGIN_NAMESPACE_GW
 
-ToolBarItem::ToolBarItem(ToolBar* parent) {
+ToolBarItem::ToolBarItem(ElementItem elementItem) : mElementItem(elementItem) {
     mLayout = new QHBoxLayout(this);
     mButton = new QPushButton(this);
     mDropdown = new QPushButton(this);
@@ -23,6 +23,10 @@ ToolBarItem::ToolBarItem(ToolBar* parent) {
     mButton->setMaximumSize({32,32});
     mDropdown->setMaximumSize({9,32});
 
+    mButton->setIcon(mElementItem.icon());
+    mButton->setToolTip(mElementItem.text() + " [" + 
+            mElementItem.shortcut().toString() + "]");
+    mButton->setShortcut(mElementItem.shortcut());
     mDropdown->setIcon(QIcon(":/data/img/toolbar/dropdown.png"));
 
     mLayout->addWidget(mButton);
@@ -30,23 +34,18 @@ ToolBarItem::ToolBarItem(ToolBar* parent) {
     mLayout->setContentsMargins(2,2,2,2);
     mLayout->setSpacing(2);
     setLayout(mLayout);
+    mDropdown->hide();
+
+    connect(mButton, &QPushButton::clicked, mElementItem.slot());
 }
 
-void ToolBarItem::setIcon(const QIcon& icon) {
-    mButton->setIcon(icon);
+const QString ToolBarItem::text() const {
+    return mElementItem.text();
 }
 
-void ToolBarItem::setText(const QString& text) {
-    mText = text;
-    mButton->setToolTip(text);
-}
-
-const QString& ToolBarItem::text() const {
-    return mText;
-}
-
-void ToolBarItem::setMenu(QMenu* menu) {
+void ToolBarItem::setMenu(ToolBarMenu* menu) {
     mDropdown->setMenu(menu);
+    mDropdown->show();
 }
 
 QUML_END_NAMESPACE_GW

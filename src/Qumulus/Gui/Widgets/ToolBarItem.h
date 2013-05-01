@@ -14,6 +14,8 @@
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QMenu>
 #include <QtGui/QIcon>
+#include <Gui/Widgets/ElementItem.h>
+#include <Gui/Widgets/ToolBarMenu.h>
 #include <Lib/Core/Ptr.h>
 #ifdef Q_OS_MAC
 #include <QtMacExtras/QMacNativeWidget>
@@ -28,18 +30,15 @@ class ToolBarItem : public QWidget {
     Q_OBJECT
 
 public:
-    ToolBarItem(ToolBar* parent = 0);
-    void setIcon(const QIcon& icon);
-    void setMenu(QMenu* menu);
-
-    void setText(const QString& text);
-    const QString& text() const;
+    ToolBarItem(ElementItem item);
+    void setMenu(ToolBarMenu* menu);
+    const QString text() const;
 
 private:
     QHBoxLayout* mLayout;
     QPushButton* mButton;
     QPushButton* mDropdown;
-    QString mText;
+    ElementItem mElementItem;
 };
 
 QUML_END_NAMESPACE_GW

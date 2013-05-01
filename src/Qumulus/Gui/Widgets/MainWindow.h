@@ -9,10 +9,13 @@
 
 #include "internal_base.h"
 #include <QtWidgets/QMainWindow>
+#include <QtCore/QHash>
+#include <QtCore/QString>
 
 class QMenu;
 class QSplitter;
 class QAction;
+class QCursor;
 
 QUML_BEGIN_NAMESPACE_GW
 
@@ -20,6 +23,8 @@ class StatusBar;
 class EditorView;
 class ToolBar;
 class SideBar;
+class ToolBarMenu;
+class ToolBarItem;
 
 class MainWindow : public QMainWindow {
     Q_OBJECT
@@ -33,6 +38,8 @@ public:
 
 private:
     void createMenus();
+    void populateToolbar();
+    void createCursors();
 
 private:
     ToolBar* mToolBar;
@@ -41,6 +48,21 @@ private:
     StatusBar* mStatusBar;
     EditorView* mEditorView;
 
+    // Toolbar members;
+    ToolBarItem* mClassItem;
+    ToolBarMenu* mClassMenu;
+    ToolBarItem* mPackageItem;
+    ToolBarMenu* mPackageMenu;
+    ToolBarItem* mInheritanceItem;
+    ToolBarMenu* mInheritanceMenu;
+    ToolBarItem* mAggregationItem;
+    ToolBarMenu* mAggregationMenu;
+    ToolBarItem* mRelationshipItem;
+    ToolBarMenu* mRelationshipMenu;
+    ToolBarItem* mOperationItem;
+    ToolBarItem* mAttributeItem;
+
+    // Main menu members
     QMenu* mFileMenu;
     QMenu* mEditMenu;
     QMenu* mInsertMenu;
@@ -72,6 +94,8 @@ private:
     
     // Help Menu
     QAction* mAboutAction;
+
+    QHash<QString, QCursor> mCursors;
 };
 
 QUML_END_NAMESPACE_GW
