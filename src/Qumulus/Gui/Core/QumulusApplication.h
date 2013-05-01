@@ -20,7 +20,7 @@
 QUML_BEGIN_NAMESPACE_GC
 
 class QumulusApplication : public QApplication {
-    Q_OBJECT;
+    Q_OBJECT
 
 public:
     QumulusApplication(int& argc, char** argv);
