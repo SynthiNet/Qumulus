@@ -2,6 +2,6 @@
 # the main source directory. DO NOT EDIT MANUALLY!
 
 SET ( QUMULUS_UML_ALL_SRC 
-Qumulus/Uml/Core/Abstractions/Element.cpp Qumulus/Uml/Core/Abstractions/MultiplicityElement.cpp Qumulus/Uml/Core/Abstractions/NamedElement.cpp Qumulus/Uml/Core/Abstractions/Namespace.cpp Qumulus/Uml/Core/Constructs/Package.cpp Qumulus/Uml/Core/Constructs/Property.cpp  )
+Qumulus/Uml/Core/Abstractions/Element.cpp Qumulus/Uml/Core/Abstractions/MultiplicityElement.cpp Qumulus/Uml/Core/Abstractions/NamedElement.cpp Qumulus/Uml/Core/Abstractions/Namespace.cpp Qumulus/Uml/Core/Constructs/Package.cpp Qumulus/Uml/Core/Constructs/Property.cpp Qumulus/Uml/Diagram/Diagram.cpp Qumulus/Uml/Diagram/DiagramElement.cpp Qumulus/Uml/Diagram/GraphConnector.cpp Qumulus/Uml/Diagram/GraphEdge.cpp  )
 SET ( QUMULUS_UML_ALL_MM_SRC 
  )
