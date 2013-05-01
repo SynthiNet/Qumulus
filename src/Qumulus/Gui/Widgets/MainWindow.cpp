@@ -72,7 +72,7 @@ MainWindow::MainWindow() :
     // Create the main menus.
     createMenus();
 
-    connect(mStatusBar->slider(), &ZoomSlider::valueChanged,
+    connect(mStatusBar->slider(), &ZoomSlider::zoomChanged,
             mEditorView, &EditorView::zoom);
 }
 
