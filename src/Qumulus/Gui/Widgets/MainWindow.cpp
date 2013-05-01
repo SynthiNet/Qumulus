@@ -12,6 +12,7 @@
 #include <Gui/Widgets/StyleType.h>
 #include <Gui/Widgets/StatusBar.h>
 #include <Gui/Widgets/EditorView.h>
+#include <Gui/Widgets/ElementItem.h>
 #include <Gui/Core/QumulusApplication.h>
 #include <QtWidgets/QSplitter>
 #include <QtWidgets/QGridLayout>
@@ -40,9 +41,11 @@ MainWindow::MainWindow() :
 
     // Add toolbar item
     // TODO separate this and store classItem?
-    ToolBarItem* classItem = new ToolBarItem(mToolBar);
-    classItem->setIcon(QIcon(":/data/img/toolbar/class.png"));
-    classItem->setText("Class");
+    ElementItem eli("Class", QIcon(":/data/img/toolbar/class.png"), 
+            QKeySequence(tr("C")));
+    ToolBarItem* classItem = new ToolBarItem(eli);
+    //classItem->setIcon(QIcon(":/data/img/toolbar/class.png"));
+    //classItem->setText("Class");
     mToolBar->addWidget(classItem);
 
     // Create main view.
