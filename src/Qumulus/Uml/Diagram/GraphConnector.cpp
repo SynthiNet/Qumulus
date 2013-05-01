@@ -8,7 +8,7 @@
 
 QUML_BEGIN_NAMESPACE_UD
 
-GraphConnector(GraphElement* e) :
+GraphConnector::GraphConnector(GraphElement* e) :
         mGraphElement(e),
         mFirstEdge(nullptr),
         mSecondEdge(nullptr) {
