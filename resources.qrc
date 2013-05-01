@@ -13,6 +13,13 @@
     <file>data/img/toolbar/template-class.png</file>
     <file>data/img/toolbar/dropdown.png</file>
 
+    <file>data/img/toolbar/inheritance.png</file>
+    <file>data/img/toolbar/template-specialization.png</file>
+    <file>data/img/toolbar/aggregation.png</file>
+    <file>data/img/toolbar/containment.png</file>
+    <file>data/img/toolbar/relationship.png</file>
+    <file>data/img/toolbar/package-membership.png</file>
+
     <file>data/img/sidebar/class.png</file>
     <file>data/img/sidebar/enum.png</file>
     <file>data/img/sidebar/package.png</file>
