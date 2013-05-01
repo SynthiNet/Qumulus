@@ -19,7 +19,7 @@ public:
     EditorView(QWidget* parent = 0);
 
 public slots:
-    void zoom(int value);
+    void zoom(double value);
 
 private:
     QGraphicsScene* mScene;

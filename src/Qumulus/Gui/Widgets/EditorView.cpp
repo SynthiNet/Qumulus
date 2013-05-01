@@ -14,9 +14,9 @@ EditorView::EditorView(QWidget* parent) : QGraphicsView(parent),
     setScene(mScene);
 }
 
-void EditorView::zoom(int value) {
+void EditorView::zoom(double value) {
     resetMatrix();
-    scale(value / 100.0, value / 100.0);
+    scale(value, value);
 }
 
 QUML_END_NAMESPACE_GW
