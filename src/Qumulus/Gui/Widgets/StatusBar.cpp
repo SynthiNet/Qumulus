@@ -14,20 +14,33 @@ QUML_BEGIN_NAMESPACE_GW
 
 StatusBar::StatusBar(QWidget* parent) : QStatusBar(parent),
 #ifdef Q_OS_MAC
-    mZoom(new ZoomSlider()), mSpacer(new QWidget(this)) {
+    mZoom(new ZoomSlider()), mZoomBox(new QComboBox()),
+    mSpacer(new QWidget(this)) {
     setSizeGripEnabled(false);
     setStyleType(StyleType::Active);
 
     mSpacer->setStyleSheet("border: 0; background: transparent;");
     mSpacer->setMinimumWidth(5);
 #else
-    mZoom(new ZoomSlider()) {
+    mZoom(new ZoomSlider()), mZoomBox(new QComboBox(this)) {
 #endif
     setFixedHeight(24);
+    addPermanentWidget(mZoomBox);
+    mZoomBox->addItems({"25 %", "50 %", "75 %", "100 %", 
+            "200 %", "300 %", "400 %"});
+    mZoomBox->setCurrentIndex(3);
+    mZoomBox->setMaximumWidth(75);
     addPermanentWidget(mZoom);
 #ifdef Q_OS_MAC
     addPermanentWidget(mSpacer);
 #endif
+
+    connect(mZoomBox, 
+            static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), 
+            [&](int value){mZoom->setValue(value);});
+    connect(mZoom,
+            &ZoomSlider::valueChanged,
+            [&](int value){mZoomBox->setCurrentIndex(value);});
 }
 
 MainWindow* StatusBar::window() {
@@ -39,20 +52,22 @@ void StatusBar::setStyleType(StyleType s) {
     switch(s) {
     case StyleType::Active:
         setStyleSheet(
+            "QStatusBar {"
             "border-top: 1px solid #828282;"
             "background-color: qlineargradient("
                     "x1: 0, y1: 0, x2: 0, y2: 1,"
                     "stop: 0 rgb(212, 212, 212),"
-                    "stop: 1 rgb(176, 176, 176));"
+                    "stop: 1 rgb(176, 176, 176));}"
         );
         break;
     case StyleType::Inactive:
         setStyleSheet(
+            "QStatusBar {"
             "border-top: 1px solid #B2B2B2;"
             "background-color: qlineargradient("
                     "x1: 0, y1: 0, x2: 0, y2: 1,"
                     "stop: 0 rgb(237, 237, 237),"
-                    "stop: 1 rgb(224, 224, 224));"
+                    "stop: 1 rgb(224, 224, 224));}"
         );
         break;
     }

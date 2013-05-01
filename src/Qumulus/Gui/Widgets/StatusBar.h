@@ -10,6 +10,7 @@
 #include "internal_base.h"
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QSpacerItem>
+#include <QtWidgets/QComboBox>
 #include <Gui/Widgets/StyleType.h>
 #include <Gui/Widgets/ZoomSlider.h>
 
@@ -37,6 +38,8 @@ protected:
 
 private:
     ZoomSlider* mZoom;
+    QComboBox* mZoomBox;
+    
 #ifdef Q_OS_MAC
     QWidget* mSpacer;
     QPoint mDragPosition;
