@@ -26,6 +26,7 @@ ToolBarItem::ToolBarItem(ElementItem elementItem) : mElementItem(elementItem) {
     mButton->setIcon(mElementItem.icon());
     mButton->setToolTip(mElementItem.text() + " [" + 
             mElementItem.shortcut().toString() + "]");
+    mButton->setShortcut(mElementItem.shortcut());
     mDropdown->setIcon(QIcon(":/data/img/toolbar/dropdown.png"));
 
     mLayout->addWidget(mButton);
@@ -33,14 +34,18 @@ ToolBarItem::ToolBarItem(ElementItem elementItem) : mElementItem(elementItem) {
     mLayout->setContentsMargins(2,2,2,2);
     mLayout->setSpacing(2);
     setLayout(mLayout);
+    mDropdown->hide();
+
+    connect(mButton, &QPushButton::clicked, mElementItem.slot());
 }
 
 const QString ToolBarItem::text() const {
     return mElementItem.text();
 }
 
-void ToolBarItem::setMenu(QMenu* menu) {
+void ToolBarItem::setMenu(ToolBarMenu* menu) {
     mDropdown->setMenu(menu);
+    mDropdown->show();
 }
 
 QUML_END_NAMESPACE_GW

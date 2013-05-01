@@ -15,6 +15,7 @@
 #include <QtWidgets/QMenu>
 #include <QtGui/QIcon>
 #include <Gui/Widgets/ElementItem.h>
+#include <Gui/Widgets/ToolBarMenu.h>
 #include <Lib/Core/Ptr.h>
 #ifdef Q_OS_MAC
 #include <QtMacExtras/QMacNativeWidget>
@@ -30,7 +31,7 @@ class ToolBarItem : public QWidget {
 
 public:
     ToolBarItem(ElementItem item);
-    void setMenu(QMenu* menu);
+    void setMenu(ToolBarMenu* menu);
     const QString text() const;
 
 private:
