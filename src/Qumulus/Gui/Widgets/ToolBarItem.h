@@ -38,6 +38,7 @@ private:
     QHBoxLayout* mLayout;
     QPushButton* mButton;
     QPushButton* mDropdown;
+    ToolBarMenu* mMenu;
     ElementItem mElementItem;
 };
 

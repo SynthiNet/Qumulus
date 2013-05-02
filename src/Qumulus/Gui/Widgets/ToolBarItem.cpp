@@ -44,7 +44,10 @@ const QString ToolBarItem::text() const {
 }
 
 void ToolBarItem::setMenu(ToolBarMenu* menu) {
-    mDropdown->setMenu(menu);
+    mMenu = menu;
+    connect(mDropdown, &QPushButton::clicked, [&]{
+            mMenu->exec(mButton->mapToGlobal({-2, 34}));
+            });
     mDropdown->show();
 }
 
