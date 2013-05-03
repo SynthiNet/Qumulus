@@ -27,11 +27,11 @@ void Element::removeElement(const uptr<Element>& other) {
     mOwnedElements.erase(other); 
 }
 
-std::size_t Element::size() const {
+std::size_t Element::numElements() const {
     return mOwnedElements.size();
 }
 
-void Element::clear() {
+void Element::clearElements() {
     mOwnedElements.clear();
 }
 

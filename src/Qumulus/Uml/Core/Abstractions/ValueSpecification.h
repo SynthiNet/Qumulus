@@ -43,6 +43,8 @@ public:
     }
 
     virtual bool isNull() const = 0;
+
+    QUML_CLONABLE_ABSTRACT(ValueSpecification);
 };
 
 QUML_END_NAMESPACE_UCA

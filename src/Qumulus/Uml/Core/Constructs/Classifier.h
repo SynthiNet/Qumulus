@@ -22,33 +22,30 @@ class Property;
 class Classifier : public Type, public QuUCA::Namespace {
 public:
 
-    void allFeatures() const { NYI(); }
-    void parents() const { NYI(); }
-    void allParents() const { NYI(); }
-    bool conformsTo(Classifier* other) const { NYI(); return false; }
-    bool hasVisibilityOf(QuUCA::NamedElement* m) const { NYI(); return false; }
-    void inherit() { NYI(); }
-    bool maySpecializeType(Classifier* c) const { NYI(); return false; }
+    // void allFeatures() const { NYI(); }
+    // void parents() const { NYI(); }
+    // void allParents() const { NYI(); }
+    // bool conformsTo(Classifier* other) const { NYI(); return false; }
+    // bool hasVisibilityOf(QuUCA::NamedElement* m) const { NYI(); return false; }
+    // void inherit() { NYI(); }
+    // bool maySpecializeType(Classifier* c) const { NYI(); return false; }
 
-    bool abstract() const { return mAbstract; }
-    void setAbstract(bool a) { mAbstract = a; }
+    // bool abstract() const { return mAbstract; }
+    // void setAbstract(bool a) { mAbstract = a; }
 
-    bool final() const { return mFinal; }
-    void setFinal(bool f) { mFinal = f; }
+    // bool final() const { return mFinal; }
+    // void setFinal(bool f) { mFinal = f; }
 
-    const std::unordered_set<Classifier*>& generalizations() const {
-        return mGeneralizations;
+    const std::list<Property*>& attributes() const {
+        return mAttributes;
     }
 
-    const std::list<Property*>& properties() const {
-        return mProperties;
-    }
+    QUML_CLONABLE_ABSTRACT(Classifier);
 
 private:
     bool mAbstract;
     bool mFinal;
-    std::unordered_set<Classifier*> mGeneralizations;
-    std::list<Property*> mProperties;
+    std::list<Property*> mAttributes;
 
 };
 

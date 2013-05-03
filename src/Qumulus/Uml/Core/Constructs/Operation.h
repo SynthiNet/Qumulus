@@ -18,15 +18,21 @@ class Parameter;
 
 class Operation : public BehavioralFeature {
 public:
-    Parameter* returnResult() const;
+    Operation(Class* c = 0);
 
-    bool isQuery() const { return mQuery; }
-    void setQuery(bool b) { mQuery = b; }
+    // Parameter* returnResult() const;
+
+    // bool isQuery() const { return mQuery; }
+    // void setQuery(bool b) { mQuery = b; }
+
+    Class* getClass() const { return mClass; }
+    void setClass(Class* c) { mClass = c; }
 
     QUML_CLONABLE(Operation);
 private:
-    std::unordered_set<Operation*> mRedefinedOperations;
-    bool mQuery;
+    Class* mClass;
+    // std::unordered_set<Operation*> mRedefinedOperations;
+    // bool mQuery;
 
 };
 

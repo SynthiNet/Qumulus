@@ -17,6 +17,8 @@
 
 QUML_BEGIN_NAMESPACE_UCA
 
+class Comment;
+
 class Element : public QuLC::Clonable {
 public:
     Element() = default;
@@ -32,18 +34,23 @@ public:
         return mOwnedElements;
     }
 
+    const std::unordered_set<Comment*>& ownedComments() const {
+        return mOwnedComments;
+    }
+
+    QUML_CLONABLE(Element)
+protected:
     void addElement(uptr<Element> other);
     void removeElement(const uptr<Element>& other);
 
-    std::size_t size() const;
-    void clear();
+    std::size_t numElements() const;
+    void clearElements();
 
     bool contains(const uptr<Element>& other) const;
     bool containsRecursive(const uptr<Element>& other) const;
-
-    QUML_CLONABLE(Element)
 private:
     std::unordered_set<uptr<Element>> mOwnedElements;
+    std::unordered_set<Comment*> mOwnedComments;
 };
 
 QUML_END_NAMESPACE_UCA

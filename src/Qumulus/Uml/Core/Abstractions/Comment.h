@@ -29,6 +29,7 @@ public:
         return mAnnotatedElements;
     }
     
+    QUML_CLONABLE(Comment);
 private:
     QString mBody;
     std::unordered_set<Element*> mAnnotatedElements;

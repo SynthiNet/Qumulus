@@ -29,10 +29,15 @@ public:
         return mOwnedOperations;
     }
 
+    const std::unordered_set<Class*>& superClasses() const {
+        return mSuperClasses;
+    }
+
     QUML_CLONABLE(Class);
 private:
     std::list<Property*> mOwnedAttributes;
     std::list<Operation*> mOwnedOperations;
+    std::unordered_set<Class*> mSuperClasses;
 };
 
 QUML_END_NAMESPACE_UCC

@@ -16,22 +16,42 @@
 
 QUML_BEGIN_NAMESPACE_UCC
 
-class Property : public StructuralFeature {
+class Class;
+class Association;
 
-    Type* owningType() const { return mOwningType; }
-    void setOwningType(Type* t) { mOwningType = t; }
+class Property : public StructuralFeature {
+public:
+    Property(Class* c = 0);
+
+    Class* getClass() const { return mClass; }
+    void setClass(Class* c) { mClass = c; }
 
     bool readOnly() const override { return mReadOnly; }
-    bool composite() const { NYI(); return false; }
-    bool derived() const { NYI(); return false; }
-    QuLC::Optional<QString> defaultValue() const { NYI(); return nullptr; }
+    void setReadOnly(bool r) { mReadOnly = r; }
 
-    bool isNavigable() const { NYI(); return false; }
-    Property* opposite() const { NYI(); return nullptr; }
+    // bool composite() const { NYI(); return false; }
+
+    // bool derived() const { NYI(); return false; }
+    // QuLC::Optional<QString> defaultValue() const { NYI(); return nullptr; }
+
+    // bool isNavigable() const { return mOpposite; }
+
+    Property* opposite() const;
+
+    Association* association() const { return mAssociation; }
+    void setAssociation(Association* a) { mAssociation = a; }
+
+    Association* owningAssociation() const;
+
+    std::set<Property*> redefinedProperties() const;
+    std::set<Property*> subsettedProperties() const;
+
+    QUML_CLONABLE(Property);
 private:
-    Type* mOwningType;
+    // Type* mOwningType;
+    Class* mClass;
     bool mReadOnly;
-    Property* mOpposite;
+    Association* mAssociation;
 };
 
 QUML_END_NAMESPACE_UCC
