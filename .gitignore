@@ -25,9 +25,9 @@ test/QumulusTestExe
 test/QumulusTestExe.exe
 
 # Generated documenation
-docs/html/**
-docs/latex/**
-docs/xml/**
+doc/html/**
+doc/latex/**
+doc/xml/**
 
 # Backup and patch files
 *~
