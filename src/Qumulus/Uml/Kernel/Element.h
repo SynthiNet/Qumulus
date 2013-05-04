@@ -27,6 +27,7 @@ public:
     Element(Element&& other);
     
     virtual bool mustBeOwned() const {
+        NYI();
         return true;
     }
 
