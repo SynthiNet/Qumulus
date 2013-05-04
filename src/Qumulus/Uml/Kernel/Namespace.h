@@ -19,17 +19,17 @@ public:
     Namespace() = default;
     Namespace(const Namespace& n);
 
-    const umap<QString, NamedElement*>& 
-            ownedMembers() const {
+    const uset<NamedElement*>& ownedMembers() const {
         return mOwnedMembers;
     }
 
-    void addMember(uptr<NamedElement> e);
+    void addOwnedMember(uptr<NamedElement> e);
+    void removeOwnedMember(NamedElement* e);
 
 
-    QUML_CLONABLE(Namespace)
+    QUML_CLONABLE_ABSTRACT(Namespace)
 private:
-    umap<QString, NamedElement*> mOwnedMembers;
+    uset<NamedElement*> mOwnedMembers;
 };
 
 QUML_END_NAMESPACE_UK
