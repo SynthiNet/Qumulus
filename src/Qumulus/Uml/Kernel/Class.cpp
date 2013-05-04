@@ -13,7 +13,7 @@ QUML_BEGIN_NAMESPACE_UK
 
 void Class::addNestedClassifier(uptr<Classifier> c) {
     NYI();
-    mNestedClassifiers.push_back(c.get());
+    QuLC::add(mNestedClassifiers, c.get());
     addElement(std::move(c));
 }
 
@@ -25,7 +25,7 @@ void Class::removeNestedClassifier(Classifier* c) {
 
 void Class::addAttribute(uptr<Property> c) {
     NYI();
-    mOwnedAttributes.push_back(c.get());
+    QuLC::add(mOwnedAttributes, c.get());
     addElement(std::move(c));
 }
 
@@ -37,7 +37,7 @@ void Class::removeAttribute(Property* c) {
 
 void Class::addOperation(uptr<Operation> c) {
     NYI();
-    mOwnedOperations.push_back(c.get());
+    QuLC::add(mOwnedOperations, c.get());
     addElement(std::move(c));
 }
 
