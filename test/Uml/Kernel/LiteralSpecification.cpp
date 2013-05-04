@@ -5,8 +5,8 @@
  */
 
 #include <gtest/gtest.h>
-#include <Uml/Core/Abstractions/LiteralSpecification.h>
-#include <Uml/Core/Abstractions/Literals.h>
+#include <Uml/Kernel/LiteralSpecification.h>
+#include <Uml/Kernel/Literals.h>
 
 namespace {
 
