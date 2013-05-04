@@ -6,11 +6,19 @@
 
 #include "Element.h"
 
+#include "Comment.h"
+
 QUML_BEGIN_NAMESPACE_UK
 
 Element::Element(const Element& other) {
     for(auto& x : other.mOwnedElements) {
         mOwnedElements.insert(uptr<Element>(x->clone()));
+    }
+
+    for(auto& x : mOwnedElements) {
+        if(Comment* p = dynamic_cast<Comment*>(x.get())) {
+            mOwnedComments.insert(p);
+        }
     }
 }
 
@@ -18,6 +26,17 @@ Element::Element(const Element& other) {
 Element::Element(Element&& other) {
     std::swap(mOwnedElements, other.mOwnedElements);
 }
+
+void Element::addComment(uptr<Comment> c) {
+    QuLC::add(mOwnedComments, c.get());
+    addElement(std::move(c));
+}
+
+void Element::removeComment(Comment* c) {
+    QuLC::remove(mOwnedComments, c);
+    removeElement(c);
+}
+
 
 void Element::addElement(uptr<Element> other) {
     mOwnedElements.insert(std::move(other)); 

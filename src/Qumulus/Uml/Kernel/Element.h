@@ -39,6 +39,9 @@ public:
         return mOwnedComments;
     }
 
+    void addComment(uptr<Comment> c);
+    void removeComment(Comment* c);
+
     QUML_CLONABLE(Element)
 protected:
     void addElement(uptr<Element> other);
