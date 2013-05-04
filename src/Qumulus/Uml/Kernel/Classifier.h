@@ -37,6 +37,8 @@ public:
         return mAttributes;
     }
 
+    virtual uset<Classifier*> general() const = 0;
+
     QUML_CLONABLE_ABSTRACT(Classifier);
 
 private:
