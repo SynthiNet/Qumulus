@@ -9,7 +9,7 @@
 
 #include "internal_base.h"
 
-#include "Namespace.h"
+#include "NamedElement.h"
 
 #include <Lib/Core/Nyi.h>
 
@@ -17,7 +17,7 @@ QUML_BEGIN_NAMESPACE_UK
 
 class Classifier;
 
-class RedefinableElement : public Namespace {
+class RedefinableElement : public virtual NamedElement {
 public:
 
     virtual bool isConsistentWith(RedefinableElement*) {

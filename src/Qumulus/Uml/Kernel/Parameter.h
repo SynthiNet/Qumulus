@@ -9,8 +9,7 @@
 
 #include "internal_base.h"
 
-#include <Uml/Core/Abstractions/MultiplicityElement.h>
-
+#include "MultiplicityElement.h"
 #include "TypedElement.h"
 #include "ParameterDirectionKind.h"
 

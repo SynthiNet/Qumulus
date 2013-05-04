@@ -33,7 +33,7 @@ public:
     // bool final() const { return mFinal; }
     // void setFinal(bool f) { mFinal = f; }
 
-    const list<Property*>& attributes() const {
+    const std::vector<Property*>& attributes() const {
         return mAttributes;
     }
 
@@ -42,7 +42,7 @@ public:
 private:
     bool mAbstract;
     bool mFinal;
-    list<Property*> mAttributes;
+    std::vector<Property*> mAttributes;
 
 };
 

@@ -19,19 +19,19 @@ QUML_BEGIN_NAMESPACE_UK
 class DataType : public Classifier {
 public:
 
-    const list<Property*>& ownedAttributes() const {
+    const std::vector<Property*>& ownedAttributes() const {
         return mOwnedAttributes;
     }
 
-    const list<Operation*>& ownedOperations() const {
+    const std::vector<Operation*>& ownedOperations() const {
         return mOwnedOperations;
     }
 
     QUML_CLONABLE(DataType);
 
 private:
-    list<Property*> mOwnedAttributes;
-    list<Operation*> mOwnedOperations;
+    std::vector<Property*> mOwnedAttributes;
+    std::vector<Operation*> mOwnedOperations;
 };
 
 QUML_END_NAMESPACE_UK

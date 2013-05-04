@@ -41,13 +41,13 @@ public:
     QUML_CLONABLE(Element)
 protected:
     void addElement(uptr<Element> other);
-    void removeElement(const uptr<Element>& other);
+    void removeElement(Element* other);
 
     std::size_t numElements() const;
     void clearElements();
 
-    bool contains(const uptr<Element>& other) const;
-    bool containsRecursive(const uptr<Element>& other) const;
+    bool contains(Element* other) const;
+    bool containsRecursive(Element* other) const;
 private:
     uset<uptr<Element>> mOwnedElements;
     uset<Comment*> mOwnedComments;

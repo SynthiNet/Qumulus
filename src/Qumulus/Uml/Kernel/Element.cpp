@@ -23,8 +23,10 @@ void Element::addElement(uptr<Element> other) {
     mOwnedElements.insert(std::move(other)); 
 }
 
-void Element::removeElement(const uptr<Element>& other) {
-    mOwnedElements.erase(other); 
+void Element::removeElement(Element* other) {
+    auto it = std::find_if(mOwnedElements.begin(), mOwnedElements.end(),
+            [&](const uptr<Element>& e) { return e.get() == other;});
+    mOwnedElements.erase(it); 
 }
 
 std::size_t Element::numElements() const {
@@ -35,11 +37,13 @@ void Element::clearElements() {
     mOwnedElements.clear();
 }
 
-bool Element::contains(const uptr<Element>& other) const {
-    return mOwnedElements.find(other) != mOwnedElements.end();
+bool Element::contains(Element* other) const {
+    return std::find_if(mOwnedElements.begin(), mOwnedElements.end(),
+            [&](const uptr<Element>& e) { return e.get() == other;}) != 
+            mOwnedElements.end();
 }
 
-bool Element::containsRecursive(const uptr<Element>& other) const {
+bool Element::containsRecursive(Element* other) const {
     if(contains(other)) return true;
 
     for(const uptr<Element>& e : mOwnedElements) {
