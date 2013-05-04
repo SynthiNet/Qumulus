@@ -113,7 +113,7 @@ public:
         mInitialized = false;
     }
 
-    Optional<T>& operator==(const Optional<T>& o) const {
+    bool operator==(const Optional<T>& o) const {
         return (!*this && !o) || **this == *o;
     }
 
