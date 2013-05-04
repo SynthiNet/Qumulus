@@ -12,10 +12,6 @@
 #include "Namespace.h"
 #include "Type.h"
 
-#include <Lib/Core/Nyi.h>
-
-#include <list>
-
 QUML_BEGIN_NAMESPACE_UK
 
 class Property;
@@ -37,7 +33,7 @@ public:
     // bool final() const { return mFinal; }
     // void setFinal(bool f) { mFinal = f; }
 
-    const std::list<Property*>& attributes() const {
+    const list<Property*>& attributes() const {
         return mAttributes;
     }
 
@@ -46,7 +42,7 @@ public:
 private:
     bool mAbstract;
     bool mFinal;
-    std::list<Property*> mAttributes;
+    list<Property*> mAttributes;
 
 };
 

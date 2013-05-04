@@ -13,7 +13,6 @@
 
 #include "NamedElement.h"
 
-#include <set>
 
 QUML_BEGIN_NAMESPACE_UK
 
@@ -24,7 +23,7 @@ class Feature :
         public RedefinableElement {
 public:
 private:
-    std::set<Classifier*> mFeaturingClassifiers;
+    uset<Classifier*> mFeaturingClassifiers;
 };
 
 QUML_END_NAMESPACE_UK

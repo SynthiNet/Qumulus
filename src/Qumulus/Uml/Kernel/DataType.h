@@ -11,8 +11,6 @@
 
 #include "Classifier.h"
 
-#include <list>
-
 class Property;
 class Operation;
 
@@ -21,19 +19,19 @@ QUML_BEGIN_NAMESPACE_UK
 class DataType : public Classifier {
 public:
 
-    const std::list<Property*>& ownedAttributes() const {
+    const list<Property*>& ownedAttributes() const {
         return mOwnedAttributes;
     }
 
-    const std::list<Operation*>& ownedOperations() const {
+    const list<Operation*>& ownedOperations() const {
         return mOwnedOperations;
     }
 
     QUML_CLONABLE(DataType);
 
 private:
-    std::list<Property*> mOwnedAttributes;
-    std::list<Operation*> mOwnedOperations;
+    list<Property*> mOwnedAttributes;
+    list<Operation*> mOwnedOperations;
 };
 
 QUML_END_NAMESPACE_UK

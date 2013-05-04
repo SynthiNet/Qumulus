@@ -12,8 +12,8 @@
 #include <Lib/Core/Clonable.h>
 #include <Lib/Core/Ptr.h>
 #include <Lib/Core/Hash.h>
-
-#include <unordered_set>
+#include <Lib/Core/Container.h>
+#include <Lib/Core/Nyi.h>
 
 QUML_BEGIN_NAMESPACE_UK
 
@@ -30,11 +30,11 @@ public:
         return true;
     }
 
-    const std::unordered_set<uptr<Element>>& ownedElements() const {
+    const uset<uptr<Element>>& ownedElements() const {
         return mOwnedElements;
     }
 
-    const std::unordered_set<Comment*>& ownedComments() const {
+    const uset<Comment*>& ownedComments() const {
         return mOwnedComments;
     }
 
@@ -49,8 +49,8 @@ protected:
     bool contains(const uptr<Element>& other) const;
     bool containsRecursive(const uptr<Element>& other) const;
 private:
-    std::unordered_set<uptr<Element>> mOwnedElements;
-    std::unordered_set<Comment*> mOwnedComments;
+    uset<uptr<Element>> mOwnedElements;
+    uset<Comment*> mOwnedComments;
 };
 
 QUML_END_NAMESPACE_UK

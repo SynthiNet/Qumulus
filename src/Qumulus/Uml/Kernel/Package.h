@@ -13,20 +13,19 @@
 
 #include "Namespace.h"
 
-#include <map>
 
 QUML_BEGIN_NAMESPACE_UK
 
 class Package : public Namespace, public PackageableElement {
 public:
 
-    const std::map<QString, Package*>& nestedPackages() const {
+    const umap<QString, Package*>& nestedPackages() const {
         return mNestedPackages;
     }
 
     QUML_CLONABLE(Package)
 private:
-    std::map<QString, Package*> mNestedPackages;
+    umap<QString, Package*> mNestedPackages;
 };
 
 QUML_END_NAMESPACE_UK

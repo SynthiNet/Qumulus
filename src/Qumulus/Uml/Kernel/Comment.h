@@ -16,23 +16,23 @@ QUML_BEGIN_NAMESPACE_UK
 class Comment : public Element {
 public:
     Comment(const QString& body = "", 
-            std::unordered_set<Element*> annotated = {});
+            uset<Element*> annotated = {});
 
     const QString& body() const { return mBody; }
     void setBody(const QString& b) { mBody = b; }
 
-    std::unordered_set<Element*> annotatedElements() { 
+    uset<Element*> annotatedElements() { 
         return mAnnotatedElements;
     }
     
-    const std::unordered_set<Element*> annotatedElements() const { 
+    const uset<Element*> annotatedElements() const { 
         return mAnnotatedElements;
     }
     
     QUML_CLONABLE(Comment);
 private:
     QString mBody;
-    std::unordered_set<Element*> mAnnotatedElements;
+    uset<Element*> mAnnotatedElements;
 };
 
 QUML_END_NAMESPACE_UK

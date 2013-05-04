@@ -11,7 +11,6 @@
 
 #include "NamedElement.h"
 
-#include <unordered_map>
 
 QUML_BEGIN_NAMESPACE_UK
 
@@ -20,7 +19,7 @@ public:
     Namespace() = default;
     Namespace(const Namespace& n);
 
-    const std::unordered_map<QString, NamedElement*>& 
+    const umap<QString, NamedElement*>& 
             ownedMembers() const {
         return mOwnedMembers;
     }
@@ -30,7 +29,7 @@ public:
 
     QUML_CLONABLE(Namespace)
 private:
-    std::unordered_map<QString, NamedElement*> mOwnedMembers;
+    umap<QString, NamedElement*> mOwnedMembers;
 };
 
 QUML_END_NAMESPACE_UK

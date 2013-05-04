@@ -11,8 +11,6 @@
 
 #include "Feature.h"
 
-#include <unordered_set>
-
 QUML_BEGIN_NAMESPACE_UK
 
 class Parameter;
@@ -22,8 +20,8 @@ class BehavioralFeature : public Feature {
 public:
     QUML_CLONABLE_ABSTRACT(BehavioralFeature);
 private:
-    std::unordered_set<Parameter*> mOwnedParameters;
-    std::unordered_set<Type*> mRaisedExceptions;
+    uset<Parameter*> mOwnedParameters;
+    uset<Type*> mRaisedExceptions;
 };
 
 QUML_END_NAMESPACE_UK

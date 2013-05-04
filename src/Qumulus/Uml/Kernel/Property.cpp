@@ -28,14 +28,14 @@ Association* Property::owningAssociation() const {
     return nullptr;
 }
 
-std::set<Property*> Property::redefinedProperties() const {
+uset<Property*> Property::redefinedProperties() const {
     NYI();
-    return std::set<Property*>();
+    return uset<Property*>();
 }
 
-std::set<Property*> Property::subsettedProperties() const {
+uset<Property*> Property::subsettedProperties() const {
     NYI();
-    return std::set<Property*>();
+    return uset<Property*>();
 }
 
 

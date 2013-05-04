@@ -31,7 +31,7 @@ public:
     QUML_CLONABLE(Operation);
 private:
     Class* mClass;
-    // std::unordered_set<Operation*> mRedefinedOperations;
+    // uset<Operation*> mRedefinedOperations;
     // bool mQuery;
 
 };

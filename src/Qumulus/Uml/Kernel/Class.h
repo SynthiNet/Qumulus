@@ -11,7 +11,7 @@
 
 #include "Classifier.h"
 
-#include <list>
+#include <Lib/Core/Container.h>
 
 QUML_BEGIN_NAMESPACE_UK
 
@@ -21,23 +21,23 @@ class Operation;
 class Class : public Classifier {
 public:
     
-    const std::list<Property*>& ownedAttributes() const {
+    const list<Property*>& ownedAttributes() const {
         return mOwnedAttributes;
     }
 
-    const std::list<Operation*>& ownedOperations() const {
+    const list<Operation*>& ownedOperations() const {
         return mOwnedOperations;
     }
 
-    const std::unordered_set<Class*>& superClasses() const {
+    const uset<Class*>& superClasses() const {
         return mSuperClasses;
     }
 
     QUML_CLONABLE(Class);
 private:
-    std::list<Property*> mOwnedAttributes;
-    std::list<Operation*> mOwnedOperations;
-    std::unordered_set<Class*> mSuperClasses;
+    list<Property*> mOwnedAttributes;
+    list<Operation*> mOwnedOperations;
+    uset<Class*> mSuperClasses;
 };
 
 QUML_END_NAMESPACE_UK

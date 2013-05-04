@@ -43,8 +43,8 @@ public:
 
     Association* owningAssociation() const;
 
-    std::set<Property*> redefinedProperties() const;
-    std::set<Property*> subsettedProperties() const;
+    uset<Property*> redefinedProperties() const;
+    uset<Property*> subsettedProperties() const;
 
     QUML_CLONABLE(Property);
 private:

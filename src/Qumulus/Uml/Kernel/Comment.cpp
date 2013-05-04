@@ -8,7 +8,7 @@
 
 QUML_BEGIN_NAMESPACE_UK
 
-Comment::Comment(const QString& body, std::unordered_set<Element*> annotated) :
+Comment::Comment(const QString& body, uset<Element*> annotated) :
         mBody(body), 
         mAnnotatedElements(annotated) {
 
