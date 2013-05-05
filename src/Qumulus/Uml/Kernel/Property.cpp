@@ -12,7 +12,8 @@ QUML_BEGIN_NAMESPACE_UK
 
 Property::Property(Class* c) : 
         mClass(c),
-        mAssociation(0) {
+        mAssociation(0),
+        mAggregation(AggregationKind::None) {
 
 }
 
