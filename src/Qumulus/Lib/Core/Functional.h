@@ -36,8 +36,30 @@ QSet<U> map(const QSet<T>& l, std::function<U(const T&)> f) {
 } 
 
 template<class T, class U>
+QList<T> mapto(const QList<U>& l) {
+    QList<T> toReturn;
+    for(const U& u : l) {
+        if(T t = static_cast<T>(u))
+            toReturn.append(t);
+    } 
+
+    return toReturn;
+}
+
+template<class T, class U>
+QSet<T> mapto(const QSet<U>& l) {
+    QSet<T> toReturn;
+    for(const U& u : l) {
+        if(T t = static_cast<T>(u))
+            toReturn.insert(t);
+    } 
+
+    return toReturn;
+}
+
+template<class T, class U>
 QList<T> dynmapto(const QList<U>& l) {
-    QList<U> toReturn;
+    QList<T> toReturn;
     for(const U& u : l) {
         if(T t = dynamic_cast<T>(u))
             toReturn.append(t);
@@ -48,7 +70,7 @@ QList<T> dynmapto(const QList<U>& l) {
 
 template<class T, class U>
 QSet<T> dynmapto(const QSet<U>& l) {
-    QSet<U> toReturn;
+    QSet<T> toReturn;
     for(const U& u : l) {
         if(T t = dynamic_cast<T>(u))
             toReturn.insert(t);

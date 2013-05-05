@@ -11,6 +11,7 @@
 
 #include <Lib/Core/Clonable.h>
 #include <Lib/Core/Nyi.h>
+#include <Lib/Core/Functional.h>
 
 #include <QtCore/QSet>
 #include <QtCore/QList>

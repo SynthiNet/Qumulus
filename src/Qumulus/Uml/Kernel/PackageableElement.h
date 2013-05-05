@@ -20,11 +20,11 @@ public:
     PackageableElement();
     PackageableElement(QString name, Package* p = 0);
 
-    virtual ~PackageableElement() = 0;
-
     Package* package() const {
         return mPackage;
     }
+
+    QUML_CLONABLE_ABSTRACT(PackageableElement);
 private:
     Package* mPackage;
 };

@@ -35,12 +35,7 @@ void Class::removeOperation(Operation* c) {
 
 
 QSet<Classifier*> Class::general() const {
-    QSet<Classifier*> toReturn;
-    for(auto& p : superClasses()) {
-        toReturn.insert(p);
-    }
-
-    return toReturn;
+    return QuLC::mapto<Classifier*>(mSuperClasses);
 }
 
 void Class::addSuperClass(Class* c) {
