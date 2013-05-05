@@ -59,7 +59,7 @@ QSet<T> dynmapto(const QSet<U>& l) {
 
 template<class T>
 QList<T> filter(const QList<T>& l, std::function<bool(const T&)> f) {
-    QList<U> toReturn;
+    QList<T> toReturn;
     for(const T& t : l) {
         if(f(t)) toReturn.append(t);
     } 
@@ -69,7 +69,7 @@ QList<T> filter(const QList<T>& l, std::function<bool(const T&)> f) {
 
 template<class T>
 QSet<T> filter(const QSet<T>& l, std::function<bool(const T&)> f) {
-    QSet<U> toReturn;
+    QSet<T> toReturn;
     for(const T& t : l) {
         if(f(t)) toReturn.insert(t);
     } 
