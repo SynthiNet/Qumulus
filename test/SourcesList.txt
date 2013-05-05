@@ -2,6 +2,6 @@
 # the main source directory. DO NOT EDIT MANUALLY!
 
 SET ( QUMLTEST_ALL_SRC 
-Lib/Core/Optional.cpp Lib/Core/Unlimited.cpp Uml/Kernel/LiteralSpecification.cpp main.cpp  )
+Lib/Core/Optional.cpp Lib/Core/Unlimited.cpp NyiHandler.cpp Uml/Kernel/Class.cpp Uml/Kernel/LiteralSpecification.cpp main.cpp  )
 SET ( QUMLTEST_ALL_MM_SRC 
  )
