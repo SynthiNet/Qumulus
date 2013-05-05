@@ -20,6 +20,8 @@ public:
     QuLC::Optional<bool> boolValue() const override {
         return mValue;
     }
+
+    void setValue(QuLC::Optional<bool> v) { mValue = v; }
 private:
     bool mValue;
 };
@@ -31,6 +33,8 @@ public:
     QuLC::Optional<int> intValue() const override {
         return mValue;
     }
+
+    void setValue(QuLC::Optional<int> v) { mValue = v; }
 private:
     int mValue;
 };
@@ -42,6 +46,7 @@ public:
     bool isNull() const override {
         return false;
     }
+
 private:
     bool mValue;
 };
@@ -53,6 +58,8 @@ public:
     QuLC::Optional<double> doubleValue() const {
         return mValue;
     }
+
+    void setValue(QuLC::Optional<double> v) { mValue = v; }
 private:
     double mValue;
 };
@@ -64,6 +71,8 @@ public:
     QuLC::Optional<QString> stringValue() const override {
         return mValue;
     }
+
+    void setValue(QuLC::Optional<QString> v) { mValue = v; }
 private:
     QString mValue;
 };
@@ -75,6 +84,8 @@ public:
     QuLC::Optional<QuLC::Unlimited> unlimitedValue() const override {
         return mValue;
     }
+
+    void setValue(QuLC::Optional<QuLC::Unlimited> v) { mValue = v; }
 private:
     QuLC::Unlimited mValue;
 };
