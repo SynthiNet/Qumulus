@@ -34,7 +34,7 @@ public:
     }
 
     void addException(Type* t);
-    void removeParameter(Type* t);
+    void removeException(Type* t);
 
     QUML_CLONABLE_ABSTRACT(BehavioralFeature);
 private:

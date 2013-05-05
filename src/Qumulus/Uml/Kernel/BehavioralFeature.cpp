@@ -23,7 +23,7 @@ void BehavioralFeature::addException(Type* t) {
     mRaisedExceptions.append(t);
 }
 
-void BehavioralFeature::removeParameter(Type* t) {
+void BehavioralFeature::removeException(Type* t) {
     mRaisedExceptions.removeAll(t);
 }
 
