@@ -18,12 +18,17 @@ QUML_BEGIN_NAMESPACE_UK
 
 class Classifier;
 
-class Feature : 
-        public virtual NamedElement,
-        public RedefinableElement {
+class Feature : public RedefinableElement {
 public:
+    Feature(Classifier* c = 0);
+
+    bool isStatic() const { return mStatic; }
+    void setStatic(bool s) { mStatic = s; }
+
+    QUML_CLONABLE_ABSTRACT(Feature);
 private:
-    QSet<Classifier*> mFeaturingClassifiers;
+    Classifier* mFeaturingClassifier;
+    bool mStatic;
 };
 
 QUML_END_NAMESPACE_UK
