@@ -13,19 +13,18 @@
 
 QUML_BEGIN_NAMESPACE_UK
 
-class Classifier;
+class Type;
 
 class TypedElement : public virtual NamedElement {
 public:
-    TypedElement() {}
-    virtual ~TypedElement() = 0;
+    TypedElement(Type* type = 0) : mType(type) {}
 
-    Classifier* type() const { return mType; }
-    void setType(Classifier* c) { mType = c; }
+    Type* type() const { return mType; }
+    void setType(Type* c) { mType = c; }
 
     QUML_CLONABLE_ABSTRACT(TypedElement);
 private:
-    Classifier* mType;
+    Type* mType;
 };
 
 QUML_END_NAMESPACE_UK
