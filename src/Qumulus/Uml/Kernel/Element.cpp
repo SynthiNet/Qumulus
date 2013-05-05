@@ -45,7 +45,6 @@ void Element::addElement(Element* other) {
 
 void Element::removeElement(Element* other) {
     mOwnedElements.remove(other);
-    delete other;
 }
 
 QUML_END_NAMESPACE_UK

@@ -29,7 +29,6 @@ public:
     virtual ~Element();
     
     virtual bool mustBeOwned() const {
-        NYI();
         return true;
     }
 
@@ -42,7 +41,7 @@ public:
     }
 
     /**
-     * This function takes over ownership.
+     * @note This function takes over ownership.
      */
     void addComment(Comment* c);
     void removeComment(Comment* c);
@@ -50,9 +49,10 @@ public:
     QUML_CLONABLE(Element)
 protected:
     /**
-     * This function takes over ownership.
+     * @note This function takes over ownership.
      */
     void addElement(Element* other);
+
     void removeElement(Element* other);
 
 private:
