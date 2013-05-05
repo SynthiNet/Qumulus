@@ -11,40 +11,53 @@
 
 #include "Namespace.h"
 #include "Type.h"
+#include "RedefinableElement.h"
 
 QUML_BEGIN_NAMESPACE_UK
 
 class Property;
+class Feature;
 
-class Classifier : public Type, public Namespace {
+class Classifier : public Type, public Namespace, public RedefinableElement {
 public:
+    Classifier();
+    Classifier(QString name, Package* p = 0);
 
-    // void allFeatures() const { NYI(); }
-    // void parents() const { NYI(); }
-    // void allParents() const { NYI(); }
-    // bool conformsTo(Classifier* other) const { NYI(); return false; }
-    // bool hasVisibilityOf(NamedElement* m) const { NYI(); return false; }
-    // void inherit() { NYI(); }
-    // bool maySpecializeType(Classifier* c) const { NYI(); return false; }
+    bool abstract() const { return mAbstract; }
+    void setAbstract(bool a) { mAbstract = a; }
 
-    // bool abstract() const { return mAbstract; }
-    // void setAbstract(bool a) { mAbstract = a; }
+    bool final() const { return mFinal; }
+    void setFinal(bool f) { mFinal = f; }
 
-    // bool final() const { return mFinal; }
-    // void setFinal(bool f) { mFinal = f; }
-
-    const std::vector<Property*>& attributes() const {
+    const QList<Property*>& attributes() const {
         return mAttributes;
     }
 
-    virtual uset<Classifier*> general() const = 0;
+    /**
+     * This function takes over ownership.
+     */
+    void addAttribute(Property* p);
+    void removeAttribute(Property* p);
+
+    const QSet<Feature*>& features() const {
+        return mFeatures;
+    }
+
+    /**
+     * This function takes over ownership.
+     */
+    void addFeature(Feature* p);
+    void removeFeature(Feature* f);
+
+    virtual QSet<Classifier*> general() const = 0;
 
     QUML_CLONABLE_ABSTRACT(Classifier);
 
 private:
-    bool mAbstract;
-    bool mFinal;
-    std::vector<Property*> mAttributes;
+    bool mAbstract = false;
+    bool mFinal = false;
+    QList<Property*> mAttributes;
+    QSet<Feature*> mFeatures;
 
 };
 

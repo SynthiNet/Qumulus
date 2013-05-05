@@ -19,17 +19,16 @@ public:
     Namespace() = default;
     Namespace(const Namespace& n);
 
-    const uset<NamedElement*>& ownedMembers() const {
+    const QSet<NamedElement*>& ownedMembers() const {
         return mOwnedMembers;
     }
 
-    void addOwnedMember(uptr<NamedElement> e);
+    void addOwnedMember(NamedElement* e);
     void removeOwnedMember(NamedElement* e);
-
 
     QUML_CLONABLE_ABSTRACT(Namespace)
 private:
-    uset<NamedElement*> mOwnedMembers;
+    QSet<NamedElement*> mOwnedMembers;
 };
 
 QUML_END_NAMESPACE_UK

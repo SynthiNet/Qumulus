@@ -16,23 +16,23 @@ QUML_BEGIN_NAMESPACE_UK
 class Comment : public Element {
 public:
     Comment(const QString& body = "", 
-            uset<Element*> annotated = {});
+            QSet<Element*> annotated = {});
 
     const QString& body() const { return mBody; }
     void setBody(const QString& b) { mBody = b; }
 
-    uset<Element*> annotatedElements() { 
+    QSet<Element*> annotatedElements() { 
         return mAnnotatedElements;
     }
     
-    const uset<Element*> annotatedElements() const { 
+    const QSet<Element*> annotatedElements() const { 
         return mAnnotatedElements;
     }
     
     QUML_CLONABLE(Comment);
 private:
     QString mBody;
-    uset<Element*> mAnnotatedElements;
+    QSet<Element*> mAnnotatedElements;
 };
 
 QUML_END_NAMESPACE_UK

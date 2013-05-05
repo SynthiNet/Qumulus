@@ -10,10 +10,11 @@
 #include "internal_base.h"
 
 #include <Lib/Core/Clonable.h>
-#include <Lib/Core/Ptr.h>
-#include <Lib/Core/Hash.h>
-#include <Lib/Core/Container.h>
 #include <Lib/Core/Nyi.h>
+
+#include <QtCore/QSet>
+#include <QtCore/QList>
+#include <QtCore/QString>
 
 QUML_BEGIN_NAMESPACE_UK
 
@@ -22,39 +23,40 @@ class Comment;
 class Element : public QuLC::Clonable {
 public:
     Element() = default;
-
     Element(const Element& other);
-    Element(Element&& other);
+
+    virtual ~Element();
     
     virtual bool mustBeOwned() const {
         NYI();
         return true;
     }
 
-    const uset<uptr<Element>>& ownedElements() const {
+    const QSet<Element*>& ownedElements() const {
         return mOwnedElements;
     }
 
-    const uset<Comment*>& ownedComments() const {
+    const QSet<Comment*>& ownedComments() const {
         return mOwnedComments;
     }
 
-    void addComment(uptr<Comment> c);
+    /**
+     * This function takes over ownership.
+     */
+    void addComment(Comment* c);
     void removeComment(Comment* c);
 
     QUML_CLONABLE(Element)
 protected:
-    void addElement(uptr<Element> other);
+    /**
+     * This function takes over ownership.
+     */
+    void addElement(Element* other);
     void removeElement(Element* other);
 
-    std::size_t numElements() const;
-    void clearElements();
-
-    bool contains(Element* other) const;
-    bool containsRecursive(Element* other) const;
 private:
-    uset<uptr<Element>> mOwnedElements;
-    uset<Comment*> mOwnedComments;
+    QSet<Element*> mOwnedElements;
+    QSet<Comment*> mOwnedComments;
 };
 
 QUML_END_NAMESPACE_UK

@@ -17,13 +17,13 @@ QUML_BEGIN_NAMESPACE_UK
 class Enumeration : public DataType {
 public:
 
-    const std::vector<EnumerationLiteral*>& ownedLiterals() const { 
+    const QList<EnumerationLiteral*>& ownedLiterals() const { 
         return mOwnedLiterals;
     }
 
     QUML_CLONABLE(Enumeration);
 private:
-    std::vector<EnumerationLiteral*> mOwnedLiterals;
+    QList<EnumerationLiteral*> mOwnedLiterals;
 };
 
 QUML_END_NAMESPACE_UK

@@ -12,64 +12,40 @@ QUML_BEGIN_NAMESPACE_UK
 
 Element::Element(const Element& other) {
     for(auto& x : other.mOwnedElements) {
-        mOwnedElements.insert(uptr<Element>(x->clone()));
+        mOwnedElements.insert(x->clone());
     }
 
     for(auto& x : mOwnedElements) {
-        if(Comment* p = dynamic_cast<Comment*>(x.get())) {
+        if(Comment* p = dynamic_cast<Comment*>(x)) {
             mOwnedComments.insert(p);
         }
     }
 }
 
-
-Element::Element(Element&& other) {
-    std::swap(mOwnedElements, other.mOwnedElements);
+Element::~Element() {
+    for(auto& x : mOwnedElements) {
+        delete x;
+    }
 }
 
-void Element::addComment(uptr<Comment> c) {
-    QuLC::add(mOwnedComments, c.get());
-    addElement(std::move(c));
+void Element::addComment(Comment* c) {
+    mOwnedComments.insert(c);
+    addElement(c);
 }
 
 void Element::removeComment(Comment* c) {
-    QuLC::remove(mOwnedComments, c);
+    mOwnedComments.remove(c);
     removeElement(c);
 }
 
 
-void Element::addElement(uptr<Element> other) {
-    mOwnedElements.insert(std::move(other)); 
+void Element::addElement(Element* other) {
+    mOwnedElements.insert(other); 
 }
 
 void Element::removeElement(Element* other) {
-    auto it = std::find_if(mOwnedElements.begin(), mOwnedElements.end(),
-            [&](const uptr<Element>& e) { return e.get() == other;});
-    mOwnedElements.erase(it); 
-}
-
-std::size_t Element::numElements() const {
-    return mOwnedElements.size();
-}
-
-void Element::clearElements() {
-    mOwnedElements.clear();
-}
-
-bool Element::contains(Element* other) const {
-    return std::find_if(mOwnedElements.begin(), mOwnedElements.end(),
-            [&](const uptr<Element>& e) { return e.get() == other;}) != 
-            mOwnedElements.end();
-}
-
-bool Element::containsRecursive(Element* other) const {
-    if(contains(other)) return true;
-
-    for(const uptr<Element>& e : mOwnedElements) {
-        if(e->containsRecursive(other)) return true;
-    }
-
-    return false;
+    mOwnedElements.remove(other);
+    delete other;
 }
 
 QUML_END_NAMESPACE_UK

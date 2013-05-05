@@ -10,6 +10,22 @@
 
 QUML_BEGIN_NAMESPACE_UK
 
+NamedElement::NamedElement() :
+        mName(nullptr),
+        mVisibility(nullptr),
+        mNameSpace(0) {
+
+}
+
+NamedElement::NamedElement(QString name, Namespace* n) :
+        mName(name),
+        mVisibility(nullptr),
+        mNameSpace(n) {
+
+}
+
+
+
 QuLC::Optional<QString> NamedElement::qualifiedName() const {
     if(mName) {
         if(mNameSpace) {

@@ -22,14 +22,14 @@ class BehavioralFeature :
         public virtual Namespace {
 public:
     
-    const std::vector<Parameter*>& parameters() const { 
+    const QList<Parameter*>& parameters() const { 
         return mOwnedParameters; 
     }
 
-    void addParameter(uptr<Parameter> p);
+    void addParameter(Parameter* p);
     void removeParameter(Parameter* p);
 
-    const std::vector<Type*>& raisedExceptions() const {
+    const QList<Type*>& raisedExceptions() const {
         return mRaisedExceptions;
     }
 
@@ -38,8 +38,8 @@ public:
 
     QUML_CLONABLE_ABSTRACT(BehavioralFeature);
 private:
-    std::vector<Parameter*> mOwnedParameters;
-    std::vector<Type*> mRaisedExceptions;
+    QList<Parameter*> mOwnedParameters;
+    QList<Type*> mRaisedExceptions;
 };
 
 QUML_END_NAMESPACE_UK

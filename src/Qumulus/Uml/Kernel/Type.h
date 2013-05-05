@@ -9,15 +9,19 @@
 
 #include "internal_base.h"
 
-#include "PackagableElement.h"
+#include "PackageableElement.h"
 
 QUML_BEGIN_NAMESPACE_UK
 
 class Type : public PackageableElement {
 public:
+    Type() {}
+    Type(QString name, Package* p = 0) : PackageableElement(name, p) {}
+
     virtual ~Type() = 0;
 
     virtual bool conformsTo(Type* other) const {
+        (void)other;
         return false;
     }
 };

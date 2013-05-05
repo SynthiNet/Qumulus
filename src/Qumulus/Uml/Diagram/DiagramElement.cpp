@@ -12,12 +12,12 @@ DiagramElement::DiagramElement() : mVisible(true) {
 
 }
 
-const QString& DiagramElement::property(const QString& key) const {
-    return mProperties.at(key);
+QString DiagramElement::property(const QString& key) const {
+    return mProperties[key];
 }
 
 QString& DiagramElement::property(const QString& key) {
-    return mProperties.at(key);
+    return mProperties[key];
 }
 
 QUML_END_NAMESPACE_UD

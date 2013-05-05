@@ -9,7 +9,7 @@
 
 #include "internal_base.h"
 
-#include "PackagableElement.h"
+#include "PackageableElement.h"
 
 #include "Namespace.h"
 
@@ -19,13 +19,17 @@ QUML_BEGIN_NAMESPACE_UK
 class Package : public Namespace, public PackageableElement {
 public:
 
-    const umap<QString, Package*>& nestedPackages() const {
+    const QSet<Package*>& nestedPackages() const {
         return mNestedPackages;
+    }
+
+    bool mustBeOwned() const override {
+        return false;
     }
 
     QUML_CLONABLE(Package)
 private:
-    umap<QString, Package*> mNestedPackages;
+    QSet<Package*> mNestedPackages;
 };
 
 QUML_END_NAMESPACE_UK

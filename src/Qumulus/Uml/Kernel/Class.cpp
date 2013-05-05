@@ -11,9 +11,9 @@
 
 QUML_BEGIN_NAMESPACE_UK
 
-void Class::addNestedClassifier(uptr<Classifier> c) {
+void Class::addNestedClassifier(Classifier* c) {
     NYI();
-    QuLC::add(mNestedClassifiers, c.get());
+    mNestedClassifiers.append(c);
     addElement(std::move(c));
 }
 
@@ -22,23 +22,10 @@ void Class::removeNestedClassifier(Classifier* c) {
     NYI();
 }
 
-
-void Class::addAttribute(uptr<Property> c) {
+void Class::addOperation(Operation* c) {
     NYI();
-    QuLC::add(mOwnedAttributes, c.get());
-    addElement(std::move(c));
-}
-
-void Class::removeAttribute(Property* c) {
-    (void)c;
-    NYI();
-}
-
-
-void Class::addOperation(uptr<Operation> c) {
-    NYI();
-    QuLC::add(mOwnedOperations, c.get());
-    addElement(std::move(c));
+    mOwnedOperations.append(c);
+    addElement(c);
 }
 
 void Class::removeOperation(Operation* c) {
@@ -47,9 +34,9 @@ void Class::removeOperation(Operation* c) {
 }
 
 
-uset<Classifier*> Class::general() const {
-    uset<Classifier*> toReturn;
-    for(auto p : superClasses()) {
+QSet<Classifier*> Class::general() const {
+    QSet<Classifier*> toReturn;
+    for(auto& p : superClasses()) {
         toReturn.insert(p);
     }
 
@@ -61,7 +48,7 @@ void Class::addSuperClass(Class* c) {
 }
 
 void Class::removeSuperClass(Class* c) {
-    mSuperClasses.erase(c);
+    mSuperClasses.remove(c);
 }
 
 

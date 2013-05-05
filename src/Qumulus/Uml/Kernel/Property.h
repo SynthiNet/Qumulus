@@ -43,8 +43,8 @@ public:
 
     Association* owningAssociation() const;
 
-    uset<Property*> redefinedProperties() const;
-    uset<Property*> subsettedProperties() const;
+    QSet<Property*> redefinedProperties() const;
+    QSet<Property*> subsettedProperties() const;
 
     QUML_CLONABLE(Property);
 private:

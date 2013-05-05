@@ -9,25 +9,22 @@
 
 QUML_BEGIN_NAMESPACE_UK
 
-void BehavioralFeature::addParameter(uptr<Parameter> p) {
-    mOwnedParameters.push_back(p.get());
+void BehavioralFeature::addParameter(Parameter* p) {
+    mOwnedParameters.append(p);
     addElement(std::move(p));
 }
 
 void BehavioralFeature::removeParameter(Parameter* p) {
+    mOwnedParameters.removeAll(p);
     removeElement(p);
-    mOwnedParameters.erase(std::find(
-                mOwnedParameters.begin(), mOwnedParameters.end(), p));
-
 }
 
 void BehavioralFeature::addException(Type* t) {
-    mRaisedExceptions.push_back(t);
+    mRaisedExceptions.append(t);
 }
 
 void BehavioralFeature::removeParameter(Type* t) {
-    mRaisedExceptions.erase(std::find(
-                mRaisedExceptions.begin(), mRaisedExceptions.end(), t));
+    mRaisedExceptions.removeAll(t);
 }
 
 QUML_END_NAMESPACE_UK

@@ -19,6 +19,7 @@ class Classifier;
 
 class RedefinableElement : public virtual NamedElement {
 public:
+    RedefinableElement(Classifier* c = 0, RedefinableElement* r = 0);
 
     virtual bool isConsistentWith(RedefinableElement*) {
         return false;
@@ -29,15 +30,20 @@ public:
         return false;
     }
 
-    virtual bool leaf() {
-        return false;
-    }
+    Classifier* redefinitionContext() const { return mRedefinitionContext; }
+    void setRedefinitionContext(Classifier* c) { mRedefinitionContext = c; }
 
+    RedefinableElement* redefinedElement() const { return mRedefinedElement; }
+    void setRedefinedElement(RedefinableElement* r) { mRedefinedElement = r; }
+
+    bool leaf() const { return mLeaf; }
+    void setLeaf(bool l) { mLeaf = l; }
 
     QUML_CLONABLE_ABSTRACT(RedefinableElement);
 private:
-    RedefinableElement* mRedefinedElement;
     Classifier* mRedefinitionContext;
+    RedefinableElement* mRedefinedElement;
+    bool mLeaf;
 };
 
 QUML_END_NAMESPACE_UK

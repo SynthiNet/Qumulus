@@ -19,42 +19,34 @@ class Operation;
 class Class : public Classifier {
 public:
     
-    const std::vector<Classifier*>& nestedClassifiers() const {
+    const QList<Classifier*>& nestedClassifiers() const {
         return mNestedClassifiers;
     }
 
-    void addNestedClassifier(uptr<Classifier> c);
+    void addNestedClassifier(Classifier* c);
     void removeNestedClassifier(Classifier* c);
 
-    const std::vector<Property*>& ownedAttributes() const {
-        return mOwnedAttributes;
-    }
-
-    void addAttribute(uptr<Property> c);
-    void removeAttribute(Property* c);
-
-    const std::vector<Operation*>& ownedOperations() const {
+    const QList<Operation*>& ownedOperations() const {
         return mOwnedOperations;
     }
 
-    void addOperation(uptr<Operation> c);
+    void addOperation(Operation* c);
     void removeOperation(Operation* c);
 
-    const uset<Class*>& superClasses() const {
+    const QSet<Class*>& superClasses() const {
         return mSuperClasses;
     }
 
-    uset<Classifier*> general() const override;
+    QSet<Classifier*> general() const override;
 
     void addSuperClass(Class* c);
     void removeSuperClass(Class* c);
 
     QUML_CLONABLE(Class);
 private:
-    std::vector<Classifier*> mNestedClassifiers;
-    std::vector<Property*> mOwnedAttributes;
-    std::vector<Operation*> mOwnedOperations;
-    uset<Class*> mSuperClasses;
+    QList<Classifier*> mNestedClassifiers;
+    QList<Operation*> mOwnedOperations;
+    QSet<Class*> mSuperClasses;
 };
 
 QUML_END_NAMESPACE_UK

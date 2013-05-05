@@ -23,7 +23,7 @@ class Feature :
         public RedefinableElement {
 public:
 private:
-    uset<Classifier*> mFeaturingClassifiers;
+    QSet<Classifier*> mFeaturingClassifiers;
 };
 
 QUML_END_NAMESPACE_UK

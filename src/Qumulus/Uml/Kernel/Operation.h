@@ -31,7 +31,7 @@ public:
     QUML_CLONABLE(Operation);
 private:
     Class* mClass;
-    // uset<Operation*> mRedefinedOperations;
+    // QSet<Operation*> mRedefinedOperations;
     // bool mQuery;
 
 };

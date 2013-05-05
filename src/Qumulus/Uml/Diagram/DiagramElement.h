@@ -10,10 +10,7 @@
 #include "internal_base.h"
 
 #include <QtCore/QString>
-
-#include <unordered_map>
-
-#include <Lib/Core/Hash.h>
+#include <QtCore/QHash>
 
 QUML_BEGIN_NAMESPACE_UD
 
@@ -23,7 +20,7 @@ class DiagramElement {
 public:
     DiagramElement();
     
-    const QString& property(const QString& key) const;
+    QString property(const QString& key) const;
     QString& property(const QString& key);
 
     bool visible() const { return mVisible; }
@@ -34,7 +31,7 @@ public:
 
 private:
     bool mVisible;
-    std::unordered_map<QString, QString> mProperties;
+    QHash<QString, QString> mProperties;
     GraphElement* mContainer;
 };
 

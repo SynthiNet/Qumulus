@@ -22,7 +22,8 @@ class Namespace;
 
 class NamedElement : public virtual Element {
 public:
-    NamedElement() = default;
+    NamedElement();
+    NamedElement(QString name, Namespace* n = 0);
 
     QString separator() const {
         // TODO: do not assume C++.
