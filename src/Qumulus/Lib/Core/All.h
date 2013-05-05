@@ -11,7 +11,7 @@
 
 #include "Clonable.h"
 #include "Exception.h"
-#include "Hash.h"
+#include "Functional.h"
 #include "Nyi.h"
 #include "Optional.h"
 #include "Ptr.h"
