@@ -14,7 +14,7 @@ Classifier::Classifier() {
 
 }
 
-Classifier::Classifier(QString name, Package* p) : Type(name, p) {
+Classifier::Classifier(QString name, Namespace* p) : Type(name, p) {
 
 }
 

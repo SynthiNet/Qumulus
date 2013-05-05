@@ -18,6 +18,8 @@ class Operation;
 
 class Class : public Classifier {
 public:
+    Class();
+    Class(QString name, Namespace* p);
     
     const QList<Classifier*>& nestedClassifiers() const {
         return mNestedClassifiers;

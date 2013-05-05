@@ -11,6 +11,16 @@
 
 QUML_BEGIN_NAMESPACE_UK
 
+Class::Class() {
+
+}
+
+Class::Class(QString name, Namespace* p) :
+        Classifier(name, p) {
+
+}
+
+
 void Class::addNestedClassifier(Classifier* c) {
     mNestedClassifiers.append(c);
     addOwnedMember(c);

@@ -14,8 +14,10 @@ PackageableElement::PackageableElement() {
     setVisiblity(VisibilityKind::Public);
 }
 
-PackageableElement::PackageableElement(QString name, Package* p) : 
+PackageableElement::PackageableElement(QString name, Namespace* p) : 
         NamedElement(name, p) {
+    if(Package* pg = dynamic_cast<Package*>(p)) 
+        mPackage = pg;
     setVisiblity(VisibilityKind::Public);
 }
 

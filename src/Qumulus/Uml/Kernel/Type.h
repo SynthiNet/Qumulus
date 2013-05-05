@@ -16,7 +16,7 @@ QUML_BEGIN_NAMESPACE_UK
 class Type : public PackageableElement {
 public:
     Type() {}
-    Type(QString name, Package* p = 0) : PackageableElement(name, p) {}
+    Type(QString name, Namespace* p = 0) : PackageableElement(name, p) {}
 
     virtual bool conformsTo(Type* other) const {
         (void)other;

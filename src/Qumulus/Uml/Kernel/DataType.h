@@ -18,6 +18,8 @@ QUML_BEGIN_NAMESPACE_UK
 
 class DataType : public Classifier {
 public:
+    DataType() {}
+    DataType(QString name, Namespace* p = 0) : Classifier(name, p) {}
 
     const QList<Property*>& ownedAttributes() const {
         return mOwnedAttributes;

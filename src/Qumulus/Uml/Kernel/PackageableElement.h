@@ -18,7 +18,7 @@ class Package;
 class PackageableElement : public virtual NamedElement {
 public:
     PackageableElement();
-    PackageableElement(QString name, Package* p = 0);
+    PackageableElement(QString name, Namespace* p = 0);
 
     Package* package() const {
         return mPackage;
