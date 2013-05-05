@@ -43,7 +43,7 @@ void remove(std::unordered_set<T>& v, const T& t) {
     v.erase(t);
 }
 
-QUML_END_NAMESPACE_UK
+QUML_END_NAMESPACE_LC
 
 #endif /* LIB_CORE_CONTAINER_H_ */
 
