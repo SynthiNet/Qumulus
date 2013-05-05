@@ -12,25 +12,23 @@
 QUML_BEGIN_NAMESPACE_UK
 
 void Class::addNestedClassifier(Classifier* c) {
-    NYI();
     mNestedClassifiers.append(c);
-    addElement(std::move(c));
+    addOwnedMember(c);
 }
 
 void Class::removeNestedClassifier(Classifier* c) {
-    (void)c;
-    NYI();
+    mNestedClassifiers.removeAll(c);
+    removeOwnedMember(c);
 }
 
 void Class::addOperation(Operation* c) {
-    NYI();
     mOwnedOperations.append(c);
-    addElement(c);
+    addFeature(c);
 }
 
 void Class::removeOperation(Operation* c) {
-    (void)c;
-    NYI();
+    mOwnedOperations.append(c);
+    removeFeature(c);
 }
 
 
