@@ -10,7 +10,7 @@ QUML_BEGIN_NAMESPACE_UK
 
 Enumeration::Enumeration() {}
 
-Enumeration::Enumeration(QString name, Namespace* p = 0) :
+Enumeration::Enumeration(QString name, Namespace* p) :
         DataType(name, p) {
 
 }
@@ -21,7 +21,7 @@ void Enumeration::addLiteral(EnumerationLiteral* l) {
 }
 
 void Enumeration::removeLiteral(EnumerationLiteral* l) {
-    mOwnedLiterals.remove(l);
+    mOwnedLiterals.removeAll(l);
     removeOwnedMember(l);
 }
 
