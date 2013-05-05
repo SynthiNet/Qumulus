@@ -9,14 +9,15 @@
 
 #include "internal_base.h"
 
-#include "Element.h"
+#include "PackageableElement.h"
+#include "TypedElement.h"
 
 #include <Lib/Core/Optional.h>
 #include <Lib/Core/Unlimited.h>
 
 QUML_BEGIN_NAMESPACE_UK
 
-class ValueSpecification : public virtual Element {
+class ValueSpecification : public PackageableElement, public TypedElement {
 public:
     ValueSpecification() = default;
 
