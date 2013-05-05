@@ -10,19 +10,33 @@
 
 QUML_BEGIN_NAMESPACE_UK
 
-bool MultiplicityElement::isMultivalued() const { 
-    NYI(); 
-    return false; 
+MultiplicityElement::MultiplicityElement() {
+
 }
 
-bool MultiplicityElement::includesCardinatity(unsigned i) const { 
-    NYI(); 
-    return false; 
+MultiplicityElement::MultiplicityElement(QuLC::Unlimited u) :
+        mLower(QuLC::unltd(u) ? nullptr : u),
+        mUpper(u) {
+
+}
+MultiplicityElement::MultiplicityElement(unsigned l, QuLC::Unlimited u) : 
+        mLower(l),
+        mUpper(u) {
+
+}
+
+
+bool MultiplicityElement::isMultivalued() const { 
+    return mUpper && *mUpper > 1; 
+}
+
+bool MultiplicityElement::includesCardinality(unsigned i) const { 
+    return mLower && mUpper && *mLower <= i && i <= *mUpper;
 }
 
 bool MultiplicityElement::includedMultiplicity(MultiplicityElement* m) const {
-    NYI();
-    return false;
+    return mLower && mUpper && m->mLower && m->mUpper &&
+            *mLower <= *m->mLower && *m->mUpper <= *mUpper;
 }
 
 QUML_END_NAMESPACE_UK

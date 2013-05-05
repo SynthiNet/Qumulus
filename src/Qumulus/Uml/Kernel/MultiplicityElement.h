@@ -18,8 +18,12 @@ QUML_BEGIN_NAMESPACE_UK
 
 class MultiplicityElement : public virtual Element {
 public:
+    MultiplicityElement();
+    MultiplicityElement(QuLC::Unlimited u);
+    MultiplicityElement(unsigned l, QuLC::Unlimited u);
+
     bool isMultivalued() const;
-    bool includesCardinatity(unsigned i) const;
+    bool includesCardinality(unsigned i) const;
     bool includedMultiplicity(MultiplicityElement* m) const;
 
     QuLC::Optional<unsigned> lowerBound() const {
