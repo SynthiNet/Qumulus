@@ -37,8 +37,6 @@ public:
         return mSuperClasses;
     }
 
-    QSet<Classifier*> general() const override;
-
     void addSuperClass(Class* c);
     void removeSuperClass(Class* c);
 

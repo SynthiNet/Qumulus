@@ -38,4 +38,13 @@ void Classifier::removeFeature(Feature* f) {
     removeOwnedMember(f);
 }
 
+void Classifier::addGeneralization(Classifier* c) {
+    mGeneralizations.insert(c);
+}
+
+void Classifier::removeGeneralization(Classifier* c) {
+    mGeneralizations.remove(c);
+}
+
+
 QUML_END_NAMESPACE_UK

@@ -49,7 +49,12 @@ public:
     void addFeature(Feature* p);
     void removeFeature(Feature* f);
 
-    virtual QSet<Classifier*> general() const = 0;
+    const QSet<Classifier*>& general() const {
+        return mGeneralizations;
+    }
+
+    void addGeneralization(Classifier* c);
+    void removeGeneralization(Classifier* c);
 
     QUML_CLONABLE_ABSTRACT(Classifier);
 
@@ -58,6 +63,7 @@ private:
     bool mFinal = false;
     QList<Property*> mAttributes;
     QSet<Feature*> mFeatures;
+    QSet<Classifier*> mGeneralizations;
 
 };
 

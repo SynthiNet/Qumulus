@@ -31,17 +31,14 @@ void Class::removeOperation(Operation* c) {
     removeFeature(c);
 }
 
-
-QSet<Classifier*> Class::general() const {
-    return QuLC::mapto<Classifier*>(mSuperClasses);
-}
-
 void Class::addSuperClass(Class* c) {
     mSuperClasses.insert(c);
+    addGeneralization(c);
 }
 
 void Class::removeSuperClass(Class* c) {
     mSuperClasses.remove(c);
+    removeGeneralization(c);
 }
 
 
