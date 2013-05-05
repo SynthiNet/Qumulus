@@ -21,10 +21,16 @@ class Parameter :
         public virtual MultiplicityElement, 
         public virtual TypedElement{
 public:
+    Parameter(Operation* o = 0);
 
     QuLC::Optional<QString> defaultValue() const { return mDefaultValue; }
+    void setDefaultValue(QuLC::Optional<QString> s) { mDefaultValue = s; }
+
     ParameterDirectionKind direction() const { return mDirection; }
+    void setDirection(ParameterDirectionKind d) { mDirection = d; }
+
     Operation* operation() const { return mOperation; }
+    void setOperation(Operation* o);
 
     QUML_CLONABLE(Parameter);
 private:
