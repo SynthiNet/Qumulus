@@ -20,10 +20,11 @@ class Operation : public BehavioralFeature {
 public:
     Operation(Class* c = 0);
 
-    // Parameter* returnResult() const;
+    Parameter* returnResult() const;
+    Type* type() const;
 
-    // bool isQuery() const { return mQuery; }
-    // void setQuery(bool b) { mQuery = b; }
+    bool isQuery() const { return mQuery; }
+    void setQuery(bool b) { mQuery = b; }
 
     Class* getClass() const { return mClass; }
     void setClass(Class* c) { mClass = c; }
@@ -31,8 +32,8 @@ public:
     QUML_CLONABLE(Operation);
 private:
     Class* mClass;
-    // QSet<Operation*> mRedefinedOperations;
-    // bool mQuery;
+    QSet<Operation*> mRedefinedOperations;
+    bool mQuery;
 
 };
 
