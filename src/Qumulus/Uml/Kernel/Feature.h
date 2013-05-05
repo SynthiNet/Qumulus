@@ -25,6 +25,9 @@ public:
     bool isStatic() const { return mStatic; }
     void setStatic(bool s) { mStatic = s; }
 
+    Classifier* featuringClassifier() const { return mFeaturingClassifier; }
+    void setFeaturingClassifier(Classifier* c) { mFeaturingClassifier = c; }
+
     QUML_CLONABLE_ABSTRACT(Feature);
 private:
     Classifier* mFeaturingClassifier;
