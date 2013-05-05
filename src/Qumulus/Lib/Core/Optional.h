@@ -111,6 +111,7 @@ public:
             static_cast<T*>(&mStorage)->~T();
 
         mInitialized = false;
+        return *this;
     }
 
     bool operator==(const Optional<T>& o) const {
