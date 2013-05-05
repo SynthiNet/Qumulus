@@ -15,7 +15,7 @@ QUML_BEGIN_NAMESPACE_UK
 
 class PrimtiveType : public DataType {
 public:
-    QUML_CLONABLE(PrimtiveType);
+    QUML_CLONABLE(PrimitiveType);
 };
 
 QUML_END_NAMESPACE_UK
