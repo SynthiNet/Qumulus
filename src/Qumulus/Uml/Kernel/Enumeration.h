@@ -16,10 +16,15 @@ QUML_BEGIN_NAMESPACE_UK
 
 class Enumeration : public DataType {
 public:
+    Enumeration();
+    Enumeration(QString name, Namespace* p = 0);
 
     const QList<EnumerationLiteral*>& ownedLiterals() const { 
         return mOwnedLiterals;
     }
+
+    void addLiteral(EnumerationLiteral* l);
+    void removeLiteral(EnumerationLiteral* l);
 
     QUML_CLONABLE(Enumeration);
 private:

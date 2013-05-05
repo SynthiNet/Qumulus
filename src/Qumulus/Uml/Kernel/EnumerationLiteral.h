@@ -17,7 +17,8 @@ class Enumeration;
 
 class EnumerationLiteral : public NamedElement {
 public:
-    EnumerationLiteral(Enumeration* o = nullptr);
+    EnumerationLiteral();
+    EnumerationLiteral(QString name, Enumeration* o = nullptr);
 
     Enumeration* enumeration() const { return mEnumeration; }
     void setEnumeration(Enumeration* e) { mEnumeration = e; }

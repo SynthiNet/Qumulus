@@ -8,7 +8,10 @@
 
 QUML_BEGIN_NAMESPACE_UK
 
-EnumerationLiteral::EnumerationLiteral(Enumeration* o) : 
+
+EnumerationLiteral::EnumerationLiteral() {}
+EnumerationLiteral::EnumerationLiteral(QString name, Enumeration* o) :
+        NamedElement(name),
         mEnumeration(o) {
 
 }
