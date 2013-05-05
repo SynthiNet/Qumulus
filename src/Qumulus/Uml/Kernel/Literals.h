@@ -21,7 +21,7 @@ public:
         return mValue;
     }
 
-    void setValue(QuLC::Optional<bool> v) { mValue = v; }
+    void setValue(bool v) { mValue = v; }
 private:
     bool mValue;
 };
@@ -34,7 +34,7 @@ public:
         return mValue;
     }
 
-    void setValue(QuLC::Optional<int> v) { mValue = v; }
+    void setValue(int v) { mValue = v; }
 private:
     int mValue;
 };
@@ -59,7 +59,7 @@ public:
         return mValue;
     }
 
-    void setValue(QuLC::Optional<double> v) { mValue = v; }
+    void setValue(double v) { mValue = v; }
 private:
     double mValue;
 };
@@ -72,7 +72,7 @@ public:
         return mValue;
     }
 
-    void setValue(QuLC::Optional<QString> v) { mValue = v; }
+    void setValue(QString v) { mValue = v; }
 private:
     QString mValue;
 };
@@ -85,7 +85,7 @@ public:
         return mValue;
     }
 
-    void setValue(QuLC::Optional<QuLC::Unlimited> v) { mValue = v; }
+    void setValue(QuLC::Unlimited v) { mValue = v; }
 private:
     QuLC::Unlimited mValue;
 };
