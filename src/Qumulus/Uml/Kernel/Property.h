@@ -26,9 +26,6 @@ public:
     Class* getClass() const { return mClass; }
     void setClass(Class* c) { mClass = c; }
 
-    bool readOnly() const override { return mReadOnly; }
-    void setReadOnly(bool r) { mReadOnly = r; }
-
     bool composite() const { NYI(); return false; }
 
     // bool derived() const { NYI(); return false; }
@@ -50,7 +47,6 @@ public:
 private:
     // Type* mOwningType;
     Class* mClass;
-    bool mReadOnly;
     Association* mAssociation;
 };
 
