@@ -54,7 +54,10 @@ Q_MACEXTRAS_EXPORT void qRegisterDraggedTypes(const QStringList &types);
 
 // Duplicate of QMacPasteboardMime in the Cocoa Platform Plugin. Keep in sync!
 class Q_MACEXTRAS_EXPORT QMacPasteboardMime {
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-private-field"
     char type;
+#pragma GCC diagnostic pop
 public:
     enum QMacPasteboardMimeType { MIME_DND=0x01,
         MIME_CLIP=0x02,
