@@ -72,6 +72,13 @@ MainWindow::MainWindow() :
     // Create the main menus.
     createMenus();
 
+    mCancelAction = new QAction(this);
+    mCancelAction->setShortcuts({QKeySequence(tr("Esc"))});
+    addAction(mCancelAction);
+
+    connect(mCancelAction, &QAction::triggered, 
+            [&]{mEditorView->unsetCursor();});
+
     connect(mStatusBar->slider(), &ZoomSlider::zoomChanged,
             mEditorView, &EditorView::zoom);
 }
