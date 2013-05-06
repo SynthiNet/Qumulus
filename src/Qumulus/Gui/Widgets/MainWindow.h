@@ -95,6 +95,9 @@ private:
     // Help Menu
     QAction* mAboutAction;
 
+    // Generic cancel action
+    QAction* mCancelAction;
+
     QHash<QString, QCursor> mCursors;
 };
 
