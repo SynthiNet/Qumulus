@@ -4,7 +4,6 @@
  * Author: Frank Erens
  */
 
-#include <Lib/Core/Nyi.h>
 #include <Gui/Core/QumulusApplication.h>
 #include <Gui/Widgets/MainWindow.h>
 
