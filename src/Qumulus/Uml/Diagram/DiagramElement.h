@@ -35,10 +35,14 @@ public:
 
     DiagramElement* owningElement() const;
 
+    bool isIcon() const { return mIcon; }
+    void setIcon(bool b) { mIcon = b; }
+
     QUML_CLONABLE_ABSTRACT(DiagramElement);
 private:
     QuUK::Element* mModelElement;
     Style* mLocalStyle;
+    bool mIcon;
 };
 
 QUML_END_NAMESPACE_UD
