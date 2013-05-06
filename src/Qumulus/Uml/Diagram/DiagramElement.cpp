@@ -8,7 +8,7 @@
 
 QUML_BEGIN_NAMESPACE_UD
 
-DiagramElement::DiagramElement(QuUK::Element* m, DiagramElement* p = 0) : 
+DiagramElement::DiagramElement(QuUK::Element* m, DiagramElement* p) : 
         QGraphicsItemGroup(p), 
         mModelElement(m),
         mLocalStyle(0) {

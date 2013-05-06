@@ -9,6 +9,8 @@
 
 #include "internal_base.h"
 
+#include "Style.h"
+
 #include <QtWidgets/QGraphicsItemGroup>
 #include <Lib/Core/Clonable.h>
 
@@ -20,16 +22,14 @@ QUML_END_NAMESPACE_UK
 
 QUML_BEGIN_NAMESPACE_UD
 
-class Style;
-
 class DiagramElement : public QGraphicsItemGroup {
 public:
     DiagramElement(QuUK::Element* m, DiagramElement* p = 0);
 
     QuUK::Element* modelElement() { return mModelElement; }
 
-    Style* localStyle() const { return mStyle; }
-    void setLocalStyle(Style* s) { mStyle = s; }
+    Style* localStyle() const { return mLocalStyle; }
+    void setLocalStyle(Style* s) { mLocalStyle = s; }
 
     Style* sharedStyle() const;
 
