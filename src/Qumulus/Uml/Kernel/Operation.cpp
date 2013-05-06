@@ -19,6 +19,7 @@ Parameter* Operation::returnResult() const {
         if(p->direction() == ParameterDirectionKind::Return)
             return p;
     }
+    return nullptr;
 }
 
 Type* Operation::type() const {
