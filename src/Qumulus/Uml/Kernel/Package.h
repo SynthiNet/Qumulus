@@ -45,6 +45,8 @@ public:
     void addOwnedType(Type* t);
     void removeOwnedType(Type* t);
 
+    void updateDiagramElement() override;
+
     QUML_CLONABLE(Package)
 private:
     void addPackagedElement(PackageableElement* e);

@@ -29,7 +29,7 @@ public:
         return mOwnedOperations;
     }
 
-    QUML_CLONABLE(DataType);
+    QUML_CLONABLE_ABSTRACT(DataType);
 
 private:
     QList<Property*> mOwnedAttributes;

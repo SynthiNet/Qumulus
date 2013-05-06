@@ -42,7 +42,7 @@ public:
         mUpper = u;
     }
 
-    QUML_CLONABLE(MultiplicityElement)
+    QUML_CLONABLE_ABSTRACT(MultiplicityElement)
 private:
     QuLC::Optional<unsigned> mLower;
     QuLC::Optional<QuLC::Unlimited> mUpper;

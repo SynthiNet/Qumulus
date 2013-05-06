@@ -29,6 +29,8 @@ public:
         return mAnnotatedElements;
     }
     
+    void updateDiagramElement() override;
+
     QUML_CLONABLE(Comment);
 private:
     QString mBody;

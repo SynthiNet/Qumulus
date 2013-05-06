@@ -29,6 +29,8 @@ public:
     Class* getClass() const { return mClass; }
     void setClass(Class* c) { mClass = c; }
 
+    void updateDiagramElement() override;
+
     QUML_CLONABLE(Operation);
 private:
     Class* mClass;

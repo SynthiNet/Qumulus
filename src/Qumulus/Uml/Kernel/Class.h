@@ -42,6 +42,8 @@ public:
     void addSuperClass(Class* c);
     void removeSuperClass(Class* c);
 
+    void updateDiagramElement() override;
+
     QUML_CLONABLE(Class);
 private:
     QList<Classifier*> mNestedClassifiers;

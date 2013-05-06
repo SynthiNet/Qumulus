@@ -32,6 +32,8 @@ public:
     Operation* operation() const { return mOperation; }
     void setOperation(Operation* o);
 
+    void updateDiagramElement() override;
+
     QUML_CLONABLE(Parameter);
 private:
     QuLC::Optional<QString> mDefaultValue;

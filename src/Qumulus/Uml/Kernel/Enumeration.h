@@ -26,6 +26,8 @@ public:
     void addLiteral(EnumerationLiteral* l);
     void removeLiteral(EnumerationLiteral* l);
 
+    void updateDiagramElement() override;
+
     QUML_CLONABLE(Enumeration);
 private:
     QList<EnumerationLiteral*> mOwnedLiterals;

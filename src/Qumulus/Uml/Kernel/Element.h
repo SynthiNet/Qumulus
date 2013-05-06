@@ -13,6 +13,8 @@
 #include <Lib/Core/Nyi.h>
 #include <Lib/Core/Functional.h>
 
+#include <Uml/Diagram/DiagramElement.h>
+
 #include <QtCore/QSet>
 #include <QtCore/QList>
 #include <QtCore/QString>
@@ -40,13 +42,19 @@ public:
         return mOwnedComments;
     }
 
+    virtual QuUD::DiagramElement* diagramElement() const {
+        return mDiagramElement; 
+    }
+
+    virtual void updateDiagramElement() = 0;
+
     /**
      * @note This function takes over ownership.
      */
     void addComment(Comment* c);
     void removeComment(Comment* c);
 
-    QUML_CLONABLE(Element)
+    QUML_CLONABLE_ABSTRACT(Element)
 protected:
     /**
      * @note This function takes over ownership.
@@ -58,6 +66,7 @@ protected:
 private:
     QSet<Element*> mOwnedElements;
     QSet<Comment*> mOwnedComments;
+    QuUD::DiagramElement* mDiagramElement;
 };
 
 QUML_END_NAMESPACE_UK

@@ -47,6 +47,8 @@ public:
     QSet<Property*> redefinedProperties() const;
     QSet<Property*> subsettedProperties() const;
 
+    void updateDiagramElement() override;
+
     QUML_CLONABLE(Property);
 private:
     AggregationKind mAggregation;
