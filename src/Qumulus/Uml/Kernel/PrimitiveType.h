@@ -13,8 +13,10 @@
 
 QUML_BEGIN_NAMESPACE_UK
 
-class PrimtiveType : public DataType {
+class PrimitiveType : public DataType {
 public:
+    void updateDiagramElement() override;
+
     QUML_CLONABLE(PrimitiveType);
 };
 
