@@ -27,7 +27,7 @@ public:
     DiagramElement(QuUK::Element* m = 0, DiagramElement* p = 0);
     virtual ~DiagramElement();
 
-    QuUK::Element* modelElement() { return mModelElement; }
+    virtual QuUK::Element* modelElement() { return mModelElement; }
 
     Style* localStyle() const { return mLocalStyle; }
     void setLocalStyle(Style* s) { mLocalStyle = s; }
