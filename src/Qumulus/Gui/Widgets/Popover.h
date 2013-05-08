@@ -16,13 +16,21 @@ class Popover : public QWidget {
     Q_OBJECT
 
 public:
-    Popover(QWidget* parent = 0, QPoint pos = QPoint(0, 0));
+    enum Direction {
+        Top,
+        Right,
+        Bottom,
+        Left
+    };
+
+public:
+    Popover(QWidget* parent = 0, QPoint pos = QPoint(0, 0), Qt::Orientation orientation = Qt::Horizontal);
 
 protected:
     void resizeEvent(QResizeEvent* event) override;
     
 private:
-    void generateMask();
+    void generateMask(Direction direction, int offset);
 
 private:
     QBitmap* mMask;
