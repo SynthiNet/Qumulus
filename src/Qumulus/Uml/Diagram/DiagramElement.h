@@ -35,6 +35,7 @@ public:
     Style* sharedStyle() const;
 
     DiagramElement* owningElement() const;
+    void setOwningElement(DiagramElement* e);
 
     bool isIcon() const { return mIcon; }
     void setIcon(bool b) { mIcon = b; }

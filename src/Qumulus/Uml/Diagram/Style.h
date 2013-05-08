@@ -15,6 +15,7 @@
 QUML_BEGIN_NAMESPACE_UD
 
 class Style : public QHash<QString, QString> {
+public:
     QString fontName() const { return (*this)["fontName"]; }
     void setFontName(QString s) { (*this)["fontName"] = s; }
 

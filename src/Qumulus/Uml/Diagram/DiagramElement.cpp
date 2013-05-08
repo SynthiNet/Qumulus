@@ -24,6 +24,10 @@ DiagramElement* DiagramElement::owningElement() const {
     return dynamic_cast<DiagramElement*>(parentItem());
 }
 
+void DiagramElement::setOwningElement(DiagramElement* e) {
+    setParentItem(e);
+}
+
 Style* DiagramElement::sharedStyle() const {
     if(mLocalStyle)
         return mLocalStyle;
