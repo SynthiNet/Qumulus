@@ -30,7 +30,7 @@ void EditorView::mousePressEvent(QMouseEvent* e) {
             delete mPopover;
             mPopover = nullptr;
         } else {
-            mPopover = new Popover(this, e->globalPos());
+            mPopover = new Popover(this, e->globalPos(), Qt::Horizontal);
             mPopover->show();
         }
     }
