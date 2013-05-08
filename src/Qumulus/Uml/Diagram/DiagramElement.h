@@ -25,6 +25,7 @@ QUML_BEGIN_NAMESPACE_UD
 class DiagramElement : public QGraphicsItemGroup {
 public:
     DiagramElement(QuUK::Element* m = 0, DiagramElement* p = 0);
+    virtual ~DiagramElement();
 
     QuUK::Element* modelElement() { return mModelElement; }
 

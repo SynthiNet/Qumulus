@@ -16,6 +16,10 @@ DiagramElement::DiagramElement(QuUK::Element* m, DiagramElement* p) :
 
 }
 
+DiagramElement::~DiagramElement() {
+    delete mLocalStyle;
+}
+
 DiagramElement* DiagramElement::owningElement() const {
     return dynamic_cast<DiagramElement*>(parentItem());
 }
