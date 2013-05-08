@@ -16,7 +16,17 @@ QUML_BEGIN_NAMESPACE_UD
 class Edge : public DiagramElement {
 public:
     Edge(QuUK::Element* e = 0, DiagramElement* p = 0);
+
+    QuUK::Element* source() const { return mSource; }
+    void setSource(QuUK::Element* e) { mSource = e; } 
+
+    QuUK::Element* target() const { return mTarget; }
+    void setTarget(QuUK::Element* e) { mTarget = e; } 
 private:
+    QuUK::Element* mSource;
+    QuUK::Element* mTarget;
+
+    QList<QPoint> mWaypoints;
 };
 
 QUML_END_NAMESPACE_UD
