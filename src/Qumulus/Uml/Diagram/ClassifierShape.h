@@ -17,8 +17,8 @@ class ClassifierShape : public CompartmentableShape {
 public:
     ClassifierShape(QuUK::Element* e = 0, DiagramElement* p = 0);
 
-    void indentForVisibility() const { return mIndentForVisibilty; }
-    void setIndentForVisibility(bool b) { mIndentForVisibilty = c; }
+    bool indentForVisibility() const { return mIndentForVisibilty; }
+    void setIndentForVisibility(bool b) { mIndentForVisibilty = b; }
 private:
     bool mIndentForVisibilty = false;
 };
