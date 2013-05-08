@@ -13,7 +13,7 @@
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QPushButton>
 
-#include <QtGui/QApplication>
+#include <QtWidgets/QApplication>
 #include <QtWidgets/QDesktopWidget>
 #include <QtCore/QDebug>
 
