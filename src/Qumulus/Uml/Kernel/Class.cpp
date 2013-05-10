@@ -51,5 +51,8 @@ void Class::removeSuperClass(Class* c) {
     removeGeneralization(c);
 }
 
+void Class::updateDiagramElement() {
+
+}
 
 QUML_END_NAMESPACE_UK

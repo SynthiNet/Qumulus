@@ -26,4 +26,8 @@ Type* Operation::type() const {
     return returnResult()->type();
 }
 
+void Operation::updateDiagramElement() {
+
+}
+
 QUML_END_NAMESPACE_UK

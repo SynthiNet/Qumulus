@@ -47,5 +47,8 @@ void Package::removePackagedElement(PackageableElement* e) {
     addOwnedMember(e);
 }
 
+void Package::updateDiagramElement() {
+
+}
 
 QUML_END_NAMESPACE_UK

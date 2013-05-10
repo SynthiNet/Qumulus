@@ -15,6 +15,9 @@ QUML_BEGIN_NAMESPACE_UK
 
 class PrimitiveType : public DataType {
 public:
+    PrimitiveType() {}
+    PrimitiveType(QString name, Namespace* p = 0) : DataType(name, p) {}
+
     void updateDiagramElement() override;
 
     QUML_CLONABLE(PrimitiveType);

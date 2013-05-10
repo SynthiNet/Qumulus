@@ -25,4 +25,8 @@ void Enumeration::removeLiteral(EnumerationLiteral* l) {
     removeOwnedMember(l);
 }
 
+void Enumeration::updateDiagramElement() {
+
+}
+
 QUML_END_NAMESPACE_UK

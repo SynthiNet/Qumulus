@@ -14,5 +14,9 @@ Comment::Comment(const QString& body, QSet<Element*> annotated) :
 
 }
 
+void Comment::updateDiagramElement() {
+
+}
+
 QUML_END_NAMESPACE_UK
 

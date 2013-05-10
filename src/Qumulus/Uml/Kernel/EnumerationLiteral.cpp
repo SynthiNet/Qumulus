@@ -16,5 +16,8 @@ EnumerationLiteral::EnumerationLiteral(QString name, Enumeration* o) :
 
 }
 
+void EnumerationLiteral::updateDiagramElement() {
+
+}
 
 QUML_END_NAMESPACE_UK

@@ -38,6 +38,9 @@ QSet<Property*> Property::subsettedProperties() const {
     return QSet<Property*>();
 }
 
+void Property::updateDiagramElement() {
+
+}
 
 QUML_END_NAMESPACE_UK
 
