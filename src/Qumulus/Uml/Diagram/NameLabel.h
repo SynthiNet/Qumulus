@@ -7,8 +7,19 @@
 #ifndef UML_DIAGRAM_NAMELABEL_H_
 #define UML_DIAGRAM_NAMELABEL_H_
 
+#include "internal_base.h"
 
-// Code here
+#include "Label.h"
+
+QUML_BEGIN_NAMESPACE_UD
+
+class NameLabel : public Label {
+public:
+    NameLabel(QuUK::Element* e = 0, DiagramElement* p = 0);
+    NameLabel(const QString& t, QuUK::Element* e = 0, DiagramElement* p = 0);
+};
+
+QUML_END_NAMESPACE_UD
 
 #endif /* UML_DIAGRAM_NAMELABEL_H_ */
 

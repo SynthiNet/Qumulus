@@ -13,10 +13,11 @@
 
 QUML_BEGIN_NAMESPACE_UD
 
-class KeywordLabel : public Label {
+class MultiplicityLabel : public Label {
 public:
-    KeywordLabel(QuUK::Element* e = 0, DiagramElement* p = 0);
-    KeywordLabel(const QString& t, QuUK::Element* e = 0, DiagramElement* p = 0);
+    MultiplicityLabel(QuUK::Element* e = 0, DiagramElement* p = 0);
+    MultiplicityLabel(const QString& t, QuUK::Element* e = 0, 
+            DiagramElement* p = 0);
 };
 
 QUML_END_NAMESPACE_UD
