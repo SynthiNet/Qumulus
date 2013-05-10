@@ -17,12 +17,15 @@ QUML_BEGIN_NAMESPACE_UD
 class Diagram : public Shape {
 public:
     Diagram(QString name = "", double resolution = 300);
+    Diagram(const Diagram&);
 
     const QString& name() const { return mName; }
     void setName(const QString& n) { mName = n; }
 
     double resolution() const { return mResolution; }
     void setResolution(double r) { mResolution = r; }
+
+    QUML_CLONABLE(Diagram);
 private:
     QString mName;
     double mResolution;

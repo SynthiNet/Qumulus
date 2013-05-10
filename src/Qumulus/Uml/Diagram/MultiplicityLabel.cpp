@@ -19,5 +19,9 @@ MultiplicityLabel::MultiplicityLabel(const QString& t, QuUK::Element* e,
 
 }
 
+MultiplicityLabel::MultiplicityLabel(const MultiplicityLabel& l) :
+        Label(l) {
+}
+
 QUML_END_NAMESPACE_UD
 

@@ -18,6 +18,9 @@ public:
     AssociationEndLabel(QuUK::Element* e = 0, DiagramElement* p = 0);
     AssociationEndLabel(const QString& t, QuUK::Element* e = 0, 
             DiagramElement* p = 0);
+    AssociationEndLabel(const AssociationEndLabel&);
+
+    QUML_CLONABLE(AssociationEndLabel);
 };
 
 QUML_END_NAMESPACE_UD

@@ -17,6 +17,9 @@ class KeywordLabel : public Label {
 public:
     KeywordLabel(QuUK::Element* e = 0, DiagramElement* p = 0);
     KeywordLabel(const QString& t, QuUK::Element* e = 0, DiagramElement* p = 0);
+    KeywordLabel(const KeywordLabel&);
+
+    QUML_CLONABLE(KeywordLabel);
 };
 
 QUML_END_NAMESPACE_UD

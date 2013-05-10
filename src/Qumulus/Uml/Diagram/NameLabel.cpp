@@ -19,5 +19,10 @@ NameLabel::NameLabel(const QString& t, QuUK::Element* e,
 
 }
 
+NameLabel::NameLabel(const NameLabel& l) :
+        Label(l) {
+
+}
+
 QUML_END_NAMESPACE_UD
 

@@ -18,6 +18,10 @@ public:
     MultiplicityLabel(QuUK::Element* e = 0, DiagramElement* p = 0);
     MultiplicityLabel(const QString& t, QuUK::Element* e = 0, 
             DiagramElement* p = 0);
+
+    MultiplicityLabel(const MultiplicityLabel&);
+
+    QUML_CLONABLE(MultiplicityLabel);
 };
 
 QUML_END_NAMESPACE_UD

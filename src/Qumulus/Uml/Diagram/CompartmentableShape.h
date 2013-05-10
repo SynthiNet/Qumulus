@@ -18,11 +18,14 @@ QUML_BEGIN_NAMESPACE_UD
 class CompartmentableShape : public Shape {
 public:
     CompartmentableShape(QuUK::Element* e = 0, DiagramElement* p = 0);
+    CompartmentableShape(const CompartmentableShape&);
 
     Compartment* compartment(unsigned i);
+    const QList<Compartment*> compartments() const { return mCompartments; }
 
     void addCompartment(Compartment* c);
 
+    QUML_CLONABLE(CompartmentableShape);
 private:
     QList<Compartment*> mCompartments;
 };

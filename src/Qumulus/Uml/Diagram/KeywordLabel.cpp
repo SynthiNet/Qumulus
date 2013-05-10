@@ -20,4 +20,8 @@ KeywordLabel::KeywordLabel(const QString& t, QuUK::Element* e,
 
 }
 
+KeywordLabel::KeywordLabel(const KeywordLabel& l) :
+        Label(l) {
+
+}
 QUML_END_NAMESPACE_UD

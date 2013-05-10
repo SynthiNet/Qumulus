@@ -18,5 +18,9 @@ Diagram::Diagram(QString name, double resolution) :
     s->setFontSize(10.0);
 }
 
+Diagram::Diagram(const Diagram& d) :
+        Shape(d) {
+
+}
 
 QUML_END_NAMESPACE_UD

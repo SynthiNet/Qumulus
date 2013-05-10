@@ -13,5 +13,9 @@ AssociationShape::AssociationShape(QuUK::Element* e, DiagramElement* p) :
     
 }
 
+AssociationShape::AssociationShape(const AssociationShape& s) :
+        Shape(s) {
+
+}
 
 QUML_END_NAMESPACE_UD

@@ -16,12 +16,15 @@ QUML_BEGIN_NAMESPACE_UD
 class Edge : public DiagramElement {
 public:
     Edge(QuUK::Element* e = 0, DiagramElement* p = 0);
+    Edge(const Edge&);
 
     QuUK::Element* source() const { return mSource; }
     void setSource(QuUK::Element* e) { mSource = e; } 
 
     QuUK::Element* target() const { return mTarget; }
     void setTarget(QuUK::Element* e) { mTarget = e; } 
+
+    QUML_CLONABLE(Edge);
 private:
     QuUK::Element* mSource;
     QuUK::Element* mTarget;

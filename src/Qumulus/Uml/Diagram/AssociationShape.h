@@ -17,8 +17,12 @@ QUML_BEGIN_NAMESPACE_UD
 class AssociationShape : public Shape {
 public:
     AssociationShape(QuUK::Element* e = 0, DiagramElement* p = 0);
+    AssociationShape(const AssociationShape&);
+
     AssociationShapeKind kind() const { return mKind; }
     void setKind(AssociationShapeKind k) { mKind = k; }
+
+    QUML_CLONABLE(AssociationShape);
 private:
     AssociationShapeKind mKind;
 };

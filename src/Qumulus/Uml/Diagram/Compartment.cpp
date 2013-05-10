@@ -14,6 +14,11 @@ Compartment::Compartment(CompartmentableShape* p) :
     p->addCompartment(this);
 }
 
+Compartment::Compartment(const Compartment& c) :
+        Shape(c) {
+
+}
+
 CompartmentableShape* Compartment::compartmentableShape() const {
     return static_cast<CompartmentableShape*>(owningElement());
 }

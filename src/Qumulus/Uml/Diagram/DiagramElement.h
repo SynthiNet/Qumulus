@@ -25,6 +25,8 @@ QUML_BEGIN_NAMESPACE_UD
 class DiagramElement : public QGraphicsItemGroup {
 public:
     DiagramElement(QuUK::Element* m = 0, DiagramElement* p = 0);
+    DiagramElement(const DiagramElement&);
+
     virtual ~DiagramElement();
 
     virtual QuUK::Element* modelElement() const { return mModelElement; }
@@ -41,19 +43,11 @@ public:
     bool isIcon() const { return mIcon; }
     void setIcon(bool b) { mIcon = b; }
 
-    bool isVisible() const { return mVisible; }
-
-    /**
-     * @note This only takes effect on top-level elements.
-     */
-    void setVisible(bool v) { mVisible = v; }
-
     QUML_CLONABLE_ABSTRACT(DiagramElement);
 private:
     QuUK::Element* mModelElement;
     Style* mLocalStyle;
     bool mIcon;
-    bool mVisible;
 };
 
 QUML_END_NAMESPACE_UD

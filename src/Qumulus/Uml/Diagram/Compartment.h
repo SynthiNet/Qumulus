@@ -18,9 +18,12 @@ class CompartmentableShape;
 class Compartment : public Shape {
 public:
     Compartment(CompartmentableShape* p = 0);
+    Compartment(const Compartment& o);
 
     CompartmentableShape* compartmentableShape() const;
     void setCompartimentableShape(CompartmentableShape* s);
+
+    QUML_CLONABLE(Compartment);
 };
 
 QUML_END_NAMESPACE_UD

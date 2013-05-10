@@ -13,5 +13,9 @@ ClassifierShape::ClassifierShape(QuUK::Element* e, DiagramElement* p) :
 
 }
 
+ClassifierShape::ClassifierShape(const ClassifierShape& s) :
+        CompartmentableShape(s) {
+
+}
 
 QUML_END_NAMESPACE_UD

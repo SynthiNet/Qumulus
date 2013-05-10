@@ -16,6 +16,7 @@ QUML_BEGIN_NAMESPACE_UD
 class Shape : public DiagramElement {
 public:
     Shape(QuUK::Element* e = 0, DiagramElement* p = 0);
+    Shape(const Shape&);
 private:
 };
 

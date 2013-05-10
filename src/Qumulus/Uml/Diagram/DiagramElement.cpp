@@ -6,15 +6,21 @@
 
 #include "DiagramElement.h"
 
+#include <Lib/Core/Nyi.h>
+
 QUML_BEGIN_NAMESPACE_UD
 
 DiagramElement::DiagramElement(QuUK::Element* m, DiagramElement* p) : 
         QGraphicsItemGroup(p), 
         mModelElement(m),
         mLocalStyle(0),
-        mIcon(false),
-        mVisible(false) {
+        mIcon(false) {
+    setVisible(false);
+}
 
+DiagramElement::DiagramElement(const DiagramElement& d) {
+    NYI();
+    (void)d;
 }
 
 DiagramElement::~DiagramElement() {

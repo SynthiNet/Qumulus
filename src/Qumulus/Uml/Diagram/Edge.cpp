@@ -12,4 +12,8 @@ Edge::Edge(QuUK::Element* e, DiagramElement* p) :
         DiagramElement(e, p) {
 }
 
+Edge::Edge(const Edge& e) :
+        DiagramElement(e) {
+
+}
 QUML_END_NAMESPACE_UD

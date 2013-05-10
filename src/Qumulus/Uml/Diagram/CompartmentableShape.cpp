@@ -14,6 +14,11 @@ CompartmentableShape::CompartmentableShape(QuUK::Element* e,
 
 }
 
+CompartmentableShape::CompartmentableShape(const CompartmentableShape& c) :
+        Shape(c) {
+
+}
+
 Compartment* CompartmentableShape::compartment(unsigned i) {
     return mCompartments[i];
 }

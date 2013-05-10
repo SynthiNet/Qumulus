@@ -17,6 +17,10 @@ class NameLabel : public Label {
 public:
     NameLabel(QuUK::Element* e = 0, DiagramElement* p = 0);
     NameLabel(const QString& t, QuUK::Element* e = 0, DiagramElement* p = 0);
+
+    NameLabel(const NameLabel& l);
+
+    QUML_CLONABLE(NameLabel);
 };
 
 QUML_END_NAMESPACE_UD

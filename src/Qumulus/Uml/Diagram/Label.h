@@ -17,9 +17,12 @@ class Label : public Shape {
 public:
     Label(QuUK::Element* e = 0, DiagramElement* p = 0);
     Label(const QString& t, QuUK::Element* e = 0, DiagramElement* p = 0);
+    Label(const Label&);
 
     const QString& text() const { return mText; }
     void setText(const QString& s) { mText = s; }
+
+    QUML_CLONABLE(Label);
 private:
     QString mText;
 };

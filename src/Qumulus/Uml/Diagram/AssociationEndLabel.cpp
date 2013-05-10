@@ -19,4 +19,8 @@ AssociationEndLabel::AssociationEndLabel(const QString& t, QuUK::Element* e,
 
 }
 
+AssociationEndLabel::AssociationEndLabel(const AssociationEndLabel& l) :
+        Label(l) {
+
+}
 QUML_END_NAMESPACE_UD
