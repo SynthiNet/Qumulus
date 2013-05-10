@@ -10,6 +10,12 @@
 
 QUML_BEGIN_NAMESPACE_UK
 
+QHash<QString, Element*> Element::mElementsById;
+
+Element::Element() {
+    mElementsById.insert(uniqueId(), this);
+}
+
 Element::Element(const Element& other) {
     for(auto& x : other.mOwnedElements) {
         mOwnedElements.insert(x->clone());
@@ -20,12 +26,15 @@ Element::Element(const Element& other) {
             mOwnedComments.insert(p);
         }
     }
+
+    mElementsById.insert(uniqueId(), this);
 }
 
 Element::~Element() {
     for(auto& x : mOwnedElements) {
         delete x;
     }
+    mElementsById.remove(uniqueId());
 }
 
 void Element::addComment(Comment* c) {
@@ -45,6 +54,21 @@ void Element::addElement(Element* other) {
 
 void Element::removeElement(Element* other) {
     mOwnedElements.remove(other);
+}
+
+QString Element::uniqueId() const {
+    return mUniqueId.toString();
+}
+
+void Element::setUniqueId(const QString& s) {
+    mElementsById.remove(uniqueId());
+    mUniqueId = s;
+    mElementsById.insert(s, this);
+}
+
+Element* Element::byId(const QString& s) {
+    auto it = mElementsById.find(s);
+    return it == mElementsById.end() ? nullptr : *it;
 }
 
 QUML_END_NAMESPACE_UK
