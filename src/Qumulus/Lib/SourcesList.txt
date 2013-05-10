@@ -2,6 +2,6 @@
 # the main source directory. DO NOT EDIT MANUALLY!
 
 SET ( QUMULUS_LIB_ALL_SRC 
- )
+Qumulus/Lib/Core/UniqueId.cpp  )
 SET ( QUMULUS_LIB_ALL_MM_SRC 
  )
