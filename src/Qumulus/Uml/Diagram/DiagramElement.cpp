@@ -12,7 +12,8 @@ DiagramElement::DiagramElement(QuUK::Element* m, DiagramElement* p) :
         QGraphicsItemGroup(p), 
         mModelElement(m),
         mLocalStyle(0),
-        mIcon(false) {
+        mIcon(false),
+        mVisible(false) {
 
 }
 
