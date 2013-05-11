@@ -12,6 +12,8 @@
 #include <QtCore/QHash>
 #include <QtCore/QString>
 
+#include <QtGui/QFont>
+
 QUML_BEGIN_NAMESPACE_UD
 
 class Style : public QHash<QString, QString> {
@@ -21,6 +23,8 @@ public:
 
     double fontSize() const { return (*this)["fontSize"].toDouble(); }
     void setFontSize(double d) { (*this)["fontSize"] = QString::number(d); }
+
+    QFont font() { return QFont(fontName(), fontSize()); }
 };
 
 QUML_END_NAMESPACE_UD
