@@ -33,4 +33,8 @@ void Shape::setHeight(double h) {
     resize(width(), h);
 }
 
+QSizeF Shape::optimalSize() const {
+    return mSizeHint.isValid() ? mSizeHint : minimumSize();
+}
+
 QUML_END_NAMESPACE_UD

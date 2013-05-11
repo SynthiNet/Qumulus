@@ -25,6 +25,7 @@ public:
 
     void addCompartment(Compartment* c);
 
+    using Shape::resize;
     void resize(double, double) override;
 
     QUML_CLONABLE(CompartmentableShape);

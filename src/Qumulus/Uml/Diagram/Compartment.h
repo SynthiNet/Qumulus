@@ -26,6 +26,8 @@ public:
     CompartmentableShape* compartmentableShape() const;
     void setCompartimentableShape(CompartmentableShape* s);
 
+    using Shape::resize;
+
     /**
      * @note: This should never be called directly. Use
      * CompartmentableShape::resize() instead.

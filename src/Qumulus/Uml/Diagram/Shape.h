@@ -34,8 +34,11 @@ public:
     QSizeF maximumSize() const { return mMaximumSize; }
     void setMaximumSize(QSizeF s) { mMaximumSize = s; }
 
+    QSizeF optimalSize() const;
+
 protected:
     void setSize(QSizeF s) { mSize = s; }
+    void setSizeHint(QSizeF s) { mSizeHint = s; }
 
 private:
     QSizeF mSize = QSizeF();

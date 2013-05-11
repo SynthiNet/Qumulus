@@ -11,12 +11,18 @@
 
 #include "Element.h"
 
+#include <Uml/Diagram/CommentShape.h>
+
 QUML_BEGIN_NAMESPACE_UK
 
+struct CommentGraphics;
+
 class Comment : public Element {
+    friend struct CommentGraphics;
 public:
     Comment(const QString& body = "", 
             QSet<Element*> annotated = {});
+    ~Comment();
 
     const QString& body() const { return mBody; }
     void setBody(const QString& b) { mBody = b; }
@@ -28,6 +34,8 @@ public:
     const QSet<Element*> annotatedElements() const { 
         return mAnnotatedElements;
     }
+
+    QuUD::CommentShape* diagramElement() const override;
     
     void updateDiagramElement(QuUD::Diagram*) override;
 
@@ -35,6 +43,8 @@ public:
 private:
     QString mBody;
     QSet<Element*> mAnnotatedElements;
+
+    CommentGraphics* mGraphics = nullptr;
 };
 
 QUML_END_NAMESPACE_UK

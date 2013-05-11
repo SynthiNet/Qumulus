@@ -16,7 +16,6 @@ Compartment::Compartment(CompartmentableShape* p) :
         mRectItem(new QGraphicsRectItem(this)) {
     p->addCompartment(this);
     addToGroup(mRectItem);
-    mRectItem->setRect(0, 0, 100, 40);
 }
 
 Compartment::Compartment(const Compartment& c) :

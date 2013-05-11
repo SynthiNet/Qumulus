@@ -9,6 +9,7 @@
 
 #include <Uml/Kernel/PrimitiveType.h>
 #include <Uml/Kernel/Enumeration.h>
+#include <Uml/Kernel/Comment.h>
 
 QUML_BEGIN_NAMESPACE_GW
 
@@ -31,12 +32,28 @@ EditorView::EditorView(QWidget* parent) : QGraphicsView(parent),
 
     // FIXME: this is temporary testing code!
     auto visibilityKind = new QuUK::Enumeration("VisibilityKind");
-    auto vkPublic = new QuUK::EnumerationLiteral("Public", visibilityKind);
-    auto vkProtected = new QuUK::EnumerationLiteral("Protected", visibilityKind);
-    auto vkPrivate = new QuUK::EnumerationLiteral("Private", visibilityKind);
+    new QuUK::EnumerationLiteral("Public", visibilityKind);
+    new QuUK::EnumerationLiteral("Protected", visibilityKind);
+    new QuUK::EnumerationLiteral("Private", visibilityKind);
     visibilityKind->updateDiagramElement(mDiagram);
+    visibilityKind->diagramElement()->setPos(-200, 50);
     visibilityKind->diagramElement()->setVisible(true);
     mDiagram->addToGroup(visibilityKind->diagramElement());
+
+    // FIXME: this is temporary testing code!
+    QSet<QuUK::Element*> tmpset;
+    tmpset.insert(visibilityKind); // for some reason not initlist constructible
+    auto comment = new QuUK::Comment(
+            "VisibilityKind is an enumeration type that defines literals to "
+            "determine the visibility of elements in a model.", 
+            tmpset);
+    comment->updateDiagramElement(mDiagram);
+    comment->diagramElement()->resize(200,0);
+    comment->updateDiagramElement(mDiagram);
+    comment->diagramElement()->resize(200,0);
+    comment->diagramElement()->setPos(-250, 150);
+    comment->diagramElement()->setVisible(true);
+    mDiagram->addToGroup(comment->diagramElement());
 
     mScene->addItem(mDiagram);
 }
