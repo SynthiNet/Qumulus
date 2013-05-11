@@ -44,7 +44,6 @@ void PrimitiveType::updateDiagramElement(QuUD::Diagram* diagram) {
     d->setVisible(false);
 
     auto size = g->mCompartment->minimumSize();
-    qDebug() <<  g->mNameLabel->fullTextWidth();
     size.setWidth(std::max(g->mNameLabel->fullTextWidth(), 90) + 10);
     g->mCompartment->setMinimumSize(size);
     g->mCompartment->resize(0, 0);
