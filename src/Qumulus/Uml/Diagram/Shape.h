@@ -19,7 +19,6 @@ public:
     Shape(const Shape&);
 
     QSizeF size() const { return mSize; }
-    void setSize(QSizeF s) { mSize = s; }
 
     double width() const;
     double height() const;
@@ -35,6 +34,8 @@ public:
     QSizeF maximumSize() const { return mMaximumSize; }
     void setMaximumSize(QSizeF s) { mMaximumSize = s; }
 
+protected:
+    void setSize(QSizeF s) { mSize = s; }
 
 private:
     QSizeF mSize = QSizeF();

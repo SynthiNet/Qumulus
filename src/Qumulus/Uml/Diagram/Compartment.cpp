@@ -44,6 +44,8 @@ void Compartment::resize(double w, double h) {
     }
     
     mRectItem->setRect(0, 0, w, h);
+
+    setSize({w, h});
 }
 
 QUML_END_NAMESPACE_UD
