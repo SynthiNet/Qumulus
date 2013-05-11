@@ -28,8 +28,22 @@ void CompartmentableShape::addCompartment(Compartment* c) {
     addToGroup(c);
 }
 
-void CompartmentableShape::resize(double, double) {
+void CompartmentableShape::resize(double w, double h) {
+    unsigned totalh = 0;
+    for(int i = 0; i < compartments().size(); ++i) {
+        unsigned newh = h / (compartments().size() - i);
 
+        compartment(i)->resize(w, newh);
+        unsigned actualh = compartment(i)->height();
+
+        if(i < compartments().size() - 1)
+            compartment(i + 1)->setPos(0, compartment(i)->pos().x() + actualh);
+        
+        h -= actualh;
+        totalh += actualh;
+    }
+
+    setSize({compartment(0)->size().width(), totalh});
 }
 
 QUML_END_NAMESPACE_UD

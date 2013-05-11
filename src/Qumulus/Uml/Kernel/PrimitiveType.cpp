@@ -37,11 +37,17 @@ void PrimitiveType::updateDiagramElement(QuUD::Diagram* diagram) {
     }
 
     auto g = mGraphics;
-    auto d = mDiagramElement;
+    auto d = static_cast<QuUD::CompartmentableShape*>(mDiagramElement);
 
     d->setVisible(false);
 
-    g->mNameLabel->setPos(0, d->sharedStyle()->fontSize() * 1.3);
+    float hheight = d->height() / 2;
+
+    g->mKeywordLabel->setPos(0, hheight - d->sharedStyle()->fontSize() * 1.5);
+    g->mKeywordLabel->resize(d->width(), 0);
+
+    g->mNameLabel->setPos(0, hheight - d->sharedStyle()->fontSize() * 0.2);
+    g->mNameLabel->resize(d->width(), 0);
 }
     
 
@@ -52,6 +58,9 @@ PrimitiveTypeGraphics::PrimitiveTypeGraphics(PrimitiveType* p) :
         mNameLabel(new QuUD::NameLabel(*(p->name()), p, mCompartment)) {
     mKeywordLabel->setWidth(100);
     mNameLabel->setWidth(100);
+    mCompartment->setMinimumSize(QSize(100, 40));
+
+    static_cast<QuUD::CompartmentableShape*>(p->diagramElement())->resize(0, 0);
 }
 
 PrimitiveTypeGraphics::~PrimitiveTypeGraphics() {
