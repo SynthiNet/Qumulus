@@ -30,7 +30,7 @@ EditorView::EditorView(QWidget* parent) : QGraphicsView(parent),
     mScene->addItem(mDiagram);
 }
 
-EditorView::~EditorView() {
+EditorView::~EditorView() noexcept {
     delete mDiagram;    
 }
 
