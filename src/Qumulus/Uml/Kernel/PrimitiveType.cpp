@@ -42,11 +42,12 @@ void PrimitiveType::updateDiagramElement(QuUD::Diagram* diagram) {
     d->setVisible(false);
 
     float hheight = d->height() / 2;
+    int fheight = d->sharedStyle()->fontHeight();
 
-    g->mKeywordLabel->setPos(0, hheight - d->sharedStyle()->fontSize() * 1.5);
+    g->mKeywordLabel->setPos(0, hheight - fheight * 1.2);
     g->mKeywordLabel->resize(d->width(), 0);
 
-    g->mNameLabel->setPos(0, hheight - d->sharedStyle()->fontSize() * 0.2);
+    g->mNameLabel->setPos(0, hheight - fheight * 0.2);
     g->mNameLabel->resize(d->width(), 0);
 }
     

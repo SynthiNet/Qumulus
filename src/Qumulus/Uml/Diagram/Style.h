@@ -13,6 +13,7 @@
 #include <QtCore/QString>
 
 #include <QtGui/QFont>
+#include <QtGui/QFontMetrics>
 
 QUML_BEGIN_NAMESPACE_UD
 
@@ -25,6 +26,8 @@ public:
     void setFontSize(double d) { (*this)["fontSize"] = QString::number(d); }
 
     QFont font() { return QFont(fontName(), fontSize()); }
+
+    int fontHeight() { return QFontMetrics(font()).height(); }
 };
 
 QUML_END_NAMESPACE_UD
