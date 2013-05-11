@@ -44,11 +44,9 @@ public:
     LiteralNull() {}
 
     bool isNull() const override {
-        return false;
+        return true;
     }
 
-private:
-    bool mValue;
 };
 
 class LiteralReal : public LiteralSpecification {
