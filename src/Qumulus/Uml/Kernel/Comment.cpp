@@ -14,7 +14,7 @@ Comment::Comment(const QString& body, QSet<Element*> annotated) :
 
 }
 
-void Comment::updateDiagramElement() {
+void Comment::updateDiagramElement(QuUD::Diagram*) {
 
 }
 

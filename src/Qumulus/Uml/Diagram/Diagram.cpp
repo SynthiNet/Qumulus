@@ -15,7 +15,7 @@ Diagram::Diagram(QString name, double resolution) :
     auto s = new Style;
     setLocalStyle(s);
     s->setFontName("sans-serif");
-    s->setFontSize(10.0);
+    s->setFontSize(12.0);
 }
 
 Diagram::Diagram(const Diagram& d) :

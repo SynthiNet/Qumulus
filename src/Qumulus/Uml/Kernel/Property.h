@@ -47,7 +47,7 @@ public:
     QSet<Property*> redefinedProperties() const;
     QSet<Property*> subsettedProperties() const;
 
-    void updateDiagramElement() override;
+    void updateDiagramElement(QuUD::Diagram*) override;
 
     QUML_CLONABLE(Property);
 private:

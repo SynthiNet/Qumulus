@@ -29,7 +29,7 @@ public:
         return mAnnotatedElements;
     }
     
-    void updateDiagramElement() override;
+    void updateDiagramElement(QuUD::Diagram*) override;
 
     QUML_CLONABLE(Comment);
 private:

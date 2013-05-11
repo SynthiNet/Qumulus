@@ -11,6 +11,8 @@
 
 #include "Shape.h"
 
+class QGraphicsTextItem;
+
 QUML_BEGIN_NAMESPACE_UD
 
 class Label : public Shape {
@@ -20,10 +22,14 @@ public:
     Label(const Label&);
 
     const QString& text() const { return mText; }
-    void setText(const QString& s) { mText = s; }
+    virtual void setText(const QString& s);
+    void setHtml(const QString& s);
+
+    void setWidth(double w);
 
     QUML_CLONABLE(Label);
 private:
+    QGraphicsTextItem* mTextItem;
     QString mText;
 };
 

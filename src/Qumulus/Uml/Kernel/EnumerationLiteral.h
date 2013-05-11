@@ -23,7 +23,7 @@ public:
     Enumeration* enumeration() const { return mEnumeration; }
     void setEnumeration(Enumeration* e) { mEnumeration = e; }
 
-    void updateDiagramElement() override;
+    void updateDiagramElement(QuUD::Diagram*) override;
 
     QUML_CLONABLE(EnumerationLiteral);
 private:

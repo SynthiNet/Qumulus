@@ -26,7 +26,7 @@ public:
     void addLiteral(EnumerationLiteral* l);
     void removeLiteral(EnumerationLiteral* l);
 
-    void updateDiagramElement() override;
+    void updateDiagramElement(QuUD::Diagram*) override;
 
     QUML_CLONABLE(Enumeration);
 private:

@@ -19,6 +19,8 @@ public:
     KeywordLabel(const QString& t, QuUK::Element* e = 0, DiagramElement* p = 0);
     KeywordLabel(const KeywordLabel&);
 
+    void setText(const QString& s) override;
+
     QUML_CLONABLE(KeywordLabel);
 };
 

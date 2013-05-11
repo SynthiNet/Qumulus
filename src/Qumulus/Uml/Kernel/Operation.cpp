@@ -26,7 +26,7 @@ Type* Operation::type() const {
     return returnResult()->type();
 }
 
-void Operation::updateDiagramElement() {
+void Operation::updateDiagramElement(QuUD::Diagram*) {
 
 }
 

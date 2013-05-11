@@ -15,7 +15,6 @@ DiagramElement::DiagramElement(QuUK::Element* m, DiagramElement* p) :
         mModelElement(m),
         mLocalStyle(0),
         mIcon(false) {
-    setVisible(false);
 }
 
 DiagramElement::DiagramElement(const DiagramElement& d) {

@@ -7,11 +7,16 @@
 #include "Compartment.h"
 #include "CompartmentableShape.h"
 
+#include <QtWidgets/QGraphicsRectItem>
+
 QUML_BEGIN_NAMESPACE_UD
 
 Compartment::Compartment(CompartmentableShape* p) :
-        Shape(0, p) {
+        Shape(0, p),
+        mRectItem(new QGraphicsRectItem(this)) {
     p->addCompartment(this);
+    addToGroup(mRectItem);
+    mRectItem->setRect(0, 0, 100, 40);
 }
 
 Compartment::Compartment(const Compartment& c) :

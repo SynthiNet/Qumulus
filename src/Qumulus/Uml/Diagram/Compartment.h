@@ -11,19 +11,24 @@
 
 #include "Shape.h"
 
+class QGraphicsRectItem;
+
 QUML_BEGIN_NAMESPACE_UD
 
 class CompartmentableShape;
 
 class Compartment : public Shape {
+    friend class CompartmentableShape;
 public:
     Compartment(CompartmentableShape* p = 0);
-    Compartment(const Compartment& o);
+    Compartment(const Compartment&);
 
     CompartmentableShape* compartmentableShape() const;
     void setCompartimentableShape(CompartmentableShape* s);
 
     QUML_CLONABLE(Compartment);
+private:
+    QGraphicsRectItem* mRectItem;
 };
 
 QUML_END_NAMESPACE_UD

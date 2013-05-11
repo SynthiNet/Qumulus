@@ -38,7 +38,7 @@ QSet<Property*> Property::subsettedProperties() const {
     return QSet<Property*>();
 }
 
-void Property::updateDiagramElement() {
+void Property::updateDiagramElement(QuUD::Diagram*) {
 
 }
 

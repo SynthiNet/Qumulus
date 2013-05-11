@@ -17,8 +17,9 @@ class NameLabel : public Label {
 public:
     NameLabel(QuUK::Element* e = 0, DiagramElement* p = 0);
     NameLabel(const QString& t, QuUK::Element* e = 0, DiagramElement* p = 0);
-
     NameLabel(const NameLabel& l);
+
+    void setText(const QString& s) override;
 
     QUML_CLONABLE(NameLabel);
 };

@@ -29,7 +29,7 @@ public:
     Class* getClass() const { return mClass; }
     void setClass(Class* c) { mClass = c; }
 
-    void updateDiagramElement() override;
+    void updateDiagramElement(QuUD::Diagram*) override;
 
     QUML_CLONABLE(Operation);
 private:

@@ -25,7 +25,7 @@ void Enumeration::removeLiteral(EnumerationLiteral* l) {
     removeOwnedMember(l);
 }
 
-void Enumeration::updateDiagramElement() {
+void Enumeration::updateDiagramElement(QuUD::Diagram*) {
 
 }
 

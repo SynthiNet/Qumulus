@@ -14,8 +14,9 @@ Classifier::Classifier() {
 
 }
 
-Classifier::Classifier(QString name, Namespace* p) : Type(name, p) {
-
+Classifier::Classifier(QString name, Namespace* p)  {
+    setName(name);
+    setNameSpace(p);
 }
 
 void Classifier::addAttribute(Property* p) {

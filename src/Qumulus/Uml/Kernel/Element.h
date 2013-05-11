@@ -15,6 +15,7 @@
 #include <Lib/Core/UniqueId.h>
 
 #include <Uml/Diagram/DiagramElement.h>
+#include <Uml/Diagram/Diagram.h>
 
 #include <QtCore/QSet>
 #include <QtCore/QList>
@@ -47,7 +48,7 @@ public:
         return mDiagramElement; 
     }
 
-    virtual void updateDiagramElement() = 0;
+    virtual void updateDiagramElement(QuUD::Diagram*) = 0;
 
     /**
      * @note This function takes over ownership.
@@ -68,12 +69,14 @@ protected:
 
     void removeElement(Element* other);
 
+protected:
+    QuUD::DiagramElement* mDiagramElement;
+
 private:
     static QHash<QString, Element*> mElementsById;
 
     QSet<Element*> mOwnedElements;
     QSet<Comment*> mOwnedComments;
-    QuUD::DiagramElement* mDiagramElement;
     QuLC::UniqueId mUniqueId;
 };
 

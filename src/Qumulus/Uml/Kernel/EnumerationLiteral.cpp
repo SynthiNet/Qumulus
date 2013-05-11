@@ -16,7 +16,7 @@ EnumerationLiteral::EnumerationLiteral(QString name, Enumeration* o) :
 
 }
 
-void EnumerationLiteral::updateDiagramElement() {
+void EnumerationLiteral::updateDiagramElement(QuUD::Diagram*) {
 
 }
 

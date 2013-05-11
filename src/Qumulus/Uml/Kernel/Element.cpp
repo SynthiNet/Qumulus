@@ -12,11 +12,13 @@ QUML_BEGIN_NAMESPACE_UK
 
 QHash<QString, Element*> Element::mElementsById;
 
-Element::Element() {
+Element::Element() :
+        mDiagramElement(0) {
     mElementsById.insert(uniqueId(), this);
 }
 
-Element::Element(const Element& other) {
+Element::Element(const Element& other) :
+        mDiagramElement(0) {
     for(auto& x : other.mOwnedElements) {
         mOwnedElements.insert(x->clone());
     }
@@ -34,7 +36,10 @@ Element::~Element() {
     for(auto& x : mOwnedElements) {
         delete x;
     }
+
     mElementsById.remove(uniqueId());
+
+    delete mDiagramElement;
 }
 
 void Element::addComment(Comment* c) {
