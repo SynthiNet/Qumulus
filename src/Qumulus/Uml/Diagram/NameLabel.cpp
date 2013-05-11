@@ -29,5 +29,11 @@ void NameLabel::setText(const QString& s) {
     setHtml("<center><b>"+s+"</b></center>");
 }
 
+int NameLabel::fullTextWidth() const {
+    return QFontMetrics(QFont(
+            sharedStyle()->fontName(), sharedStyle()->fontSize(), 
+            QFont::Bold)).width(text());
+}
+
 QUML_END_NAMESPACE_UD
 

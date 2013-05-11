@@ -21,6 +21,8 @@ public:
 
     void setText(const QString& s) override;
 
+    int fullTextWidth() const;
+
     QUML_CLONABLE(NameLabel);
 };
 

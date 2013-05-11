@@ -10,6 +10,8 @@
 #include <Uml/Diagram/KeywordLabel.h>
 #include <Uml/Diagram/NameLabel.h>
 
+#include <QtCore/QDebug>
+
 QUML_BEGIN_NAMESPACE_UK
 
 struct PrimitiveTypeGraphics {
@@ -40,6 +42,13 @@ void PrimitiveType::updateDiagramElement(QuUD::Diagram* diagram) {
     auto d = static_cast<QuUD::CompartmentableShape*>(mDiagramElement);
 
     d->setVisible(false);
+
+    auto size = g->mCompartment->minimumSize();
+    qDebug() <<  g->mNameLabel->fullTextWidth();
+    size.setWidth(std::max(g->mNameLabel->fullTextWidth(), 90) + 10);
+    g->mCompartment->setMinimumSize(size);
+    g->mCompartment->resize(0, 0);
+    d->resize(0,0);
 
     float hheight = d->height() / 2;
     int fheight = d->sharedStyle()->fontHeight();
