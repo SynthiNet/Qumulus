@@ -21,6 +21,8 @@ public:
 
     void setText(const QString& s) override;
 
+    void resize(double, double) override;
+
     QUML_CLONABLE(KeywordLabel);
 };
 

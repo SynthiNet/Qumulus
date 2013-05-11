@@ -30,4 +30,8 @@ void KeywordLabel::setText(const QString& s) {
     setHtml("<center>&laquo; "+s+" &raquo;</center>");
 }
 
+void KeywordLabel::resize(double w, double) {
+    setTextWidth(w);
+}
+
 QUML_END_NAMESPACE_UD

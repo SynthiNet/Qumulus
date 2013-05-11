@@ -23,6 +23,8 @@ public:
 
     int fullTextWidth() const;
 
+    void resize(double, double) override;
+
     QUML_CLONABLE(NameLabel);
 };
 

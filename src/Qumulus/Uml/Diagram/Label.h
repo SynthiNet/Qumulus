@@ -28,6 +28,8 @@ public:
     void resize(double w, double h) override;
 
     QUML_CLONABLE(Label);
+protected:
+    void setTextWidth(double w);
 private:
     QGraphicsTextItem* mTextItem;
     QString mText;

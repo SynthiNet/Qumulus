@@ -14,6 +14,7 @@
 QUML_BEGIN_NAMESPACE_UK
 
 class Enumeration;
+struct EnumerationLiteralGraphics;
 
 class EnumerationLiteral : public NamedElement {
 public:
@@ -28,6 +29,7 @@ public:
     QUML_CLONABLE(EnumerationLiteral);
 private:
     Enumeration* mEnumeration;
+    EnumerationLiteralGraphics* mGraphics = nullptr;
 };
 
 QUML_END_NAMESPACE_UK

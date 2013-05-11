@@ -35,5 +35,10 @@ int NameLabel::fullTextWidth() const {
             QFont::Bold)).width(text());
 }
 
+void NameLabel::resize(double w, double) {
+    setTextWidth(w);
+}
+
+
 QUML_END_NAMESPACE_UD
 

@@ -8,6 +8,7 @@
 #include <Gui/Widgets/Popover.h>
 
 #include <Uml/Kernel/PrimitiveType.h>
+#include <Uml/Kernel/Enumeration.h>
 
 QUML_BEGIN_NAMESPACE_GW
 
@@ -24,8 +25,18 @@ EditorView::EditorView(QWidget* parent) : QGraphicsView(parent),
     // FIXME: this is temporary testing code!
     auto boolean = new QuUK::PrimitiveType("bool");
     boolean->updateDiagramElement(mDiagram);
+    boolean->diagramElement()->setPos(-200, 0);
     boolean->diagramElement()->setVisible(true);
     mDiagram->addToGroup(boolean->diagramElement());
+
+    // FIXME: this is temporary testing code!
+    auto visibilityKind = new QuUK::Enumeration("VisibilityKind");
+    auto vkPublic = new QuUK::EnumerationLiteral("Public", visibilityKind);
+    auto vkProtected = new QuUK::EnumerationLiteral("Protected", visibilityKind);
+    auto vkPrivate = new QuUK::EnumerationLiteral("Private", visibilityKind);
+    visibilityKind->updateDiagramElement(mDiagram);
+    visibilityKind->diagramElement()->setVisible(true);
+    mDiagram->addToGroup(visibilityKind->diagramElement());
 
     mScene->addItem(mDiagram);
 }

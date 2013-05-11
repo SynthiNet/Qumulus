@@ -48,7 +48,13 @@ void Label::setHtml(const QString& s) {
 }
 
 void Label::resize(double w, double) {
-    mTextItem->setTextWidth(w);
+    QString elided = sharedStyle()->fontMetrics().elidedText(
+            mTextItem->toPlainText(), Qt::ElideRight, w - 10);
+    setHtml(elided);
+    setTextWidth(w);
 }
 
+void Label::setTextWidth(double w) {
+    mTextItem->setTextWidth(w);
+}
 QUML_END_NAMESPACE_UD

@@ -29,6 +29,11 @@ void CompartmentableShape::addCompartment(Compartment* c) {
 }
 
 void CompartmentableShape::resize(double w, double h) {
+    if(minimumSize().isValid()) {
+        w = std::max(w, minimumSize().width());
+        h = std::max(h, minimumSize().height());
+    }
+
     unsigned totalh = 0;
     for(int i = 0; i < compartments().size(); ++i) {
         unsigned newh = h / (compartments().size() - i);
