@@ -25,7 +25,7 @@ public:
     virtual void setText(const QString& s);
     void setHtml(const QString& s);
 
-    void setWidth(double w);
+    void resize(double w, double h) override;
 
     QUML_CLONABLE(Label);
 private:

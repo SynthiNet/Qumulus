@@ -25,6 +25,8 @@ public:
 
     void addCompartment(Compartment* c);
 
+    void resize(double, double) override;
+
     QUML_CLONABLE(CompartmentableShape);
 private:
     QList<Compartment*> mCompartments;

@@ -18,4 +18,8 @@ AssociationShape::AssociationShape(const AssociationShape& s) :
 
 }
 
+void AssociationShape::resize(double, double) {
+
+}
+
 QUML_END_NAMESPACE_UD

@@ -17,7 +17,30 @@ class Shape : public DiagramElement {
 public:
     Shape(QuUK::Element* e = 0, DiagramElement* p = 0);
     Shape(const Shape&);
+
+    QSizeF size() const { return mSize; }
+    void setSize(QSizeF s) { mSize = s; }
+
+    double width() const;
+    double height() const;
+    void setWidth(double);
+    void setHeight(double);
+
+    void resize(QSizeF s) { resize(s.width(), s.height()); }
+    virtual void resize(double w, double h) = 0;
+
+    QSizeF minimumSize() const { return mMinimumSize; }
+    void setMinimumSize(QSizeF s) { mMinimumSize = s; }
+
+    QSizeF maximumSize() const { return mMaximumSize; }
+    void setMaximumSize(QSizeF s) { mMaximumSize = s; }
+
+
 private:
+    QSizeF mSize = QSizeF();
+    QSizeF mMinimumSize = QSizeF();
+    QSizeF mMaximumSize = QSizeF();
+    QSizeF mSizeHint = QSizeF();
 };
 
 QUML_END_NAMESPACE_UD

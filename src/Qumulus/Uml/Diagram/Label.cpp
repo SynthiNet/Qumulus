@@ -18,8 +18,7 @@ Label::Label(QuUK::Element* e, DiagramElement* p) :
         mTextItem(new QGraphicsTextItem(this)),
         mText("") {
     addToGroup(mTextItem);
-    mTextItem->setFont(QFont(sharedStyle()->fontName(), 
-                sharedStyle()->fontSize()));
+    mTextItem->setFont(sharedStyle()->font());
     setText("");
 }
 
@@ -48,7 +47,7 @@ void Label::setHtml(const QString& s) {
     mTextItem->setHtml(s);
 }
 
-void Label::setWidth(double w) {
+void Label::resize(double w, double) {
     mTextItem->setTextWidth(w);
 }
 

@@ -22,6 +22,8 @@ public:
     AssociationShapeKind kind() const { return mKind; }
     void setKind(AssociationShapeKind k) { mKind = k; }
 
+    void resize(double, double) override;
+
     QUML_CLONABLE(AssociationShape);
 private:
     AssociationShapeKind mKind;

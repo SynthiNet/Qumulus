@@ -25,6 +25,8 @@ public:
     double resolution() const { return mResolution; }
     void setResolution(double r) { mResolution = r; }
 
+    void resize(double, double) override {}
+
     QUML_CLONABLE(Diagram);
 private:
     QString mName;

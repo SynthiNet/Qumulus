@@ -16,4 +16,21 @@ Shape::Shape(const Shape& s) :
         DiagramElement(s) {
 
 }
+
+double Shape::width() const {
+    return mSize.width();
+}
+
+double Shape::height() const {
+    return mSize.height();
+}
+
+void Shape::setWidth(double w) {
+    resize(w, height());
+}
+
+void Shape::setHeight(double h) {
+    resize(width(), h);
+}
+
 QUML_END_NAMESPACE_UD

@@ -32,6 +32,18 @@ void Compartment::setCompartimentableShape(CompartmentableShape* s) {
     setOwningElement(s);
 }
 
+void Compartment::resize(double w, double h) {
+    if(minimumSize().isValid()) {
+        w = std::max(w, minimumSize().width());
+        h = std::max(h, minimumSize().height());
+    }
 
+    if(maximumSize().isValid()) {
+        w = std::min(w, maximumSize().width());
+        h = std::min(h, maximumSize().height());
+    }
+    
+    mRectItem->setRect(0, 0, w, h);
+}
 
 QUML_END_NAMESPACE_UD

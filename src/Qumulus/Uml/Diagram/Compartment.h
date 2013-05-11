@@ -26,6 +26,12 @@ public:
     CompartmentableShape* compartmentableShape() const;
     void setCompartimentableShape(CompartmentableShape* s);
 
+    /**
+     * @note: This should never be called directly. Use
+     * CompartmentableShape::resize() instead.
+     */
+    void resize(double, double) override;
+
     QUML_CLONABLE(Compartment);
 private:
     QGraphicsRectItem* mRectItem;

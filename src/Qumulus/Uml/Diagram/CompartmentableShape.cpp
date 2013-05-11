@@ -28,4 +28,8 @@ void CompartmentableShape::addCompartment(Compartment* c) {
     addToGroup(c);
 }
 
+void CompartmentableShape::resize(double, double) {
+
+}
+
 QUML_END_NAMESPACE_UD
