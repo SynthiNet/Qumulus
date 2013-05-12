@@ -12,11 +12,12 @@
 
 QUML_BEGIN_NAMESPACE_UK
 
-Property::Property(Class* c) : 
+Property::Property(QString name, Class* c) : 
         mAggregation(AggregationKind::None),
         mClass(c),
         mAssociation(0) {
-
+    if(c) c->addAttribute(this);
+    setName(name);
 }
 
 Property* Property::opposite() const {

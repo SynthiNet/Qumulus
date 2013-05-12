@@ -24,7 +24,7 @@ class Association;
 
 class Property : public StructuralFeature {
 public:
-    Property(Class* c = 0);
+    Property(QString name, Class* c = 0);
 
     AggregationKind aggregation() const { return mAggregation; }
     void setAggregation(AggregationKind a) { mAggregation = a; }
