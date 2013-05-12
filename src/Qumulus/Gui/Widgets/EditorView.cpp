@@ -10,6 +10,7 @@
 #include <Uml/Kernel/PrimitiveType.h>
 #include <Uml/Kernel/Enumeration.h>
 #include <Uml/Kernel/Comment.h>
+#include <Uml/Kernel/Package.h>
 
 QUML_BEGIN_NAMESPACE_GW
 
@@ -17,7 +18,6 @@ EditorView::EditorView(QWidget* parent) : QGraphicsView(parent),
         mScene(new QGraphicsScene(this)),
         mPopover(nullptr),
         mDiagram(new QuUD::Diagram()) {
-    mScene->addEllipse(-5, -5, 10, 10, QPen(Qt::blue), QBrush(Qt::blue));
     setScene(mScene);
     setSceneRect(-20000.0, -20000.0, 40000.0, 40000.0);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
@@ -50,6 +50,13 @@ EditorView::EditorView(QWidget* parent) : QGraphicsView(parent),
     comment->updateDiagramElement(mDiagram, {200, 0});
     comment->diagramElement()->setPos(-250, 150);
     comment->diagramElement()->setVisible(true);
+    mDiagram->addToGroup(comment->diagramElement());
+
+    // FIXME: this is temporary testing code!
+    auto package = new QuUK::Package("Uml");
+    package->updateDiagramElement(mDiagram);
+    package->diagramElement()->setVisible(true);
+    package->diagramElement()->setPos(-200, -100);
     mDiagram->addToGroup(comment->diagramElement());
 
     mScene->addItem(mDiagram);
