@@ -10,9 +10,11 @@
 
 QUML_BEGIN_NAMESPACE_UK
 
-Parameter::Parameter(Operation* o) :
+Parameter::Parameter(QString name, Operation* o) :
     mDirection(ParameterDirectionKind::In) {
     setOperation(o);
+    if(o) o->addParameter(this);
+    setName(name);
 }
 
 void Parameter::setOperation(Operation* o) {

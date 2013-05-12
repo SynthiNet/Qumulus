@@ -21,7 +21,7 @@ class Parameter :
         public virtual MultiplicityElement, 
         public virtual TypedElement{
 public:
-    Parameter(Operation* o = 0);
+    Parameter(QString name, Operation* o = 0);
 
     QuLC::Optional<QString> defaultValue() const { return mDefaultValue; }
     void setDefaultValue(QuLC::Optional<QString> s) { mDefaultValue = s; }
