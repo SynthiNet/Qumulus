@@ -11,6 +11,10 @@
 #include <Uml/Kernel/Enumeration.h>
 #include <Uml/Kernel/Comment.h>
 #include <Uml/Kernel/Package.h>
+#include <Uml/Kernel/Class.h>
+#include <Uml/Kernel/Operation.h>
+#include <Uml/Kernel/Parameter.h>
+#include <Uml/Kernel/Property.h>
 
 QUML_BEGIN_NAMESPACE_GW
 
@@ -29,6 +33,22 @@ EditorView::EditorView(QWidget* parent) : QGraphicsView(parent),
     boolean->diagramElement()->setPos(-200, 0);
     boolean->diagramElement()->setVisible(true);
     mDiagram->addToGroup(boolean->diagramElement());
+
+    // FIXME: look at me, different comment.
+    auto classs = new QuUK::Class("Classy");
+    auto oper = new QuUK::Operation("naam", classs);
+    oper->setStatic(true);
+    oper->setVisiblity(QuUK::VisibilityKind::Public);
+    auto ret = new QuUK::Parameter("", oper);
+    ret->setDirection(QuUK::ParameterDirectionKind::Return);
+    ret->setType(boolean);
+    (new QuUK::Parameter("par1", oper))->setDirection(QuUK::ParameterDirectionKind::Out);
+    (new QuUK::Parameter("par2", oper))->setType(boolean);
+    new QuUK::Property("naamGeinspireerdDoorHetWerkVanMarxVanTweeEeuwenTerug", classs);
+    classs->updateDiagramElement(mDiagram);
+    classs->diagramElement()->setPos(20, 0);
+    classs->diagramElement()->setVisible(true);
+    mDiagram->addToGroup(classs->diagramElement());
 
     // FIXME: this is temporary testing code!
     auto visibilityKind = new QuUK::Enumeration("VisibilityKind");
