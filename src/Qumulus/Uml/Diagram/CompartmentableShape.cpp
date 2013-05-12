@@ -42,7 +42,7 @@ void CompartmentableShape::resize(double w, double h) {
         unsigned actualh = compartment(i)->height();
 
         if(i < compartments().size() - 1)
-            compartment(i + 1)->setPos(0, compartment(i)->pos().x() + actualh);
+            compartment(i + 1)->setPos(0, compartment(i)->pos().y() + actualh);
         
         h -= actualh;
         totalh += actualh;
