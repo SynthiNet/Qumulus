@@ -18,7 +18,6 @@ EditorView::EditorView(QWidget* parent) : QGraphicsView(parent),
         mScene(new QGraphicsScene(this)),
         mPopover(nullptr),
         mDiagram(new QuUD::Diagram()) {
-    mScene->addEllipse(-5, -5, 10, 10, QPen(Qt::blue), QBrush(Qt::blue));
     setScene(mScene);
     setSceneRect(-20000.0, -20000.0, 40000.0, 40000.0);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
