@@ -56,8 +56,6 @@ void Comment::updateDiagramElement(QuUD::Diagram* diagram, QSizeF newsize) {
     g->mText->setTextWidth(d->width());
     g->mText->setPos(0, 10);
 
-    qDebug() << g->mText->boundingRect();
-
     d->setMinimumSize({100, 
             std::max(60.0, g->mText->boundingRect().height()) + 10.0});
     d->resize(newsize);
