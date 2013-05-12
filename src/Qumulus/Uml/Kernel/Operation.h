@@ -18,7 +18,7 @@ class Parameter;
 
 class Operation : public BehavioralFeature {
 public:
-    Operation(Class* c = 0);
+    Operation(QString name, Class* c = 0);
 
     Parameter* returnResult() const;
     Type* type() const;

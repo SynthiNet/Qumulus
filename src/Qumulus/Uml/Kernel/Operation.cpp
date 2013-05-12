@@ -8,11 +8,16 @@
 
 #include "Parameter.h"
 
+#include "Class.h"
+
 QUML_BEGIN_NAMESPACE_UK
 
-Operation::Operation(Class* c) : 
+Operation::Operation(QString name, Class* c) : 
         mClass(c), 
-        mQuery(false) {}
+        mQuery(false) {
+    setName(name);
+    if(c) c->addOperation(this);
+}
 
 Parameter* Operation::returnResult() const {
     for(auto&& p : parameters()) {
