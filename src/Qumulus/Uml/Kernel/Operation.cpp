@@ -31,7 +31,10 @@ Parameter* Operation::returnResult() const {
 }
 
 Type* Operation::type() const {
-    return returnResult()->type();
+    if(returnResult())
+        return returnResult()->type();
+    else
+        return nullptr;
 }
 
 QuUD::Label* Operation::diagramElement() const {
@@ -59,7 +62,16 @@ void Operation::updateDiagramElement(QuUD::Diagram*, QSizeF) {
 
     for(Parameter* p : parameters()) {
         if(p->direction() == ParameterDirectionKind::Return) continue;
-        
+
+        // Parameter direction
+        if(p->direction() == ParameterDirectionKind::Out) {
+            str += "out ";
+        }
+
+        if(p->direction() == ParameterDirectionKind::InOut) {
+            str += "inout ";
+        }
+
         // Parameter name
         str += *(p->name());
 
@@ -99,12 +111,12 @@ void Operation::updateDiagramElement(QuUD::Diagram*, QSizeF) {
 
     d->setText(str);
 
+    d->resize(static_cast<QuUD::Shape*>(
+                mClass->diagramElement())->width(), 0);
+
     if(isStatic()) {
         d->setHtml(QString("<u>")+str+"</u>");
     }
-    
-    d->resize(static_cast<QuUD::Shape*>(
-                mClass->diagramElement())->width(), 0);
 }
 
 QUML_END_NAMESPACE_UK
