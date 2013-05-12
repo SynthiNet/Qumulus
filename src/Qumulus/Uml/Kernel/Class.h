@@ -1,6 +1,7 @@
 /*
  * Qumulus UML editor
  * Author: Frank Erens
+ * Author: Randy Thiemann
  *
  */
 
@@ -15,6 +16,8 @@ QUML_BEGIN_NAMESPACE_UK
 
 class Property;
 class Operation;
+
+struct ClassGraphics;
 
 class Class : public Classifier {
 public:
@@ -49,6 +52,7 @@ private:
     QList<Classifier*> mNestedClassifiers;
     QList<Operation*> mOwnedOperations;
     QSet<Class*> mSuperClasses;
+    ClassGraphics* mGraphics;
 };
 
 QUML_END_NAMESPACE_UK
