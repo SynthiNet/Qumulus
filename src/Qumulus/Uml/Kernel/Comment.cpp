@@ -65,7 +65,7 @@ void Comment::updateDiagramElement(QuUD::Diagram* diagram, QSizeF newsize) {
 
 CommentGraphics::CommentGraphics(Comment* c) :
         mText(new QGraphicsTextItem(c->diagramElement())){
-
+    mText->setFont(c->diagramElement()->sharedStyle()->font());
 }
 
 CommentGraphics::~CommentGraphics() {
