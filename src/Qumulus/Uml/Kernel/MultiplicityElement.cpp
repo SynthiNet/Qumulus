@@ -1,6 +1,7 @@
 /*
  * Qumulus UML editor
  * Author: Frank Erens
+ * Author: Randy Thiemann
  *
  */
 
@@ -37,6 +38,30 @@ bool MultiplicityElement::includesCardinality(unsigned i) const {
 bool MultiplicityElement::includedMultiplicity(MultiplicityElement* m) const {
     return mLower && mUpper && m->mLower && m->mUpper &&
             *mLower <= *m->mLower && *m->mUpper <= *mUpper;
+}
+
+QString MultiplicityElement::multiplicityString() const {
+    QString str = "";
+    if(mLower || mUpper) {
+        unsigned lower = mLower ? *(mLower) : 0;
+        QuLC::Unlimited upper = mUpper ? *(mUpper) : "*";
+
+        if(lower == 0 || QuLC::unltd(upper)) {
+            str += "[*]";
+        } else if(QuLC::unltd(upper) || lower != upper) {
+            str += "[";
+            str += lower;
+            str += "..";
+            str += upper;
+            str += "]";
+        } else if(lower != 1) {
+            str += "[";
+            str += lower;
+            str += "]";
+        }
+    }
+
+    return str;
 }
 
 QUML_END_NAMESPACE_UK

@@ -1,6 +1,7 @@
 /*
  * Qumulus UML editor
  * Author: Frank Erens
+ * Author: Randy Thiemann
  *
  */
 
@@ -16,6 +17,17 @@ enum class VisibilityKind {
     Private,
     Protected
 };
+
+inline char toChar(VisibilityKind v) {
+    switch(v) {
+    case VisibilityKind::Public:
+        return '+';
+    case VisibilityKind::Private:
+        return '-';
+    case VisibilityKind::Protected:
+        return '#';
+    }
+}
 
 QUML_END_NAMESPACE_UK
 

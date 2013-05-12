@@ -1,6 +1,7 @@
 /*
  * Qumulus UML editor
  * Author: Frank Erens
+ * Author: Randy Thiemann
  *
  */
 
@@ -41,6 +42,8 @@ public:
     void setUpperBound(QuLC::Optional<QuLC::Unlimited> u) {
         mUpper = u;
     }
+
+    QString multiplicityString() const;
 
     QUML_CLONABLE_ABSTRACT(MultiplicityElement)
 private:
