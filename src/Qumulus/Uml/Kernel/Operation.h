@@ -1,6 +1,7 @@
 /*
  * Qumulus UML editor
  * Author: Frank Erens
+ * Author: Randy Thiemann
  *
  */
 
@@ -8,6 +9,8 @@
 #define UML_KERNEL_OPERATION_H_
 
 #include "internal_base.h"
+
+#include <Uml/Diagram/Label.h>
 
 #include "BehavioralFeature.h"
 
@@ -29,6 +32,7 @@ public:
     Class* getClass() const { return mClass; }
     void setClass(Class* c) { mClass = c; }
 
+    QuUD::Label* diagramElement() const override;
     void updateDiagramElement(QuUD::Diagram*, QSizeF s = QSizeF()) override;
 
     QUML_CLONABLE(Operation);
