@@ -26,7 +26,7 @@ Type* Operation::type() const {
     return returnResult()->type();
 }
 
-void Operation::updateDiagramElement(QuUD::Diagram*) {
+void Operation::updateDiagramElement(QuUD::Diagram*, QSizeF) {
 
 }
 

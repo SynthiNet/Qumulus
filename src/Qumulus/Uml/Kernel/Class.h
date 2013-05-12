@@ -42,7 +42,7 @@ public:
     void addSuperClass(Class* c);
     void removeSuperClass(Class* c);
 
-    void updateDiagramElement(QuUD::Diagram*) override;
+    void updateDiagramElement(QuUD::Diagram*, QSizeF s = QSizeF()) override;
 
     QUML_CLONABLE(Class);
 private:

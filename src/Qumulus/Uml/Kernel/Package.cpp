@@ -47,7 +47,7 @@ void Package::removePackagedElement(PackageableElement* e) {
     addOwnedMember(e);
 }
 
-void Package::updateDiagramElement(QuUD::Diagram*) {
+void Package::updateDiagramElement(QuUD::Diagram*, QSizeF) {
 
 }
 

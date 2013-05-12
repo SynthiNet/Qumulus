@@ -32,7 +32,8 @@ PrimitiveType::~PrimitiveType() {
     delete mGraphics;
 }
 
-void PrimitiveType::updateDiagramElement(QuUD::Diagram* diagram) {
+void PrimitiveType::updateDiagramElement(QuUD::Diagram* diagram, 
+        QSizeF newsize) {
     if(!mDiagramElement) {
         mDiagramElement = new QuUD::ClassifierShape(this, diagram);
         mGraphics = new PrimitiveTypeGraphics(this);
@@ -43,11 +44,15 @@ void PrimitiveType::updateDiagramElement(QuUD::Diagram* diagram) {
 
     d->setVisible(false);
 
+    if(!newsize.isValid()) {
+        newsize = d->size();
+    }
+
     auto size = g->mCompartment->minimumSize();
     size.setWidth(std::max(g->mNameLabel->fullTextWidth(), 90) + 10);
     g->mCompartment->setMinimumSize(size);
-    g->mCompartment->resize(0, 0);
-    d->resize(0,0);
+    g->mCompartment->resize(newsize);
+    d->resize(newsize);
 
     float hheight = d->height() / 2;
     int fheight = d->sharedStyle()->fontHeight();

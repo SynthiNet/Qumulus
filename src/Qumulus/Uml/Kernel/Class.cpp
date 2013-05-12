@@ -51,7 +51,7 @@ void Class::removeSuperClass(Class* c) {
     removeGeneralization(c);
 }
 
-void Class::updateDiagramElement(QuUD::Diagram*) {
+void Class::updateDiagramElement(QuUD::Diagram*, QSizeF) {
 
 }
 

@@ -45,7 +45,7 @@ public:
     void addOwnedType(Type* t);
     void removeOwnedType(Type* t);
 
-    void updateDiagramElement(QuUD::Diagram*) override;
+    void updateDiagramElement(QuUD::Diagram*, QSizeF s = QSizeF()) override;
 
     QUML_CLONABLE(Package)
 private:

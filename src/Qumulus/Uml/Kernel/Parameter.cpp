@@ -20,7 +20,7 @@ void Parameter::setOperation(Operation* o) {
     setNameSpace(o);
 }
 
-void Parameter::updateDiagramElement(QuUD::Diagram*) {
+void Parameter::updateDiagramElement(QuUD::Diagram*, QSizeF) {
 
 }
 

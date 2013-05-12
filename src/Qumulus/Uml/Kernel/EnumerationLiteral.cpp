@@ -19,7 +19,11 @@ EnumerationLiteral::EnumerationLiteral(QString name, Enumeration* o) :
     if(o) o->addLiteral(this);
 }
 
-void EnumerationLiteral::updateDiagramElement(QuUD::Diagram*) {
+QuUD::Label* EnumerationLiteral::diagramElement() const {
+    return static_cast<QuUD::Label*>(mDiagramElement);
+}
+
+void EnumerationLiteral::updateDiagramElement(QuUD::Diagram*, QSizeF) {
     if(!mDiagramElement) {
         mDiagramElement = new QuUD::Label(*name(), this, 
                 mEnumeration->diagramElement());

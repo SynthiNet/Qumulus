@@ -34,7 +34,7 @@ QuUD::CommentShape* Comment::diagramElement() const {
     return static_cast<QuUD::CommentShape*>(mDiagramElement);
 }
 
-void Comment::updateDiagramElement(QuUD::Diagram* diagram) {
+void Comment::updateDiagramElement(QuUD::Diagram* diagram, QSizeF newsize) {
     if(!mDiagramElement) {
         mDiagramElement = new QuUD::CommentShape(this, diagram);
         mGraphics = new CommentGraphics(this);
@@ -45,8 +45,12 @@ void Comment::updateDiagramElement(QuUD::Diagram* diagram) {
 
     d->setVisible(false);
 
+    if(!newsize.isValid()) {
+        newsize = d->size();
+    }
+
     d->setMinimumSize({100, 60});
-    d->resize(d->size());
+    d->resize(newsize);
 
     g->mText->setPlainText(mBody);
     g->mText->setTextWidth(d->width());
@@ -56,7 +60,7 @@ void Comment::updateDiagramElement(QuUD::Diagram* diagram) {
 
     d->setMinimumSize({100, 
             std::max(60.0, g->mText->boundingRect().height()) + 10.0});
-    d->resize(d->size());
+    d->resize(newsize);
 }
 
 CommentGraphics::CommentGraphics(Comment* c) :

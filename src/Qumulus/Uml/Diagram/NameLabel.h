@@ -21,7 +21,7 @@ public:
 
     void setText(const QString& s) override;
 
-    int fullTextWidth() const;
+    int fullTextWidth() const override;
 
     void resize(double, double) override;
 

@@ -47,10 +47,7 @@ EditorView::EditorView(QWidget* parent) : QGraphicsView(parent),
             "VisibilityKind is an enumeration type that defines literals to "
             "determine the visibility of elements in a model.", 
             tmpset);
-    comment->updateDiagramElement(mDiagram);
-    comment->diagramElement()->resize(200,0);
-    comment->updateDiagramElement(mDiagram);
-    comment->diagramElement()->resize(200,0);
+    comment->updateDiagramElement(mDiagram, {200, 0});
     comment->diagramElement()->setPos(-250, 150);
     comment->diagramElement()->setVisible(true);
     mDiagram->addToGroup(comment->diagramElement());

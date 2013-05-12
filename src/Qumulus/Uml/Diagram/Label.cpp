@@ -47,6 +47,10 @@ void Label::setHtml(const QString& s) {
     mTextItem->setHtml(s);
 }
 
+int Label::fullTextWidth() const {
+    return sharedStyle()->textWidth(mTextItem->toPlainText());
+}
+
 void Label::resize(double w, double) {
     QString elided = sharedStyle()->fontMetrics().elidedText(
             mTextItem->toPlainText(), Qt::ElideRight, w - 10);

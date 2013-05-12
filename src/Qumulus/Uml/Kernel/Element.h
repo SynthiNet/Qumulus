@@ -48,7 +48,7 @@ public:
         return mDiagramElement; 
     }
 
-    virtual void updateDiagramElement(QuUD::Diagram*) = 0;
+    virtual void updateDiagramElement(QuUD::Diagram*, QSizeF s = QSizeF()) = 0;
 
     /**
      * @note This function takes over ownership.

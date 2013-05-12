@@ -47,7 +47,7 @@ void Enumeration::removeLiteral(EnumerationLiteral* l) {
     removeOwnedMember(l);
 }
 
-void Enumeration::updateDiagramElement(QuUD::Diagram* diagram) {
+void Enumeration::updateDiagramElement(QuUD::Diagram* diagram, QSizeF newsize) {
     if(!mDiagramElement) {
         mDiagramElement = new QuUD::ClassifierShape(this, diagram);
         mGraphics = new EnumerationGraphics(this);
@@ -58,16 +58,23 @@ void Enumeration::updateDiagramElement(QuUD::Diagram* diagram) {
         }
     }
 
+
+
     auto g = mGraphics;
     auto d = static_cast<QuUD::CompartmentableShape*>(mDiagramElement);
 
     d->setVisible(false);
 
+    if(!newsize.isValid()) {
+        newsize = d->size();
+    }
+
     auto size = g->mHeadCompartment->minimumSize();
     size.setWidth(std::max(g->mNameLabel->fullTextWidth(), 140) + 10);
     g->mHeadCompartment->setMinimumSize(size);
+    g->mHeadCompartment->setMaximumSize({newsize.width(), 40});
     g->mHeadCompartment->resize(0, 0);
-    d->resize(0,0);
+    d->resize(newsize);
 
     float hheight = g->mHeadCompartment->height() / 2;
     int fheight = g->mHeadCompartment->sharedStyle()->fontHeight();
@@ -79,15 +86,18 @@ void Enumeration::updateDiagramElement(QuUD::Diagram* diagram) {
     g->mNameLabel->resize(d->width(), 0);
 
     double offset = 0;
+    int textwidth = 0;
     for(EnumerationLiteral* l : ownedLiterals()) {
         l->updateDiagramElement(diagram);
         l->diagramElement()->setPos(0, offset);
+        textwidth = std::max(textwidth, l->diagramElement()->fullTextWidth());
         offset += l->diagramElement()->sharedStyle()->fontHeight();
     }
 
     g->mLiteralsCompartment->setMinimumSize({150, offset + 10});
+    d->setSizeHint({std::max(textwidth + 20, 150), offset + 50});
 
-    d->resize(0,0);
+    d->resize(newsize);
 }
 
 EnumerationGraphics::EnumerationGraphics(Enumeration* e) :
@@ -100,7 +110,7 @@ EnumerationGraphics::EnumerationGraphics(Enumeration* e) :
     mKeywordLabel->setWidth(150);
     mNameLabel->setWidth(150);
     mHeadCompartment->setMinimumSize(QSize(150, 40));
-    mHeadCompartment->setMaximumSize(QSize(-1, 40));
+    mHeadCompartment->setMaximumSize(QSize(150, 40));
     mLiteralsCompartment->setMinimumSize(QSize(150, 40));
 
     static_cast<QuUD::CompartmentableShape*>(

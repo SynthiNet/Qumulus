@@ -37,7 +37,7 @@ public:
 
     QuUD::CommentShape* diagramElement() const override;
     
-    void updateDiagramElement(QuUD::Diagram*) override;
+    void updateDiagramElement(QuUD::Diagram*, QSizeF s = QSizeF()) override;
 
     QUML_CLONABLE(Comment);
 private:
