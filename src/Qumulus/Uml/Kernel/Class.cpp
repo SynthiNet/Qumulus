@@ -95,14 +95,11 @@ void Class::updateDiagramElement(QuUD::Diagram* diagram, QSizeF newsize) {
     auto size = g->mHeadCompartment->minimumSize();
     size.setWidth(std::max(g->mNameLabel->fullTextWidth(), 190) + 10);
     g->mHeadCompartment->setMinimumSize(size);
-    g->mHeadCompartment->setMaximumSize({newsize.width(), 40});
+    g->mHeadCompartment->setMaximumSize({newsize.width(), 20});
     g->mHeadCompartment->resize(0, 0);
     d->resize(newsize);
 
-    float hheight = g->mHeadCompartment->height() / 2;
-    int fheight = g->mHeadCompartment->sharedStyle()->fontHeight();
-
-    g->mNameLabel->setPos(0, hheight - fheight * 0.2);
+    g->mNameLabel->setPos(0, 0);
     g->mNameLabel->resize(d->width(), 0);
 
     double offset = 0;
@@ -142,13 +139,13 @@ ClassGraphics::ClassGraphics(Class* e) :
                 static_cast<QuUD::CompartmentableShape*>(e->diagramElement()))),
         mNameLabel(new QuUD::NameLabel(*(e->name()), e, mHeadCompartment)) {
     mNameLabel->setWidth(200);
-    mHeadCompartment->setMinimumSize(QSize(200, 40));
-    mHeadCompartment->setMaximumSize(QSize(200, 40));
+    mHeadCompartment->setMinimumSize(QSize(200, 20));
+    mHeadCompartment->setMaximumSize(QSize(200, 20));
     mAttributesCompartment->setMinimumSize(QSize(200, 40));
     mOperationsCompartment->setMinimumSize(QSize(200, 40));
 
     static_cast<QuUD::CompartmentableShape*>(
-            e->diagramElement())->setMinimumSize({0, 120});
+            e->diagramElement())->setMinimumSize({0, 100});
 }
 
 ClassGraphics::~ClassGraphics() {
