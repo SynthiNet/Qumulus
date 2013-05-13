@@ -72,12 +72,13 @@ MainWindow::MainWindow() :
     // Create the main menus.
     createMenus();
 
+    // Cancel mode action.
     mCancelAction = new QAction(this);
     mCancelAction->setShortcuts({QKeySequence(tr("Esc"))});
     addAction(mCancelAction);
-
     connect(mCancelAction, &QAction::triggered, 
-            [&]{mEditorView->unsetCursor();});
+            [&]{unsetCursor();});
+
 
     connect(mStatusBar->slider(), &ZoomSlider::zoomChanged,
             mEditorView, &EditorView::zoom);
@@ -92,24 +93,24 @@ void MainWindow::populateToolbar() {
             ElementItem("Class", 
                     QIcon(":/data/img/toolbar/class.png"), 
                     QKeySequence(tr("C")),
-                    [&]{mEditorView->setCursor(mCursors["class"]);}));
+                    [&]{setCursor(mCursors["class"]);}));
 
     mClassMenu = new ToolBarMenu();
     mClassMenu->addItem(
             ElementItem("Template Class", 
                     QIcon(":/data/img/toolbar/template-class.png"),
                     QKeySequence(tr("T")),
-                    [&]{mEditorView->setCursor(mCursors["template-class"]);}));
+                    [&]{setCursor(mCursors["template-class"]);}));
     mClassMenu->addItem(
             ElementItem("Enum", 
                     QIcon(":/data/img/toolbar/enum.png"),
                     QKeySequence(tr("E")),
-                    [&]{mEditorView->setCursor(mCursors["enum"]);}));
+                    [&]{setCursor(mCursors["enum"]);}));
     mClassMenu->addItem(
             ElementItem("Primitive Datatype", 
                     QIcon(":/data/img/toolbar/primitive.png"),
                     QKeySequence(tr("D")), 
-                    [&]{mEditorView->setCursor(mCursors["primitive"]);}));
+                    [&]{setCursor(mCursors["primitive"]);}));
     mClassItem->setMenu(mClassMenu);
     mToolBar->addWidget(mClassItem);
 
@@ -119,14 +120,14 @@ void MainWindow::populateToolbar() {
             ElementItem("Package", 
                     QIcon(":/data/img/toolbar/package.png"), 
                     QKeySequence(tr("P")),
-                    [&]{mEditorView->setCursor(mCursors["package"]);}));
+                    [&]{setCursor(mCursors["package"]);}));
 
     mPackageMenu = new ToolBarMenu();
     mPackageMenu->addItem(
             ElementItem("Comment", 
                     QIcon(":/data/img/toolbar/comment.png"),
                     QKeySequence(tr("H")),
-                    [&]{mEditorView->setCursor(mCursors["comment"]);}));
+                    [&]{setCursor(mCursors["comment"]);}));
     mPackageItem->setMenu(mPackageMenu);
     mToolBar->addWidget(mPackageItem);
 
@@ -139,14 +140,14 @@ void MainWindow::populateToolbar() {
             ElementItem("Inheritance", 
                     QIcon(":/data/img/toolbar/inheritance.png"), 
                     QKeySequence(tr("I")),
-                    [&]{mEditorView->setCursor(mCursors["inheritance"]);}));
+                    [&]{setCursor(mCursors["inheritance"]);}));
 
     mInheritanceMenu = new ToolBarMenu();
     mInheritanceMenu->addItem(
             ElementItem("Template Specialization", 
                     QIcon(":/data/img/toolbar/template-specialization.png"),
                     QKeySequence(tr("S")),
-                    [&]{mEditorView->setCursor(mCursors["template-specialization"]);}));
+                    [&]{setCursor(mCursors["template-specialization"]);}));
     mInheritanceItem->setMenu(mInheritanceMenu);
     mToolBar->addWidget(mInheritanceItem);
 
@@ -156,14 +157,14 @@ void MainWindow::populateToolbar() {
             ElementItem("Aggregation", 
                     QIcon(":/data/img/toolbar/aggregation.png"), 
                     QKeySequence(tr("G")),
-                    [&]{mEditorView->setCursor(mCursors["aggregation"]);}));
+                    [&]{setCursor(mCursors["aggregation"]);}));
 
     mAggregationMenu = new ToolBarMenu();
     mAggregationMenu->addItem(
             ElementItem("Containment", 
                     QIcon(":/data/img/toolbar/containment.png"),
                     QKeySequence(tr("N")),
-                    [&]{mEditorView->setCursor(mCursors["containment"]);}));
+                    [&]{setCursor(mCursors["containment"]);}));
     mAggregationItem->setMenu(mAggregationMenu);
     mToolBar->addWidget(mAggregationItem);
 
@@ -173,36 +174,16 @@ void MainWindow::populateToolbar() {
             ElementItem("Relationship", 
                     QIcon(":/data/img/toolbar/relationship.png"), 
                     QKeySequence(tr("R")),
-                    [&]{mEditorView->setCursor(mCursors["relationship"]);}));
+                    [&]{setCursor(mCursors["relationship"]);}));
 
     mRelationshipMenu = new ToolBarMenu();
     mRelationshipMenu->addItem(
             ElementItem("Package Membership", 
                     QIcon(":/data/img/toolbar/package-membership.png"),
                     QKeySequence(tr("M")),
-                    [&]{mEditorView->setCursor(mCursors["package-membership"]);}));
+                    [&]{setCursor(mCursors["package-membership"]);}));
     mRelationshipItem->setMenu(mRelationshipMenu);
     mToolBar->addWidget(mRelationshipItem);
-
-
-    mToolBar->addSeparator();
-
-
-    // Operations and attributes.
-    mOperationItem = new ToolBarItem(
-            ElementItem("Operation", 
-                    QIcon(":/data/img/toolbar/operation.png"), 
-                    QKeySequence(tr("O")),
-                    [&]{QMessageBox::information(this, "", "Operation");})
-            );
-    mToolBar->addWidget(mOperationItem);
-    mAttributeItem = new ToolBarItem(
-            ElementItem("Attribute", 
-                    QIcon(":/data/img/toolbar/Attribute.png"), 
-                    QKeySequence(tr("A")),
-                    [&]{QMessageBox::information(this, "", "Attribute");})
-            );
-    mToolBar->addWidget(mAttributeItem);
 }
 
 void MainWindow::createMenus() {
@@ -271,6 +252,50 @@ void MainWindow::createMenus() {
     mEditMenu->addAction(mPasteAction);
     mEditMenu->addAction(mDeleteAction);
     mEditMenu->addAction(mDuplicateAction);
+
+    // View Menu
+    mCenterAction = new QAction(tr("&Center View"), this);
+    mCenterAction->setShortcuts({QKeySequence(tr("Home"))});
+    connect(mCenterAction, &QAction::triggered,
+            [&]{mEditorView->centerOn(0, 0);});
+
+    mUndoZoomAction = new QAction(tr("&Actual Size"), this);
+    mUndoZoomAction->setShortcuts({QKeySequence(tr("Ctrl+0"))});
+    connect(mUndoZoomAction, &QAction::triggered,
+            [&]{mStatusBar->slider()->setValue(3);});
+
+    mZoomInAction = new QAction(tr("Zoom &In"), this);
+    mZoomInAction->setShortcuts(QKeySequence::ZoomIn);
+    connect(mZoomInAction, &QAction::triggered,
+            [&]{mStatusBar->slider()->setValue(
+                        mStatusBar->slider()->value() + 1);});
+
+    mZoomOutAction = new QAction(tr("Zoom &Out"), this);
+    mZoomOutAction->setShortcuts(QKeySequence::ZoomOut);
+    connect(mZoomOutAction, &QAction::triggered,
+            [&]{mStatusBar->slider()->setValue(
+                        mStatusBar->slider()->value() - 1);});
+
+#ifdef Q_OS_MAC
+    mFullScreenAction = new QAction(tr("Toggle &Full Screen"), this);
+    mFullScreenAction->setShortcuts(QKeySequence::FullScreen);
+    addAction(mFullScreenAction);
+    connect(mFullScreenAction, &QAction::triggered, 
+            [&]{if(this->isFullScreen())
+                this->showNormal();
+            else
+                this->showFullScreen();});
+#endif
+
+    mViewMenu->addAction(mCenterAction);
+#ifdef Q_OS_MAC
+    mViewMenu->addSeparator();
+    mViewMenu->addAction(mFullScreenAction);
+#endif
+    mViewMenu->addSeparator();
+    mViewMenu->addAction(mUndoZoomAction);
+    mViewMenu->addAction(mZoomInAction);
+    mViewMenu->addAction(mZoomOutAction);
 
     // Help Menu
     mAboutAction = new QAction(tr("&About Qumulus"), this);
