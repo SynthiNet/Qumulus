@@ -76,6 +76,7 @@ private:
     QAction* mOpenAction;
     QAction* mCloseAction;
     QAction* mPrintAction;
+    QAction* mExportAction;
     
     // Edit Menu
     QAction* mUndoAction;
