@@ -9,13 +9,13 @@
 
 #include "internal_base.h"
 
-#include "Shape.h"
+#include "SelectableShape.h"
 
 #include <QtWidgets/QGraphicsRectItem>
 
 QUML_BEGIN_NAMESPACE_UD
 
-class PackageShape : public Shape {
+class PackageShape : public SelectableShape {
 public:
     PackageShape(QuUK::Element* e = 0, DiagramElement* p = 0);
     PackageShape(const PackageShape&);
