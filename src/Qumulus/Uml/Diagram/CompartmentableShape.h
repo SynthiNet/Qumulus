@@ -27,7 +27,6 @@ public:
 
     using Shape::resize;
     void resize(double, double) override;
-    QRectF boundingRect() const override;
 
     QUML_CLONABLE(CompartmentableShape);
 

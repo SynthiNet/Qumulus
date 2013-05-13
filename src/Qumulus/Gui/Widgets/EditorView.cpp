@@ -55,7 +55,7 @@ EditorView::EditorView(QWidget* parent) : QGraphicsView(parent),
     classs->updateDiagramElement(mDiagram);
     classs->diagramElement()->setPos(20, 0);
     classs->diagramElement()->setVisible(true);
-    mDiagram->addToGroup(classs->diagramElement());
+    mDiagram->addElement(classs->diagramElement());
 
     // FIXME: this is temporary testing code!
     auto visibilityKind = new QuUK::Enumeration("VisibilityKind");
@@ -84,7 +84,7 @@ EditorView::EditorView(QWidget* parent) : QGraphicsView(parent),
     package->updateDiagramElement(mDiagram);
     package->diagramElement()->setVisible(true);
     package->diagramElement()->setPos(-200, -100);
-    mDiagram->addElement(comment->diagramElement());
+    mDiagram->addElement(package->diagramElement());
 }
 
 EditorView::~EditorView() noexcept {
