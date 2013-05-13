@@ -9,13 +9,14 @@
 
 #include "internal_base.h"
 
-#include "Shape.h"
+#include "SelectableShape.h"
 
 #include <QtWidgets/QGraphicsPolygonItem>
+#include <QtWidgets/QGraphicsLineItem>
 
 QUML_BEGIN_NAMESPACE_UD
 
-class CommentShape : public Shape {
+class CommentShape : public SelectableShape {
 public:
     CommentShape(QuUK::Element* e = 0, DiagramElement* p = 0);
     CommentShape(const CommentShape&);
@@ -26,6 +27,8 @@ public:
     QUML_CLONABLE(CommentShape);
 private:
     QGraphicsPolygonItem* mPolygon;
+    QGraphicsLineItem* mLine1;
+    QGraphicsLineItem* mLine2;
 };
 
 QUML_END_NAMESPACE_UD
