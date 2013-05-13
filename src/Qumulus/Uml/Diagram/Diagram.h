@@ -10,14 +10,17 @@
 
 #include "internal_base.h"
 
-#include "Shape.h"
+#include "DiagramElement.h"
+
+class QGraphicsScene;
 
 QUML_BEGIN_NAMESPACE_UD
 
-class Diagram : public Shape {
+class Diagram : public DiagramElement {
 public:
     Diagram(QString name = "", double resolution = 300);
     Diagram(const Diagram&);
+    ~Diagram();
 
     const QString& name() const { return mName; }
     void setName(const QString& n) { mName = n; }
@@ -25,12 +28,17 @@ public:
     double resolution() const { return mResolution; }
     void setResolution(double r) { mResolution = r; }
 
-    void resize(double, double) override {}
+    void addElement(DiagramElement* e);
+    void removeElement(DiagramElement* e);
+    
+    void setScene(QGraphicsScene* e);
 
     QUML_CLONABLE(Diagram);
 private:
     QString mName;
     double mResolution;
+    QList<DiagramElement*> mElements;
+    QGraphicsScene* mScene = nullptr;
 };
 
 QUML_END_NAMESPACE_UD

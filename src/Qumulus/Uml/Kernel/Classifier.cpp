@@ -47,5 +47,8 @@ void Classifier::removeGeneralization(Classifier* c) {
     mGeneralizations.remove(c);
 }
 
+QuUD::ClassifierShape* Classifier::diagramElement() const {
+    return static_cast<QuUD::ClassifierShape*>(mDiagramElement);
+}
 
 QUML_END_NAMESPACE_UK

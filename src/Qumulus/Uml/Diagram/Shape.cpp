@@ -37,4 +37,10 @@ QSizeF Shape::optimalSize() const {
     return mSizeHint.isValid() ? mSizeHint : minimumSize();
 }
 
+void Shape::setOwningElement(DiagramElement* e) {
+    DiagramElement::setOwningElement(e);
+    if(Shape* p = dynamic_cast<Shape*>(e))
+        setParentItem(p); 
+}
+
 QUML_END_NAMESPACE_UD

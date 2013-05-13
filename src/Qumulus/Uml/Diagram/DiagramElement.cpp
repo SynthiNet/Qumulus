@@ -11,10 +11,9 @@
 QUML_BEGIN_NAMESPACE_UD
 
 DiagramElement::DiagramElement(QuUK::Element* m, DiagramElement* p) : 
-        QGraphicsItemGroup(p), 
         mModelElement(m),
-        mLocalStyle(0),
-        mIcon(false) {
+        mLocalStyle(0), 
+        mOwningElement(p) {
 }
 
 DiagramElement::DiagramElement(const DiagramElement& d) {
@@ -24,14 +23,6 @@ DiagramElement::DiagramElement(const DiagramElement& d) {
 
 DiagramElement::~DiagramElement() {
     delete mLocalStyle;
-}
-
-DiagramElement* DiagramElement::owningElement() const {
-    return dynamic_cast<DiagramElement*>(parentItem());
-}
-
-void DiagramElement::setOwningElement(DiagramElement* e) {
-    setParentItem(e);
 }
 
 Style* DiagramElement::sharedStyle() const {

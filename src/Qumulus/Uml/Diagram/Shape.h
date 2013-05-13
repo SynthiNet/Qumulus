@@ -11,9 +11,11 @@
 
 #include "DiagramElement.h"
 
+#include <QtWidgets/QGraphicsItemGroup>
+
 QUML_BEGIN_NAMESPACE_UD
 
-class Shape : public DiagramElement {
+class Shape : public DiagramElement, public QGraphicsItemGroup {
 public:
     Shape(QuUK::Element* e = 0, DiagramElement* p = 0);
     Shape(const Shape&);
@@ -37,6 +39,9 @@ public:
     QSizeF optimalSize() const;
     void setSizeHint(QSizeF s) { mSizeHint = s; }
 
+    void setOwningElement(DiagramElement* e); 
+
+    QUML_CLONABLE_ABSTRACT(Shape);
 protected:
     void setSize(QSizeF s) { mSize = s; }
 
