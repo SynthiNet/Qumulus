@@ -5,18 +5,15 @@
  */
 
 #include "CompartmentableShape.h"
-#include <QtCore/QDebug>
 
 QUML_BEGIN_NAMESPACE_UD
 
 CompartmentableShape::CompartmentableShape(QuUK::Element* e, 
         DiagramElement* p) :
-        Shape(e, p) {
-    setFlag(QGraphicsItem::ItemIsSelectable);
-}
+        SelectableShape(e, p) {}
 
 CompartmentableShape::CompartmentableShape(const CompartmentableShape& c) :
-        Shape(c) {
+        SelectableShape(c) {
 
 }
 
@@ -50,18 +47,6 @@ void CompartmentableShape::resize(double w, double h) {
     }
 
     setSize({compartment(0)->size().width(), totalh});
-}
-
-QVariant CompartmentableShape::itemChange(GraphicsItemChange c, 
-        const QVariant& v) {
-    if(c == QGraphicsItem::ItemSelectedChange) {
-        if(v.toBool()) {
-            qDebug() << "Selected";
-        } else {
-            qDebug() << "Deselected";
-        }
-    }
-    return Shape::itemChange(c, v); 
 }
 
 QUML_END_NAMESPACE_UD
