@@ -64,8 +64,4 @@ QVariant CompartmentableShape::itemChange(GraphicsItemChange c,
     return Shape::itemChange(c, v); 
 }
 
-QRectF CompartmentableShape::boundingRect() const {
-    return QRectF(0, 0, width(), height());
-}
-
 QUML_END_NAMESPACE_UD

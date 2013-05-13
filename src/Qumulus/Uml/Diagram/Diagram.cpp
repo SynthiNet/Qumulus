@@ -7,6 +7,10 @@
 #include "Diagram.h"
 #include "Style.h"
 
+#include "Shape.h"
+
+#include <QtWidgets/QGraphicsScene>
+
 QUML_BEGIN_NAMESPACE_UD
 
 constexpr static float kFontSize =
@@ -26,8 +30,30 @@ Diagram::Diagram(QString name, double resolution) :
 }
 
 Diagram::Diagram(const Diagram& d) :
-        Shape(d) {
+        DiagramElement(d) {
 
+}
+
+Diagram::~Diagram() {
+    for(auto& p : mElements) {
+        delete p;
+    }
+}
+
+void Diagram::addElement(DiagramElement* e) {
+    mElements.append(e);
+    if(Shape* p = dynamic_cast<Shape*>(e))
+        mScene->addItem(p);
+}
+
+void Diagram::removeElement(DiagramElement* e) {
+    mElements.removeAll(e);
+    if(Shape* p = dynamic_cast<Shape*>(e))
+        mScene->removeItem(p);
+}
+
+void Diagram::setScene(QGraphicsScene* e) {
+    mScene = e;
 }
 
 QUML_END_NAMESPACE_UD

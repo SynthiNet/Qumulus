@@ -32,12 +32,14 @@ EditorView::EditorView(QWidget* parent) : QGraphicsView(parent),
     setDragMode(QGraphicsView::RubberBandDrag);
     setFocusPolicy(Qt::StrongFocus);
 
+    mDiagram->setScene(mScene);
+
     // FIXME: this is temporary testing code!
     auto boolean = new QuUK::PrimitiveType("bool");
     boolean->updateDiagramElement(mDiagram);
     boolean->diagramElement()->setPos(-200, 0);
     boolean->diagramElement()->setVisible(true);
-    mDiagram->addToGroup(boolean->diagramElement());
+    mDiagram->addElement(boolean->diagramElement());
 
     // FIXME: look at me, different comment.
     auto classs = new QuUK::Class("Classy");
@@ -53,7 +55,7 @@ EditorView::EditorView(QWidget* parent) : QGraphicsView(parent),
     classs->updateDiagramElement(mDiagram);
     classs->diagramElement()->setPos(20, 0);
     classs->diagramElement()->setVisible(true);
-    mDiagram->addToGroup(classs->diagramElement());
+    mDiagram->addElement(classs->diagramElement());
 
     // FIXME: this is temporary testing code!
     auto visibilityKind = new QuUK::Enumeration("VisibilityKind");
@@ -63,7 +65,7 @@ EditorView::EditorView(QWidget* parent) : QGraphicsView(parent),
     visibilityKind->updateDiagramElement(mDiagram);
     visibilityKind->diagramElement()->setPos(-200, 50);
     visibilityKind->diagramElement()->setVisible(true);
-    mDiagram->addToGroup(visibilityKind->diagramElement());
+    mDiagram->addElement(visibilityKind->diagramElement());
 
     // FIXME: this is temporary testing code!
     QSet<QuUK::Element*> tmpset;
@@ -75,16 +77,14 @@ EditorView::EditorView(QWidget* parent) : QGraphicsView(parent),
     comment->updateDiagramElement(mDiagram, {200, 0});
     comment->diagramElement()->setPos(-250, 150);
     comment->diagramElement()->setVisible(true);
-    mDiagram->addToGroup(comment->diagramElement());
+    mDiagram->addElement(comment->diagramElement());
 
     // FIXME: this is temporary testing code!
     auto package = new QuUK::Package("Uml");
     package->updateDiagramElement(mDiagram);
     package->diagramElement()->setVisible(true);
     package->diagramElement()->setPos(-200, -100);
-    mDiagram->addToGroup(comment->diagramElement());
-
-    mScene->addItem(mDiagram);
+    mDiagram->addElement(package->diagramElement());
 }
 
 EditorView::~EditorView() noexcept {

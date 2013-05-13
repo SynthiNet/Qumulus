@@ -11,7 +11,7 @@
 
 #include "Style.h"
 
-#include <QtWidgets/QGraphicsItemGroup>
+#include <QtCore/QObject>
 #include <Lib/Core/Clonable.h>
 
 #include <Uml/Kernel/internal_base.h>
@@ -22,7 +22,7 @@ QUML_END_NAMESPACE_UK
 
 QUML_BEGIN_NAMESPACE_UD
 
-class DiagramElement : public QGraphicsItemGroup {
+class DiagramElement {
 public:
     DiagramElement(QuUK::Element* m = 0, DiagramElement* p = 0);
     DiagramElement(const DiagramElement&);
@@ -37,17 +37,14 @@ public:
 
     Style* sharedStyle() const;
 
-    DiagramElement* owningElement() const;
-    void setOwningElement(DiagramElement* e);
-
-    bool isIcon() const { return mIcon; }
-    void setIcon(bool b) { mIcon = b; }
+    DiagramElement* owningElement() const { return mOwningElement; }
+    virtual void setOwningElement(DiagramElement* e) { mOwningElement = e; }
 
     QUML_CLONABLE_ABSTRACT(DiagramElement);
 private:
     QuUK::Element* mModelElement;
     Style* mLocalStyle;
-    bool mIcon;
+    DiagramElement* mOwningElement;
 };
 
 QUML_END_NAMESPACE_UD
