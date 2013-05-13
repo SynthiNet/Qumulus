@@ -7,9 +7,7 @@
 #ifndef UML_DIAGRAM_SELECTABLESHAPE_H_
 #define UML_DIAGRAM_SELECTABLESHAPE_H_
 
-
 #include "internal_base.h"
-
 #include "Shape.h"
 
 QUML_BEGIN_NAMESPACE_UD
