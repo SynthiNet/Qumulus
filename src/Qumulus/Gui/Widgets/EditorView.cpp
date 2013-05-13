@@ -5,6 +5,8 @@
  */
 
 #include "EditorView.h"
+#include <QtCore/QDebug>
+#include <QtWidgets/QGraphicsRectItem>
 #include <Gui/Widgets/Popover.h>
 
 #include <Uml/Kernel/PrimitiveType.h>
@@ -23,9 +25,12 @@ EditorView::EditorView(QWidget* parent) : QGraphicsView(parent),
         mPopover(nullptr),
         mDiagram(new QuUD::Diagram()) {
     setScene(mScene);
+    mScene->setBackgroundBrush(QBrush(Qt::white, Qt::SolidPattern));
     setSceneRect(-20000.0, -20000.0, 40000.0, 40000.0);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+    setDragMode(QGraphicsView::RubberBandDrag);
+    setFocusPolicy(Qt::StrongFocus);
 
     // FIXME: this is temporary testing code!
     auto boolean = new QuUK::PrimitiveType("bool");
@@ -92,15 +97,33 @@ void EditorView::zoom(double value) {
 }
 
 void EditorView::mousePressEvent(QMouseEvent* e) {
-    if(e->buttons() == Qt::LeftButton) {
-        if(mPopover) {
+    /*if(e->buttons() == Qt::LeftButton) {
+          if(mPopover) {
             delete mPopover;
             mPopover = nullptr;
         } else {
             mPopover = new Popover(this, e->globalPos(), Qt::Horizontal);
             mPopover->show();
         }
+    }*/
+
+    QGraphicsView::mousePressEvent(e);
+}
+
+void EditorView::keyPressEvent(QKeyEvent* e) {
+    if(e->key() == Qt::Key_Shift) {
+        setDragMode(QGraphicsView::ScrollHandDrag);
     }
+
+    QGraphicsView::keyPressEvent(e);
+}
+
+void EditorView::keyReleaseEvent(QKeyEvent* e) {
+    if(e->key() == Qt::Key_Shift) {
+        setDragMode(QGraphicsView::RubberBandDrag);
+    }
+
+    QGraphicsView::keyReleaseEvent(e);
 }
 
 QUML_END_NAMESPACE_GW
