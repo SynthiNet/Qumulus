@@ -22,12 +22,15 @@ class EditorView : public QGraphicsView {
 public:
     EditorView(QWidget* parent = 0);
     ~EditorView() noexcept;
+    const QuUD::Diagram* diagram() const { return mDiagram; }
 
 public slots:
     void zoom(double value);
 
 protected:
-    void mousePressEvent(QMouseEvent* event);
+    void mousePressEvent(QMouseEvent* event) override;
+    void keyPressEvent(QKeyEvent* event) override;
+    void keyReleaseEvent(QKeyEvent* event) override;
 
 private:
     QGraphicsScene* mScene;

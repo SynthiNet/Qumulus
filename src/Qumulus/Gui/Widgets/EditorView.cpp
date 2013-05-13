@@ -5,12 +5,18 @@
  */
 
 #include "EditorView.h"
+#include <QtCore/QDebug>
+#include <QtWidgets/QGraphicsRectItem>
 #include <Gui/Widgets/Popover.h>
 
 #include <Uml/Kernel/PrimitiveType.h>
 #include <Uml/Kernel/Enumeration.h>
 #include <Uml/Kernel/Comment.h>
 #include <Uml/Kernel/Package.h>
+#include <Uml/Kernel/Class.h>
+#include <Uml/Kernel/Operation.h>
+#include <Uml/Kernel/Parameter.h>
+#include <Uml/Kernel/Property.h>
 
 QUML_BEGIN_NAMESPACE_GW
 
@@ -19,9 +25,13 @@ EditorView::EditorView(QWidget* parent) : QGraphicsView(parent),
         mPopover(nullptr),
         mDiagram(new QuUD::Diagram()) {
     setScene(mScene);
+    mScene->setBackgroundBrush(QBrush(Qt::white, Qt::SolidPattern));
     setSceneRect(-20000.0, -20000.0, 40000.0, 40000.0);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+    setDragMode(QGraphicsView::RubberBandDrag);
+    setFocusPolicy(Qt::StrongFocus);
+
     mDiagram->setScene(mScene);
 
     // FIXME: this is temporary testing code!
@@ -30,6 +40,22 @@ EditorView::EditorView(QWidget* parent) : QGraphicsView(parent),
     boolean->diagramElement()->setPos(-200, 0);
     boolean->diagramElement()->setVisible(true);
     mDiagram->addElement(boolean->diagramElement());
+
+    // FIXME: look at me, different comment.
+    auto classs = new QuUK::Class("Classy");
+    auto oper = new QuUK::Operation("naam", classs);
+    oper->setStatic(true);
+    oper->setVisiblity(QuUK::VisibilityKind::Public);
+    auto ret = new QuUK::Parameter("", oper);
+    ret->setDirection(QuUK::ParameterDirectionKind::Return);
+    ret->setType(boolean);
+    (new QuUK::Parameter("par1", oper))->setDirection(QuUK::ParameterDirectionKind::Out);
+    (new QuUK::Parameter("par2", oper))->setType(boolean);
+    new QuUK::Property("naamGeinspireerdDoorHetWerkVanMarxVanTweeEeuwenTerug", classs);
+    classs->updateDiagramElement(mDiagram);
+    classs->diagramElement()->setPos(20, 0);
+    classs->diagramElement()->setVisible(true);
+    mDiagram->addToGroup(classs->diagramElement());
 
     // FIXME: this is temporary testing code!
     auto visibilityKind = new QuUK::Enumeration("VisibilityKind");
@@ -71,15 +97,33 @@ void EditorView::zoom(double value) {
 }
 
 void EditorView::mousePressEvent(QMouseEvent* e) {
-    if(e->buttons() == Qt::LeftButton) {
-        if(mPopover) {
+    /*if(e->buttons() == Qt::LeftButton) {
+          if(mPopover) {
             delete mPopover;
             mPopover = nullptr;
         } else {
             mPopover = new Popover(this, e->globalPos(), Qt::Horizontal);
             mPopover->show();
         }
+    }*/
+
+    QGraphicsView::mousePressEvent(e);
+}
+
+void EditorView::keyPressEvent(QKeyEvent* e) {
+    if(e->key() == Qt::Key_Shift) {
+        setDragMode(QGraphicsView::ScrollHandDrag);
     }
+
+    QGraphicsView::keyPressEvent(e);
+}
+
+void EditorView::keyReleaseEvent(QKeyEvent* e) {
+    if(e->key() == Qt::Key_Shift) {
+        setDragMode(QGraphicsView::RubberBandDrag);
+    }
+
+    QGraphicsView::keyReleaseEvent(e);
 }
 
 QUML_END_NAMESPACE_GW

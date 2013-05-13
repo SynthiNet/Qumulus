@@ -22,7 +22,7 @@ struct ClassGraphics;
 class Class : public Classifier {
 public:
     Class();
-    Class(QString name, Namespace* p);
+    Class(QString name, Namespace* p = nullptr);
     
     const QList<Classifier*>& nestedClassifiers() const {
         return mNestedClassifiers;

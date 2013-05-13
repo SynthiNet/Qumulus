@@ -27,8 +27,13 @@ public:
 
     using Shape::resize;
     void resize(double, double) override;
+    QRectF boundingRect() const override;
 
     QUML_CLONABLE(CompartmentableShape);
+
+protected:
+    QVariant itemChange(GraphicsItemChange change, const QVariant & value) override;
+
 private:
     QList<Compartment*> mCompartments;
 };

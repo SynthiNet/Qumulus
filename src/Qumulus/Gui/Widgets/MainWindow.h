@@ -59,8 +59,6 @@ private:
     ToolBarMenu* mAggregationMenu;
     ToolBarItem* mRelationshipItem;
     ToolBarMenu* mRelationshipMenu;
-    ToolBarItem* mOperationItem;
-    ToolBarItem* mAttributeItem;
 
     // Main menu members
     QMenu* mFileMenu;
@@ -78,6 +76,7 @@ private:
     QAction* mOpenAction;
     QAction* mCloseAction;
     QAction* mPrintAction;
+    QAction* mExportAction;
     
     // Edit Menu
     QAction* mUndoAction;
@@ -91,12 +90,21 @@ private:
     // Insert Menu
      
     // View Menu
+    QAction* mCenterAction;
+    QAction* mZoomInAction;
+    QAction* mZoomOutAction;
+    QAction* mUndoZoomAction;
     
     // Help Menu
     QAction* mAboutAction;
 
     // Generic cancel action
     QAction* mCancelAction;
+
+#ifdef Q_OS_MAC
+    // OSX only fullscreen action
+    QAction* mFullScreenAction;
+#endif
 
     QHash<QString, QCursor> mCursors;
 };
