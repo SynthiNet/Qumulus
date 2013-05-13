@@ -9,6 +9,9 @@
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QFileDialog>
 #include <QtSvg/QSvgGenerator>
+#include <QtPrintSupport/QPrinter>
+#include <QtPrintSupport/QPrintDialog>
+#include <QtPrintSupport/QPrintPreviewDialog>
 #include <Gui/Widgets/SideBar.h>
 #include <Gui/Widgets/ToolBar.h>
 #include <Gui/Widgets/StyleType.h>
@@ -208,6 +211,13 @@ void MainWindow::createMenus() {
     
     mPrintAction = new QAction(tr("&Print..."), this);
     mPrintAction->setShortcuts(QKeySequence::Print);
+    connect(mPrintAction, &QAction::triggered, [&]{
+            QPrinter printer;
+            if(QPrintDialog(&printer).exec() == QDialog::Accepted) {
+                QPainter painter(&printer);
+                painter.setRenderHint(QPainter::Antialiasing);
+                mEditorView->scene()->render(&painter);
+            }});
     
     mExportAction = new QAction(tr("&Export..."), this);
     connect(mExportAction, &QAction::triggered, [&]{
