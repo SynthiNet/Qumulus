@@ -37,17 +37,17 @@ Type* Operation::type() const {
         return nullptr;
 }
 
-QuUD::Label* Operation::diagramElement() const {
-    return static_cast<QuUD::Label*>(mDiagramElement);
+QuUD::FeatureLabel* Operation::diagramElement() const {
+    return static_cast<QuUD::FeatureLabel*>(mDiagramElement);
 }
 
 void Operation::updateDiagramElement(QuUD::Diagram*, QSizeF) {
     if(!mDiagramElement) {
-        mDiagramElement = new QuUD::Label(*name(), this, 
+        mDiagramElement = new QuUD::FeatureLabel(*name(), this, 
                 mClass->diagramElement());
     }
     
-    auto d = static_cast<QuUD::Label*>(mDiagramElement);
+    auto d = static_cast<QuUD::FeatureLabel*>(mDiagramElement);
     QString str = "";
 
     if(visibility()) {
@@ -109,14 +109,13 @@ void Operation::updateDiagramElement(QuUD::Diagram*, QSizeF) {
         str += " {query}";
     }
 
+
+    d->setStatic(isStatic());
+
     d->setText(str);
 
     d->resize(static_cast<QuUD::Shape*>(
                 mClass->diagramElement())->width(), 0);
-
-    if(isStatic()) {
-        d->setHtml(QString("<u>")+str+"</u>");
-    }
 }
 
 QUML_END_NAMESPACE_UK

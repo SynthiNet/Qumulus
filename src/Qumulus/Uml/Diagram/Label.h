@@ -32,8 +32,8 @@ public:
     QUML_CLONABLE(Label);
 protected:
     void setTextWidth(double w);
-private:
     QGraphicsTextItem* mTextItem;
+private:
     QString mText;
 };
 

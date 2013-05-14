@@ -41,17 +41,17 @@ QSet<Property*> Property::subsettedProperties() const {
     return QSet<Property*>();
 }
 
-QuUD::Label* Property::diagramElement() const {
-    return static_cast<QuUD::Label*>(mDiagramElement);
+QuUD::FeatureLabel* Property::diagramElement() const {
+    return static_cast<QuUD::FeatureLabel*>(mDiagramElement);
 }
 
 void Property::updateDiagramElement(QuUD::Diagram*, QSizeF) {
     if(!mDiagramElement) {
-        mDiagramElement = new QuUD::Label(*name(), this, 
+        mDiagramElement = new QuUD::FeatureLabel(*name(), this, 
                 mClass->diagramElement());
     }
     
-    auto d = static_cast<QuUD::Label*>(mDiagramElement);
+    auto d = static_cast<QuUD::FeatureLabel*>(mDiagramElement);
     QString str = "";
 
     if(visibility()) {
@@ -81,11 +81,9 @@ void Property::updateDiagramElement(QuUD::Diagram*, QSizeF) {
         str += " {readOnly}";
     }
 
-    d->setText(str);
+    d->setStatic(isStatic());
 
-    if(isStatic()) {
-        d->setHtml(QString("<u>")+str+"</u>");
-    }
+    d->setText(str);
 
     d->resize(static_cast<QuUD::Shape*>(
                 mClass->diagramElement())->width(), 0);

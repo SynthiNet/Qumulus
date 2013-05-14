@@ -19,7 +19,7 @@ class Operation;
 
 class Parameter : 
         public virtual MultiplicityElement, 
-        public virtual TypedElement{
+        public virtual TypedElement {
 public:
     Parameter(QString name, Operation* o = 0);
 
