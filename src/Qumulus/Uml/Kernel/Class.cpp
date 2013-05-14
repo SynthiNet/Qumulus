@@ -95,7 +95,7 @@ void Class::updateDiagramElement(QuUD::Diagram* diagram, QSizeF newsize) {
     auto size = g->mHeadCompartment->minimumSize();
     size.setWidth(std::max(g->mNameLabel->fullTextWidth(), 190) + 10);
     g->mHeadCompartment->setMinimumSize(size);
-    g->mHeadCompartment->setMaximumSize({newsize.width(), 20});
+    g->mHeadCompartment->setMaximumSize({size.width(), 20});
     g->mHeadCompartment->resize(0, 0);
     d->resize(newsize);
 
@@ -112,7 +112,7 @@ void Class::updateDiagramElement(QuUD::Diagram* diagram, QSizeF newsize) {
         offset += l->diagramElement()->sharedStyle()->fontHeight();
     }
 
-    g->mOperationsCompartment->setMinimumSize({200, offset + 10});
+    g->mOperationsCompartment->setMinimumSize({200, std::max(offset + 10, 40.0)});
 
     int oldoffset = offset;
     offset = 0;
@@ -124,7 +124,7 @@ void Class::updateDiagramElement(QuUD::Diagram* diagram, QSizeF newsize) {
         offset += l->diagramElement()->sharedStyle()->fontHeight();
     }
 
-    g->mAttributesCompartment->setMinimumSize({200, offset + 10});
+    g->mAttributesCompartment->setMinimumSize({200, std::max(offset + 10, 40.0)});
     d->setSizeHint({std::max(textwidth + 20, 200), oldoffset + offset + 50});
 
     d->resize(newsize);
