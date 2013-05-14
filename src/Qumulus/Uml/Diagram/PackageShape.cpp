@@ -1,24 +1,28 @@
 /*
  * Qumulus UML editor
  * Author: Frank Erens
+ * Author: Randy Thiemann
  *
  */
 
 #include "PackageShape.h"
+#include <QtGui/QBrush>
 
 QUML_BEGIN_NAMESPACE_UD
 
 PackageShape::PackageShape(QuUK::Element* e, 
         DiagramElement* p) :
-        Shape(e, p),
+        SelectableShape(e, p),
         mTabItem(new QGraphicsRectItem(0, 0, 30, 10, this)),
         mBodyItem(new QGraphicsRectItem(0, 10, 100, 50, this)) {
+    mTabItem->setBrush(QBrush(Qt::white));
+    mBodyItem->setBrush(QBrush(Qt::white));
     addToGroup(mTabItem);
     addToGroup(mBodyItem);
 }
 
 PackageShape::PackageShape(const PackageShape& c) :
-        Shape(c) {
+        SelectableShape(c) {
 
 }
 

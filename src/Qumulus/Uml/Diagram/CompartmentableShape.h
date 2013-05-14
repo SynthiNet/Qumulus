@@ -1,6 +1,7 @@
 /*
  * Qumulus UML editor
  * Author: Frank Erens
+ * Author: Randy Thiemann
  *
  */
 
@@ -9,13 +10,13 @@
 
 #include "internal_base.h"
 
-#include "Shape.h"
+#include "SelectableShape.h"
 
 #include "Compartment.h"
 
 QUML_BEGIN_NAMESPACE_UD
 
-class CompartmentableShape : public Shape {
+class CompartmentableShape : public SelectableShape {
 public:
     CompartmentableShape(QuUK::Element* e = 0, DiagramElement* p = 0);
     CompartmentableShape(const CompartmentableShape&);
@@ -29,9 +30,6 @@ public:
     void resize(double, double) override;
 
     QUML_CLONABLE(CompartmentableShape);
-
-protected:
-    QVariant itemChange(GraphicsItemChange change, const QVariant & value) override;
 
 private:
     QList<Compartment*> mCompartments;

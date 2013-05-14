@@ -1,6 +1,7 @@
 /*
  * Qumulus UML editor
  * Author: Frank Erens
+ * Author: Randy Thiemann
  *
  */
 
@@ -8,6 +9,7 @@
 #include "CompartmentableShape.h"
 
 #include <QtWidgets/QGraphicsRectItem>
+#include <QtGui/QBrush>
 
 QUML_BEGIN_NAMESPACE_UD
 
@@ -15,6 +17,7 @@ Compartment::Compartment(CompartmentableShape* p) :
         Shape(0, p),
         mRectItem(new QGraphicsRectItem(this)) {
     p->addCompartment(this);
+    mRectItem->setBrush(QBrush(Qt::white));
     addToGroup(mRectItem);
 }
 
