@@ -30,8 +30,8 @@ public:
 
     QUML_CLONABLE_ABSTRACT(Feature);
 private:
-    Classifier* mFeaturingClassifier;
-    bool mStatic;
+    Classifier* mFeaturingClassifier = nullptr;
+    bool mStatic = false;
 };
 
 QUML_END_NAMESPACE_UK
