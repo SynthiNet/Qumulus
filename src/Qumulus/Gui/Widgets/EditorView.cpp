@@ -8,6 +8,7 @@
 #include <QtCore/QDebug>
 #include <QtWidgets/QGraphicsRectItem>
 #include <Gui/Widgets/Popover.h>
+#include <QtWidgets/QApplication>
 
 #include <Uml/Kernel/PrimitiveType.h>
 #include <Uml/Kernel/Enumeration.h>
@@ -17,6 +18,7 @@
 #include <Uml/Kernel/Operation.h>
 #include <Uml/Kernel/Parameter.h>
 #include <Uml/Kernel/Property.h>
+#include <Uml/Diagram/SelectableShape.h>
 
 QUML_BEGIN_NAMESPACE_GW
 
@@ -31,6 +33,7 @@ EditorView::EditorView(QWidget* parent) : QGraphicsView(parent),
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
     setDragMode(QGraphicsView::RubberBandDrag);
     setFocusPolicy(Qt::StrongFocus);
+    setMouseTracking(true);
 
     mDiagram->setScene(mScene);
 
@@ -106,6 +109,25 @@ void EditorView::mousePressEvent(QMouseEvent* e) {
     }*/
 
     QGraphicsView::mousePressEvent(e);
+}
+
+void EditorView::mouseMoveEvent(QMouseEvent* e) {
+    for(auto i : scene()->selectedItems()) {
+        if(auto p = dynamic_cast<QuUD::SelectableShape*>(i)) {
+            if(p->shouldShowBDiag(mapToScene(e->pos()))) {
+                QApplication::setOverrideCursor(Qt::SizeBDiagCursor);
+                mCursorOverride = true;
+            } else if(p->shouldShowFDiag(mapToScene(e->pos()))) {
+                QApplication::setOverrideCursor(Qt::SizeFDiagCursor);
+                mCursorOverride = true;
+            } else {
+                mCursorOverride = false;
+                QApplication::restoreOverrideCursor();
+            }
+        }
+    }
+
+    QGraphicsView::mouseMoveEvent(e);
 }
 
 void EditorView::keyPressEvent(QKeyEvent* e) {
