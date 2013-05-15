@@ -24,6 +24,7 @@
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QAction>
 #include <QtWidgets/QMessageBox>
+#include <QtWidgets/QGraphicsItem>
 #include <QtGui/QCursor>
 #include <QtGui/QPixmap>
 #include <QtGui/QPdfWriter>
@@ -293,7 +294,19 @@ void MainWindow::createMenus() {
     mPasteAction->setShortcuts(QKeySequence::Paste);
     
     mDeleteAction = new QAction(tr("&Delete"), this);
-    mDeleteAction->setShortcuts(QKeySequence::Delete);
+    mDeleteAction->setShortcuts({QKeySequence(Qt::Key_Backspace),
+            QKeySequence(Qt::Key_Delete)});
+    connect(mDeleteAction, &QAction::triggered, [&]{
+            if(QApplication::focusWidget() == mEditorView) {
+                for(auto i : mEditorView->scene()->selectedItems()) {
+                    i->setVisible(false);
+                }
+            } else if(QApplication::focusWidget() == mSideBar) {
+                for(auto i : mSideBar->selectionModel()->selectedIndexes()) {
+                    // Do something with i here.
+                    (void) i;
+                }
+            }});
 
     mDuplicateAction = new QAction(tr("D&uplicate"), this);
     mDuplicateAction->setShortcuts({QKeySequence(tr("Ctrl+D"))});
