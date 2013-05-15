@@ -12,15 +12,32 @@
 
 QUML_BEGIN_NAMESPACE_UD
 
+enum class DragPosition {
+    None,
+    TopLeft,
+    TopRight,
+    BottomLeft,
+    BottomRight
+};
+
 class SelectableShape : public Shape {
 public:
     SelectableShape(QuUK::Element* e = 0, DiagramElement* p = 0);
     SelectableShape(const SelectableShape&);
+    QRectF boundingRect() const override;
 
     QUML_CLONABLE_ABSTRACT(SelectableShape);
 
 protected:
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
+            QWidget *widget) override;
+   void mouseMoveEvent(QGraphicsSceneMouseEvent* event) override;
+    void mousePressEvent(QGraphicsSceneMouseEvent* event) override;
+   void mouseReleaseEvent(QGraphicsSceneMouseEvent* event) override;
     QVariant itemChange(GraphicsItemChange change, const QVariant & value) override;
+
+private:
+    DragPosition mDragPosition = DragPosition::None;
 };
 
 QUML_END_NAMESPACE_UD

@@ -15,16 +15,18 @@ PackageShape::PackageShape(QuUK::Element* e,
         SelectableShape(e, p),
         mTabItem(new QGraphicsRectItem(0, 0, 30, 10, this)),
         mBodyItem(new QGraphicsRectItem(0, 10, 100, 50, this)) {
+    constexpr int kPackageZOrdering = -2;
     mTabItem->setBrush(QBrush(Qt::white));
     mBodyItem->setBrush(QBrush(Qt::white));
     addToGroup(mTabItem);
     addToGroup(mBodyItem);
+    setZValue(kPackageZOrdering);
 }
 
 PackageShape::PackageShape(const PackageShape& c) :
-        SelectableShape(c) {
+        SelectableShape(c) {}
 
-}
+
 
 void PackageShape::resize(double w, double h) {
      if(minimumSize().isValid()) {
