@@ -20,20 +20,15 @@ struct CommentGraphics;
 class Comment : public Element {
     friend struct CommentGraphics;
 public:
-    Comment(const QString& body = "", 
-            QSet<Element*> annotated = {});
+    Comment(const QString& body = "", Element* annotated = 0);
     ~Comment();
 
     const QString& body() const { return mBody; }
     void setBody(const QString& b) { mBody = b; }
 
-    QSet<Element*> annotatedElements() { 
-        return mAnnotatedElements;
-    }
+    Element* annotatedElement() const { return mAnnotatedElement; }
+    void setAnnotatedElement(Element* e) { mAnnotatedElement = e; }
     
-    const QSet<Element*> annotatedElements() const { 
-        return mAnnotatedElements;
-    }
 
     QuUD::CommentShape* diagramElement() const override;
     
@@ -42,7 +37,7 @@ public:
     QUML_CLONABLE(Comment);
 private:
     QString mBody;
-    QSet<Element*> mAnnotatedElements;
+    Element* mAnnotatedElement = nullptr;
 
     CommentGraphics* mGraphics = nullptr;
 };
