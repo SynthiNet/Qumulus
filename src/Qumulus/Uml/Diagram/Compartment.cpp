@@ -35,15 +35,11 @@ void Compartment::setCompartimentableShape(CompartmentableShape* s) {
 }
 
 void Compartment::resize(double w, double h) {
-    if(minimumSize().isValid()) {
-        w = std::max(w, minimumSize().width());
-        h = std::max(h, minimumSize().height());
-    }
+    w = minimumSize().width() == -1 ? w : std::max(w, minimumSize().width());
+    h = minimumSize().height() == -1 ? h : std::max(h, minimumSize().height());
 
-    if(maximumSize().isValid()) {
-        w = std::min(w, maximumSize().width());
-        h = std::min(h, maximumSize().height());
-    }
+    w = maximumSize().width() == -1 ? w : std::min(w, maximumSize().width());
+    h = maximumSize().height() == -1 ? h :std::min(h, maximumSize().height());
     
     mRectItem->setRect(0, 0, w, h);
 

@@ -28,10 +28,8 @@ CommentShape::CommentShape(const CommentShape& c) :
 }
 
 void CommentShape::resize(double w, double h) {
-     if(minimumSize().isValid()) {
-        w = std::max(w, minimumSize().width());
-        h = std::max(h, minimumSize().height());
-    }   
+    w = minimumSize().width() == -1 ? w : std::max(w, minimumSize().width());
+    h = minimumSize().height() == -1 ? h : std::max(h, minimumSize().height());
 
     QPolygonF poly({
         {w-20, 0},
