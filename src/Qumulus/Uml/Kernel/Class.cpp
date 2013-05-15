@@ -12,6 +12,7 @@
 
 #include <Uml/Diagram/ClassifierShape.h>
 #include <Uml/Diagram/NameLabel.h>
+#include <Lib/Core/Functional.h>
 
 QUML_BEGIN_NAMESPACE_UK
 
@@ -53,16 +54,6 @@ void Class::addOperation(Operation* c) {
 void Class::removeOperation(Operation* c) {
     mOwnedOperations.append(c);
     removeFeature(c);
-}
-
-void Class::addSuperClass(Class* c) {
-    mSuperClasses.insert(c);
-    addGeneralization(c);
-}
-
-void Class::removeSuperClass(Class* c) {
-    mSuperClasses.remove(c);
-    removeGeneralization(c);
 }
 
 void Class::updateDiagramElement(QuUD::Diagram* diagram, QSizeF newsize) {

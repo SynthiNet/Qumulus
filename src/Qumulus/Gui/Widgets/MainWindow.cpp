@@ -178,17 +178,17 @@ void MainWindow::populateToolbar() {
 
     // Relationship and submenu.
     mRelationshipItem = new ToolBarItem(
-            ElementItem("Relationship", 
-                    QIcon(":/data/img/toolbar/relationship.png"), 
-                    QKeySequence(tr("R")),
-                    [&]{setCursor(mCursors["relationship"]);}));
+            ElementItem("Package Membership", 
+                    QIcon(":/data/img/toolbar/package-membership.png"), 
+                    QKeySequence(tr("M")),
+                    [&]{setCursor(mCursors["package-membership"]);}));
 
     mRelationshipMenu = new ToolBarMenu();
     mRelationshipMenu->addItem(
-            ElementItem("Package Membership", 
-                    QIcon(":/data/img/toolbar/package-membership.png"),
-                    QKeySequence(tr("M")),
-                    [&]{setCursor(mCursors["package-membership"]);}));
+            ElementItem("Usage", 
+                    QIcon(":/data/img/toolbar/usage.png"),
+                    QKeySequence(tr("U")),
+                    [&]{setCursor(mCursors["usage"]);}));
     mRelationshipItem->setMenu(mRelationshipMenu);
     mToolBar->addWidget(mRelationshipItem);
 }
@@ -398,8 +398,8 @@ void MainWindow::createCursors() {
         QCursor(QPixmap(":/data/img/cursor/package.png"), -1, -1);
     mCursors["primitive"] = 
         QCursor(QPixmap(":/data/img/cursor/primitive.png"), -1, -1);
-    mCursors["relationship"] = 
-        QCursor(QPixmap(":/data/img/cursor/relationship.png"), -1, -1);
+    mCursors["usage"] = 
+        QCursor(QPixmap(":/data/img/cursor/usage.png"), -1, -1);
     mCursors["template-class"] = 
         QCursor(QPixmap(":/data/img/cursor/template-class.png"), -1, -1);
     mCursors["template-specialization"] = 

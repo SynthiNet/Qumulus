@@ -68,12 +68,10 @@ EditorView::EditorView(QWidget* parent) : QGraphicsView(parent),
     mDiagram->addElement(visibilityKind->diagramElement());
 
     // FIXME: this is temporary testing code!
-    QSet<QuUK::Element*> tmpset;
-    tmpset.insert(visibilityKind); // for some reason not initlist constructible
     auto comment = new QuUK::Comment(
             "VisibilityKind is an enumeration type that defines literals to "
             "determine the visibility of elements in a model.", 
-            tmpset);
+            visibilityKind);
     comment->updateDiagramElement(mDiagram, {200, 0});
     comment->diagramElement()->setPos(-250, 150);
     comment->diagramElement()->setVisible(true);

@@ -39,11 +39,20 @@ void Classifier::removeFeature(Feature* f) {
     removeOwnedMember(f);
 }
 
-void Classifier::addGeneralization(Classifier* c) {
+const QSet<Classifier*> Classifier::general() const {
+    QSet<Classifier*> toReturn;
+    for(Generalization* g : mGeneralizations) {
+        toReturn.insert(g->general());
+    }
+
+    return toReturn;
+}
+
+void Classifier::addGeneralization(Generalization* c) {
     mGeneralizations.insert(c);
 }
 
-void Classifier::removeGeneralization(Classifier* c) {
+void Classifier::removeGeneralization(Generalization* c) {
     mGeneralizations.remove(c);
 }
 

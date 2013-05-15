@@ -38,20 +38,12 @@ public:
     void addOperation(Operation* c);
     void removeOperation(Operation* c);
 
-    const QSet<Class*>& superClasses() const {
-        return mSuperClasses;
-    }
-
-    void addSuperClass(Class* c);
-    void removeSuperClass(Class* c);
-
     void updateDiagramElement(QuUD::Diagram*, QSizeF s = QSizeF()) override;
 
     QUML_CLONABLE(Class);
 private:
     QList<Classifier*> mNestedClassifiers;
     QList<Operation*> mOwnedOperations;
-    QSet<Class*> mSuperClasses;
     ClassGraphics* mGraphics;
 };
 

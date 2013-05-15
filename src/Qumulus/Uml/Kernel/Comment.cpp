@@ -20,9 +20,9 @@ struct CommentGraphics {
     QGraphicsTextItem* mText = nullptr;
 };
 
-Comment::Comment(const QString& body, QSet<Element*> annotated) :
+Comment::Comment(const QString& body, Element* annotated) :
         mBody(body), 
-        mAnnotatedElements(annotated) {
+        mAnnotatedElement(annotated) {
 
 }
 
