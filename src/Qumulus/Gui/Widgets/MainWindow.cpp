@@ -37,7 +37,8 @@ MainWindow::MainWindow() :
         mSideBar(new SideBar(this)),
         mSplitter(new QSplitter(this)),
         mStatusBar(new StatusBar(this)),
-        mEditorView(new EditorView(this)) {
+        mEditorView(new EditorView(this)),
+        mUndoStack(new QUndoStack(this)) {
     constexpr unsigned kWidth = 700, kHeight = 480, kSideWidth = 220;
     createCursors();
 
@@ -278,10 +279,10 @@ void MainWindow::createMenus() {
     mFileMenu->addAction(mQuitAction);    
     
     // Edit Menu
-    mUndoAction = new QAction(tr("&Undo"), this);
+    mUndoAction = mUndoStack->createUndoAction(this); 
     mUndoAction->setShortcuts(QKeySequence::Undo);
     
-    mRedoAction = new QAction(tr("&Redo"), this);
+    mRedoAction = mUndoStack->createRedoAction(this);
     mRedoAction->setShortcuts(QKeySequence::Redo);
     
     mCutAction = new QAction(tr("&Cut"), this);

@@ -11,6 +11,7 @@
 #include <QtWidgets/QMainWindow>
 #include <QtCore/QHash>
 #include <QtCore/QString>
+#include <QtWidgets/QUndoStack>
 
 class QMenu;
 class QSplitter;
@@ -35,6 +36,7 @@ public:
     ToolBar* toolBar() const { return mToolBar; }
     StatusBar* statusBar() const { return mStatusBar; }
     SideBar* sideBar() const { return mSideBar; }
+    QUndoStack* undoStack() const { return mUndoStack; }
 
 private:
     void createMenus();
@@ -47,6 +49,8 @@ private:
     QSplitter* mSplitter;
     StatusBar* mStatusBar;
     EditorView* mEditorView;
+
+    QUndoStack* mUndoStack;
 
     // Toolbar members;
     ToolBarItem* mClassItem;

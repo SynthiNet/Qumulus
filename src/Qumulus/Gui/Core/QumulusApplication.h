@@ -25,12 +25,15 @@ class QumulusApplication : public QApplication {
 public:
     QumulusApplication(int& argc, char** argv);
     QuGW::MainWindow* mainWindowForWidget(QWidget* w) const;
+    
+    QuGW::MainWindow* activeWindow() const;
 
 public slots:
     void onFocusChanged(QWidget* old, QWidget* now);
 
 private:
     QuGW::MainWindow* mMainWindow;
+    QuGW::MainWindow* mActiveWindow;
 };
 
 QUML_END_NAMESPACE_GC

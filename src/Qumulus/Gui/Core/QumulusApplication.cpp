@@ -49,6 +49,8 @@ void QumulusApplication::onFocusChanged(QWidget* old, QWidget* now) {
         w2->sideBar()->setStyleType(QuGW::StyleType::Active);
         w2->statusBar()->setStyleType(QuGW::StyleType::Active);
     }
+
+    mActiveWindow = w2;
 #endif
 }
 
