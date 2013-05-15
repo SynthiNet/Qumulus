@@ -12,6 +12,7 @@
 #include "Namespace.h"
 #include "Type.h"
 #include "RedefinableElement.h"
+#include "Generalization.h"
 
 #include <Uml/Diagram/ClassifierShape.h>
 
@@ -55,12 +56,12 @@ public:
     void addFeature(Feature* p);
     void removeFeature(Feature* f);
 
-    const QSet<Classifier*>& general() const {
-        return mGeneralizations;
-    }
+    const QSet<Classifier*> general() const;
 
-    void addGeneralization(Classifier* c);
-    void removeGeneralization(Classifier* c);
+    QSet<Generalization*> generalizations() const { return mGeneralizations; }
+
+    void addGeneralization(Generalization* g);
+    void removeGeneralization(Generalization* g);
 
     QuUD::ClassifierShape* diagramElement() const override;
 
@@ -71,7 +72,7 @@ private:
     bool mFinal = false;
     QList<Property*> mAttributes;
     QSet<Feature*> mFeatures;
-    QSet<Classifier*> mGeneralizations;
+    QSet<Generalization*> mGeneralizations;
 
 };
 
