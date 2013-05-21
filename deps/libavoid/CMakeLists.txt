@@ -32,3 +32,7 @@ set(LIBAVOID_SRC
 
 include_directories(..)
 add_library(avoid SHARED ${LIBAVOID_SRC})
+
+if(WIN32)
+    install(TARGETS avoid DESTINATION .)
+endif()
