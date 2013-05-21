@@ -86,7 +86,7 @@ void Class::updateDiagramElement(QuUD::Diagram* diagram, QSizeF newsize) {
     auto size = g->mHeadCompartment->minimumSize();
     size.setWidth(std::max(g->mNameLabel->fullTextWidth(), 190) + 10);
     g->mHeadCompartment->setMinimumSize(size);
-    g->mHeadCompartment->setMaximumSize({size.width(), 20});
+    g->mHeadCompartment->setMaximumSize({-1, 20});
     g->mHeadCompartment->resize(0, 0);
     d->resize(newsize);
 
@@ -131,7 +131,7 @@ ClassGraphics::ClassGraphics(Class* e) :
         mNameLabel(new QuUD::NameLabel(*(e->name()), e, mHeadCompartment)) {
     mNameLabel->setWidth(200);
     mHeadCompartment->setMinimumSize(QSize(200, 20));
-    mHeadCompartment->setMaximumSize(QSize(200, 20));
+    mHeadCompartment->setMaximumSize(QSize(-1, 20));
     mAttributesCompartment->setMinimumSize(QSize(200, 40));
     mOperationsCompartment->setMinimumSize(QSize(200, 40));
 
