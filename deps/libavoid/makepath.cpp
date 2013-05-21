@@ -40,7 +40,7 @@
 #include "libavoid/debug.h"
 #include "libavoid/assertions.h"
 
-#include "math.h"
+#include "mathconst.h"
 
 namespace Avoid {
 

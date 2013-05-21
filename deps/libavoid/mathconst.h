@@ -2,8 +2,8 @@
  * Author: Frank Erens
  */
 
-#ifndef AVOID_MATH_H
-#define AVOID_MATH_H
+#ifndef AVOID_MATHCONST_H
+#define AVOID_MATHCONST_H
 
 // <Frank Erens> For some reason, MinGW does not define M_PI while 
 //               GCC does. I guess MinGW simply uses the MSFT C library
