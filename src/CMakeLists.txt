@@ -111,8 +111,6 @@ elseif(WIN32)
         " COMPONENT RUNTIME)
 
     install(FILES ${QT5_LIBRARY_DIR}/libEGL.dll DESTINATION .)
-
-    install(TARGETS avoid ${CMAKE_INSTALL_PREFIX}/${BINARY_DEST})
 endif()
 
 
