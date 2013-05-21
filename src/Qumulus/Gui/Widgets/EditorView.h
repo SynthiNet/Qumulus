@@ -29,6 +29,7 @@ public slots:
 
 protected:
     void mousePressEvent(QMouseEvent* event) override;
+    void mouseMoveEvent(QMouseEvent* event) override;
     void keyPressEvent(QKeyEvent* event) override;
     void keyReleaseEvent(QKeyEvent* event) override;
 
@@ -36,6 +37,7 @@ private:
     QGraphicsScene* mScene;
     Popover* mPopover;
     QuUD::Diagram* mDiagram;
+    bool mCursorOverride = false;
 };
 
 QUML_END_NAMESPACE_GW

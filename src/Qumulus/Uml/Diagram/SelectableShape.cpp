@@ -37,12 +37,40 @@ void SelectableShape::paint(QPainter* p, const QStyleOptionGraphicsItem* o,
     }
 }
 
+bool SelectableShape::isInsideCircle(int x, int y, int cx, 
+        int cy, int cw, int ch) const {
+    QRegion region(cx, cy, cw, ch);
+    return region.contains({x, y});
+}
+
+bool SelectableShape::shouldShowBDiag(QPointF p) const {
+    int x = mapFromScene(p).x();
+    int y = mapFromScene(p).y();
+
+    if(isInsideCircle(x, y, -8, height(), 9, 9) || 
+            isInsideCircle(x, y, width(), -8, 9, 9)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+bool SelectableShape::shouldShowFDiag(QPointF p) const {
+    int x = mapFromScene(p).x();
+    int y = mapFromScene(p).y();
+
+    if(isInsideCircle(x, y, -8, -8, 9, 9) || 
+            isInsideCircle(x, y, width(), height(), 9, 9)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
 void SelectableShape::mousePressEvent(QGraphicsSceneMouseEvent *e) {
     int x = e->pos().x();
     int y = e->pos().y();
-    auto isInsideCircle = [](int x, int y, int cx, int cy, int cw, int ch){ 
-        QRegion region(cx, cy, cw, ch);
-        return region.contains({x, y});};
 
     if(isInsideCircle(x, y, -8, -8, 9, 9)) {
         mDragPosition = DragPosition::TopLeft;
@@ -123,7 +151,6 @@ void SelectableShape::mouseMoveEvent(QGraphicsSceneMouseEvent *e) {
         //FIXME: Call doesn't work, why?
         //modelElement()->updateDiagramElement(nullptr, {w, h});
     } else {
-        qDebug() << "Not Dragging";
         Shape::mouseMoveEvent(e);
     }
 }
