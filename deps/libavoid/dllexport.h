@@ -26,7 +26,7 @@
 #ifndef AVOID_DLLEXPORT_H
 #define AVOID_DLLEXPORT_H
 
-#ifdef _MSC_VER
+#ifdef WIN32
 	#ifdef LIBAVOID_EXPORTS
 		#define AVOID_EXPORT __declspec(dllexport)
 	#else

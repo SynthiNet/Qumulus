@@ -31,6 +31,7 @@ set(LIBAVOID_SRC
 )
 
 include_directories(..)
+add_definitions(-DLIBAVOID_EXPORTS)
 add_library(avoid SHARED ${LIBAVOID_SRC})
 
 if(WIN32)
