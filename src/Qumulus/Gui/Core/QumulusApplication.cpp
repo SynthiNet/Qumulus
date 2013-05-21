@@ -16,9 +16,10 @@ QumulusApplication::QumulusApplication(int& argc, char** argv) :
     QApplication(argc, argv)  {
     connect(this, &QumulusApplication::focusChanged, 
             this, &QumulusApplication::onFocusChanged);
-#ifdef Q_OS_MAC
-    setQuitOnLastWindowClosed(false);
-#endif
+// TODO: implement proper multi-document support on OS X.
+// #ifdef Q_OS_MAC
+//     setQuitOnLastWindowClosed(false);
+// #endif
 }
 
 QuGW::MainWindow* QumulusApplication::mainWindowForWidget(QWidget* w) const {
