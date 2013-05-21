@@ -39,6 +39,8 @@
 #include "libavoid/geomtypes.h"
 #include "libavoid/assertions.h"
 
+#include "math.h"
+
 namespace Avoid {
 
 

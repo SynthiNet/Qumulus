@@ -40,6 +40,8 @@
 #include "libavoid/debug.h"
 #include "libavoid/assertions.h"
 
+#include "math.h"
+
 namespace Avoid {
 
 class ANode
