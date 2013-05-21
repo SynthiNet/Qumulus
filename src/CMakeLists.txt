@@ -20,6 +20,7 @@ endif()
 include_directories(
     Qumulus 
     ${QTMACEXTRAS_INCLUDE_DIRS}
+    ${LIBAVOID_INCLUDE_DIRS}
     ${Qt5Gui_PRIVATE_INCLUDE_DIRS}
 )
 
@@ -50,15 +51,13 @@ add_executable(${QUMULUS} WIN32 MACOSX_BUNDLE
 
 target_link_libraries(${QUMULUS} quml 
     ${Qt5Core_QTMAIN_LIBRARIES}
-    ${QTMACEXTRAS_LIBRARIES})
+    ${QTMACEXTRAS_LIBRARIES}
+    ${LIBAVOID_LIBRARIES})
 qt5_use_modules(${QUMULUS} Widgets PrintSupport Svg Xml)
 
 if(APPLE)
     set_target_properties(${QUMULUS} PROPERTIES
         MACOSX_BUNDLE_INFO_PLIST ${PLIST_PATH})
-
-
-
 endif()
 
 # Installation
@@ -93,7 +92,7 @@ if(APPLE)
         include(BundleUtilities)
         fixup_bundle(\${CMAKE_INSTALL_PREFIX}/${QUMULUS}.app 
             \"\${QTPLUGINS}\" 
-            \"${QT5_LIBRARY_DIR};${QTMACEXTRAS_LIBRARY_DIR}\")
+            \"${QT5_LIBRARY_DIR};${QTMACEXTRAS_LIBRARY_DIR};${LIBAVOID_LIBRARY_DIR}\")
         " COMPONENT Runtime)
 elseif(WIN32)
     # Install required libraries
@@ -112,6 +111,8 @@ elseif(WIN32)
         " COMPONENT RUNTIME)
 
     install(FILES ${QT5_LIBRARY_DIR}/libEGL.dll DESTINATION .)
+
+    install(TARGETS avoid ${CMAKE_INSTALL_PREFIX}/${BINARY_DEST})
 endif()
 
 

@@ -117,6 +117,12 @@ if(APPLE)
     set(QTMACEXTRAS_LIBRARY_DIR ${CMAKE_BINARY_DIR}/deps/QtMacExtras)
 endif()
 
+# libavoid
+add_subdirectory(deps/libavoid)
+set(LIBAVOID_LIBRARIES avoid)
+set(LIBAVOID_INCLUDE_DIRS ${CMAKE_SOURCE_DIR}/deps)
+set(LIBAVOID_LIBRARY_DIR ${CMAKE_BINARY_DIR}/deps/libavoid)
+
 add_subdirectory(src)
 add_subdirectory(deps/gtest EXCLUDE_FROM_ALL)
 add_subdirectory(test)
