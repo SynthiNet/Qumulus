@@ -29,6 +29,7 @@ public:
 
     void resize(QSizeF s) { resize(s.width(), s.height()); }
     virtual void resize(double w, double h) = 0;
+    virtual void updateSizeConstraints() = 0;
 
     QSizeF minimumSize() const { return mMinimumSize; }
     void setMinimumSize(QSizeF s) { mMinimumSize = s; }
