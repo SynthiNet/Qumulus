@@ -10,7 +10,7 @@
 
 #include "internal_base.h"
 
-#include "Shape.h"
+#include "DiagramElement.h"
 
 class QGraphicsRectItem;
 
@@ -18,7 +18,7 @@ QUML_BEGIN_NAMESPACE_GD
 
 class CompartmentableShape;
 
-class Compartment : public Shape {
+class Compartment : public DiagramElement {
     friend class CompartmentableShape;
 public:
     Compartment(CompartmentableShape* p = 0);
@@ -27,21 +27,16 @@ public:
     CompartmentableShape* compartmentableShape() const;
     void setCompartimentableShape(CompartmentableShape* s);
 
-    using Shape::resize;
-
-    /**
-     * @note: This should never be called directly. Use
-     * CompartmentableShape::resize() instead.
-     */
-    void resize(double, double) override;
-
-    // These are not used -- all drawing is done by CompartmentableShape
-    QRectF boundingRect() const override;
-    void paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget*) override;
+    float minimumHeight() const { return mMinimumHeight; }
+    void setMinimumHeight(float f) { mMinimumHeight = f; }
+    float maximumHeight() const { return mMaximumHeight; }
+    void setMaximumHeight(float f) { mMaximumHeight = f; }
 
     QUML_CLONABLE(Compartment);
 private:
     QGraphicsRectItem* mRectItem;
+    float mMinimumHeight = 0;
+    float mMaximumHeight = 0;
 };
 
 QUML_END_NAMESPACE_GD
