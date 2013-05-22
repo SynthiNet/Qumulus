@@ -38,6 +38,9 @@ void PackageShape::resize(double w, double h) {
 
 void PackageShape::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, 
         QWidget* widget) {
+    updateSizeConstraints();
+    resize(size());
+
     painter->setBrush(Qt::white);
 
     painter->drawRect(0, 0, 30, 10);
