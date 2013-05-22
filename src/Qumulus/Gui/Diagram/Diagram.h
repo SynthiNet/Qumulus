@@ -14,7 +14,23 @@
 
 class QGraphicsScene;
 
+QUML_BEGIN_NAMESPACE_UK
+
+class Package;
+class Comment;
+class Class;
+class PrimitiveType;
+class Enumeration;
+
+QUML_END_NAMESPACE_UK
+
 QUML_BEGIN_NAMESPACE_GD
+
+class PackageShape;
+class CommentShape;
+class PrimitiveShape;
+class ClassShape;
+class EnumShape;
 
 class Diagram : public DiagramElement {
 public:
@@ -27,6 +43,12 @@ public:
 
     double resolution() const { return mResolution; }
     void setResolution(double r) { mResolution = r; }
+
+    PackageShape* createShape(QuUK::Package*) const;
+    CommentShape* createShape(QuUK::Comment*) const;
+    PrimitiveShape* createShape(QuUK::PrimitiveType*) const;
+    ClassShape* createShape(QuUK::Class*) const;
+    EnumShape* createShape(QuUK::Enumeration*) const;
 
     void addElement(DiagramElement* e);
     void removeElement(DiagramElement* e);

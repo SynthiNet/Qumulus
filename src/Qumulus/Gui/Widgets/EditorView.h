@@ -10,7 +10,7 @@
 #include "internal_base.h"
 #include <QtWidgets/QGraphicsView>
 #include <QtGui/QMouseEvent>
-#include <Uml/Diagram/Diagram.h>
+#include <Gui/Diagram/Diagram.h>
 
 QUML_BEGIN_NAMESPACE_GW
 
@@ -22,7 +22,7 @@ class EditorView : public QGraphicsView {
 public:
     EditorView(QWidget* parent = 0);
     ~EditorView() noexcept;
-    const QuUD::Diagram* diagram() const { return mDiagram; }
+    const QuGD::Diagram* diagram() const { return mDiagram; }
 
 public slots:
     void zoom(double value);
@@ -36,7 +36,7 @@ protected:
 private:
     QGraphicsScene* mScene;
     Popover* mPopover;
-    QuUD::Diagram* mDiagram;
+    QuGD::Diagram* mDiagram;
     bool mCursorOverride = false;
 };
 

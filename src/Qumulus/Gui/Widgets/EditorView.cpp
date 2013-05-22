@@ -18,14 +18,14 @@
 #include <Uml/Kernel/Operation.h>
 #include <Uml/Kernel/Parameter.h>
 #include <Uml/Kernel/Property.h>
-#include <Uml/Diagram/SelectableShape.h>
+#include <Gui/Diagram/SelectableShape.h>
 
 QUML_BEGIN_NAMESPACE_GW
 
 EditorView::EditorView(QWidget* parent) : QGraphicsView(parent), 
         mScene(new QGraphicsScene(this)),
         mPopover(nullptr),
-        mDiagram(new QuUD::Diagram()) {
+        mDiagram(new QuGD::Diagram()) {
     setScene(mScene);
     mScene->setBackgroundBrush(QBrush(Qt::white, Qt::SolidPattern));
     setSceneRect(-20000.0, -20000.0, 40000.0, 40000.0);
@@ -37,6 +37,7 @@ EditorView::EditorView(QWidget* parent) : QGraphicsView(parent),
 
     mDiagram->setScene(mScene);
 
+#if 0
     // FIXME: this is temporary testing code!
     auto boolean = new QuUK::PrimitiveType("bool");
     boolean->updateDiagramElement(mDiagram);
@@ -86,6 +87,7 @@ EditorView::EditorView(QWidget* parent) : QGraphicsView(parent),
     package->diagramElement()->setVisible(true);
     package->diagramElement()->setPos(-200, -100);
     mDiagram->addElement(package->diagramElement());
+#endif
 }
 
 EditorView::~EditorView() noexcept {
@@ -113,7 +115,7 @@ void EditorView::mousePressEvent(QMouseEvent* e) {
 
 void EditorView::mouseMoveEvent(QMouseEvent* e) {
     for(auto i : scene()->selectedItems()) {
-        if(auto p = dynamic_cast<QuUD::SelectableShape*>(i)) {
+        if(auto p = dynamic_cast<QuGD::SelectableShape*>(i)) {
             if(p->shouldShowBDiag(mapToScene(e->pos()))) {
                 QApplication::setOverrideCursor(Qt::SizeBDiagCursor);
                 mCursorOverride = true;

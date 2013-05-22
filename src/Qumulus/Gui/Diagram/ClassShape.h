@@ -13,15 +13,15 @@
 
 QUML_BEGIN_NAMESPACE_GD
 
-class ClassifierShape : public CompartmentableShape {
+class ClassShape : public CompartmentableShape {
 public:
-    ClassifierShape(QuUK::Element* e = 0, DiagramElement* p = 0);
-    ClassifierShape(const ClassifierShape&);
+    ClassShape(QuUK::Element* e = 0, DiagramElement* p = 0);
+    ClassShape(const ClassShape&);
 
     bool indentForVisibility() const { return mIndentForVisibilty; }
     void setIndentForVisibility(bool b) { mIndentForVisibilty = b; }
 
-    QUML_CLONABLE(ClassifierShape);
+    QUML_CLONABLE(ClassShape);
 private:
     bool mIndentForVisibilty = false;
 };

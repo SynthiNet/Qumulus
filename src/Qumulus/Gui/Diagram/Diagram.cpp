@@ -9,6 +9,8 @@
 
 #include "Shape.h"
 
+#include <Lib/Core/Nyi.h>
+
 #include <QtWidgets/QGraphicsScene>
 
 QUML_BEGIN_NAMESPACE_GD
@@ -54,6 +56,31 @@ void Diagram::removeElement(DiagramElement* e) {
 
 void Diagram::setScene(QGraphicsScene* e) {
     mScene = e;
+}
+
+PackageShape* Diagram::createShape(QuUK::Package*) const {
+    NYI();
+    return nullptr;
+}
+
+CommentShape* Diagram::createShape(QuUK::Comment*) const {
+    NYI();
+    return nullptr;
+}
+
+PrimitiveShape* Diagram::createShape(QuUK::PrimitiveType*) const {
+    NYI();
+    return nullptr;
+}
+
+ClassShape* Diagram::createShape(QuUK::Class*) const {
+    NYI();
+    return nullptr;
+}
+
+EnumShape* Diagram::createShape(QuUK::Enumeration*) const {
+    NYI();
+    return nullptr;
 }
 
 QUML_END_NAMESPACE_GD

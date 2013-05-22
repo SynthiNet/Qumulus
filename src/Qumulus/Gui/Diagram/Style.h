@@ -26,10 +26,6 @@ public:
     void setFontSize(double d) { (*this)["fontSize"] = QString::number(d); }
 
     QFont font() const { return QFont(fontName(), fontSize()); }
-    QFontMetrics fontMetrics() const { return QFontMetrics(font()); }
-
-    int fontHeight() const { return fontMetrics().height(); }
-    int textWidth(const QString& t) const { return fontMetrics().width(t); }
 };
 
 QUML_END_NAMESPACE_GD

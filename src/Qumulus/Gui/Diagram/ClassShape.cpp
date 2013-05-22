@@ -4,16 +4,16 @@
  *
  */
 
-#include "ClassifierShape.h"
+#include "ClassShape.h"
 
 QUML_BEGIN_NAMESPACE_GD
 
-ClassifierShape::ClassifierShape(QuUK::Element* e, DiagramElement* p) : 
+ClassShape::ClassShape(QuUK::Element* e, DiagramElement* p) : 
         CompartmentableShape(e, p) {
 
 }
 
-ClassifierShape::ClassifierShape(const ClassifierShape& s) :
+ClassShape::ClassShape(const ClassShape& s) :
         CompartmentableShape(s) {
 
 }
