@@ -54,7 +54,7 @@ void CommentShape::resize(double w, double h) {
 }
 
 void CommentShape::updateSizeConstraints() {
-
+    setMinimumSize({100, 40});
 }
 
 QUML_END_NAMESPACE_GD
