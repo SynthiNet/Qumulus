@@ -8,11 +8,20 @@
 #include "Style.h"
 
 #include "Shape.h"
+
 #include "PackageShape.h"
+#include "CommentShape.h"
+#include "PrimitiveShape.h"
+#include "ClassShape.h"
+#include "EnumShape.h"
 
 #include <Lib/Core/Nyi.h>
 
 #include <Uml/Kernel/Package.h>
+#include <Uml/Kernel/Comment.h>
+#include <Uml/Kernel/PrimitiveType.h>
+#include <Uml/Kernel/Class.h>
+#include <Uml/Kernel/Enumeration.h>
 
 #include <QtWidgets/QGraphicsScene>
 
@@ -67,24 +76,28 @@ PackageShape* Diagram::createShape(QuUK::Package* p) {
     return pshape;
 }
 
-CommentShape* Diagram::createShape(QuUK::Comment*) {
-    NYI();
-    return nullptr;
+CommentShape* Diagram::createShape(QuUK::Comment* c) {
+    auto cshape = new CommentShape(c, this);
+    addElement(cshape);
+    return cshape;
 }
 
-PrimitiveShape* Diagram::createShape(QuUK::PrimitiveType*) {
-    NYI();
-    return nullptr;
+PrimitiveShape* Diagram::createShape(QuUK::PrimitiveType* p) {
+    auto pshape = new PrimitiveShape(p, this);
+    addElement(pshape);
+    return pshape;
 }
 
-ClassShape* Diagram::createShape(QuUK::Class*) {
-    NYI();
-    return nullptr;
+ClassShape* Diagram::createShape(QuUK::Class* c) {
+    auto cshape = new ClassShape(c, this);
+    addElement(cshape);
+    return cshape;
 }
 
-EnumShape* Diagram::createShape(QuUK::Enumeration*) {
-    NYI();
-    return nullptr;
+EnumShape* Diagram::createShape(QuUK::Enumeration* e) {
+    auto eshape = new EnumShape(e, this);
+    addElement(eshape);
+    return eshape;
 }
 
 QUML_END_NAMESPACE_GD

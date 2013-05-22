@@ -4,8 +4,8 @@
  *
  */
 
-#ifndef UML_DIAGRAM_CLASSIFIERSHAPE_H_
-#define UML_DIAGRAM_CLASSIFIERSHAPE_H_
+#ifndef UML_DIAGRAM_CLASSSHAPE_H_
+#define UML_DIAGRAM_CLASSSHAPE_H_
 
 #include "internal_base.h"
 
@@ -30,5 +30,5 @@ private:
 QUML_END_NAMESPACE_GD
 
 
-#endif /* UML_DIAGRAM_CLASSIFIERSHAPE_H_ */
+#endif /* UML_DIAGRAM_CLASSSHAPE_H_ */
 
