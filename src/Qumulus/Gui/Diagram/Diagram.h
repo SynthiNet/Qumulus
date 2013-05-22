@@ -44,11 +44,11 @@ public:
     double resolution() const { return mResolution; }
     void setResolution(double r) { mResolution = r; }
 
-    PackageShape* createShape(QuUK::Package*) const;
-    CommentShape* createShape(QuUK::Comment*) const;
-    PrimitiveShape* createShape(QuUK::PrimitiveType*) const;
-    ClassShape* createShape(QuUK::Class*) const;
-    EnumShape* createShape(QuUK::Enumeration*) const;
+    PackageShape* createShape(QuUK::Package*);
+    CommentShape* createShape(QuUK::Comment*);
+    PrimitiveShape* createShape(QuUK::PrimitiveType*);
+    ClassShape* createShape(QuUK::Class*);
+    EnumShape* createShape(QuUK::Enumeration*);
 
     void addElement(DiagramElement* e);
     void removeElement(DiagramElement* e);

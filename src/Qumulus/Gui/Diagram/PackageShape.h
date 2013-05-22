@@ -29,6 +29,7 @@ public:
 
     QUML_CLONABLE(PackageShape);
 private:
+    QString packageName() const;
 };
 
 QUML_END_NAMESPACE_GD

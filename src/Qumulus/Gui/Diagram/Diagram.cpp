@@ -8,8 +8,11 @@
 #include "Style.h"
 
 #include "Shape.h"
+#include "PackageShape.h"
 
 #include <Lib/Core/Nyi.h>
+
+#include <Uml/Kernel/Package.h>
 
 #include <QtWidgets/QGraphicsScene>
 
@@ -58,27 +61,28 @@ void Diagram::setScene(QGraphicsScene* e) {
     mScene = e;
 }
 
-PackageShape* Diagram::createShape(QuUK::Package*) const {
+PackageShape* Diagram::createShape(QuUK::Package* p) {
+    auto pshape = new PackageShape(p, this);
+    addElement(pshape);
+    return pshape;
+}
+
+CommentShape* Diagram::createShape(QuUK::Comment*) {
     NYI();
     return nullptr;
 }
 
-CommentShape* Diagram::createShape(QuUK::Comment*) const {
+PrimitiveShape* Diagram::createShape(QuUK::PrimitiveType*) {
     NYI();
     return nullptr;
 }
 
-PrimitiveShape* Diagram::createShape(QuUK::PrimitiveType*) const {
+ClassShape* Diagram::createShape(QuUK::Class*) {
     NYI();
     return nullptr;
 }
 
-ClassShape* Diagram::createShape(QuUK::Class*) const {
-    NYI();
-    return nullptr;
-}
-
-EnumShape* Diagram::createShape(QuUK::Enumeration*) const {
+EnumShape* Diagram::createShape(QuUK::Enumeration*) {
     NYI();
     return nullptr;
 }
