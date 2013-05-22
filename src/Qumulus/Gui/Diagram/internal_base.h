@@ -9,15 +9,15 @@
 
 
 // Code here
-#define QUML_BEGIN_NAMESPACE_UD \
-    namespace Qumulus { namespace Uml { namespace Diagram {
+#define QUML_BEGIN_NAMESPACE_GD \
+    namespace Qumulus { namespace Gui { namespace Diagram {
 
-#define QUML_END_NAMESPACE_UD }}}
+#define QUML_END_NAMESPACE_GD }}}
 
-QUML_BEGIN_NAMESPACE_UD
-QUML_END_NAMESPACE_UD
+QUML_BEGIN_NAMESPACE_GD
+QUML_END_NAMESPACE_GD
 
-namespace QuUD = Qumulus::Uml::Diagram;
+namespace QuGD = Qumulus::Gui::Diagram;
 
 #endif /* UML_DIAGRAM_INTERNAL_BASE_H_ */
 
