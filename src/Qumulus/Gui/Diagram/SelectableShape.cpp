@@ -30,10 +30,10 @@ void SelectableShape::paint(QPainter* p, const QStyleOptionGraphicsItem* o,
 
     if(isSelected()) {
         p->setBrush(QBrush({64, 193, 255}));
-        p->drawEllipse(-6,-6,7,7);
-        p->drawEllipse(-6,height()-1,7,7);
-        p->drawEllipse(width()-1,-6,7,7);
-        p->drawEllipse(width()-1,height()-1,7,7);
+        p->drawEllipse(-3,-3,7,7);
+        p->drawEllipse(-3,height()-3,7,7);
+        p->drawEllipse(width()-3,-3,7,7);
+        p->drawEllipse(width()-3,height()-3,7,7);
     }
 }
 
@@ -47,8 +47,8 @@ bool SelectableShape::shouldShowBDiag(QPointF p) const {
     int x = mapFromScene(p).x();
     int y = mapFromScene(p).y();
 
-    if(isInsideCircle(x, y, -8, height(), 9, 9) || 
-            isInsideCircle(x, y, width(), -8, 9, 9)) {
+    if(isInsideCircle(x, y, -4, height()-2, 9, 9) || 
+            isInsideCircle(x, y, width()-2, -4, 9, 9)) {
         return true;
     } else {
         return false;
@@ -59,8 +59,8 @@ bool SelectableShape::shouldShowFDiag(QPointF p) const {
     int x = mapFromScene(p).x();
     int y = mapFromScene(p).y();
 
-    if(isInsideCircle(x, y, -8, -8, 9, 9) || 
-            isInsideCircle(x, y, width(), height(), 9, 9)) {
+    if(isInsideCircle(x, y, -4, -4, 9, 9) || 
+            isInsideCircle(x, y, width()-2, height()-2, 9, 9)) {
         return true;
     } else {
         return false;
@@ -72,13 +72,13 @@ void SelectableShape::mousePressEvent(QGraphicsSceneMouseEvent *e) {
     int x = e->pos().x();
     int y = e->pos().y();
 
-    if(isInsideCircle(x, y, -8, -8, 9, 9)) {
+    if(isInsideCircle(x, y, -4, -4, 9, 9)) {
         mDragPosition = DragPosition::TopLeft;
-    } else if(isInsideCircle(x, y, -8, height(), 9, 9)) {
+    } else if(isInsideCircle(x, y, -4, height()-2, 9, 9)) {
         mDragPosition = DragPosition::BottomLeft;
-    } else if(isInsideCircle(x, y, width(), -8, 9, 9)) {
+    } else if(isInsideCircle(x, y, width()-2, -4, 9, 9)) {
         mDragPosition = DragPosition::TopRight;
-    } else if(isInsideCircle(x, y, width(), height(), 9, 9)) {
+    } else if(isInsideCircle(x, y, width()-2, height()-2, 9, 9)) {
         mDragPosition = DragPosition::BottomRight;
     }
 
