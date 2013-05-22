@@ -6,7 +6,7 @@
 
 #include "NameLabel.h"
 
-QUML_BEGIN_NAMESPACE_UD
+QUML_BEGIN_NAMESPACE_GD
 
 NameLabel::NameLabel(QuUK::Element* e, DiagramElement* p) :
         Label(e, p) {
@@ -40,5 +40,5 @@ void NameLabel::resize(double w, double) {
 }
 
 
-QUML_END_NAMESPACE_UD
+QUML_END_NAMESPACE_GD
 

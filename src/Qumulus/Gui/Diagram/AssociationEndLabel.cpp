@@ -6,7 +6,7 @@
 
 #include "AssociationEndLabel.h"
 
-QUML_BEGIN_NAMESPACE_UD
+QUML_BEGIN_NAMESPACE_GD
 
 AssociationEndLabel::AssociationEndLabel(QuUK::Element* e, 
         DiagramElement* p) :
@@ -23,4 +23,4 @@ AssociationEndLabel::AssociationEndLabel(const AssociationEndLabel& l) :
         Label(l) {
 
 }
-QUML_END_NAMESPACE_UD
+QUML_END_NAMESPACE_GD

@@ -8,7 +8,7 @@
 #include "PackageShape.h"
 #include <QtGui/QBrush>
 
-QUML_BEGIN_NAMESPACE_UD
+QUML_BEGIN_NAMESPACE_GD
 
 PackageShape::PackageShape(QuUK::Element* e, 
         DiagramElement* p) :
@@ -37,5 +37,5 @@ void PackageShape::resize(double w, double h) {
     setSize({w, h});
 }
 
-QUML_END_NAMESPACE_UD
+QUML_END_NAMESPACE_GD
 

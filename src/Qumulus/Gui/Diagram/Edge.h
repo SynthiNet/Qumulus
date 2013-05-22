@@ -11,7 +11,7 @@
 
 #include "Shape.h"
 
-QUML_BEGIN_NAMESPACE_UD
+QUML_BEGIN_NAMESPACE_GD
 
 class Edge : public Shape {
 public:
@@ -34,7 +34,7 @@ private:
     QList<QPoint> mWaypoints;
 };
 
-QUML_END_NAMESPACE_UD
+QUML_END_NAMESPACE_GD
 
 #endif /* UML_DIAGRAM_EDGE_H_ */
 

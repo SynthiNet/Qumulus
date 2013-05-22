@@ -14,7 +14,7 @@
 
 #include "Compartment.h"
 
-QUML_BEGIN_NAMESPACE_UD
+QUML_BEGIN_NAMESPACE_GD
 
 class CompartmentableShape : public SelectableShape {
 public:
@@ -35,7 +35,7 @@ private:
     QList<Compartment*> mCompartments;
 };
 
-QUML_END_NAMESPACE_UD
+QUML_END_NAMESPACE_GD
 
 #endif /* UML_DIAGRAM_COMPARTMENTABLESHAPE_H_ */
 

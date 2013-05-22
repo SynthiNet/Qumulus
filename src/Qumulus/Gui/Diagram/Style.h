@@ -15,7 +15,7 @@
 #include <QtGui/QFont>
 #include <QtGui/QFontMetrics>
 
-QUML_BEGIN_NAMESPACE_UD
+QUML_BEGIN_NAMESPACE_GD
 
 class Style : public QHash<QString, QString> {
 public:
@@ -32,7 +32,7 @@ public:
     int textWidth(const QString& t) const { return fontMetrics().width(t); }
 };
 
-QUML_END_NAMESPACE_UD
+QUML_END_NAMESPACE_GD
 
 #endif /* UML_DIAGRAM_STYLE_H_ */
 

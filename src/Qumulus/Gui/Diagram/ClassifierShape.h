@@ -11,7 +11,7 @@
 
 #include "CompartmentableShape.h"
 
-QUML_BEGIN_NAMESPACE_UD
+QUML_BEGIN_NAMESPACE_GD
 
 class ClassifierShape : public CompartmentableShape {
 public:
@@ -26,7 +26,7 @@ private:
     bool mIndentForVisibilty = false;
 };
 
-QUML_END_NAMESPACE_UD
+QUML_END_NAMESPACE_GD
 
 
 #endif /* UML_DIAGRAM_CLASSIFIERSHAPE_H_ */

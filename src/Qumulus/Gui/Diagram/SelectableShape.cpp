@@ -13,7 +13,7 @@
 #include <Uml/Kernel/Element.h>
 #include <functional>
 
-QUML_BEGIN_NAMESPACE_UD
+QUML_BEGIN_NAMESPACE_GD
 
 SelectableShape::SelectableShape(QuUK::Element* e, DiagramElement* p) : 
     Shape(e, p) {
@@ -171,4 +171,4 @@ QVariant SelectableShape::itemChange(GraphicsItemChange c,
     return Shape::itemChange(c, v); 
 }
 
-QUML_END_NAMESPACE_UD
+QUML_END_NAMESPACE_GD

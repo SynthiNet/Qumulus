@@ -15,7 +15,7 @@
 #include <QtWidgets/QGraphicsPolygonItem>
 #include <QtWidgets/QGraphicsLineItem>
 
-QUML_BEGIN_NAMESPACE_UD
+QUML_BEGIN_NAMESPACE_GD
 
 class CommentShape : public SelectableShape {
 public:
@@ -32,7 +32,7 @@ private:
     QGraphicsLineItem* mLine2;
 };
 
-QUML_END_NAMESPACE_UD
+QUML_END_NAMESPACE_GD
 
 #endif /* UML_DIAGRAM_COMMENTSHAPE_H_ */
 

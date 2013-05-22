@@ -8,7 +8,7 @@
 
 #include <Lib/Core/Nyi.h>
 
-QUML_BEGIN_NAMESPACE_UD
+QUML_BEGIN_NAMESPACE_GD
 
 DiagramElement::DiagramElement(QuUK::Element* m, DiagramElement* p) : 
         mModelElement(m),
@@ -34,4 +34,4 @@ Style* DiagramElement::sharedStyle() const {
 
 
 
-QUML_END_NAMESPACE_UD
+QUML_END_NAMESPACE_GD

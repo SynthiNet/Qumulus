@@ -11,7 +11,7 @@
 
 #include "Label.h"
 
-QUML_BEGIN_NAMESPACE_UD
+QUML_BEGIN_NAMESPACE_GD
 
 class KeywordLabel : public Label {
 public:
@@ -26,7 +26,7 @@ public:
     QUML_CLONABLE(KeywordLabel);
 };
 
-QUML_END_NAMESPACE_UD
+QUML_END_NAMESPACE_GD
 
 #endif /* UML_DIAGRAM_KEYWORDLABEL_H_ */
 

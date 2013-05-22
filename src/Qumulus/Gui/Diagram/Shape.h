@@ -13,7 +13,7 @@
 
 #include <QtWidgets/QGraphicsItemGroup>
 
-QUML_BEGIN_NAMESPACE_UD
+QUML_BEGIN_NAMESPACE_GD
 
 class Shape : public DiagramElement, public QGraphicsItemGroup {
 public:
@@ -52,7 +52,7 @@ private:
     QSizeF mSizeHint = QSizeF();
 };
 
-QUML_END_NAMESPACE_UD
+QUML_END_NAMESPACE_GD
 
 #endif /* UML_DIAGRAM_SHAPE_H_ */
 

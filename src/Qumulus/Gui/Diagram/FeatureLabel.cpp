@@ -6,7 +6,7 @@
 
 #include "FeatureLabel.h"
 
-QUML_BEGIN_NAMESPACE_UD
+QUML_BEGIN_NAMESPACE_GD
 
 FeatureLabel::FeatureLabel(QuUK::Element* e, DiagramElement* p) :
         Label(e, p) {
@@ -42,4 +42,4 @@ void FeatureLabel::resize(double w, double) {
     setTextWidth(w);
 }
 
-QUML_END_NAMESPACE_UD
+QUML_END_NAMESPACE_GD

@@ -6,7 +6,7 @@
 
 #include "ClassifierShape.h"
 
-QUML_BEGIN_NAMESPACE_UD
+QUML_BEGIN_NAMESPACE_GD
 
 ClassifierShape::ClassifierShape(QuUK::Element* e, DiagramElement* p) : 
         CompartmentableShape(e, p) {
@@ -18,4 +18,4 @@ ClassifierShape::ClassifierShape(const ClassifierShape& s) :
 
 }
 
-QUML_END_NAMESPACE_UD
+QUML_END_NAMESPACE_GD

@@ -14,7 +14,7 @@
 
 #include <QtWidgets/QGraphicsRectItem>
 
-QUML_BEGIN_NAMESPACE_UD
+QUML_BEGIN_NAMESPACE_GD
 
 class PackageShape : public SelectableShape {
 public:
@@ -30,7 +30,7 @@ private:
     QGraphicsRectItem* mBodyItem;
 };
 
-QUML_END_NAMESPACE_UD
+QUML_END_NAMESPACE_GD
 
 #endif /* UML_DIAGRAM_PACKAGESHAPE_H_ */
 

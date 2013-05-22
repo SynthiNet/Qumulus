@@ -6,7 +6,7 @@
 
 #include "AssociationShape.h"
 
-QUML_BEGIN_NAMESPACE_UD
+QUML_BEGIN_NAMESPACE_GD
 AssociationShape::AssociationShape(QuUK::Element* e, DiagramElement* p) :
         Shape(e, p),
         mKind(AssociationShapeKind::Triangle) {
@@ -22,4 +22,4 @@ void AssociationShape::resize(double, double) {
 
 }
 
-QUML_END_NAMESPACE_UD
+QUML_END_NAMESPACE_GD

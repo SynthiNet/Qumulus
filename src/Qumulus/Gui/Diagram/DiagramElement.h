@@ -20,7 +20,7 @@ QUML_BEGIN_NAMESPACE_UK
 class Element;
 QUML_END_NAMESPACE_UK
 
-QUML_BEGIN_NAMESPACE_UD
+QUML_BEGIN_NAMESPACE_GD
 
 class DiagramElement {
 public:
@@ -47,7 +47,7 @@ private:
     DiagramElement* mOwningElement;
 };
 
-QUML_END_NAMESPACE_UD
+QUML_END_NAMESPACE_GD
 
 #endif /* UML_DIAGRAM_DIAGRAMELEMENT_H_ */
 

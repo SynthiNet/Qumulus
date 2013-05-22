@@ -11,7 +11,7 @@
 
 #include <QtWidgets/QGraphicsScene>
 
-QUML_BEGIN_NAMESPACE_UD
+QUML_BEGIN_NAMESPACE_GD
 
 constexpr static float kFontSize =
 #ifdef Q_OS_MAC
@@ -56,4 +56,4 @@ void Diagram::setScene(QGraphicsScene* e) {
     mScene = e;
 }
 
-QUML_END_NAMESPACE_UD
+QUML_END_NAMESPACE_GD

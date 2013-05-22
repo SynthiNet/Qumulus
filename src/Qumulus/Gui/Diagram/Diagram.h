@@ -14,7 +14,7 @@
 
 class QGraphicsScene;
 
-QUML_BEGIN_NAMESPACE_UD
+QUML_BEGIN_NAMESPACE_GD
 
 class Diagram : public DiagramElement {
 public:
@@ -41,7 +41,7 @@ private:
     QGraphicsScene* mScene = nullptr;
 };
 
-QUML_END_NAMESPACE_UD
+QUML_END_NAMESPACE_GD
 
 #endif /* UML_DIAGRAM_DIAGRAM_H_ */
 

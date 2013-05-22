@@ -11,7 +11,7 @@
 #include <QtWidgets/QGraphicsRectItem>
 #include <QtGui/QBrush>
 
-QUML_BEGIN_NAMESPACE_UD
+QUML_BEGIN_NAMESPACE_GD
 
 Compartment::Compartment(CompartmentableShape* p) :
         Shape(0, p),
@@ -46,4 +46,4 @@ void Compartment::resize(double w, double h) {
     setSize({w, h});
 }
 
-QUML_END_NAMESPACE_UD
+QUML_END_NAMESPACE_GD

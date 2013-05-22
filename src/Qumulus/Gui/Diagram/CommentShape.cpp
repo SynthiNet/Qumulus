@@ -8,7 +8,7 @@
 #include "CommentShape.h"
 #include <QtGui/QBrush>
 
-QUML_BEGIN_NAMESPACE_UD
+QUML_BEGIN_NAMESPACE_GD
 
 CommentShape::CommentShape(QuUK::Element* e, 
         DiagramElement* p) :
@@ -47,4 +47,4 @@ void CommentShape::resize(double w, double h) {
     setSize({w, h});
 }
 
-QUML_END_NAMESPACE_UD
+QUML_END_NAMESPACE_GD

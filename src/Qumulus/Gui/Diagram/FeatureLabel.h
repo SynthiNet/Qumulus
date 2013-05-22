@@ -11,7 +11,7 @@
 
 #include "Label.h"
 
-QUML_BEGIN_NAMESPACE_UD
+QUML_BEGIN_NAMESPACE_GD
 
 class FeatureLabel : public Label {
 public:
@@ -30,7 +30,7 @@ private:
     bool mStatic = false;
 };
 
-QUML_END_NAMESPACE_UD
+QUML_END_NAMESPACE_GD
 
 #endif /* UML_DIAGRAM_FEATURELABEL_H_ */
 

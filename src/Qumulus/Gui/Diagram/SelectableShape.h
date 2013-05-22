@@ -10,7 +10,7 @@
 #include "internal_base.h"
 #include "Shape.h"
 
-QUML_BEGIN_NAMESPACE_UD
+QUML_BEGIN_NAMESPACE_GD
 
 enum class DragPosition {
     None,
@@ -44,7 +44,7 @@ private:
     DragPosition mDragPosition = DragPosition::None;
 };
 
-QUML_END_NAMESPACE_UD
+QUML_END_NAMESPACE_GD
 
 #endif /* UML_DIAGRAM_SELECTABLESHAPE_H_ */
 

@@ -6,7 +6,7 @@
 
 #include "Shape.h"
 
-QUML_BEGIN_NAMESPACE_UD
+QUML_BEGIN_NAMESPACE_GD
 
 Shape::Shape(QuUK::Element* e, DiagramElement* p) :
         DiagramElement(e, p),
@@ -41,4 +41,4 @@ void Shape::setOwningElement(DiagramElement* e) {
         setParentItem(p); 
 }
 
-QUML_END_NAMESPACE_UD
+QUML_END_NAMESPACE_GD

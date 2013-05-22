@@ -11,7 +11,7 @@
 
 #include "Label.h"
 
-QUML_BEGIN_NAMESPACE_UD
+QUML_BEGIN_NAMESPACE_GD
 
 class MultiplicityLabel : public Label {
 public:
@@ -24,7 +24,7 @@ public:
     QUML_CLONABLE(MultiplicityLabel);
 };
 
-QUML_END_NAMESPACE_UD
+QUML_END_NAMESPACE_GD
 
 #endif /* UML_DIAGRAM_MULTIPLICITYLABEL_H_ */
 

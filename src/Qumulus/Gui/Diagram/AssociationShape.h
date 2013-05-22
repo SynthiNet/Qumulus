@@ -12,7 +12,7 @@
 #include "Shape.h"
 #include "AssociationShapeKind.h"
 
-QUML_BEGIN_NAMESPACE_UD
+QUML_BEGIN_NAMESPACE_GD
 
 class AssociationShape : public Shape {
 public:
@@ -29,7 +29,7 @@ private:
     AssociationShapeKind mKind;
 };
 
-QUML_END_NAMESPACE_UD
+QUML_END_NAMESPACE_GD
 
 #endif /* UML_DIAGRAM_ASSOCIATIONSHAPE_H_ */
 

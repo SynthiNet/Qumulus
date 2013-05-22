@@ -11,7 +11,7 @@
 #include <QtWidgets/QGraphicsTextItem>
 #include <QtGui/QFont>
 
-QUML_BEGIN_NAMESPACE_UD
+QUML_BEGIN_NAMESPACE_GD
 
 Label::Label(QuUK::Element* e, DiagramElement* p) :
         Shape(e, p),
@@ -61,4 +61,4 @@ void Label::resize(double w, double) {
 void Label::setTextWidth(double w) {
     mTextItem->setTextWidth(w);
 }
-QUML_END_NAMESPACE_UD
+QUML_END_NAMESPACE_GD

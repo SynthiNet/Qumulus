@@ -6,7 +6,7 @@
 
 #include "KeywordLabel.h"
 
-QUML_BEGIN_NAMESPACE_UD
+QUML_BEGIN_NAMESPACE_GD
 
 
 KeywordLabel::KeywordLabel(QuUK::Element* e, DiagramElement* p) :
@@ -34,4 +34,4 @@ void KeywordLabel::resize(double w, double) {
     setTextWidth(w);
 }
 
-QUML_END_NAMESPACE_UD
+QUML_END_NAMESPACE_GD

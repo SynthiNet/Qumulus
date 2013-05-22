@@ -7,7 +7,7 @@
 
 #include "CompartmentableShape.h"
 
-QUML_BEGIN_NAMESPACE_UD
+QUML_BEGIN_NAMESPACE_GD
 
 CompartmentableShape::CompartmentableShape(QuUK::Element* e, 
         DiagramElement* p) :
@@ -48,4 +48,4 @@ void CompartmentableShape::resize(double w, double h) {
     setSize({compartment(0)->size().width(), totalh});
 }
 
-QUML_END_NAMESPACE_UD
+QUML_END_NAMESPACE_GD
