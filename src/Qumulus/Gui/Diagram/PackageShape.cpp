@@ -18,14 +18,16 @@ PackageShape::PackageShape(QuUK::Element* e,
         SelectableShape(e, p) {
     constexpr int kPackageZOrdering = -2;
     setZValue(kPackageZOrdering);
-    setMinimumSize({100, 60});
+    updateSizeConstraints();
     resize(0, 0);
 }
 
 PackageShape::PackageShape(const PackageShape& c) :
         SelectableShape(c) {}
 
-
+void PackageShape::updateSizeConstraints() {
+    setMinimumSize({100, 10 + std::max(packageNameWidth(), 50)});
+}
 
 void PackageShape::resize(double w, double h) {
     w = minimumSize().width() == -1 ? w : std::max(w, minimumSize().width());
@@ -41,11 +43,7 @@ void PackageShape::paint(QPainter* painter, const QStyleOptionGraphicsItem* opti
     painter->drawRect(0, 0, 30, 10);
     painter->drawRect(0, 10, width(), height() - 10);
 
-    QFont font = sharedStyle()->font();
-    font.setBold(true);
-
-    QFontMetrics m(font);
-    int twidth = m.width(packageName());
+    int twidth = packageNameWidth();
 
     painter->setFont(font);
     painter->drawText((width() / 2) - (twidth / 2), 25, packageName());
@@ -55,6 +53,14 @@ void PackageShape::paint(QPainter* painter, const QStyleOptionGraphicsItem* opti
 
 QString PackageShape::packageName() const {
     return *(dynamic_cast<QuUK::Package*>(modelElement())->name());
+}
+
+int PackageShape::packageNameWidth() const {
+    QFont font = sharedStyle()->font();
+    font.setBold(true);
+
+    QFontMetrics m(font);
+    return m.width(packageName());
 }
 
 QUML_END_NAMESPACE_GD
