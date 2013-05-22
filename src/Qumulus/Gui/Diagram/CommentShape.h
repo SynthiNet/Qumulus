@@ -12,8 +12,7 @@
 
 #include "SelectableShape.h"
 
-#include <QtWidgets/QGraphicsPolygonItem>
-#include <QtWidgets/QGraphicsLineItem>
+#include <QtWidgets/QGraphicsTextItem>
 
 QUML_BEGIN_NAMESPACE_GD
 
@@ -30,9 +29,7 @@ public:
 
     QUML_CLONABLE(CommentShape);
 private:
-    QGraphicsPolygonItem* mPolygon;
-    QGraphicsLineItem* mLine1;
-    QGraphicsLineItem* mLine2;
+    QGraphicsTextItem* mText;
 };
 
 QUML_END_NAMESPACE_GD

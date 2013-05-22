@@ -6,6 +6,7 @@
  */
 
 #include "CommentShape.h"
+#include <Uml/Kernel/Comment.h>
 #include <QtGui/QBrush>
 #include <QtGui/QPainter>
 
@@ -13,7 +14,12 @@ QUML_BEGIN_NAMESPACE_GD
 
 CommentShape::CommentShape(QuUK::Element* e, 
         DiagramElement* p) :
-        SelectableShape(e, p) {
+        SelectableShape(e, p),
+        mText(new QGraphicsTextItem(this)){
+    addToGroup(mText);
+    mText->setPos(5, 10);
+    updateSizeConstraints();
+    resize(0,0);
 }
 
 CommentShape::CommentShape(const CommentShape& c) :
@@ -54,7 +60,9 @@ void CommentShape::resize(double w, double h) {
 }
 
 void CommentShape::updateSizeConstraints() {
-    setMinimumSize({100, 40});
+    mText->setPlainText(dynamic_cast<QuUK::Comment*>(modelElement())->body());
+    mText->setTextWidth(width()-10);
+    setMinimumSize({100, 10 + std::max(30.0, mText->boundingRect().height())});
 }
 
 QUML_END_NAMESPACE_GD
