@@ -19,6 +19,7 @@
 #include <Uml/Kernel/Parameter.h>
 #include <Uml/Kernel/Property.h>
 #include <Gui/Diagram/SelectableShape.h>
+#include <Gui/Diagram/PackageShape.h>
 
 QUML_BEGIN_NAMESPACE_GW
 
@@ -80,14 +81,13 @@ EditorView::EditorView(QWidget* parent) : QGraphicsView(parent),
     comment->diagramElement()->setPos(-250, 150);
     comment->diagramElement()->setVisible(true);
     mDiagram->addElement(comment->diagramElement());
+#endif
 
     // FIXME: this is temporary testing code!
     auto package = new QuUK::Package("Uml");
-    package->updateDiagramElement(mDiagram);
-    package->diagramElement()->setVisible(true);
-    package->diagramElement()->setPos(-200, -100);
-    mDiagram->addElement(package->diagramElement());
-#endif
+    auto pshape = mDiagram->createShape(package);
+    pshape->setVisible(true);
+    pshape->setPos(-200, -100);
 }
 
 EditorView::~EditorView() noexcept {

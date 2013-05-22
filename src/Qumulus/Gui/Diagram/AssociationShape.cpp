@@ -22,4 +22,9 @@ void AssociationShape::resize(double, double) {
 
 }
 
+void AssociationShape::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, 
+        QWidget* widget) {
+
+}
+
 QUML_END_NAMESPACE_GD

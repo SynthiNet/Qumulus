@@ -35,6 +35,10 @@ public:
      */
     void resize(double, double) override;
 
+    // These are not used -- all drawing is done by CompartmentableShape
+    QRectF boundingRect() const override;
+    void paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget*) override;
+
     QUML_CLONABLE(Compartment);
 private:
     QGraphicsRectItem* mRectItem;

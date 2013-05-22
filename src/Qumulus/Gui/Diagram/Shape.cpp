@@ -10,7 +10,7 @@ QUML_BEGIN_NAMESPACE_GD
 
 Shape::Shape(QuUK::Element* e, DiagramElement* p) :
         DiagramElement(e, p),
-        QGraphicsItemGroup(dynamic_cast<Shape*>(p)) {}
+        QGraphicsItem(dynamic_cast<Shape*>(p)) {}
 
 Shape::Shape(const Shape& s) :
         DiagramElement(s) {}

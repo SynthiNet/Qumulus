@@ -24,7 +24,6 @@ Compartment* CompartmentableShape::compartment(unsigned i) {
 
 void CompartmentableShape::addCompartment(Compartment* c) {
     mCompartments.append(c);
-    addToGroup(c);
 }
 
 void CompartmentableShape::resize(double w, double h) {

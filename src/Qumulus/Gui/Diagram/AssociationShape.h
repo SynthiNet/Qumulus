@@ -23,6 +23,10 @@ public:
     void setKind(AssociationShapeKind k) { mKind = k; }
 
     void resize(double, double) override;
+    QRectF boundingRect() const override { return QRectF(); }
+
+    void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, 
+            QWidget* widget) override;
 
     QUML_CLONABLE(AssociationShape);
 private:

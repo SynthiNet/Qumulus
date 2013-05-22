@@ -12,14 +12,7 @@ QUML_BEGIN_NAMESPACE_GD
 
 CommentShape::CommentShape(QuUK::Element* e, 
         DiagramElement* p) :
-        SelectableShape(e, p),
-        mPolygon(new QGraphicsPolygonItem(this)),
-        mLine1(new QGraphicsLineItem(this)),
-        mLine2(new QGraphicsLineItem(this)) {
-    mPolygon->setBrush(QBrush(Qt::white));
-    addToGroup(mPolygon);
-    addToGroup(mLine1);
-    addToGroup(mLine2);
+        SelectableShape(e, p) {
 }
 
 CommentShape::CommentShape(const CommentShape& c) :

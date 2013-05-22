@@ -24,10 +24,11 @@ public:
     using Shape::resize;
     void resize(double, double) override;
 
+    void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, 
+            QWidget* widget) override;
+
     QUML_CLONABLE(PackageShape);
 private:
-    QGraphicsRectItem* mTabItem;
-    QGraphicsRectItem* mBodyItem;
 };
 
 QUML_END_NAMESPACE_GD

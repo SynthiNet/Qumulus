@@ -16,4 +16,13 @@ Edge::Edge(const Edge& e) :
         Shape(e) {
 
 }
+
+QRectF Edge::boundingRect() const {
+
+}
+
+void Edge::paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget*) {
+
+}
+
 QUML_END_NAMESPACE_GD

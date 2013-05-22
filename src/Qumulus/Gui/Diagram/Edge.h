@@ -26,6 +26,9 @@ public:
 
     void resize(double, double) override {}
 
+    QRectF boundingRect() const override;
+    void paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget*) override;
+
     QUML_CLONABLE(Edge);
 private:
     QuUK::Element* mSource;
