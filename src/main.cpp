@@ -16,7 +16,7 @@ int main(int argc, char** argv) {
     QuGC::QumulusApplication app(argc, argv);
 
     QuGW::MainWindow w;
-    w.show();
+    w.showMaximized();
 
     return app.exec();
 }
