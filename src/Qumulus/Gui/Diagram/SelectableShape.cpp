@@ -1,5 +1,6 @@
 /*
  * Qumulus UML editor
+ * Author: Frank Erens
  * Author: Randy Thiemann
  *
  */
@@ -9,6 +10,7 @@
 #include <QtGui/QPainter>
 #include <QtWidgets/QGraphicsSceneMouseEvent>
 #include <QtWidgets/QGraphicsView>
+#include <QtWidgets/QApplication>
 #include <QtCore/QDebug>
 #include <Uml/Kernel/Element.h>
 #include <functional>
@@ -44,6 +46,14 @@ bool SelectableShape::isInsideCircle(int x, int y, int cx,
 }
 
 bool SelectableShape::shouldShowBDiag(QPointF p) const {
+    // TODO: Figure out why this cursor stays on
+    // switch(mDragPosition) {
+    // case DragPosition::TopRight:
+    // case DragPosition::BottomLeft:
+    //     return true;
+    // default:;
+    // }
+
     int x = mapFromScene(p).x();
     int y = mapFromScene(p).y();
 
@@ -56,6 +66,14 @@ bool SelectableShape::shouldShowBDiag(QPointF p) const {
 }
 
 bool SelectableShape::shouldShowFDiag(QPointF p) const {
+    // TODO: Figure out why this cursor stays on
+    // switch(mDragPosition) {
+    // case DragPosition::TopLeft:
+    // case DragPosition::BottomRight:
+    //     return true;
+    // default:;
+    // }
+
     int x = mapFromScene(p).x();
     int y = mapFromScene(p).y();
 
@@ -87,6 +105,7 @@ void SelectableShape::mousePressEvent(QGraphicsSceneMouseEvent *e) {
 
 void SelectableShape::mouseReleaseEvent(QGraphicsSceneMouseEvent *e) {
     mDragPosition = DragPosition::None;
+    QApplication::restoreOverrideCursor();
     Shape::mouseReleaseEvent(e);
 }
 
@@ -100,25 +119,25 @@ void SelectableShape::mouseMoveEvent(QGraphicsSceneMouseEvent *e) {
 
         switch(mDragPosition) {
         case DragPosition::BottomRight:
-            w += e->scenePos().x() - e->lastScenePos().x();
-            h += e->scenePos().y() - e->lastScenePos().y();
+            w = e->scenePos().x() - pos().x();
+            h = e->scenePos().y() - pos().y();
             break;
         case DragPosition::TopRight:
             oldh = h;
-            w += e->scenePos().x() - e->lastScenePos().x();
-            h += -(e->scenePos().y() - e->lastScenePos().y());
+            w = e->scenePos().x() - pos().x();
+            h += pos().y() - e->scenePos().y();
             if(h > minimumSize().height()) {
-                y += e->scenePos().y() - e->lastScenePos().y();
+                y += e->scenePos().y() - pos().y();
             } else {
                 h = oldh;
             }
             break;
         case DragPosition::BottomLeft:
             oldw = w;
-            w += -(e->scenePos().x() - e->lastScenePos().x());
-            h += e->scenePos().y() - e->lastScenePos().y();
+            w += pos().x() - e->scenePos().x();
+            h = e->scenePos().y() - pos().y();
             if(w > minimumSize().width()) {
-                x += e->scenePos().x() - e->lastScenePos().x();
+                x += e->scenePos().x() - pos().x();
             } else {
                 w = oldw;
             }
@@ -126,15 +145,15 @@ void SelectableShape::mouseMoveEvent(QGraphicsSceneMouseEvent *e) {
         case DragPosition::TopLeft:
             oldw = w;
             oldh = h;
-            w += -(e->scenePos().x() - e->lastScenePos().x());
-            h += -(e->scenePos().y() - e->lastScenePos().y());
+            w += pos().x() - e->scenePos().x();
+            h += pos().y() - e->scenePos().y();
             if(h > minimumSize().height()) {
-                y += e->scenePos().y() - e->lastScenePos().y();
+                y += e->scenePos().y() - pos().y();
             } else {
                 h = oldh;
             }
             if(w > minimumSize().width()) {
-                x += e->scenePos().x() - e->lastScenePos().x();
+                x += e->scenePos().x() - pos().x();
             } else {
                 w = oldw;
             }
