@@ -10,7 +10,7 @@ QUML_BEGIN_NAMESPACE_GD
 
 Shape::Shape(QuUK::Element* e, DiagramElement* p) :
         DiagramElement(e, p),
-        QGraphicsItem(dynamic_cast<Shape*>(p)) {}
+        QGraphicsItemGroup(dynamic_cast<Shape*>(p)) {}
 
 Shape::Shape(const Shape& s) :
         DiagramElement(s) {}
@@ -38,7 +38,7 @@ QSizeF Shape::optimalSize() const {
 void Shape::setOwningElement(DiagramElement* e) {
     DiagramElement::setOwningElement(e);
     if(Shape* p = dynamic_cast<Shape*>(e))
-        setParentItem(p); 
+        setParentItem(p);
 }
 
 QUML_END_NAMESPACE_GD

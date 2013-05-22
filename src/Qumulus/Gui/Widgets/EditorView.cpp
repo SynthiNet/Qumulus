@@ -20,6 +20,7 @@
 #include <Uml/Kernel/Property.h>
 #include <Gui/Diagram/SelectableShape.h>
 #include <Gui/Diagram/PackageShape.h>
+#include <Gui/Diagram/CommentShape.h>
 
 QUML_BEGIN_NAMESPACE_GW
 
@@ -38,56 +39,17 @@ EditorView::EditorView(QWidget* parent) : QGraphicsView(parent),
 
     mDiagram->setScene(mScene);
 
-#if 0
-    // FIXME: this is temporary testing code!
-    auto boolean = new QuUK::PrimitiveType("bool");
-    boolean->updateDiagramElement(mDiagram);
-    boolean->diagramElement()->setPos(-200, 0);
-    boolean->diagramElement()->setVisible(true);
-    mDiagram->addElement(boolean->diagramElement());
-
-    // FIXME: look at me, different comment.
-    auto classs = new QuUK::Class("Classy");
-    auto oper = new QuUK::Operation("naam", classs);
-    oper->setStatic(true);
-    oper->setVisiblity(QuUK::VisibilityKind::Public);
-    auto ret = new QuUK::Parameter("", oper);
-    ret->setDirection(QuUK::ParameterDirectionKind::Return);
-    ret->setType(boolean);
-    (new QuUK::Parameter("par1", oper))->setDirection(QuUK::ParameterDirectionKind::Out);
-    (new QuUK::Parameter("par2", oper))->setType(boolean);
-    new QuUK::Property("naamGeinspireerdDoorHetWerkVanMarxVanTweeEeuwenTerug", classs);
-    classs->updateDiagramElement(mDiagram);
-    classs->diagramElement()->setPos(20, 0);
-    classs->diagramElement()->setVisible(true);
-    mDiagram->addElement(classs->diagramElement());
-
-    // FIXME: this is temporary testing code!
-    auto visibilityKind = new QuUK::Enumeration("VisibilityKind");
-    new QuUK::EnumerationLiteral("Public", visibilityKind);
-    new QuUK::EnumerationLiteral("Protected", visibilityKind);
-    new QuUK::EnumerationLiteral("Private", visibilityKind);
-    visibilityKind->updateDiagramElement(mDiagram);
-    visibilityKind->diagramElement()->setPos(-200, 50);
-    visibilityKind->diagramElement()->setVisible(true);
-    mDiagram->addElement(visibilityKind->diagramElement());
-
-    // FIXME: this is temporary testing code!
-    auto comment = new QuUK::Comment(
-            "VisibilityKind is an enumeration type that defines literals to "
-            "determine the visibility of elements in a model.", 
-            visibilityKind);
-    comment->updateDiagramElement(mDiagram, {200, 0});
-    comment->diagramElement()->setPos(-250, 150);
-    comment->diagramElement()->setVisible(true);
-    mDiagram->addElement(comment->diagramElement());
-#endif
-
     // FIXME: this is temporary testing code!
     auto package = new QuUK::Package("Uml");
     auto pshape = mDiagram->createShape(package);
     pshape->setVisible(true);
     pshape->setPos(-200, -100);
+
+    // FIXME: this is temporary testing code!
+    auto comment = new QuUK::Comment("Dit is een test");
+    auto cshape = mDiagram->createShape(comment);
+    cshape->setVisible(true);
+    cshape->setPos(-200, 200);
 }
 
 EditorView::~EditorView() noexcept {
