@@ -28,6 +28,8 @@ public:
     void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, 
             QWidget* widget) override;
 
+    void updateSizeConstraints() override;
+
     QUML_CLONABLE(AssociationShape);
 private:
     AssociationShapeKind mKind;

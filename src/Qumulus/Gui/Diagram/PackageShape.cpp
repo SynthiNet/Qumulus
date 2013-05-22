@@ -45,6 +45,8 @@ void PackageShape::paint(QPainter* painter, const QStyleOptionGraphicsItem* opti
 
     int twidth = packageNameWidth();
 
+    QFont font = sharedStyle()->font();
+    font.setBold(true);
     painter->setFont(font);
     painter->drawText((width() / 2) - (twidth / 2), 25, packageName());
 

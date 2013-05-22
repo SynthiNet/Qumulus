@@ -25,4 +25,8 @@ void Edge::paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget*) {
 
 }
 
+void Edge::updateSizeConstraints() {
+
+}
+
 QUML_END_NAMESPACE_GD

@@ -28,6 +28,7 @@ public:
 
     using Shape::resize;
     void resize(double, double) override;
+    void updateSizeConstraints() override;
 
     QUML_CLONABLE(CompartmentableShape);
 
