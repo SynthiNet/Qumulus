@@ -22,19 +22,13 @@ struct EnumerationGraphics {
     // QuUD::NameLabel* mNameLabel = 0;
 };
 
-Enumeration::Enumeration() :
-        mGraphics(0) {
+Enumeration::Enumeration() {
 
 }
 
 Enumeration::Enumeration(QString name, Namespace* p) :
-        DataType(name, p),
-        mGraphics(0) {
+        DataType(name, p) {
 
-}
-
-Enumeration::~Enumeration() {
-    delete mGraphics;
 }
 
 void Enumeration::addLiteral(EnumerationLiteral* l) {

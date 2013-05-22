@@ -15,8 +15,6 @@
 
 QUML_BEGIN_NAMESPACE_UK
 
-struct CommentGraphics;
-
 class Comment : public Element {
     friend struct CommentGraphics;
 public:
@@ -38,8 +36,6 @@ public:
 private:
     QString mBody;
     Element* mAnnotatedElement = nullptr;
-
-    CommentGraphics* mGraphics = nullptr;
 };
 
 QUML_END_NAMESPACE_UK

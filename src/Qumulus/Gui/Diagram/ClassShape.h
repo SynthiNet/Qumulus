@@ -22,6 +22,9 @@ public:
     void setIndentForVisibility(bool b) { mIndentForVisibilty = b; }
     void updateSizeConstraints() override;
 
+    void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, 
+            QWidget* widget) override;
+
     QUML_CLONABLE(ClassShape);
 private:
     bool mIndentForVisibilty = false;

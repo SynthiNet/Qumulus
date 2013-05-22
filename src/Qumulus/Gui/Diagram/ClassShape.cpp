@@ -10,7 +10,6 @@ QUML_BEGIN_NAMESPACE_GD
 
 ClassShape::ClassShape(QuUK::Element* e, DiagramElement* p) : 
         CompartmentableShape(e, p) {
-
 }
 
 ClassShape::ClassShape(const ClassShape& s) :
@@ -19,6 +18,11 @@ ClassShape::ClassShape(const ClassShape& s) :
 }
 
 void ClassShape::updateSizeConstraints() {
+
+}
+
+void ClassShape::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, 
+        QWidget* widget) {
 
 }
 

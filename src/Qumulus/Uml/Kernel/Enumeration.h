@@ -14,14 +14,11 @@
 
 QUML_BEGIN_NAMESPACE_UK
 
-struct EnumerationGraphics;
-
 class Enumeration : public DataType {
     friend struct EnumerationGraphics;
 public:
     Enumeration();
     Enumeration(QString name, Namespace* p = 0);
-    ~Enumeration();
 
     const QList<EnumerationLiteral*>& ownedLiterals() const { 
         return mOwnedLiterals;
@@ -35,7 +32,6 @@ public:
     QUML_CLONABLE(Enumeration);
 private:
     QList<EnumerationLiteral*> mOwnedLiterals;
-    EnumerationGraphics* mGraphics;
 };
 
 QUML_END_NAMESPACE_UK

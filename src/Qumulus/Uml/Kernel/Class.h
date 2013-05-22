@@ -17,23 +17,21 @@ QUML_BEGIN_NAMESPACE_UK
 class Property;
 class Operation;
 
-struct ClassGraphics;
-
 class Class : public Classifier {
 public:
     Class();
     Class(QString name, Namespace* p = nullptr);
     
-    // const QList<Classifier*>& nestedClassifiers() const {
-    //     return mNestedClassifiers;
-    // }
+    const QList<Classifier*>& nestedClassifiers() const {
+        return mNestedClassifiers;
+    }
 
     void addNestedClassifier(Classifier* c);
     void removeNestedClassifier(Classifier* c);
 
-    // const QList<Operation*>& ownedOperations() const {
-    //     return mOwnedOperations;
-    // }
+    const QList<Operation*>& ownedOperations() const {
+        return mOwnedOperations;
+    }
 
     void addOperation(Operation* c);
     void removeOperation(Operation* c);
@@ -42,9 +40,8 @@ public:
 
     QUML_CLONABLE(Class);
 private:
-    // QList<Classifier*> mNestedClassifiers;
-    // QList<Operation*> mOwnedOperations;
-    // ClassGraphics* mGraphics;
+    QList<Classifier*> mNestedClassifiers;
+    QList<Operation*> mOwnedOperations;
 };
 
 QUML_END_NAMESPACE_UK

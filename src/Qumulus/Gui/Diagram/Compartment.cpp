@@ -27,4 +27,11 @@ void Compartment::setCompartimentableShape(CompartmentableShape* s) {
     setOwningElement(s);
 }
 
+void Compartment::setHeight(float h) {
+    h = mMinimumHeight == -1 ? h : std::max(h, mMinimumHeight);
+    h = mMaximumHeight == -1 ? h : std::min(h, mMaximumHeight);
+
+    mHeight = h;
+}
+
 QUML_END_NAMESPACE_GD

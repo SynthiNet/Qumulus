@@ -23,13 +23,8 @@ struct PrimitiveTypeGraphics {
     // QuUD::NameLabel* mNameLabel = 0;
 };
 
-PrimitiveType::PrimitiveType() :
-        mGraphics(0) {
+PrimitiveType::PrimitiveType() {
 
-}
-
-PrimitiveType::~PrimitiveType() {
-    delete mGraphics;
 }
 
 #if 0

@@ -27,7 +27,6 @@ Comment::Comment(const QString& body, Element* annotated) :
 }
 
 Comment::~Comment() {
-    delete mGraphics;
 }
 
 #if 0

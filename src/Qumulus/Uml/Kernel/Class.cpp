@@ -36,7 +36,6 @@ Class::Class(QString name, Namespace* p) :
 }
 
 
-#if 0
 void Class::addNestedClassifier(Classifier* c) {
     mNestedClassifiers.append(c);
     addOwnedMember(c);
@@ -57,6 +56,7 @@ void Class::removeOperation(Operation* c) {
     removeFeature(c);
 }
 
+#if 0
 void Class::updateDiagramElement(QuUD::Diagram* diagram, QSizeF newsize) {
     if(!mDiagramElement) {
         mDiagramElement = new QuUD::ClassifierShape(this, diagram);

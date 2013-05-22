@@ -14,6 +14,8 @@
 
 #include "Compartment.h"
 
+class QPainter;
+
 QUML_BEGIN_NAMESPACE_GD
 
 class CompartmentableShape : public SelectableShape {
@@ -30,8 +32,10 @@ public:
     void resize(double, double) override;
     void updateSizeConstraints() override;
 
-    QUML_CLONABLE(CompartmentableShape);
+    void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, 
+            QWidget* widget) override;
 
+    QUML_CLONABLE(CompartmentableShape);
 private:
     QList<Compartment*> mCompartments;
 };

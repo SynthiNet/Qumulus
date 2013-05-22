@@ -18,8 +18,6 @@ QUML_BEGIN_NAMESPACE_UK
 
 class Type;
 
-struct PackageGraphics;
-
 class Package : public Namespace, public PackageableElement {
 public:
     Package();
@@ -59,7 +57,6 @@ private:
     QSet<PackageableElement*> mPackagedElements;
     QSet<Package*> mNestedPackages;
     QSet<Type*> mOwnedTypes;
-    PackageGraphics* mGraphics = nullptr;
 };
 
 QUML_END_NAMESPACE_UK

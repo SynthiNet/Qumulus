@@ -27,6 +27,8 @@ public:
     CompartmentableShape* compartmentableShape() const;
     void setCompartimentableShape(CompartmentableShape* s);
 
+    float height() const { return mHeight; }
+    void setHeight(float f);
     float minimumHeight() const { return mMinimumHeight; }
     void setMinimumHeight(float f) { mMinimumHeight = f; }
     float maximumHeight() const { return mMaximumHeight; }
@@ -35,8 +37,9 @@ public:
     QUML_CLONABLE(Compartment);
 private:
     QGraphicsRectItem* mRectItem;
-    float mMinimumHeight = 0;
-    float mMaximumHeight = 0;
+    float mHeight = 0;
+    float mMinimumHeight = -1;
+    float mMaximumHeight = -1;
 };
 
 QUML_END_NAMESPACE_GD

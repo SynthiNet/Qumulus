@@ -13,21 +13,18 @@
 
 QUML_BEGIN_NAMESPACE_UK
 
-struct PrimitiveTypeGraphics;
 
 class PrimitiveType : public DataType {
     friend struct PrimitiveTypeGraphics;
 public:
     PrimitiveType();
     PrimitiveType(QString name, Namespace* p = 0) : DataType(name, p) {}
-    ~PrimitiveType();
 
     // void updateDiagramElement(QuUD::Diagram*, QSizeF s = QSizeF()) override;
 
     QUML_CLONABLE(PrimitiveType);
 
 private:
-    PrimitiveTypeGraphics* mGraphics;
 };
 
 QUML_END_NAMESPACE_UK
