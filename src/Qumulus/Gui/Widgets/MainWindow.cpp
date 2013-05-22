@@ -104,11 +104,11 @@ void MainWindow::populateToolbar() {
                     [&]{setCursor(mCursors["class"]);}));
 
     mClassMenu = new ToolBarMenu();
-    mClassMenu->addItem(
+    /*mClassMenu->addItem(
             ElementItem("Template Class", 
                     QIcon(":/data/img/toolbar/template-class.png"),
                     QKeySequence(tr("T")),
-                    [&]{setCursor(mCursors["template-class"]);}));
+                    [&]{setCursor(mCursors["template-class"]);}));*/
     mClassMenu->addItem(
             ElementItem("Enum", 
                     QIcon(":/data/img/toolbar/enum.png"),
@@ -309,8 +309,8 @@ void MainWindow::createMenus() {
                 }
             }});
 
-    mDuplicateAction = new QAction(tr("D&uplicate"), this);
-    mDuplicateAction->setShortcuts({QKeySequence(tr("Ctrl+D"))});
+    /*mDuplicateAction = new QAction(tr("D&uplicate"), this);
+    mDuplicateAction->setShortcuts({QKeySequence(tr("Ctrl+D"))});*/
 
     mEditMenu->addAction(mUndoAction);
     mEditMenu->addAction(mRedoAction);
@@ -318,7 +318,7 @@ void MainWindow::createMenus() {
     mEditMenu->addAction(mCopyAction);
     mEditMenu->addAction(mPasteAction);
     mEditMenu->addAction(mDeleteAction);
-    mEditMenu->addAction(mDuplicateAction);
+    //mEditMenu->addAction(mDuplicateAction);
 
     // View Menu
     mCenterAction = new QAction(tr("&Center View"), this);
