@@ -11,11 +11,11 @@
 
 #include "DiagramElement.h"
 
-#include <QtWidgets/QGraphicsItem>
+#include <QtWidgets/QGraphicsItemGroup>
 
 QUML_BEGIN_NAMESPACE_GD
 
-class Shape : public DiagramElement, public QGraphicsItem {
+class Shape : public DiagramElement, public QGraphicsItemGroup {
 public:
     Shape(QuUK::Element* e = 0, DiagramElement* p = 0);
     Shape(const Shape&);
