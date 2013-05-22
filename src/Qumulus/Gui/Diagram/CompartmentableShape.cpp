@@ -47,4 +47,8 @@ void CompartmentableShape::resize(double w, double h) {
     // setSize({compartment(0)->size().width(), totalh});
 }
 
+void CompartmentableShape::updateSizeConstraints() {
+
+}
+
 QUML_END_NAMESPACE_GD

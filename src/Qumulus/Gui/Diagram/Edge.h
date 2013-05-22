@@ -28,6 +28,7 @@ public:
 
     QRectF boundingRect() const override;
     void paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget*) override;
+    void updateSizeConstraints() override;
 
     QUML_CLONABLE(Edge);
 private:

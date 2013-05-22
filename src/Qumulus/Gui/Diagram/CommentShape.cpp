@@ -20,6 +20,11 @@ CommentShape::CommentShape(const CommentShape& c) :
 
 }
 
+void CommentShape::paint(QPainter* painter, 
+        const QStyleOptionGraphicsItem* option, QWidget* widget) {
+
+}
+
 void CommentShape::resize(double w, double h) {
     w = minimumSize().width() == -1 ? w : std::max(w, minimumSize().width());
     h = minimumSize().height() == -1 ? h : std::max(h, minimumSize().height());
@@ -38,6 +43,10 @@ void CommentShape::resize(double w, double h) {
     mPolygon->setPolygon(poly);
 
     setSize({w, h});
+}
+
+void CommentShape::updateSizeConstraints() {
+
 }
 
 QUML_END_NAMESPACE_GD

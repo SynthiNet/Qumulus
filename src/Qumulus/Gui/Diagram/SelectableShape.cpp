@@ -147,9 +147,6 @@ void SelectableShape::mouseMoveEvent(QGraphicsSceneMouseEvent *e) {
         setWidth(w);
         setHeight(h);
         prepareGeometryChange();
-
-        //FIXME: Call doesn't work, why?
-        //modelElement()->updateDiagramElement(nullptr, {w, h});
     } else {
         Shape::mouseMoveEvent(e);
     }

@@ -24,6 +24,9 @@ public:
 
     using Shape::resize;
     void resize(double, double) override;
+    void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, 
+            QWidget* widget) override;
+    void updateSizeConstraints() override;
 
     QUML_CLONABLE(CommentShape);
 private:

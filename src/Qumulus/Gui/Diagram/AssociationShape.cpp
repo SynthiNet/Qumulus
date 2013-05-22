@@ -27,4 +27,8 @@ void AssociationShape::paint(QPainter* painter, const QStyleOptionGraphicsItem* 
 
 }
 
+void AssociationShape::updateSizeConstraints() {
+
+}
+
 QUML_END_NAMESPACE_GD

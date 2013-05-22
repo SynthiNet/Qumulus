@@ -18,4 +18,8 @@ ClassShape::ClassShape(const ClassShape& s) :
 
 }
 
+void ClassShape::updateSizeConstraints() {
+
+}
+
 QUML_END_NAMESPACE_GD

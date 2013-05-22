@@ -20,6 +20,7 @@ public:
 
     bool indentForVisibility() const { return mIndentForVisibilty; }
     void setIndentForVisibility(bool b) { mIndentForVisibilty = b; }
+    void updateSizeConstraints() override;
 
     QUML_CLONABLE(ClassShape);
 private:
