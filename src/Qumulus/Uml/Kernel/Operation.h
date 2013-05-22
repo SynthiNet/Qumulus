@@ -10,7 +10,7 @@
 
 #include "internal_base.h"
 
-#include <Uml/Diagram/FeatureLabel.h>
+// #include <Uml/Diagram/FeatureLabel.h>
 
 #include "BehavioralFeature.h"
 
@@ -32,8 +32,8 @@ public:
     Class* getClass() const { return mClass; }
     void setClass(Class* c) { mClass = c; }
 
-    QuUD::FeatureLabel* diagramElement() const override;
-    void updateDiagramElement(QuUD::Diagram*, QSizeF s = QSizeF()) override;
+    // QuUD::FeatureLabel* diagramElement() const override;
+    // void updateDiagramElement(QuUD::Diagram*, QSizeF s = QSizeF()) override;
 
     QUML_CLONABLE(Operation);
 private:

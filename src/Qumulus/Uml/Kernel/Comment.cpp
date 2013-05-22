@@ -6,7 +6,7 @@
 
 #include "Comment.h"
 
-#include <Uml/Diagram/CommentShape.h>
+// #include <Uml/Diagram/CommentShape.h>
 
 #include <QtWidgets/QGraphicsTextItem>
 #include <QtCore/QDebug>
@@ -30,6 +30,7 @@ Comment::~Comment() {
     delete mGraphics;
 }
 
+#if 0
 QuUD::CommentShape* Comment::diagramElement() const {
     return static_cast<QuUD::CommentShape*>(mDiagramElement);
 }
@@ -65,6 +66,7 @@ CommentGraphics::CommentGraphics(Comment* c) :
         mText(new QGraphicsTextItem(c->diagramElement())){
     mText->setFont(c->diagramElement()->sharedStyle()->font());
 }
+#endif
 
 CommentGraphics::~CommentGraphics() {
     delete mText;

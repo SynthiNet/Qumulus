@@ -32,7 +32,7 @@ public:
     Operation* operation() const { return mOperation; }
     void setOperation(Operation* o);
 
-    void updateDiagramElement(QuUD::Diagram*, QSizeF s = QSizeF()) override;
+    // void updateDiagramElement(QuUD::Diagram*, QSizeF s = QSizeF()) override;
 
     QUML_CLONABLE(Parameter);
 private:

@@ -37,6 +37,7 @@ Type* Operation::type() const {
         return nullptr;
 }
 
+#if 0
 QuUD::FeatureLabel* Operation::diagramElement() const {
     return static_cast<QuUD::FeatureLabel*>(mDiagramElement);
 }
@@ -117,5 +118,6 @@ void Operation::updateDiagramElement(QuUD::Diagram*, QSizeF) {
     d->resize(static_cast<QuUD::Shape*>(
                 mClass->diagramElement())->width(), 0);
 }
+#endif
 
 QUML_END_NAMESPACE_UK

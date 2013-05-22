@@ -18,7 +18,7 @@ public:
     Usage() {}
     Usage(Element* e1, Element* e2) : DirectedRelationship(e1, e2) {}
 
-    void updateDiagramElement(QuUD::Diagram*, QSizeF) override {}
+    // void updateDiagramElement(QuUD::Diagram*, QSizeF) override {}
 
     QUML_CLONABLE(Usage);
 };

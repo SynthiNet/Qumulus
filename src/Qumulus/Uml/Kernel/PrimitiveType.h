@@ -22,7 +22,7 @@ public:
     PrimitiveType(QString name, Namespace* p = 0) : DataType(name, p) {}
     ~PrimitiveType();
 
-    void updateDiagramElement(QuUD::Diagram*, QSizeF s = QSizeF()) override;
+    // void updateDiagramElement(QuUD::Diagram*, QSizeF s = QSizeF()) override;
 
     QUML_CLONABLE(PrimitiveType);
 

@@ -11,7 +11,7 @@
 
 #include "Element.h"
 
-#include <Uml/Diagram/CommentShape.h>
+// #include <Uml/Diagram/CommentShape.h>
 
 QUML_BEGIN_NAMESPACE_UK
 
@@ -30,9 +30,9 @@ public:
     void setAnnotatedElement(Element* e) { mAnnotatedElement = e; }
     
 
-    QuUD::CommentShape* diagramElement() const override;
+    // QuUD::CommentShape* diagramElement() const override;
     
-    void updateDiagramElement(QuUD::Diagram*, QSizeF s = QSizeF()) override;
+    // void updateDiagramElement(QuUD::Diagram*, QSizeF s = QSizeF()) override;
 
     QUML_CLONABLE(Comment);
 private:

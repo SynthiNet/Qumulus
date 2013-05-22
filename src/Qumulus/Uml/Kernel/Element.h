@@ -14,8 +14,8 @@
 #include <Lib/Core/Functional.h>
 #include <Lib/Core/UniqueId.h>
 
-#include <Uml/Diagram/DiagramElement.h>
-#include <Uml/Diagram/Diagram.h>
+//#include <Uml/Diagram/DiagramElement.h>
+//#include <Uml/Diagram/Diagram.h>
 
 #include <QtCore/QSet>
 #include <QtCore/QList>
@@ -44,11 +44,11 @@ public:
         return mOwnedComments;
     }
 
-    virtual QuUD::DiagramElement* diagramElement() const {
-        return mDiagramElement; 
-    }
+    // virtual QuUD::DiagramElement* diagramElement() const {
+    //     return mDiagramElement; 
+    // }
 
-    virtual void updateDiagramElement(QuUD::Diagram*, QSizeF s = QSizeF()) = 0;
+    // virtual void updateDiagramElement(QuUD::Diagram*, QSizeF s = QSizeF()) = 0;
 
     /**
      * @note This function takes over ownership.
@@ -70,7 +70,7 @@ protected:
     void removeElement(Element* other);
 
 protected:
-    QuUD::DiagramElement* mDiagramElement;
+    // QuUD::DiagramElement* mDiagramElement;
 
 private:
     static QHash<QString, Element*> mElementsById;

@@ -6,20 +6,20 @@
 
 #include "Enumeration.h"
 
-#include <Uml/Diagram/ClassifierShape.h>
-#include <Uml/Diagram/KeywordLabel.h>
-#include <Uml/Diagram/NameLabel.h>
-
+// #include <Uml/Diagram/ClassifierShape.h>
+// #include <Uml/Diagram/KeywordLabel.h>
+// #include <Uml/Diagram/NameLabel.h>
+// 
 QUML_BEGIN_NAMESPACE_UK
 
 struct EnumerationGraphics {
     EnumerationGraphics(Enumeration* e);
     ~EnumerationGraphics();
 
-    QuUD::Compartment* mHeadCompartment = 0;
-    QuUD::Compartment* mLiteralsCompartment = 0;
-    QuUD::KeywordLabel* mKeywordLabel = 0;
-    QuUD::NameLabel* mNameLabel = 0;
+    // QuUD::Compartment* mHeadCompartment = 0;
+    // QuUD::Compartment* mLiteralsCompartment = 0;
+    // QuUD::KeywordLabel* mKeywordLabel = 0;
+    // QuUD::NameLabel* mNameLabel = 0;
 };
 
 Enumeration::Enumeration() :
@@ -47,6 +47,7 @@ void Enumeration::removeLiteral(EnumerationLiteral* l) {
     removeOwnedMember(l);
 }
 
+#if 0
 void Enumeration::updateDiagramElement(QuUD::Diagram* diagram, QSizeF newsize) {
     if(!mDiagramElement) {
         mDiagramElement = new QuUD::ClassifierShape(this, diagram);
@@ -123,5 +124,6 @@ EnumerationGraphics::~EnumerationGraphics() {
     delete mHeadCompartment;
     delete mLiteralsCompartment;
 }
+#endif
 
 QUML_END_NAMESPACE_UK

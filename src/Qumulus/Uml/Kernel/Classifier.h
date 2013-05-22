@@ -14,7 +14,7 @@
 #include "RedefinableElement.h"
 #include "Generalization.h"
 
-#include <Uml/Diagram/ClassifierShape.h>
+// #include <Uml/Diagram/ClassifierShape.h>
 
 QUML_BEGIN_NAMESPACE_UK
 
@@ -63,7 +63,7 @@ public:
     void addGeneralization(Generalization* g);
     void removeGeneralization(Generalization* g);
 
-    QuUD::ClassifierShape* diagramElement() const override;
+    // QuUD::ClassifierShape* diagramElement() const override;
 
     QUML_CLONABLE_ABSTRACT(Classifier);
 

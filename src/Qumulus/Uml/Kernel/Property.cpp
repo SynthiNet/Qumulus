@@ -41,6 +41,7 @@ QSet<Property*> Property::subsettedProperties() const {
     return QSet<Property*>();
 }
 
+#if 0
 QuUD::FeatureLabel* Property::diagramElement() const {
     return static_cast<QuUD::FeatureLabel*>(mDiagramElement);
 }
@@ -88,6 +89,7 @@ void Property::updateDiagramElement(QuUD::Diagram*, QSizeF) {
     d->resize(static_cast<QuUD::Shape*>(
                 mClass->diagramElement())->width(), 0);
 }
+#endif
 
 QUML_END_NAMESPACE_UK
 

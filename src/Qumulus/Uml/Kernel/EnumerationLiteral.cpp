@@ -8,7 +8,7 @@
 
 #include "Enumeration.h"
 
-#include <Uml/Diagram/Label.h>
+// #include <Uml/Diagram/Label.h>
 
 QUML_BEGIN_NAMESPACE_UK
 
@@ -19,6 +19,7 @@ EnumerationLiteral::EnumerationLiteral(QString name, Enumeration* o) :
     if(o) o->addLiteral(this);
 }
 
+#if 0
 QuUD::Label* EnumerationLiteral::diagramElement() const {
     return static_cast<QuUD::Label*>(mDiagramElement);
 }
@@ -37,5 +38,6 @@ void EnumerationLiteral::updateDiagramElement(QuUD::Diagram*, QSizeF) {
     d->resize(static_cast<QuUD::Shape*>(
                 mEnumeration->diagramElement())->width(), 0);
 }
+#endif
 
 QUML_END_NAMESPACE_UK

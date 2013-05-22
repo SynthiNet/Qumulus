@@ -9,8 +9,8 @@
 #include "Type.h"
 
 #include <QtWidgets/QGraphicsRectItem>
-#include <Uml/Diagram/NameLabel.h>
-#include <Uml/Diagram/PackageShape.h>
+// #include <Uml/Diagram/NameLabel.h>
+// #include <Uml/Diagram/PackageShape.h>
 
 QUML_BEGIN_NAMESPACE_UK
 
@@ -18,7 +18,7 @@ struct PackageGraphics {
     PackageGraphics(Package* p);
     ~PackageGraphics();
 
-    QuUD::NameLabel* mNameLabel;
+    // QuUD::NameLabel* mNameLabel;
 };
 
 Package::Package() {}
@@ -58,6 +58,7 @@ void Package::removePackagedElement(PackageableElement* e) {
     addOwnedMember(e);
 }
 
+#if 0
 QuUD::PackageShape* Package::diagramElement() const {
     return static_cast<QuUD::PackageShape*>(mDiagramElement);
 }
@@ -96,5 +97,6 @@ PackageGraphics::PackageGraphics(Package* p) :
 PackageGraphics::~PackageGraphics() {
     delete mNameLabel;
 }
+#endif
 
 QUML_END_NAMESPACE_UK

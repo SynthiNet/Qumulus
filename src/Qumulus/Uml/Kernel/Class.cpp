@@ -10,8 +10,8 @@
 #include "Property.h"
 #include "Operation.h"
 
-#include <Uml/Diagram/ClassifierShape.h>
-#include <Uml/Diagram/NameLabel.h>
+//#include <Uml/Diagram/ClassifierShape.h>
+//#include <Uml/Diagram/NameLabel.h>
 #include <Lib/Core/Functional.h>
 
 QUML_BEGIN_NAMESPACE_UK
@@ -20,10 +20,10 @@ struct ClassGraphics {
     ClassGraphics(Class* e);
     ~ClassGraphics();
 
-    QuUD::Compartment* mHeadCompartment = 0;
-    QuUD::Compartment* mAttributesCompartment = 0;
-    QuUD::Compartment* mOperationsCompartment = 0;
-    QuUD::NameLabel* mNameLabel = 0;
+    // QuUD::Compartment* mHeadCompartment = 0;
+    // QuUD::Compartment* mAttributesCompartment = 0;
+    // QuUD::Compartment* mOperationsCompartment = 0;
+    // QuUD::NameLabel* mNameLabel = 0;
 };
 
 Class::Class() {
@@ -36,6 +36,7 @@ Class::Class(QString name, Namespace* p) :
 }
 
 
+#if 0
 void Class::addNestedClassifier(Classifier* c) {
     mNestedClassifiers.append(c);
     addOwnedMember(c);
@@ -145,5 +146,6 @@ ClassGraphics::~ClassGraphics() {
     delete mAttributesCompartment;
     delete mOperationsCompartment;
 }
+#endif
 
 QUML_END_NAMESPACE_UK

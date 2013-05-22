@@ -6,9 +6,9 @@
 
 #include "PrimitiveType.h"
 
-#include <Uml/Diagram/ClassifierShape.h>
-#include <Uml/Diagram/KeywordLabel.h>
-#include <Uml/Diagram/NameLabel.h>
+// #include <Uml/Diagram/ClassifierShape.h>
+// #include <Uml/Diagram/KeywordLabel.h>
+// #include <Uml/Diagram/NameLabel.h>
 
 #include <QtCore/QDebug>
 
@@ -18,9 +18,9 @@ struct PrimitiveTypeGraphics {
     PrimitiveTypeGraphics(PrimitiveType* p);
     ~PrimitiveTypeGraphics();
 
-    QuUD::Compartment* mCompartment = 0;
-    QuUD::KeywordLabel* mKeywordLabel = 0;
-    QuUD::NameLabel* mNameLabel = 0;
+    // QuUD::Compartment* mCompartment = 0;
+    // QuUD::KeywordLabel* mKeywordLabel = 0;
+    // QuUD::NameLabel* mNameLabel = 0;
 };
 
 PrimitiveType::PrimitiveType() :
@@ -32,6 +32,7 @@ PrimitiveType::~PrimitiveType() {
     delete mGraphics;
 }
 
+#if 0
 void PrimitiveType::updateDiagramElement(QuUD::Diagram* diagram, 
         QSizeF newsize) {
     if(!mDiagramElement) {
@@ -82,4 +83,6 @@ PrimitiveTypeGraphics::~PrimitiveTypeGraphics() {
     delete mKeywordLabel;
     delete mNameLabel;
 }
+#endif
+
 QUML_END_NAMESPACE_UK

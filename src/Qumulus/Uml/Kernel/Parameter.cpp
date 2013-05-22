@@ -22,8 +22,10 @@ void Parameter::setOperation(Operation* o) {
     setNameSpace(o);
 }
 
+#if 0
 void Parameter::updateDiagramElement(QuUD::Diagram*, QSizeF) {
 
 }
+#endif
 
 QUML_END_NAMESPACE_UK

@@ -11,7 +11,7 @@
 #include "internal_base.h"
 
 #include <Lib/Core/Nyi.h>
-#include <Uml/Diagram/FeatureLabel.h>
+// #include <Uml/Diagram/FeatureLabel.h>
 
 #include "StructuralFeature.h"
 #include "Type.h"
@@ -49,8 +49,8 @@ public:
     QSet<Property*> redefinedProperties() const;
     QSet<Property*> subsettedProperties() const;
 
-    QuUD::FeatureLabel* diagramElement() const override;
-    void updateDiagramElement(QuUD::Diagram*, QSizeF s = QSizeF()) override;
+    // QuUD::FeatureLabel* diagramElement() const override;
+    // void updateDiagramElement(QuUD::Diagram*, QSizeF s = QSizeF()) override;
 
     QUML_CLONABLE(Property);
 private:
