@@ -39,14 +39,14 @@ void EnumShape::paint(QPainter* painter, const QStyleOptionGraphicsItem* option,
     QFont stereotypeFont = sharedStyle()->font();
     stereotypeFont.setItalic(true);
     painter->setFont(stereotypeFont);
-    painter->drawText(0, 0, width(), 20,
+    painter->drawText(0, 0, width(), mHeader->height() / 2,
             Qt::AlignHCenter | Qt::AlignBottom,
             "« enumeration »");
 
     QFont nameFont = sharedStyle()->font();
     nameFont.setBold(true);
     painter->setFont(nameFont);
-    painter->drawText(0, 20, width(), 40, 
+    painter->drawText(0, mHeader->height() / 2, width(), mHeader->height(), 
             Qt::AlignHCenter | Qt::AlignTop,
             modelElement()->name());
 
