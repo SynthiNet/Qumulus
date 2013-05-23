@@ -42,12 +42,17 @@ int ResizeUndoCommand::id() const {
 }
 
 bool ResizeUndoCommand::mergeWith(const QUndoCommand* command) {
+    auto c = static_cast<const ResizeUndoCommand*>(command);
+
     if(command->id() != id()) {
         return false;
     }
+    if(mShape != c->mShape) {
+        return false;
+    }
 
-    mNewPoint = static_cast<const ResizeUndoCommand*>(command)->mNewPoint;
-    mNewSize = static_cast<const ResizeUndoCommand*>(command)->mNewSize;
+    mNewPoint = c->mNewPoint;
+    mNewSize = c->mNewSize;
     return true;
 }
 

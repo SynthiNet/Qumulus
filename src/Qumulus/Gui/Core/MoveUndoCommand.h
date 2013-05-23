@@ -17,6 +17,7 @@ QUML_BEGIN_NAMESPACE_GC
 
 class MoveUndoCommand : public QUndoCommand {
 public:
+    // Fixme: make this work with multiselect
     MoveUndoCommand(QuGD::SelectableShape* shape, QPointF old, QPointF now);
 
     void undo() override;

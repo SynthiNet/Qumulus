@@ -40,11 +40,16 @@ int MoveUndoCommand::id() const {
 }
 
 bool MoveUndoCommand::mergeWith(const QUndoCommand* command) {
+    auto c = static_cast<const MoveUndoCommand*>(command);
+
     if(command->id() != id()) {
         return false;
     }
+    if(mShape != c->mShape) {
+        return false;
+    }
 
-    mNew = static_cast<const MoveUndoCommand*>(command)->mNew;
+    mNew = c->mNew;
     mUsed = true;
     return true;
 }
