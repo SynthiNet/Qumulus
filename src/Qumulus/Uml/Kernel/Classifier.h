@@ -26,10 +26,6 @@ public:
     Classifier();
     Classifier(QString name, Namespace* p = 0);
 
-    bool mustBeOwned() const override {
-        return false;
-    }
-
     bool abstract() const { return mAbstract; }
     void setAbstract(bool a) { mAbstract = a; }
 

@@ -23,10 +23,6 @@ public:
     Package();
     Package(QString name, Package* p = 0);
 
-    bool mustBeOwned() const override {
-        return false;
-    }
-
     const QSet<PackageableElement*> packagedElements() const {
         return mPackagedElements;
     }
