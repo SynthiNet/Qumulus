@@ -37,6 +37,39 @@ Type* Operation::type() const {
         return nullptr;
 }
 
+QString Operation::toString() const {
+    QString str = "";
+
+    str += QString(toChar(visibility()));
+    str += " ";
+    str += name();
+
+    str += "(";
+
+    for(Parameter* p : parameters()) {
+        if(p->direction() == ParameterDirectionKind::Return) continue;
+
+        str += p->toString();
+
+        if(p != *(parameters().end()-1)) {
+            str += ", ";
+        }
+    }
+
+    str += ")";
+
+    if(type()) {
+        str += " : ";
+        str += type()->name();
+    }
+
+    if(isQuery()) {
+        str += " {query}";
+    }
+
+    return str;
+}
+
 #if 0
 QuUD::FeatureLabel* Operation::diagramElement() const {
     return static_cast<QuUD::FeatureLabel*>(mDiagramElement);

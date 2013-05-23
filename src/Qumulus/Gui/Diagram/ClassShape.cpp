@@ -28,6 +28,8 @@ void ClassShape::updateSizeConstraints() {
 void ClassShape::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, 
         QWidget* widget) {
 
+    CompartmentableShape::paint(painter, option, widget);
+
 }
 
 QUML_END_NAMESPACE_GD

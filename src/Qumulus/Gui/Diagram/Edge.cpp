@@ -18,7 +18,7 @@ Edge::Edge(const Edge& e) :
 }
 
 QRectF Edge::boundingRect() const {
-
+    return QRectF();
 }
 
 void Edge::paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget*) {
