@@ -13,32 +13,10 @@
 QUML_BEGIN_NAMESPACE_UK
 
 Property::Property(QString name, Class* c) : 
-        mAggregation(AggregationKind::None),
         mClass(c),
         mAssociation(0) {
     if(c) c->addAttribute(this);
     setName(name);
-}
-
-Property* Property::opposite() const {
-    NYI();
-    return nullptr;
-}
-
-
-Association* Property::owningAssociation() const {
-    NYI();
-    return nullptr;
-}
-
-QSet<Property*> Property::redefinedProperties() const {
-    NYI();
-    return QSet<Property*>();
-}
-
-QSet<Property*> Property::subsettedProperties() const {
-    NYI();
-    return QSet<Property*>();
 }
 
 #if 0
