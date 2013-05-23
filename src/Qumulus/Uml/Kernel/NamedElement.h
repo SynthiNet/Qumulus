@@ -30,23 +30,23 @@ public:
         return "::";
     }
 
-    QuLC::Optional<QString> qualifiedName() const;
+    QString qualifiedName() const;
 
-    bool isDistinguishableFrom(NamedElement* n) const;
+    // bool isDistinguishableFrom(NamedElement* n) const;
 
     const Namespace* nameSpace() const { return mNameSpace; }
     void setNameSpace(Namespace* n) { mNameSpace = n; }
 
-    const QuLC::Optional<QString>& name() const { return mName; }
-    void setName(const QuLC::Optional<QString>& n) { mName = n; }
+    const QString& name() const { return mName; }
+    void setName(const QString& n) { mName = n; }
 
-    QuLC::Optional<VisibilityKind> visibility() const { return mVisibility; }
-    void setVisiblity(QuLC::Optional<VisibilityKind> v) { mVisibility = v; }
+    VisibilityKind visibility() const { return mVisibility; }
+    void setVisiblity(VisibilityKind v) { mVisibility = v; }
 
     QUML_CLONABLE_ABSTRACT(NamedElement)
 private:
-    QuLC::Optional<QString> mName;
-    QuLC::Optional<VisibilityKind> mVisibility;
+    QString mName;
+    VisibilityKind mVisibility;
     Namespace* mNameSpace;
 };
 

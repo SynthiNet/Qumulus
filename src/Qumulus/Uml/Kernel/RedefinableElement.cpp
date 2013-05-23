@@ -8,9 +8,9 @@
 
 QUML_BEGIN_NAMESPACE_UK
 
-RedefinableElement::RedefinableElement(Classifier* c, RedefinableElement* r) :
-        mRedefinitionContext(c),
-        mRedefinedElement(r),
+RedefinableElement::RedefinableElement() :
+        // mRedefinitionContext(c),
+        // mRedefinedElement(r),
         mLeaf(false) {
     
 }

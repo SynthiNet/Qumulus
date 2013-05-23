@@ -19,30 +19,30 @@ class Classifier;
 
 class RedefinableElement : public virtual NamedElement {
 public:
-    RedefinableElement(Classifier* c = 0, RedefinableElement* r = 0);
+    RedefinableElement();
 
-    virtual bool isConsistentWith(RedefinableElement*) {
-        return false;
-    } 
+    // virtual bool isConsistentWith(RedefinableElement*) {
+    //     return false;
+    // } 
 
-    bool isRedefinitionContextValid(RedefinableElement*) {
-        NYI();
-        return false;
-    }
+    // bool isRedefinitionContextValid(RedefinableElement*) {
+    //     NYI();
+    //     return false;
+    // }
 
-    Classifier* redefinitionContext() const { return mRedefinitionContext; }
-    void setRedefinitionContext(Classifier* c) { mRedefinitionContext = c; }
+    // Classifier* redefinitionContext() const { return mRedefinitionContext; }
+    // void setRedefinitionContext(Classifier* c) { mRedefinitionContext = c; }
 
-    RedefinableElement* redefinedElement() const { return mRedefinedElement; }
-    void setRedefinedElement(RedefinableElement* r) { mRedefinedElement = r; }
+    // RedefinableElement* redefinedElement() const { return mRedefinedElement; }
+    // void setRedefinedElement(RedefinableElement* r) { mRedefinedElement = r; }
 
     bool leaf() const { return mLeaf; }
     void setLeaf(bool l) { mLeaf = l; }
 
     QUML_CLONABLE_ABSTRACT(RedefinableElement);
 private:
-    Classifier* mRedefinitionContext;
-    RedefinableElement* mRedefinedElement;
+    // Classifier* mRedefinitionContext;
+    // RedefinableElement* mRedefinedElement;
     bool mLeaf;
 };
 
