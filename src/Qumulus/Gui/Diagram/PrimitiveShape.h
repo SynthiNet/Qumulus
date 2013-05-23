@@ -20,8 +20,16 @@ public:
 
     void updateSizeConstraints() override;
 
+    void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, 
+            QWidget* widget) override;
+
     QUML_CLONABLE(PrimitiveShape);
 private:
+    QString primitiveName() const;
+    int primitiveNameWidth() const;
+
+private:
+    Compartment* mCompartment;
 };
 
 QUML_END_NAMESPACE_GD

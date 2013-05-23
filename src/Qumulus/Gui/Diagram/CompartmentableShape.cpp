@@ -62,6 +62,8 @@ void CompartmentableShape::paint(QPainter* painter,
         painter->drawRect(0, h, width(), c->height());
         h += c->height();
     }
+
+    SelectableShape::paint(painter, option, widget);
 }
 
 QUML_END_NAMESPACE_GD

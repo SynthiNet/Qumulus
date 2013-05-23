@@ -6,11 +6,16 @@
 
 #include "PrimitiveShape.h"
 
+#include <Uml/Kernel/PrimitiveType.h>
+
 QUML_BEGIN_NAMESPACE_GD
 
 PrimitiveShape::PrimitiveShape(QuUK::Element* e, DiagramElement* p) : 
-        CompartmentableShape(e, p) {
-
+        CompartmentableShape(e, p),
+        mCompartment(new Compartment(this)) {
+    addCompartment(mCompartment);
+    updateSizeConstraints();
+    resize(0, 0);
 }
 
 PrimitiveShape::PrimitiveShape(const PrimitiveShape& s) :
@@ -19,7 +24,26 @@ PrimitiveShape::PrimitiveShape(const PrimitiveShape& s) :
 }
 
 void PrimitiveShape::updateSizeConstraints() {
+    setMinimumSize({10 + std::max(90, primitiveNameWidth()), 40});
+}
 
+void PrimitiveShape::paint(QPainter* painter, 
+        const QStyleOptionGraphicsItem* option, QWidget* widget) {
+    CompartmentableShape::paint(painter, option, widget);
+
+
+}
+
+QString PrimitiveShape::primitiveName() const {
+    return *(dynamic_cast<QuUK::PrimitiveType*>(modelElement())->name());
+}
+
+int PrimitiveShape::primitiveNameWidth() const {
+    QFont font = sharedStyle()->font();
+    font.setBold(true);
+
+    QFontMetrics m(font);
+    return m.width(primitiveName());
 }
 
 QUML_END_NAMESPACE_GD
