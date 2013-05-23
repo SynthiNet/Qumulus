@@ -13,6 +13,9 @@
 #include <QtWidgets/QApplication>
 #include <QtCore/QDebug>
 #include <Uml/Kernel/Element.h>
+#include <Gui/Core/QumulusApplication.h>
+#include <Gui/Core/MoveUndoCommand.h>
+#include <Gui/Core/ResizeUndoCommand.h>
 #include <functional>
 
 QUML_BEGIN_NAMESPACE_GD
@@ -21,6 +24,7 @@ SelectableShape::SelectableShape(QuUK::Element* e, DiagramElement* p) :
     Shape(e, p) {
     setFlag(QGraphicsItem::ItemIsSelectable);
     setFlag(QGraphicsItem::ItemIsMovable);
+    setFlag(QGraphicsItem::ItemSendsGeometryChanges);
 }
 
 SelectableShape::SelectableShape(const SelectableShape& c) : Shape(c) {}
@@ -161,11 +165,11 @@ void SelectableShape::mouseMoveEvent(QGraphicsSceneMouseEvent *e) {
         default:
             break;
         }
-        
-        setPos(x, y);
-        setWidth(w);
-        setHeight(h);
-        prepareGeometryChange();
+
+        if(qApp->activeWindow())
+            qApp->activeWindow()->undoStack()->push(
+                    new QuGC::ResizeUndoCommand(this, pos(), {x, y}, 
+                        size(), {w, h}));
     } else {
         Shape::mouseMoveEvent(e);
     }
@@ -177,13 +181,32 @@ QRectF SelectableShape::boundingRect() const {
 
 QVariant SelectableShape::itemChange(GraphicsItemChange c, 
         const QVariant& v) {
-    if(c == QGraphicsItem::ItemSelectedChange) {
+    switch(c) {
+    case QGraphicsItem::ItemSelectedChange:
         if(v.toBool()) {
             setZValue(zValue()+1);
         } else {
             setZValue(zValue()-1);
+        } 
+        break;
+    case QGraphicsItem::ItemPositionChange:
+        if(mDragPosition == DragPosition::None) {
+            if(qApp->activeWindow())
+                qApp->activeWindow()->undoStack()->push(
+                        new QuGC::MoveUndoCommand(this, pos(), v.toPointF()));
         }
+        break;
+    case QGraphicsItem::ItemPositionHasChanged:
+        if(mDragPosition == DragPosition::None) {
+            if(qApp->activeWindow())
+                qApp->activeWindow()->undoStack()->push(
+                        new QuGC::MoveUndoCommand(this, pos(), pos()));
+        }
+        break;
+    default:;
     }
+
+
     return Shape::itemChange(c, v); 
 }
 

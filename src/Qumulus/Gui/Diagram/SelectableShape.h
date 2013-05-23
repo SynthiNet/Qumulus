@@ -28,6 +28,8 @@ public:
     bool shouldShowBDiag(QPointF p) const;
     bool shouldShowFDiag(QPointF p) const;
 
+    using Shape::prepareGeometryChange;
+
     QUML_CLONABLE_ABSTRACT(SelectableShape);
 
 protected:

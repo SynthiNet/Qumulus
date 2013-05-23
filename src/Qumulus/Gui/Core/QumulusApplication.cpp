@@ -22,6 +22,10 @@ QumulusApplication::QumulusApplication(int& argc, char** argv) :
 // #endif
 }
 
+QuGW::MainWindow* QumulusApplication::activeWindow() const {
+    return dynamic_cast<QuGW::MainWindow*>(QApplication::activeWindow());
+}
+
 QuGW::MainWindow* QumulusApplication::mainWindowForWidget(QWidget* w) const {
     QuGW::MainWindow* mw;
     while(w != nullptr) {
