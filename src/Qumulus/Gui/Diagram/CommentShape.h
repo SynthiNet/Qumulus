@@ -12,6 +12,8 @@
 
 #include "SelectableShape.h"
 
+#include <Uml/Kernel/Comment.h>
+
 #include <QtWidgets/QGraphicsTextItem>
 
 QUML_BEGIN_NAMESPACE_GD
@@ -20,6 +22,8 @@ class CommentShape : public SelectableShape {
 public:
     CommentShape(QuUK::Element* e = 0, DiagramElement* p = 0);
     CommentShape(const CommentShape&);
+
+    QuUK::Comment* modelElement() const override;
 
     using Shape::resize;
     void resize(double, double) override;

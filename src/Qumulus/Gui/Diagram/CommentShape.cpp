@@ -27,6 +27,10 @@ CommentShape::CommentShape(const CommentShape& c) :
 
 }
 
+QuUK::Comment* CommentShape::modelElement() const {
+    return dynamic_cast<QuUK::Comment*>(SelectableShape::modelElement());
+}
+
 void CommentShape::paint(QPainter* painter, 
         const QStyleOptionGraphicsItem* option, QWidget* widget) {
     updateSizeConstraints();

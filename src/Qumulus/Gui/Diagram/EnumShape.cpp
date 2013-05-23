@@ -18,6 +18,11 @@ EnumShape::EnumShape(const EnumShape& s) :
 
 }
 
+QuUK::Enumeration* EnumShape::modelElement() const {
+    return dynamic_cast<QuUK::Enumeration*>(
+            CompartmentableShape::modelElement());
+}
+
 void EnumShape::updateSizeConstraints() {
 
 }

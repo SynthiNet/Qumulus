@@ -11,12 +11,16 @@
 
 #include "CompartmentableShape.h"
 
+#include <Uml/Kernel/PrimitiveType.h>
+
 QUML_BEGIN_NAMESPACE_GD
 
 class PrimitiveShape : public CompartmentableShape {
 public:
     PrimitiveShape(QuUK::Element* e = 0, DiagramElement* p = 0);
     PrimitiveShape(const PrimitiveShape&);
+
+    QuUK::PrimitiveType* modelElement() const override;
 
     void updateSizeConstraints() override;
 
@@ -25,7 +29,6 @@ public:
 
     QUML_CLONABLE(PrimitiveShape);
 private:
-    QString primitiveName() const;
     int primitiveNameWidth() const;
 
 private:

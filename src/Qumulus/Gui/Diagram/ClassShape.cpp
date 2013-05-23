@@ -17,6 +17,10 @@ ClassShape::ClassShape(const ClassShape& s) :
 
 }
 
+QuUK::Class* ClassShape::modelElement() const {
+    return dynamic_cast<QuUK::Class*>(CompartmentableShape::modelElement());
+}
+
 void ClassShape::updateSizeConstraints() {
 
 }

@@ -18,6 +18,11 @@ PrimitiveShape::PrimitiveShape(QuUK::Element* e, DiagramElement* p) :
     resize(0, 0);
 }
 
+QuUK::PrimitiveType* PrimitiveShape::modelElement() const {
+    return dynamic_cast<QuUK::PrimitiveType*>(
+            CompartmentableShape::modelElement());
+}
+
 PrimitiveShape::PrimitiveShape(const PrimitiveShape& s) :
         CompartmentableShape(s) {
 
@@ -34,16 +39,12 @@ void PrimitiveShape::paint(QPainter* painter,
 
 }
 
-QString PrimitiveShape::primitiveName() const {
-    return *(dynamic_cast<QuUK::PrimitiveType*>(modelElement())->name());
-}
-
 int PrimitiveShape::primitiveNameWidth() const {
     QFont font = sharedStyle()->font();
     font.setBold(true);
 
     QFontMetrics m(font);
-    return m.width(primitiveName());
+    return m.width(modelElement()->name());
 }
 
 QUML_END_NAMESPACE_GD
