@@ -11,12 +11,16 @@
 
 #include "CompartmentableShape.h"
 
+#include <Uml/Kernel/Class.h>
+
 QUML_BEGIN_NAMESPACE_GD
 
 class ClassShape : public CompartmentableShape {
 public:
     ClassShape(QuUK::Element* e = 0, DiagramElement* p = 0);
     ClassShape(const ClassShape&);
+
+    QuUK::Class* modelElement() const override; 
 
     bool indentForVisibility() const { return mIndentForVisibilty; }
     void setIndentForVisibility(bool b) { mIndentForVisibilty = b; }
@@ -26,8 +30,13 @@ public:
             QWidget* widget) override;
 
     QUML_CLONABLE(ClassShape);
+private: 
+    int classNameWidth() const;
 private:
     bool mIndentForVisibilty = false;
+    Compartment* mHeadCompartment;
+    Compartment* mAttributeCompartment;
+    Compartment* mOperationCompartment;
 };
 
 QUML_END_NAMESPACE_GD

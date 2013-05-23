@@ -23,8 +23,8 @@ class Parameter :
 public:
     Parameter(QString name, Operation* o = 0);
 
-    QuLC::Optional<QString> defaultValue() const { return mDefaultValue; }
-    void setDefaultValue(QuLC::Optional<QString> s) { mDefaultValue = s; }
+    const QString& defaultValue() const { return mDefaultValue; }
+    void setDefaultValue(const QString& s) { mDefaultValue = s; }
 
     ParameterDirectionKind direction() const { return mDirection; }
     void setDirection(ParameterDirectionKind d) { mDirection = d; }
@@ -32,11 +32,13 @@ public:
     Operation* operation() const { return mOperation; }
     void setOperation(Operation* o);
 
+    QString toString() const;
+
     // void updateDiagramElement(QuUD::Diagram*, QSizeF s = QSizeF()) override;
 
     QUML_CLONABLE(Parameter);
 private:
-    QuLC::Optional<QString> mDefaultValue;
+    QString mDefaultValue = "";
     ParameterDirectionKind mDirection;
     Operation* mOperation;
 };

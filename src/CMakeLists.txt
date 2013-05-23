@@ -36,6 +36,9 @@ if(WIN32)
         "-o${CMAKE_BINARY_DIR}/winicon.o" )
 endif()
 
+# More errors    
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror -pedantic-errors")
+
 # quml library
 add_library(quml STATIC ${QUML_ALL_SRC})
 qt5_use_modules(quml Widgets)

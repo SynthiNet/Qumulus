@@ -13,32 +13,39 @@
 QUML_BEGIN_NAMESPACE_UK
 
 Property::Property(QString name, Class* c) : 
-        mAggregation(AggregationKind::None),
         mClass(c),
         mAssociation(0) {
     if(c) c->addAttribute(this);
     setName(name);
 }
 
-Property* Property::opposite() const {
-    NYI();
-    return nullptr;
-}
+QString Property::toString() const {
+    QString str = "";
 
+    str += QString(QuUK::toChar(visibility()));
+    str += " ";
+    str += name();
 
-Association* Property::owningAssociation() const {
-    NYI();
-    return nullptr;
-}
+    if(type()) {
+        str += " : ";
+        str += type()->name();
+    }
 
-QSet<Property*> Property::redefinedProperties() const {
-    NYI();
-    return QSet<Property*>();
-}
+    if(multiplicityString() != "") {
+        str += " ";
+        str += multiplicityString();
+    }
 
-QSet<Property*> Property::subsettedProperties() const {
-    NYI();
-    return QSet<Property*>();
+    if(getDefault() != "") {
+        str += " = ";
+        str += getDefault();
+    }
+
+    if(readOnly()) {
+        str += " {readOnly}";
+    }
+
+    return str;
 }
 
 #if 0

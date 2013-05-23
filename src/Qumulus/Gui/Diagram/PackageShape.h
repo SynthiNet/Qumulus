@@ -12,7 +12,7 @@
 
 #include "SelectableShape.h"
 
-#include <QtWidgets/QGraphicsRectItem>
+#include <Uml/Kernel/Package.h>
 
 QUML_BEGIN_NAMESPACE_GD
 
@@ -20,6 +20,8 @@ class PackageShape : public SelectableShape {
 public:
     PackageShape(QuUK::Element* e = 0, DiagramElement* p = 0);
     PackageShape(const PackageShape&);
+
+    QuUK::Package* modelElement() const override;
 
     using Shape::resize;
     void resize(double, double) override;
@@ -31,7 +33,6 @@ public:
 
     QUML_CLONABLE(PackageShape);
 private:
-    QString packageName() const;
     int packageNameWidth() const;
 };
 

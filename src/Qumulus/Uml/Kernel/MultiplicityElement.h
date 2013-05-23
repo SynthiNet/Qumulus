@@ -20,26 +20,25 @@ QUML_BEGIN_NAMESPACE_UK
 class MultiplicityElement : public virtual Element {
 public:
     MultiplicityElement();
-    MultiplicityElement(QuLC::Unlimited u);
     MultiplicityElement(unsigned l, QuLC::Unlimited u);
 
     bool isMultivalued() const;
     bool includesCardinality(unsigned i) const;
     bool includedMultiplicity(MultiplicityElement* m) const;
 
-    QuLC::Optional<unsigned> lowerBound() const {
+    unsigned lowerBound() const {
         return mLower;
     }
 
-    void setLowerBound(QuLC::Optional<unsigned> u) {
+    void setLowerBound(unsigned u) {
         mLower = u;
     }
 
-    QuLC::Optional<QuLC::Unlimited> upperBound() const {
+    QuLC::Unlimited upperBound() const {
         return mUpper;
     }
 
-    void setUpperBound(QuLC::Optional<QuLC::Unlimited> u) {
+    void setUpperBound(QuLC::Unlimited u) {
         mUpper = u;
     }
 
@@ -47,8 +46,8 @@ public:
 
     QUML_CLONABLE_ABSTRACT(MultiplicityElement)
 private:
-    QuLC::Optional<unsigned> mLower;
-    QuLC::Optional<QuLC::Unlimited> mUpper;
+    unsigned mLower;
+    QuLC::Unlimited mUpper;
 };
 
 QUML_END_NAMESPACE_UK

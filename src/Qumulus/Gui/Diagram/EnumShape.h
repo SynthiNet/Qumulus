@@ -11,12 +11,16 @@
 
 #include "CompartmentableShape.h"
 
+#include <Uml/Kernel/Enumeration.h>
+
 QUML_BEGIN_NAMESPACE_GD
 
 class EnumShape : public CompartmentableShape {
 public:
     EnumShape(QuUK::Element* e = 0, DiagramElement* p = 0);
     EnumShape(const EnumShape&);
+
+    QuUK::Enumeration* modelElement() const override;
 
     void updateSizeConstraints() override;
 

@@ -22,8 +22,11 @@ void AssociationShape::resize(double, double) {
 
 }
 
-void AssociationShape::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, 
-        QWidget* widget) {
+void AssociationShape::paint(QPainter* painter, 
+        const QStyleOptionGraphicsItem* option, QWidget* widget) {
+    (void)painter;
+    (void)option;
+    (void)widget;
 
 }
 

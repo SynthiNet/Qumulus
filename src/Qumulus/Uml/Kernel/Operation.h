@@ -32,13 +32,14 @@ public:
     Class* getClass() const { return mClass; }
     void setClass(Class* c) { mClass = c; }
 
+    QString toString() const;
+
     // QuUD::FeatureLabel* diagramElement() const override;
     // void updateDiagramElement(QuUD::Diagram*, QSizeF s = QSizeF()) override;
 
     QUML_CLONABLE(Operation);
 private:
     Class* mClass;
-    QSet<Operation*> mRedefinedOperations;
     bool mQuery;
 
 };

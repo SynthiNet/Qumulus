@@ -19,16 +19,6 @@ Classifier::Classifier(QString name, Namespace* p)  {
     setNameSpace(p);
 }
 
-void Classifier::addAttribute(Property* p) {
-    mAttributes.append(p);
-    addFeature(p);
-}
-
-void Classifier::removeAttribute(Property* p) {
-    mAttributes.removeAll(p);
-    removeFeature(p);
-}
-
 void Classifier::addFeature(Feature* p) {
     mFeatures.insert(p);
     addOwnedMember(p);

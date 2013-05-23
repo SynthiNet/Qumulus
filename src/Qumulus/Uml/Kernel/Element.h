@@ -14,9 +14,6 @@
 #include <Lib/Core/Functional.h>
 #include <Lib/Core/UniqueId.h>
 
-//#include <Uml/Diagram/DiagramElement.h>
-//#include <Uml/Diagram/Diagram.h>
-
 #include <QtCore/QSet>
 #include <QtCore/QList>
 #include <QtCore/QString>
@@ -32,10 +29,6 @@ public:
 
     virtual ~Element();
     
-    virtual bool mustBeOwned() const {
-        return true;
-    }
-
     const QSet<Element*>& ownedElements() const {
         return mOwnedElements;
     }

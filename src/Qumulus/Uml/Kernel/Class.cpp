@@ -56,6 +56,16 @@ void Class::removeOperation(Operation* c) {
     removeFeature(c);
 }
 
+void Class::addAttribute(Property* p) {
+    mOwnedAttributes.append(p);
+    addFeature(p);
+}
+
+void Class::removeAttribute(Property* p) {
+    mOwnedAttributes.removeAll(p);
+    removeFeature(p);
+}
+
 #if 0
 void Class::updateDiagramElement(QuUD::Diagram* diagram, QSizeF newsize) {
     if(!mDiagramElement) {

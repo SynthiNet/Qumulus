@@ -26,38 +26,25 @@ class Property : public StructuralFeature {
 public:
     Property(QString name, Class* c = 0);
 
-    AggregationKind aggregation() const { return mAggregation; }
-    void setAggregation(AggregationKind a) { mAggregation = a; }
-
     Class* getClass() const { return mClass; }
     void setClass(Class* c) { mClass = c; }
-
-    bool composite() const { 
-        return mAggregation == AggregationKind::Composite;
-    }
-
-    Property* opposite() const;
 
     Association* association() const { return mAssociation; }
     void setAssociation(Association* a) { mAssociation = a; }
 
-    Association* owningAssociation() const;
+    const QString& getDefault() const { return mDefault; }
+    void setDefault(const QString& d) { mDefault = d; }
 
-    QuLC::Optional<QString> getDefault() const { return mDefault; }
-    void setDefault(QuLC::Optional<QString> d) { mDefault = d; }
-
-    QSet<Property*> redefinedProperties() const;
-    QSet<Property*> subsettedProperties() const;
+    QString toString() const;
 
     // QuUD::FeatureLabel* diagramElement() const override;
     // void updateDiagramElement(QuUD::Diagram*, QSizeF s = QSizeF()) override;
 
     QUML_CLONABLE(Property);
 private:
-    AggregationKind mAggregation;
     Class* mClass;
     Association* mAssociation;
-    QuLC::Optional<QString> mDefault;
+    QString mDefault;
 };
 
 QUML_END_NAMESPACE_UK

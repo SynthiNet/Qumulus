@@ -25,6 +25,10 @@ PackageShape::PackageShape(QuUK::Element* e,
 PackageShape::PackageShape(const PackageShape& c) :
         SelectableShape(c) {}
 
+QuUK::Package* PackageShape::modelElement() const {
+    return dynamic_cast<QuUK::Package*>(SelectableShape::modelElement());
+}
+
 void PackageShape::updateSizeConstraints() {
     setMinimumSize({100, 10 + std::max(packageNameWidth(), 50)});
 }
@@ -46,18 +50,14 @@ void PackageShape::paint(QPainter* painter, const QStyleOptionGraphicsItem* opti
     painter->drawRect(0, 0, 30, 10);
     painter->drawRect(0, 10, width(), height() - 10);
 
-    int twidth = packageNameWidth();
-
     QFont font = sharedStyle()->font();
     font.setBold(true);
     painter->setFont(font);
-    painter->drawText((width() / 2) - (twidth / 2), 25, packageName());
+    painter->drawText(0, 12, width(), height(), 
+            Qt::AlignTop | Qt::AlignHCenter,
+            modelElement()->name());
 
     SelectableShape::paint(painter, option, widget);
-}
-
-QString PackageShape::packageName() const {
-    return *(dynamic_cast<QuUK::Package*>(modelElement())->name());
 }
 
 int PackageShape::packageNameWidth() const {
@@ -65,7 +65,7 @@ int PackageShape::packageNameWidth() const {
     font.setBold(true);
 
     QFontMetrics m(font);
-    return m.width(packageName());
+    return m.width(modelElement()->name());
 }
 
 QUML_END_NAMESPACE_GD

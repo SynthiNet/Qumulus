@@ -80,7 +80,9 @@ EditorView::EditorView(QWidget* parent) : QGraphicsView(parent),
     pshape->setPos(-200, -100);
 
     // FIXME: this is temporary testing code!
-    auto comment = new QuUK::Comment("Dit is een test");
+    auto comment = new QuUK::Comment(
+            "VisibilityKind is an enumeration type that defines literals to "
+            "determine the visibility of elements in a model.");
     auto cshape = mDiagram->createShape(comment);
     cshape->setVisible(true);
     cshape->setPos(-200, 200);
