@@ -21,7 +21,10 @@ public:
     void updateSizeConstraints() override;
 
     QUML_CLONABLE(EnumShape);
+
 private:
+    Compartment* mHeader;
+    Compartment* mBody;
 };
 
 QUML_END_NAMESPACE_GD
