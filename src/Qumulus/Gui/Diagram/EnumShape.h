@@ -23,6 +23,9 @@ public:
     QuUK::Enumeration* modelElement() const override;
 
     void updateSizeConstraints() override;
+    int enumNameWidth() const;
+    void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, 
+        QWidget* widget);
 
     QUML_CLONABLE(EnumShape);
 
