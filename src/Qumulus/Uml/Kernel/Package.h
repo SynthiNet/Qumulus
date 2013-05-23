@@ -12,8 +12,6 @@
 #include "PackageableElement.h"
 #include "Namespace.h"
 
-// #include <Uml/Diagram/PackageShape.h>
-
 QUML_BEGIN_NAMESPACE_UK
 
 class Type;
@@ -40,10 +38,6 @@ public:
 
     void addOwnedType(Type* t);
     void removeOwnedType(Type* t);
-
-    // QuUD::PackageShape* diagramElement() const override;
-
-    // void updateDiagramElement(QuUD::Diagram*, QSizeF s = QSizeF()) override;
 
     QUML_CLONABLE(Package)
 private:
