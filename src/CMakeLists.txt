@@ -36,8 +36,10 @@ if(WIN32)
         "-o${CMAKE_BINARY_DIR}/winicon.o" )
 endif()
 
-# More errors    
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror -pedantic-errors")
+# More errors
+if(APPLE)    
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror -pedantic-errors")
+endif()
 
 # quml library
 add_library(quml STATIC ${QUML_ALL_SRC})
