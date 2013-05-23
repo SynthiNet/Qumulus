@@ -17,7 +17,7 @@
     <file>data/img/toolbar/template-specialization.png</file>
     <file>data/img/toolbar/aggregation.png</file>
     <file>data/img/toolbar/containment.png</file>
-    <file>data/img/toolbar/usage.png</file>
+    <file>data/img/toolbar/association.png</file>
     <file>data/img/toolbar/package-membership.png</file>
 
     <file>data/img/sidebar/class.png</file>
@@ -40,7 +40,7 @@
     <file>data/img/cursor/template-specialization.png</file>
     <file>data/img/cursor/aggregation.png</file>
     <file>data/img/cursor/containment.png</file>
-    <file>data/img/cursor/usage.png</file>
+    <file>data/img/cursor/association.png</file>
     <file>data/img/cursor/package-membership.png</file>
 
     <file>data/img/editor/add-attribute.png</file>

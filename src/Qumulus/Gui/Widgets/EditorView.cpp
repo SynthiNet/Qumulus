@@ -69,6 +69,7 @@ EditorView::EditorView(QWidget* parent) : QGraphicsView(parent),
     new QuUK::EnumerationLiteral("Public", visibilityKind);
     new QuUK::EnumerationLiteral("Protected", visibilityKind);
     new QuUK::EnumerationLiteral("Private", visibilityKind);
+    new QuUK::EnumerationLiteral("FILE_NOT_FOUND", visibilityKind);
     auto eshape = mDiagram->createShape(visibilityKind);
     eshape->setPos(-200, 50);
     eshape->setVisible(true);
