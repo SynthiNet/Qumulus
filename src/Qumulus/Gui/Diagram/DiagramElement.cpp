@@ -5,6 +5,7 @@
  */
 
 #include "DiagramElement.h"
+#include "Diagram.h"
 
 #include <Lib/Core/Nyi.h>
 
@@ -33,5 +34,14 @@ Style* DiagramElement::sharedStyle() const {
 }
 
 
+Diagram* DiagramElement::diagram() const {
+    DiagramElement* p = const_cast<DiagramElement*>(this);
+
+    while(!dynamic_cast<Diagram*>(p)) {
+        p = p->owningElement();
+    }
+
+    return static_cast<Diagram*>(p);
+}
 
 QUML_END_NAMESPACE_GD

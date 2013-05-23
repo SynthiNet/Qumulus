@@ -6,6 +6,8 @@
  */
 
 #include "SelectableShape.h"
+#include "Diagram.h"
+
 #include <QtCore/QDebug>
 #include <QtGui/QPainter>
 #include <QtWidgets/QGraphicsSceneMouseEvent>
@@ -193,14 +195,9 @@ QVariant SelectableShape::itemChange(GraphicsItemChange c,
         if(mDragPosition == DragPosition::None) {
             if(qApp->activeWindow())
                 qApp->activeWindow()->undoStack()->push(
-                        new QuGC::MoveUndoCommand(this, pos(), v.toPointF()));
-        }
-        break;
-    case QGraphicsItem::ItemPositionHasChanged:
-        if(mDragPosition == DragPosition::None) {
-            if(qApp->activeWindow())
-                qApp->activeWindow()->undoStack()->push(
-                        new QuGC::MoveUndoCommand(this, pos(), pos()));
+                        new QuGC::MoveUndoCommand(
+                            diagram()->scene()->selectedItems(),
+                            this, pos(), v.toPointF()));
         }
         break;
     default:;

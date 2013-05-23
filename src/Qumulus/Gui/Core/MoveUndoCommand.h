@@ -15,19 +15,24 @@
 
 QUML_BEGIN_NAMESPACE_GC
 
+struct MoveUndoData {
+    QPointF mOld;
+    QPointF mNew;
+};
+
 class MoveUndoCommand : public QUndoCommand {
 public:
     // Fixme: make this work with multiselect
-    MoveUndoCommand(QuGD::SelectableShape* shape, QPointF old, QPointF now);
+    MoveUndoCommand(QList<QGraphicsItem*> selectedItems, 
+            QuGD::SelectableShape* shape, QPointF old, QPointF now);
 
     void undo() override;
     void redo() override;
     int id() const override;
     bool mergeWith(const QUndoCommand* command) override;
 private:
-    QuGD::SelectableShape* mShape;
-    QPointF mOld;
-    QPointF mNew;
+    QList<QGraphicsItem*> mSelectedItems;
+    QHash<QuGD::SelectableShape*, MoveUndoData> mUndoData;
     bool mUsed = false;
 };
 

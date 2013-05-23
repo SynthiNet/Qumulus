@@ -54,6 +54,7 @@ public:
     void removeElement(DiagramElement* e);
     
     void setScene(QGraphicsScene* e);
+    QGraphicsScene* scene() { return mScene; }
 
     QUML_CLONABLE(Diagram);
 private:

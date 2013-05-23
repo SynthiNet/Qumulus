@@ -22,6 +22,8 @@ QUML_END_NAMESPACE_UK
 
 QUML_BEGIN_NAMESPACE_GD
 
+class Diagram;
+
 class DiagramElement {
 public:
     DiagramElement(QuUK::Element* m = 0, DiagramElement* p = 0);
@@ -36,6 +38,8 @@ public:
     void setLocalStyle(Style* s) { mLocalStyle = s; }
 
     Style* sharedStyle() const;
+
+    Diagram* diagram() const;
 
     DiagramElement* owningElement() const { return mOwningElement; }
     virtual void setOwningElement(DiagramElement* e) { mOwningElement = e; }
