@@ -14,8 +14,6 @@
 #include "RedefinableElement.h"
 #include "Generalization.h"
 
-// #include <Uml/Diagram/ClassifierShape.h>
-
 QUML_BEGIN_NAMESPACE_UK
 
 class Property;
@@ -31,16 +29,6 @@ public:
 
     bool final() const { return mFinal; }
     void setFinal(bool f) { mFinal = f; }
-
-    const QList<Property*>& attributes() const {
-        return mAttributes;
-    }
-
-    /**
-     * This function takes over ownership.
-     */
-    void addAttribute(Property* p);
-    void removeAttribute(Property* p);
 
     const QSet<Feature*>& features() const {
         return mFeatures;
@@ -59,14 +47,11 @@ public:
     void addGeneralization(Generalization* g);
     void removeGeneralization(Generalization* g);
 
-    // QuUD::ClassifierShape* diagramElement() const override;
-
     QUML_CLONABLE_ABSTRACT(Classifier);
 
 private:
     bool mAbstract = false;
     bool mFinal = false;
-    QList<Property*> mAttributes;
     QSet<Feature*> mFeatures;
     QSet<Generalization*> mGeneralizations;
 

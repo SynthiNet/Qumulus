@@ -29,9 +29,16 @@ public:
     void addNestedClassifier(Classifier* c);
     void removeNestedClassifier(Classifier* c);
 
-    const QList<Operation*>& ownedOperations() const {
+    const QList<Operation*>& operations() const {
         return mOwnedOperations;
     }
+
+    const QList<Property*>& attributes() const {
+        return mOwnedAttributes;
+    }
+
+    void addAttribute(Property* p);
+    void removeAttribute(Property* p);
 
     void addOperation(Operation* c);
     void removeOperation(Operation* c);
@@ -42,6 +49,7 @@ public:
 private:
     QList<Classifier*> mNestedClassifiers;
     QList<Operation*> mOwnedOperations;
+    QList<Property*> mOwnedAttributes;
 };
 
 QUML_END_NAMESPACE_UK
