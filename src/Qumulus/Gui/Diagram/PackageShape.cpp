@@ -50,12 +50,12 @@ void PackageShape::paint(QPainter* painter, const QStyleOptionGraphicsItem* opti
     painter->drawRect(0, 0, 30, 10);
     painter->drawRect(0, 10, width(), height() - 10);
 
-    int twidth = packageNameWidth();
-
     QFont font = sharedStyle()->font();
     font.setBold(true);
     painter->setFont(font);
-    painter->drawText((width() / 2) - (twidth / 2), 25, modelElement()->name());
+    painter->drawText(0, 12, width(), height(), 
+            Qt::AlignTop | Qt::AlignHCenter,
+            modelElement()->name());
 
     SelectableShape::paint(painter, option, widget);
 }

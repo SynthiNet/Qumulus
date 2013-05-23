@@ -8,6 +8,8 @@
 
 #include <Uml/Kernel/PrimitiveType.h>
 
+#include <QPainter>
+
 QUML_BEGIN_NAMESPACE_GD
 
 PrimitiveShape::PrimitiveShape(QuUK::Element* e, DiagramElement* p) : 
@@ -36,6 +38,19 @@ void PrimitiveShape::paint(QPainter* painter,
         const QStyleOptionGraphicsItem* option, QWidget* widget) {
     CompartmentableShape::paint(painter, option, widget);
 
+    QFont stereotypeFont = sharedStyle()->font();
+    stereotypeFont.setItalic(true);
+    painter->setFont(stereotypeFont);
+    painter->drawText(0, 0, width(), height() / 2,
+            Qt::AlignHCenter | Qt::AlignBottom,
+            "« primitive »");
+
+    QFont nameFont = sharedStyle()->font();
+    nameFont.setBold(true);
+    painter->setFont(nameFont);
+    painter->drawText(0, height() / 2, width(), height() / 2, 
+            Qt::AlignHCenter | Qt::AlignTop,
+            modelElement()->name());
 
 }
 
