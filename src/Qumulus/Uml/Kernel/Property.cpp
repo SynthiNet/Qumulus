@@ -19,6 +19,35 @@ Property::Property(QString name, Class* c) :
     setName(name);
 }
 
+QString Property::toString() const {
+    QString str = "";
+
+    str += QString(QuUK::toChar(visibility()));
+    str += " ";
+    str += name();
+
+    if(type()) {
+        str += " : ";
+        str += type()->name();
+    }
+
+    if(multiplicityString() != "") {
+        str += " ";
+        str += multiplicityString();
+    }
+
+    if(getDefault() != "") {
+        str += " = ";
+        str += getDefault();
+    }
+
+    if(readOnly()) {
+        str += " {readOnly}";
+    }
+
+    return str;
+}
+
 #if 0
 QuUD::FeatureLabel* Property::diagramElement() const {
     return static_cast<QuUD::FeatureLabel*>(mDiagramElement);

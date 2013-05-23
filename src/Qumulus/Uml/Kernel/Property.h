@@ -32,8 +32,10 @@ public:
     Association* association() const { return mAssociation; }
     void setAssociation(Association* a) { mAssociation = a; }
 
-    QuLC::Optional<QString> getDefault() const { return mDefault; }
-    void setDefault(QuLC::Optional<QString> d) { mDefault = d; }
+    const QString& getDefault() const { return mDefault; }
+    void setDefault(const QString& d) { mDefault = d; }
+
+    QString toString() const;
 
     // QuUD::FeatureLabel* diagramElement() const override;
     // void updateDiagramElement(QuUD::Diagram*, QSizeF s = QSizeF()) override;
@@ -42,7 +44,7 @@ public:
 private:
     Class* mClass;
     Association* mAssociation;
-    QuLC::Optional<QString> mDefault;
+    QString mDefault;
 };
 
 QUML_END_NAMESPACE_UK
