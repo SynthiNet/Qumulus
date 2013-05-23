@@ -64,6 +64,7 @@ void EnumShape::paint(QPainter* painter, const QStyleOptionGraphicsItem* option,
         th += delta;
     }
 }
+
 void EnumShape::updateSizeConstraints() {
     float fheight = QFontMetrics(sharedStyle()->font()).height() * 1.2; 
     float bheight = std::max(30.0f, 
