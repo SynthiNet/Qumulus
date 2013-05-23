@@ -30,8 +30,13 @@ public:
             QWidget* widget) override;
 
     QUML_CLONABLE(ClassShape);
+private: 
+    int classNameWidth() const;
 private:
     bool mIndentForVisibilty = false;
+    Compartment* mHeadCompartment;
+    Compartment* mAttributeCompartment;
+    Compartment* mOperationCompartment;
 };
 
 QUML_END_NAMESPACE_GD
