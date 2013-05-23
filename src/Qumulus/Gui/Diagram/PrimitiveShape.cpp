@@ -8,7 +8,7 @@
 
 #include <Uml/Kernel/PrimitiveType.h>
 
-#include <QPainter>
+#include <QtGui/QPainter>
 
 QUML_BEGIN_NAMESPACE_GD
 
