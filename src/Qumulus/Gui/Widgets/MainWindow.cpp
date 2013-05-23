@@ -150,13 +150,13 @@ void MainWindow::populateToolbar() {
                     QKeySequence(tr("I")),
                     [&]{setCursor(mCursors["inheritance"]);}));
 
-    mInheritanceMenu = new ToolBarMenu();
-    mInheritanceMenu->addItem(
-            ElementItem("Template Specialization", 
-                    QIcon(":/data/img/toolbar/template-specialization.png"),
-                    QKeySequence(tr("S")),
-                    [&]{setCursor(mCursors["template-specialization"]);}));
-    mInheritanceItem->setMenu(mInheritanceMenu);
+    // mInheritanceMenu = new ToolBarMenu();
+    // mInheritanceMenu->addItem(
+    //         ElementItem("Template Specialization", 
+    //                 QIcon(":/data/img/toolbar/template-specialization.png"),
+    //                 QKeySequence(tr("S")),
+    //                 [&]{setCursor(mCursors["template-specialization"]);}));
+    // mInheritanceItem->setMenu(mInheritanceMenu);
     mToolBar->addWidget(mInheritanceItem);
 
 
@@ -186,10 +186,10 @@ void MainWindow::populateToolbar() {
 
     mRelationshipMenu = new ToolBarMenu();
     mRelationshipMenu->addItem(
-            ElementItem("Usage", 
-                    QIcon(":/data/img/toolbar/usage.png"),
-                    QKeySequence(tr("U")),
-                    [&]{setCursor(mCursors["usage"]);}));
+            ElementItem("Association", 
+                    QIcon(":/data/img/toolbar/association.png"),
+                    QKeySequence(tr("R")),
+                    [&]{setCursor(mCursors["association"]);}));
     mRelationshipItem->setMenu(mRelationshipMenu);
     mToolBar->addWidget(mRelationshipItem);
 }
@@ -399,8 +399,8 @@ void MainWindow::createCursors() {
         QCursor(QPixmap(":/data/img/cursor/package.png"), -1, -1);
     mCursors["primitive"] = 
         QCursor(QPixmap(":/data/img/cursor/primitive.png"), -1, -1);
-    mCursors["usage"] = 
-        QCursor(QPixmap(":/data/img/cursor/usage.png"), -1, -1);
+    mCursors["association"] = 
+        QCursor(QPixmap(":/data/img/cursor/association.png"), -1, -1);
     mCursors["template-class"] = 
         QCursor(QPixmap(":/data/img/cursor/template-class.png"), -1, -1);
     mCursors["template-specialization"] = 

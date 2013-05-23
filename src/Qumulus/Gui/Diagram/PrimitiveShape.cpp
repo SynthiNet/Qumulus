@@ -43,7 +43,7 @@ void PrimitiveShape::paint(QPainter* painter,
     painter->setFont(stereotypeFont);
     painter->drawText(0, 0, width(), height() / 2,
             Qt::AlignHCenter | Qt::AlignBottom,
-            "« primitive »");
+            "\u00AB primitive \u00BB");
 
     QFont nameFont = sharedStyle()->font();
     nameFont.setBold(true);

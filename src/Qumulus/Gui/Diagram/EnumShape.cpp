@@ -41,7 +41,7 @@ void EnumShape::paint(QPainter* painter, const QStyleOptionGraphicsItem* option,
     painter->setFont(stereotypeFont);
     painter->drawText(0, 0, width(), mHeader->height() / 2,
             Qt::AlignHCenter | Qt::AlignBottom,
-            "« enumeration »");
+            "\u00AB enumeration \u00BB");
 
     QFont nameFont = sharedStyle()->font();
     nameFont.setBold(true);
@@ -60,7 +60,7 @@ void EnumShape::paint(QPainter* painter, const QStyleOptionGraphicsItem* option,
     for(auto& a : modelElement()->ownedLiterals()) {
         painter->drawText(2, th, width() - 2, delta,
                 Qt::AlignLeft | Qt::AlignVCenter,
-                met.elidedText("• " + a->name(), Qt::ElideRight, width() - 4));
+                met.elidedText("\u2022 " + a->name(), Qt::ElideRight, width() - 4));
         th += delta;
     }
 }
