@@ -25,6 +25,7 @@
     <file>data/img/sidebar/enum.png</file>
     <file>data/img/sidebar/package.png</file>
     <file>data/img/sidebar/primitive.png</file>
+    <file>data/img/sidebar/literal.png</file>
     <file>data/img/sidebar/operation.png</file>
     <file>data/img/sidebar/attribute.png</file>
 
@@ -44,6 +45,7 @@
     <file>data/img/cursor/package-membership.png</file>
 
     <file>data/img/editor/add-attribute.png</file>
+    <file>data/img/editor/add-literal.png</file>
     <file>data/img/editor/add-operation.png</file>
   </qresource>
 </RCC>
