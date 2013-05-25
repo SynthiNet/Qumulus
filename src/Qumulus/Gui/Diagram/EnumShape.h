@@ -28,6 +28,8 @@ public:
         QWidget* widget) override;
 
     void hoverMoveEvent(QGraphicsSceneHoverEvent* event) override;
+    QVariant itemChange(GraphicsItemChange change, 
+            const QVariant & value) override;
     QuUK::EnumerationLiteral* highlightedLiteral() const;
 
     QUML_CLONABLE(EnumShape);

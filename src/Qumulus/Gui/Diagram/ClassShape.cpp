@@ -171,4 +171,18 @@ void ClassShape::hoverMoveEvent(QGraphicsSceneHoverEvent* event) {
 
     SelectableShape::hoverMoveEvent(event);
 }
+
+QVariant ClassShape::itemChange(GraphicsItemChange change, 
+        const QVariant& value) {
+    if(change == QGraphicsItem::ItemSelectedChange) {
+        if(!value.toBool()) {
+            mHighlightedAttribute = nullptr;
+            mHighlightedOperation = nullptr;
+            update();
+        } 
+    } 
+
+    return SelectableShape::itemChange(change, value); 
+}
+
 QUML_END_NAMESPACE_GD

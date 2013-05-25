@@ -30,6 +30,8 @@ public:
             QWidget* widget) override;
 
     void hoverMoveEvent(QGraphicsSceneHoverEvent* event) override;
+    QVariant itemChange(GraphicsItemChange change, 
+            const QVariant & value) override;
     QuUK::Property* highlightedAttribute() const;
     QuUK::Operation* highlightedOperation() const;
 

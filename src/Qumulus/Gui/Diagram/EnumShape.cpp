@@ -128,4 +128,17 @@ void EnumShape::hoverMoveEvent(QGraphicsSceneHoverEvent* event) {
     SelectableShape::hoverMoveEvent(event);
 }
 
+
+QVariant EnumShape::itemChange(GraphicsItemChange change, 
+        const QVariant& value) {
+    if(change == QGraphicsItem::ItemSelectedChange) {
+        if(!value.toBool()) {
+            mHighlightedLiteral = nullptr;
+            update();
+        } 
+    } 
+
+    return SelectableShape::itemChange(change, value); 
+}
+
 QUML_END_NAMESPACE_GD
