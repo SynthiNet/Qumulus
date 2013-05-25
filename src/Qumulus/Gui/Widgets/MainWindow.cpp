@@ -230,6 +230,11 @@ void MainWindow::createMenus() {
                     "JPG image (*.jpg);;"
                     "SVG file (*.svg);;"
                     "PDF file (*.pdf)"));
+            mEditorView->scene()->clearSelection();
+            if(!fName.contains(".")) {
+                // Assume PNG
+                fName += ".png";
+            }
             if(fName.endsWith("svg")) {
                 QSvgGenerator svg;
                 svg.setFileName(fName);
