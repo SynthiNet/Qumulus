@@ -8,6 +8,9 @@
 
 #include <QtCore/QDebug>
 
+#include <Gui/Diagram/Diagram.h>
+#include <Gui/Widgets/EditorView.h>
+
 QUML_BEGIN_NAMESPACE_GC
 
 ResizeUndoCommand::ResizeUndoCommand(QuGD::SelectableShape* shape, 
@@ -27,6 +30,8 @@ void ResizeUndoCommand::undo() {
     mShape->resize(mOldSize);
     mShape->prepareGeometryChange();
     mShape->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
+
+    mShape->diagram()->editorView()->updateButtonsPosition();
 }
 
 void ResizeUndoCommand::redo() {
@@ -35,6 +40,8 @@ void ResizeUndoCommand::redo() {
     mShape->resize(mNewSize);
     mShape->prepareGeometryChange();
     mShape->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
+
+    mShape->diagram()->editorView()->updateButtonsPosition();
 }
 
 int ResizeUndoCommand::id() const {

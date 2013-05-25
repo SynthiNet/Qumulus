@@ -12,6 +12,9 @@
 #include <QtGui/QMouseEvent>
 #include <Gui/Diagram/Diagram.h>
 
+class QPushButton;
+class QGraphicsProxyWidget;
+
 QUML_BEGIN_NAMESPACE_GW
 
 class Popover;
@@ -24,8 +27,11 @@ public:
     ~EditorView() noexcept;
     const QuGD::Diagram* diagram() const { return mDiagram; }
 
+    void updateButtonsPosition();
+
 public slots:
     void zoom(double value);
+    void selectionChanged();
 
 protected:
     void mousePressEvent(QMouseEvent* event) override;
@@ -38,6 +44,14 @@ private:
     Popover* mPopover;
     QuGD::Diagram* mDiagram;
     bool mCursorOverride = false;
+
+    QPushButton* mAttributeButton;
+    QPushButton* mOperationButton;
+    QPushButton* mLiteralButton;
+    QGraphicsProxyWidget* mAttributeButtonItem;
+    QGraphicsProxyWidget* mOperationButtonItem;
+    QGraphicsProxyWidget* mLiteralButtonItem;
+
 };
 
 QUML_END_NAMESPACE_GW

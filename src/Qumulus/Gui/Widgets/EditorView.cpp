@@ -5,10 +5,14 @@
  */
 
 #include "EditorView.h"
+
+#include "Popover.h"
+
 #include <QtCore/QDebug>
 #include <QtWidgets/QGraphicsRectItem>
-#include <Gui/Widgets/Popover.h>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QGraphicsProxyWidget>
+#include <QtWidgets/QPushButton>
 
 #include <Uml/Kernel/PrimitiveType.h>
 #include <Uml/Kernel/Enumeration.h>
@@ -31,7 +35,13 @@ QUML_BEGIN_NAMESPACE_GW
 EditorView::EditorView(QWidget* parent) : QGraphicsView(parent), 
         mScene(new QGraphicsScene(this)),
         mPopover(nullptr),
-        mDiagram(new QuGD::Diagram()) {
+        mDiagram(new QuGD::Diagram()),
+        mAttributeButton(new QPushButton(
+                    QIcon(":/data/img/editor/add-attribute.png"), "")),
+        mOperationButton(new QPushButton(
+                    QIcon(":/data/img/editor/add-operation.png"), "")),
+        mLiteralButton(new QPushButton(
+                    QIcon(":/data/img/editor/add-literal.png"), "")) {
     setScene(mScene);
     mScene->setBackgroundBrush(QBrush(Qt::white, Qt::SolidPattern));
     setSceneRect(-20000.0, -20000.0, 40000.0, 40000.0);
@@ -42,6 +52,29 @@ EditorView::EditorView(QWidget* parent) : QGraphicsView(parent),
     setMouseTracking(true);
 
     mDiagram->setScene(mScene);
+    connect(mScene, &QGraphicsScene::selectionChanged, 
+            this, &EditorView::selectionChanged);
+
+    // Setup buttons
+    mAttributeButton->setIconSize({24, 24});
+    mAttributeButton->setFixedSize({32, 32});
+    mAttributeButton->setToolTip("Attribute [A]");
+    mOperationButton->setIconSize({24, 24});
+    mOperationButton->setFixedSize({32, 32});
+    mOperationButton->setToolTip("Operation [O]");
+    mLiteralButton->setIconSize({24, 24});
+    mLiteralButton->setFixedSize({32, 32});
+    mLiteralButton->setToolTip("Literal [L]");
+
+    mAttributeButtonItem = mScene->addWidget(mAttributeButton);
+    mAttributeButtonItem->setVisible(false);
+    mAttributeButtonItem->setZValue(10);
+    mOperationButtonItem = mScene->addWidget(mOperationButton);
+    mOperationButtonItem->setVisible(false);
+    mOperationButtonItem->setZValue(10);
+    mLiteralButtonItem = mScene->addWidget(mLiteralButton);
+    mLiteralButtonItem->setVisible(false);
+    mLiteralButtonItem->setZValue(10);
 
     // FIXME: this is temporary testing code!
     auto boolean = new QuUK::PrimitiveType("bool");
@@ -96,6 +129,48 @@ EditorView::~EditorView() noexcept {
 void EditorView::zoom(double value) {
     resetMatrix();
     scale(value, value);
+}
+
+void EditorView::selectionChanged() {
+    if(scene()->selectedItems().size() != 1) {
+        mAttributeButtonItem->setVisible(false);
+        mOperationButtonItem->setVisible(false);
+        mLiteralButtonItem->setVisible(false); 
+    } else {
+        auto p = scene()->selectedItems()[0];
+
+        if(dynamic_cast<QuGD::ClassShape*>(p)) {
+            mAttributeButtonItem->setVisible(true);
+            mOperationButtonItem->setVisible(true);
+            mLiteralButtonItem->setVisible(false); 
+
+            mAttributeButtonItem->setPos(p->pos() - QPointF{36, 0});
+            mOperationButtonItem->setPos(p->pos() - QPointF{36, -36});
+        } else if(dynamic_cast<QuGD::EnumShape*>(p)) {
+            mAttributeButtonItem->setVisible(false);
+            mOperationButtonItem->setVisible(false);
+            mLiteralButtonItem->setVisible(true); 
+
+            mLiteralButtonItem->setPos(p->pos() - QPointF{36, 0});
+        } else {
+            mAttributeButtonItem->setVisible(false);
+            mOperationButtonItem->setVisible(false);
+            mLiteralButtonItem->setVisible(false); 
+        }
+    }
+}
+
+void EditorView::updateButtonsPosition() {
+    if(scene()->selectedItems().size() == 1) {
+        auto p = scene()->selectedItems()[0];
+
+        if(dynamic_cast<QuGD::ClassShape*>(p)) {
+            mAttributeButtonItem->setPos(p->pos() - QPointF{36, 0});
+            mOperationButtonItem->setPos(p->pos() - QPointF{36, -36});
+        } else if(dynamic_cast<QuGD::EnumShape*>(p)) {
+            mLiteralButtonItem->setPos(p->pos() - QPointF{36, 0});
+        } 
+    }
 }
 
 void EditorView::mousePressEvent(QMouseEvent* e) {

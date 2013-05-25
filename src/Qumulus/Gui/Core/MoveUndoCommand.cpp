@@ -8,6 +8,9 @@
 
 #include <QtCore/QDebug>
 
+#include <Gui/Diagram/Diagram.h>
+#include <Gui/Widgets/EditorView.h>
+
 QUML_BEGIN_NAMESPACE_GC
 
 MoveUndoCommand::MoveUndoCommand(QList<QGraphicsItem*> selectedItems,
@@ -30,6 +33,8 @@ void MoveUndoCommand::undo() {
     for(auto it = mUndoData.begin(); it != mUndoData.end(); ++it) {
         it.key()->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
     }
+
+    mUndoData.begin().key()->diagram()->editorView()->updateButtonsPosition();
 }
 
 void MoveUndoCommand::redo() {
@@ -49,6 +54,8 @@ void MoveUndoCommand::redo() {
     for(auto it = mUndoData.begin(); it != mUndoData.end(); ++it) {
         it.key()->setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
     }
+
+    mUndoData.begin().key()->diagram()->editorView()->updateButtonsPosition();
 }
 
 int MoveUndoCommand::id() const {

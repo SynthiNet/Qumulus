@@ -23,6 +23,8 @@
 #include <Uml/Kernel/Class.h>
 #include <Uml/Kernel/Enumeration.h>
 
+#include <Gui/Widgets/EditorView.h>
+
 #include <QtWidgets/QGraphicsScene>
 
 QUML_BEGIN_NAMESPACE_GD
@@ -98,6 +100,10 @@ EnumShape* Diagram::createShape(QuUK::Enumeration* e) {
     auto eshape = new EnumShape(e, this);
     addElement(eshape);
     return eshape;
+}
+
+QuGW::EditorView* Diagram::editorView() const {
+    return dynamic_cast<QuGW::EditorView*>(scene()->views()[0]);
 }
 
 QUML_END_NAMESPACE_GD

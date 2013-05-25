@@ -12,6 +12,8 @@
 
 #include "DiagramElement.h"
 
+#include <Gui/Widgets/internal_base.h>
+
 class QGraphicsScene;
 
 QUML_BEGIN_NAMESPACE_UK
@@ -23,6 +25,12 @@ class PrimitiveType;
 class Enumeration;
 
 QUML_END_NAMESPACE_UK
+
+QUML_BEGIN_NAMESPACE_GW
+
+class EditorView;
+
+QUML_END_NAMESPACE_GW
 
 QUML_BEGIN_NAMESPACE_GD
 
@@ -54,7 +62,8 @@ public:
     void removeElement(DiagramElement* e);
     
     void setScene(QGraphicsScene* e);
-    QGraphicsScene* scene() { return mScene; }
+    QGraphicsScene* scene() const { return mScene; }
+    QuGW::EditorView* editorView() const;
 
     QUML_CLONABLE(Diagram);
 private:

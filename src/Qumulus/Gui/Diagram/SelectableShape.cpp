@@ -13,11 +13,13 @@
 #include <QtWidgets/QGraphicsSceneMouseEvent>
 #include <QtWidgets/QGraphicsView>
 #include <QtWidgets/QApplication>
-#include <QtCore/QDebug>
+
 #include <Uml/Kernel/Element.h>
 #include <Gui/Core/QumulusApplication.h>
 #include <Gui/Core/MoveUndoCommand.h>
 #include <Gui/Core/ResizeUndoCommand.h>
+#include <Gui/Widgets/EditorView.h>
+
 #include <functional>
 
 QUML_BEGIN_NAMESPACE_GD
@@ -199,6 +201,10 @@ QVariant SelectableShape::itemChange(GraphicsItemChange c,
                             diagram()->scene()->selectedItems(),
                             this, pos(), v.toPointF()));
         }
+
+        break;
+    case QGraphicsItem::ItemPositionHasChanged:
+        diagram()->editorView()->updateButtonsPosition();
         break;
     default:;
     }

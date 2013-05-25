@@ -17,7 +17,6 @@ QUML_BEGIN_NAMESPACE_GC
 
 class ResizeUndoCommand : public QUndoCommand {
 public:
-    // Fixme: make this work with multiselect
     ResizeUndoCommand(QuGD::SelectableShape* shape, 
             QPointF old, QPointF now, QSizeF oldsize, QSizeF newsize);
 
