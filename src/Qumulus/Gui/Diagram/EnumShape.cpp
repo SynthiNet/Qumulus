@@ -83,7 +83,7 @@ void EnumShape::updateSizeConstraints() {
     float bheight = std::max(30.0f, 
             modelElement()->ownedLiterals().size() * fheight) + 10;
 
-    setMinimumSize({std::max(190, enumNameWidth()) + 10, bheight});
+    setMinimumSize({std::max(190, enumNameWidth()) + 10, bheight + 40});
     mHeader->setMinimumHeight(40);
     mHeader->setMaximumHeight(40);
     mBody->setMinimumHeight(bheight);
