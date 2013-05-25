@@ -29,6 +29,10 @@ public:
     void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, 
             QWidget* widget) override;
 
+    void hoverMoveEvent(QGraphicsSceneHoverEvent* event) override;
+    QuUK::Property* highlightedAttribute() const;
+    QuUK::Operation* highlightedOperation() const;
+
     QUML_CLONABLE(ClassShape);
 private: 
     int classNameWidth() const;
@@ -37,6 +41,8 @@ private:
     Compartment* mHeadCompartment;
     Compartment* mAttributeCompartment;
     Compartment* mOperationCompartment;
+    QuUK::Property* mHighlightedAttribute = nullptr;
+    QuUK::Operation* mHighlightedOperation = nullptr;
 };
 
 QUML_END_NAMESPACE_GD

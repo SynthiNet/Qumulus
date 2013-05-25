@@ -27,11 +27,15 @@ public:
     void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, 
         QWidget* widget) override;
 
+    void hoverMoveEvent(QGraphicsSceneHoverEvent* event) override;
+    QuUK::EnumerationLiteral* highlightedLiteral() const;
+
     QUML_CLONABLE(EnumShape);
 
 private:
     Compartment* mHeader;
     Compartment* mBody;
+    QuUK::EnumerationLiteral* mHighlightedLiteral = nullptr;
 };
 
 QUML_END_NAMESPACE_GD
