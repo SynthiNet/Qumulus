@@ -11,8 +11,6 @@
 
 #include "NamedElement.h"
 
-// #include <Uml/Diagram/Label.h>
-
 QUML_BEGIN_NAMESPACE_UK
 
 class Enumeration;
@@ -25,9 +23,6 @@ public:
 
     Enumeration* enumeration() const { return mEnumeration; }
     void setEnumeration(Enumeration* e) { mEnumeration = e; }
-
-    // QuUD::Label* diagramElement() const override;
-    // void updateDiagramElement(QuUD::Diagram*, QSizeF s = QSizeF()) override;
 
     QUML_CLONABLE(EnumerationLiteral);
 private:

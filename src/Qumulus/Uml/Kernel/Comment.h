@@ -18,24 +18,15 @@ QUML_BEGIN_NAMESPACE_UK
 class Comment : public Element {
     friend struct CommentGraphics;
 public:
-    Comment(const QString& body = "", Element* annotated = 0);
+    Comment(const QString& body = "");
     ~Comment();
 
     const QString& body() const { return mBody; }
     void setBody(const QString& b) { mBody = b; }
 
-    Element* annotatedElement() const { return mAnnotatedElement; }
-    void setAnnotatedElement(Element* e) { mAnnotatedElement = e; }
-    
-
-    // QuUD::CommentShape* diagramElement() const override;
-    
-    // void updateDiagramElement(QuUD::Diagram*, QSizeF s = QSizeF()) override;
-
     QUML_CLONABLE(Comment);
 private:
     QString mBody;
-    Element* mAnnotatedElement = nullptr;
 };
 
 QUML_END_NAMESPACE_UK

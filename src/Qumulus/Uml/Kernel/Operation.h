@@ -10,8 +10,6 @@
 
 #include "internal_base.h"
 
-// #include <Uml/Diagram/FeatureLabel.h>
-
 #include "BehavioralFeature.h"
 
 QUML_BEGIN_NAMESPACE_UK
@@ -33,9 +31,6 @@ public:
     void setClass(Class* c) { mClass = c; }
 
     QString toString() const;
-
-    // QuUD::FeatureLabel* diagramElement() const override;
-    // void updateDiagramElement(QuUD::Diagram*, QSizeF s = QSizeF()) override;
 
     QUML_CLONABLE(Operation);
 private:

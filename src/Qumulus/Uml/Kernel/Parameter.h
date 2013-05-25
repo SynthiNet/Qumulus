@@ -34,8 +34,6 @@ public:
 
     QString toString() const;
 
-    // void updateDiagramElement(QuUD::Diagram*, QSizeF s = QSizeF()) override;
-
     QUML_CLONABLE(Parameter);
 private:
     QString mDefaultValue = "";

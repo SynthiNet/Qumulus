@@ -21,19 +21,8 @@ public:
     DataType() {}
     DataType(QString name, Namespace* p = 0) : Classifier(name, p) {}
 
-    const QList<Property*>& ownedAttributes() const {
-        return mOwnedAttributes;
-    }
-
-    const QList<Operation*>& ownedOperations() const {
-        return mOwnedOperations;
-    }
-
     QUML_CLONABLE_ABSTRACT(DataType);
-
 private:
-    QList<Property*> mOwnedAttributes;
-    QList<Operation*> mOwnedOperations;
 };
 
 QUML_END_NAMESPACE_UK

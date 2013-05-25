@@ -33,22 +33,6 @@ public:
         return mOwnedElements;
     }
 
-    const QSet<Comment*>& ownedComments() const {
-        return mOwnedComments;
-    }
-
-    // virtual QuUD::DiagramElement* diagramElement() const {
-    //     return mDiagramElement; 
-    // }
-
-    // virtual void updateDiagramElement(QuUD::Diagram*, QSizeF s = QSizeF()) = 0;
-
-    /**
-     * @note This function takes over ownership.
-     */
-    void addComment(Comment* c);
-    void removeComment(Comment* c);
-
     QString uniqueId() const;
     void setUniqueId(const QString& s);
     static Element* byId(const QString& s);
@@ -69,7 +53,6 @@ private:
     static QHash<QString, Element*> mElementsById;
 
     QSet<Element*> mOwnedElements;
-    QSet<Comment*> mOwnedComments;
     QuLC::UniqueId mUniqueId;
 };
 
