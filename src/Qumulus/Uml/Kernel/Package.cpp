@@ -29,7 +29,7 @@ void Package::addPackagedElement(PackageableElement* e) {
 }
 
 void Package::removePackagedElement(PackageableElement* e) {
-    mPackagedElements.insert(e);
+    mPackagedElements.remove(e);
 }
 
 QUML_END_NAMESPACE_UK

@@ -35,8 +35,6 @@ public:
 private:
 private:
     QSet<PackageableElement*> mPackagedElements;
-    QSet<Package*> mNestedPackages;
-    QSet<Type*> mOwnedTypes;
 };
 
 QUML_END_NAMESPACE_UK

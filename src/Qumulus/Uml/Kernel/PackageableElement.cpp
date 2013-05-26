@@ -15,7 +15,7 @@ PackageableElement::PackageableElement() {
 }
 
 PackageableElement::PackageableElement(QString name, Package* p) {
-    mPackage = p;
+    setPackage(p);
     setName(name);
     setVisiblity(VisibilityKind::Public);
 }

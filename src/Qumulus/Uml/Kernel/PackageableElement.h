@@ -32,7 +32,7 @@ public:
 
     QUML_CLONABLE_ABSTRACT(PackageableElement);
 private:
-    Package* mPackage;
+    Package* mPackage = nullptr;
 };
 
 QUML_END_NAMESPACE_UK
