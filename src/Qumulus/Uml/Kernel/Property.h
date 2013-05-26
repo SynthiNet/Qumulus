@@ -35,6 +35,9 @@ public:
     const QString& getDefault() const { return mDefault; }
     void setDefault(const QString& d) { mDefault = d; }
 
+    QString sidebarIcon() const override { return "property"; }
+    QString sidebarText() const override { return toString(); }
+
     QString toString() const;
 
     // QuUD::FeatureLabel* diagramElement() const override;

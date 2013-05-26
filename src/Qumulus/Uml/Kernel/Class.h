@@ -43,7 +43,7 @@ public:
     void addOperation(Operation* c);
     void removeOperation(Operation* c);
 
-    // void updateDiagramElement(QuUD::Diagram*, QSizeF s = QSizeF()) override;
+    QString sidebarIcon() const override { return "class"; }
 
     QUML_CLONABLE(Class);
 private:

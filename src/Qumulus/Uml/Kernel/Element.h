@@ -33,6 +33,10 @@ public:
         return mOwnedElements;
     }
 
+    virtual bool isTopLevel() const { return false; };
+    virtual QString sidebarIcon() const = 0;
+    virtual QString sidebarText() const = 0;
+
     QString uniqueId() const;
     void setUniqueId(const QString& s);
     static Element* byId(const QString& s);

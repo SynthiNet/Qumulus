@@ -24,6 +24,10 @@ public:
     const QString& body() const { return mBody; }
     void setBody(const QString& b) { mBody = b; }
 
+    bool isTopLevel() const override { return true; }
+    QString sidebarIcon() const override { return "comment"; }
+    QString sidebarText() const override { return body(); }
+
     QUML_CLONABLE(Comment);
 private:
     QString mBody;

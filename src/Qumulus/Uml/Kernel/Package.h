@@ -39,6 +39,9 @@ public:
     void addOwnedType(Type* t);
     void removeOwnedType(Type* t);
 
+    QString sidebarIcon() const override { return "package"; }
+    QString sidebarText() const override { return name(); }
+
     QUML_CLONABLE(Package)
 private:
     void addPackagedElement(PackageableElement* e);

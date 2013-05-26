@@ -20,6 +20,8 @@ public:
     PrimitiveType();
     PrimitiveType(QString name, Namespace* p = 0) : DataType(name, p) {}
 
+    QString sidebarIcon() const override { return "primitive"; }
+
     QUML_CLONABLE(PrimitiveType);
 private:
 };

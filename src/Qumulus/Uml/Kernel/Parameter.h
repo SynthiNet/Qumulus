@@ -32,6 +32,9 @@ public:
     Operation* operation() const { return mOperation; }
     void setOperation(Operation* o);
 
+    QString sidebarIcon() const override { return ""; }
+    QString sidebarText() const override { return ""; }
+
     QString toString() const;
 
     QUML_CLONABLE(Parameter);

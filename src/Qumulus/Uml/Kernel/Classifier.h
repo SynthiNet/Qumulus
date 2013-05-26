@@ -47,6 +47,8 @@ public:
     void addGeneralization(Generalization* g);
     void removeGeneralization(Generalization* g);
 
+    QString sidebarText() const override { return name(); }
+
     QUML_CLONABLE_ABSTRACT(Classifier);
 
 private:

@@ -30,6 +30,9 @@ public:
     Class* getClass() const { return mClass; }
     void setClass(Class* c) { mClass = c; }
 
+    QString sidebarIcon() const { return "operation"; }
+    QString sidebarText() const { return toString(); }
+
     QString toString() const;
 
     QUML_CLONABLE(Operation);

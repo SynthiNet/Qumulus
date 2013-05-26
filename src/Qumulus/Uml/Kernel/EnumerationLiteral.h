@@ -24,6 +24,9 @@ public:
     Enumeration* enumeration() const { return mEnumeration; }
     void setEnumeration(Enumeration* e) { mEnumeration = e; }
 
+    QString sidebarIcon() const override { return "literal"; }
+    QString sidebarText() const override { return name(); }
+
     QUML_CLONABLE(EnumerationLiteral);
 private:
     Enumeration* mEnumeration;

@@ -26,6 +26,8 @@ public:
 
     void addLiteral(EnumerationLiteral* l);
     void removeLiteral(EnumerationLiteral* l);
+    
+    QString sidebarIcon() const override { return "enumeration"; }
 
     QUML_CLONABLE(Enumeration);
 private:

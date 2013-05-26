@@ -22,6 +22,9 @@ public:
 
     }
 
+    QString sidebarIcon() const override { return ""; }
+    QString sidebarText() const override { return ""; }
+
     Element* source() const { return mSource; }
     void setSource(Element* s) { mSource = s; }
 

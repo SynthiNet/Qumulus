@@ -24,6 +24,8 @@ public:
         return mPackage;
     }
 
+    bool isTopLevel() const override { return package() == 0; }
+
     QUML_CLONABLE_ABSTRACT(PackageableElement);
 private:
     Package* mPackage;
