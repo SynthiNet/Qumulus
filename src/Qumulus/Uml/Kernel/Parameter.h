@@ -32,6 +32,8 @@ public:
     Operation* operation() const { return mOperation; }
     void setOperation(Operation* o);
 
+    QString qualifiedName() const override { return name(); }
+
     QString sidebarIcon() const override { return ""; }
     QString sidebarText() const override { return ""; }
 

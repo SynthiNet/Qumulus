@@ -22,20 +22,7 @@ Element::Element(const Element&) {
 }
 
 Element::~Element() {
-    for(auto& x : mOwnedElements) {
-        delete x;
-    }
-
     mElementsById.remove(uniqueId());
-}
-
-
-void Element::addElement(Element* other) {
-    mOwnedElements.insert(other); 
-}
-
-void Element::removeElement(Element* other) {
-    mOwnedElements.remove(other);
 }
 
 QString Element::uniqueId() const {

@@ -13,12 +13,10 @@
 
 QUML_BEGIN_NAMESPACE_UK
 
-
 class PrimitiveType : public DataType {
-    friend struct PrimitiveTypeGraphics;
 public:
     PrimitiveType();
-    PrimitiveType(QString name, Namespace* p = 0) : DataType(name, p) {}
+    PrimitiveType(QString name, Package* p = 0) : DataType(name, p) {}
 
     QString sidebarIcon() const override { return "primitive"; }
 

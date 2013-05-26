@@ -10,42 +10,29 @@
 #include "internal_base.h"
 
 #include "PackageableElement.h"
-#include "Namespace.h"
 
 QUML_BEGIN_NAMESPACE_UK
 
 class Type;
 
-class Package : public Namespace, public PackageableElement {
+class Package : public PackageableElement {
 public:
     Package();
     Package(QString name, Package* p = 0);
+    ~Package();
 
     const QSet<PackageableElement*> packagedElements() const {
         return mPackagedElements;
     }
 
-    const QSet<Package*>& nestedPackages() const {
-        return mNestedPackages;
-    }
-
-    void addNestedPackage(Package* p);
-    void removeNestedPackage(Package* p);
-
-    const QSet<Type*> ownedTypes() const {
-        return mOwnedTypes;
-    }
-
-    void addOwnedType(Type* t);
-    void removeOwnedType(Type* t);
+    void addPackagedElement(PackageableElement* e);
+    void removePackagedElement(PackageableElement* e);
 
     QString sidebarIcon() const override { return "package"; }
     QString sidebarText() const override { return name(); }
 
     QUML_CLONABLE(Package)
 private:
-    void addPackagedElement(PackageableElement* e);
-    void removePackagedElement(PackageableElement* e);
 private:
     QSet<PackageableElement*> mPackagedElements;
     QSet<Package*> mNestedPackages;

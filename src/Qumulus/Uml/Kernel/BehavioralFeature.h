@@ -10,22 +10,23 @@
 #include "internal_base.h"
 
 #include "Feature.h"
-#include "Namespace.h"
 
 QUML_BEGIN_NAMESPACE_UK
 
 class Parameter;
 class Type;
 
-class BehavioralFeature : 
-        public Feature,
-        public virtual Namespace {
+class BehavioralFeature : public Feature {
 public:
-    
+    ~BehavioralFeature();
+
     const QList<Parameter*>& parameters() const { 
         return mOwnedParameters; 
     }
 
+    /**
+     * @note This function takes ownership
+     */
     void addParameter(Parameter* p);
     void removeParameter(Parameter* p);
 

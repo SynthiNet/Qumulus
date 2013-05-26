@@ -9,14 +9,18 @@
 
 QUML_BEGIN_NAMESPACE_UK
 
+BehavioralFeature::~BehavioralFeature() {
+    for(auto& x : mOwnedParameters) {
+        delete x;
+    }
+}
+
 void BehavioralFeature::addParameter(Parameter* p) {
     mOwnedParameters.append(p);
-    addElement(std::move(p));
 }
 
 void BehavioralFeature::removeParameter(Parameter* p) {
     mOwnedParameters.removeAll(p);
-    removeElement(p);
 }
 
 void BehavioralFeature::addException(Type* t) {

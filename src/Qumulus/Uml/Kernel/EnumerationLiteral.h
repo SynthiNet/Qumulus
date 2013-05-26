@@ -24,6 +24,8 @@ public:
     Enumeration* enumeration() const { return mEnumeration; }
     void setEnumeration(Enumeration* e) { mEnumeration = e; }
 
+    QString qualifiedName() const override;
+
     QString sidebarIcon() const override { return "literal"; }
     QString sidebarText() const override { return name(); }
 

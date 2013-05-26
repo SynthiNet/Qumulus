@@ -30,6 +30,8 @@ public:
     Class* getClass() const { return mClass; }
     void setClass(Class* c) { mClass = c; }
 
+    QString qualifiedName() const override;
+
     QString sidebarIcon() const { return "operation"; }
     QString sidebarText() const { return toString(); }
 

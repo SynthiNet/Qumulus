@@ -12,19 +12,23 @@ Enumeration::Enumeration() {
 
 }
 
-Enumeration::Enumeration(QString name, Namespace* p) :
+Enumeration::~Enumeration() {
+    for(auto& x : mOwnedLiterals) {
+        delete x;
+    }
+}
+
+Enumeration::Enumeration(QString name, Package* p) :
         DataType(name, p) {
 
 }
 
 void Enumeration::addLiteral(EnumerationLiteral* l) {
     mOwnedLiterals.append(l);
-    addOwnedMember(l);
 }
 
 void Enumeration::removeLiteral(EnumerationLiteral* l) {
     mOwnedLiterals.removeAll(l);
-    removeOwnedMember(l);
 }
 
 QUML_END_NAMESPACE_UK

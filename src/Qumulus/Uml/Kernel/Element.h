@@ -29,10 +29,6 @@ public:
 
     virtual ~Element();
     
-    const QSet<Element*>& ownedElements() const {
-        return mOwnedElements;
-    }
-
     virtual bool isTopLevel() const { return false; };
     virtual QString sidebarIcon() const = 0;
     virtual QString sidebarText() const = 0;
@@ -42,21 +38,8 @@ public:
     static Element* byId(const QString& s);
 
     QUML_CLONABLE_ABSTRACT(Element)
-protected:
-    /**
-     * @note This function takes over ownership.
-     */
-    void addElement(Element* other);
-
-    void removeElement(Element* other);
-
-protected:
-    // QuUD::DiagramElement* mDiagramElement;
-
 private:
     static QHash<QString, Element*> mElementsById;
-
-    QSet<Element*> mOwnedElements;
     QuLC::UniqueId mUniqueId;
 };
 

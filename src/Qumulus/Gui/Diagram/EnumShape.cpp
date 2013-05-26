@@ -65,7 +65,7 @@ void EnumShape::paint(QPainter* painter, const QStyleOptionGraphicsItem* option,
     float delta = met.height() * 1.2;
     painter->setFont(literalFont);
 
-    for(auto& a : modelElement()->ownedLiterals()) {
+    for(auto& a : modelElement()->literals()) {
         if(a == highlightedLiteral()) {
             painter->fillRect(1, th + 1, width() - 2, delta - 2, 
                     QColor(200, 240, 255));
@@ -81,7 +81,7 @@ void EnumShape::paint(QPainter* painter, const QStyleOptionGraphicsItem* option,
 void EnumShape::updateSizeConstraints() {
     float fheight = QFontMetrics(sharedStyle()->font()).height() * 1.2; 
     float bheight = std::max(30.0f, 
-            modelElement()->ownedLiterals().size() * fheight) + 10;
+            modelElement()->literals().size() * fheight) + 10;
 
     setMinimumSize({std::max(190, enumNameWidth()) + 10, bheight + 40});
     mHeader->setMinimumHeight(40);
@@ -115,10 +115,10 @@ void EnumShape::hoverMoveEvent(QGraphicsSceneHoverEvent* event) {
 
             int yi = (unsigned)y;
 
-            if(yi >= modelElement()->ownedLiterals().size()) {
+            if(yi >= modelElement()->literals().size()) {
                 mHighlightedLiteral = nullptr;
             } else {
-                auto x = modelElement()->ownedLiterals()[yi];
+                auto x = modelElement()->literals()[yi];
                 mHighlightedLiteral = x;
                 update();
             }

@@ -19,7 +19,7 @@ QUML_BEGIN_NAMESPACE_UK
 class DataType : public Classifier {
 public:
     DataType() {}
-    DataType(QString name, Namespace* p = 0) : Classifier(name, p) {}
+    DataType(QString name, Package* p = 0) : Classifier(name, p) {}
 
     QUML_CLONABLE_ABSTRACT(DataType);
 private:

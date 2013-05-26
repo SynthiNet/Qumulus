@@ -18,12 +18,16 @@ class Enumeration : public DataType {
     friend struct EnumerationGraphics;
 public:
     Enumeration();
-    Enumeration(QString name, Namespace* p = 0);
+    Enumeration(QString name, Package* p = 0);
+    ~Enumeration();
 
-    const QList<EnumerationLiteral*>& ownedLiterals() const { 
+    const QList<EnumerationLiteral*>& literals() const { 
         return mOwnedLiterals;
     }
 
+    /**
+     * @note This function takes ownership
+     */
     void addLiteral(EnumerationLiteral* l);
     void removeLiteral(EnumerationLiteral* l);
     

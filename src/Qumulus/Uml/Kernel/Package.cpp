@@ -16,37 +16,20 @@ Package::Package() {}
 
 Package::Package(QString name, Package* p) :
         PackageableElement(name, p) {
-
 }
 
-void Package::addNestedPackage(Package* p) {
-    mNestedPackages.insert(p);
-    addPackagedElement(p);
-}
-
-void Package::removeNestedPackage(Package* p) {
-    mNestedPackages.remove(p);
-    removePackagedElement(p);
-}
-
-void Package::addOwnedType(Type* t) {
-    mOwnedTypes.insert(t);
-    addPackagedElement(t);
-}
-
-void Package::removeOwnedType(Type* t) {
-    mOwnedTypes.remove(t);
-    addPackagedElement(t);
+Package::~Package() {
+    for(auto& x : mPackagedElements) {
+        delete x;
+    }
 }
 
 void Package::addPackagedElement(PackageableElement* e) {
     mPackagedElements.insert(e);
-    addOwnedMember(e);
 }
 
 void Package::removePackagedElement(PackageableElement* e) {
     mPackagedElements.insert(e);
-    addOwnedMember(e);
 }
 
 QUML_END_NAMESPACE_UK

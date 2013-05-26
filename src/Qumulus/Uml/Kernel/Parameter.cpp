@@ -20,7 +20,6 @@ Parameter::Parameter(QString name, Operation* o) :
 
 void Parameter::setOperation(Operation* o) {
     mOperation = o;
-    setNameSpace(o);
 }
 
 QString Parameter::toString() const {

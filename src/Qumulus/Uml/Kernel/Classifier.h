@@ -9,7 +9,6 @@
 
 #include "internal_base.h"
 
-#include "Namespace.h"
 #include "Type.h"
 #include "RedefinableElement.h"
 #include "Generalization.h"
@@ -19,26 +18,16 @@ QUML_BEGIN_NAMESPACE_UK
 class Property;
 class Feature;
 
-class Classifier : public Type, public Namespace, public RedefinableElement {
+class Classifier : public Type, public RedefinableElement {
 public:
     Classifier();
-    Classifier(QString name, Namespace* p = 0);
+    Classifier(QString name, Package* p = 0);
 
     bool abstract() const { return mAbstract; }
     void setAbstract(bool a) { mAbstract = a; }
 
     bool final() const { return mFinal; }
     void setFinal(bool f) { mFinal = f; }
-
-    const QSet<Feature*>& features() const {
-        return mFeatures;
-    }
-
-    /**
-     * This function takes over ownership.
-     */
-    void addFeature(Feature* p);
-    void removeFeature(Feature* f);
 
     const QSet<Classifier*> general() const;
 
@@ -54,7 +43,6 @@ public:
 private:
     bool mAbstract = false;
     bool mFinal = false;
-    QSet<Feature*> mFeatures;
     QSet<Generalization*> mGeneralizations;
 
 };

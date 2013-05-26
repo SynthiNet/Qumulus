@@ -6,46 +6,18 @@
 
 #include "NamedElement.h"
 
-#include "Namespace.h"
-
 QUML_BEGIN_NAMESPACE_UK
 
 NamedElement::NamedElement() :
         mName(""),
-        mVisibility(),
-        mNameSpace(0) {
+        mVisibility() {
 
 }
 
-NamedElement::NamedElement(QString name, Namespace* n) :
+NamedElement::NamedElement(QString name) :
         mName(name),
-        mVisibility(VisibilityKind::Public),
-        mNameSpace(n) {
+        mVisibility(VisibilityKind::Public) {
 
 }
-
-
-
-// QuLC::Optional<QString> NamedElement::qualifiedName() const {
-//     if(mName) {
-//         if(mNameSpace) {
-//             auto super = mNameSpace->qualifiedName();
-//             if(super) {
-//                 return *super + separator() + *mName;
-//             } else {
-//                 return nullptr;
-//             }
-//         } else {
-//             return mName;
-//         }
-//     } else {
-//         return nullptr;
-//     }
-// }
-
-
-// bool NamedElement::isDistinguishableFrom(NamedElement* n) const {
-//     return mName != n->mName;
-// }
 
 QUML_END_NAMESPACE_UK

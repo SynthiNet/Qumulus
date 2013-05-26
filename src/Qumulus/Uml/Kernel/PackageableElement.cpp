@@ -14,12 +14,35 @@ PackageableElement::PackageableElement() {
     setVisiblity(VisibilityKind::Public);
 }
 
-PackageableElement::PackageableElement(QString name, Namespace* p) {
-    if(Package* pg = dynamic_cast<Package*>(p)) 
-        mPackage = pg;
+PackageableElement::PackageableElement(QString name, Package* p) {
+    mPackage = p;
     setName(name);
-    setNameSpace(p);
     setVisiblity(VisibilityKind::Public);
+}
+
+QString PackageableElement::qualifiedName() const {
+    if(name() != "") {
+        if(package()) {
+            QString s = package()->qualifiedName();
+            if(s != "") {
+                return s + separator() + name();
+            } else {
+                return "";
+            }
+        } else {
+            return name();
+        }
+    }
+
+    return "";
+}
+
+void PackageableElement::setPackage(Package* p) {
+    if(mPackage)
+        mPackage->removePackagedElement(this);
+    mPackage = p;
+    if(p)
+        p->addPackagedElement(this);
 }
 
 

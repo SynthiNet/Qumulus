@@ -19,6 +19,12 @@ Property::Property(QString name, Class* c) :
     setName(name);
 }
 
+QString Property::qualifiedName() const {
+    if(!mClass) return "";
+    QString s = mClass->qualifiedName();
+    return s == "" ? s : s + separator() + name(); 
+}
+
 QString Property::toString() const {
     QString str = "";
 

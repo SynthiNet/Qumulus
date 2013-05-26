@@ -18,11 +18,15 @@ class Package;
 class PackageableElement : public virtual NamedElement {
 public:
     PackageableElement();
-    PackageableElement(QString name, Namespace* p = 0);
+    PackageableElement(QString name, Package* p = 0);
 
     Package* package() const {
         return mPackage;
     }
+
+    QString qualifiedName() const;
+
+    void setPackage(Package* p);
 
     bool isTopLevel() const override { return package() == 0; }
 

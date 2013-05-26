@@ -20,14 +20,16 @@ class Operation;
 class Class : public Classifier {
 public:
     Class();
-    Class(QString name, Namespace* p = nullptr);
+    Class(QString name, Package* p = nullptr);
+    ~Class();
     
-    const QList<Classifier*>& nestedClassifiers() const {
-        return mNestedClassifiers;
-    }
+    // TODO: nested classifiers
+    // const QList<Classifier*>& nestedClassifiers() const {
+    //     return mNestedClassifiers;
+    // }
 
-    void addNestedClassifier(Classifier* c);
-    void removeNestedClassifier(Classifier* c);
+    // void addNestedClassifier(Classifier* c);
+    // void removeNestedClassifier(Classifier* c);
 
     const QList<Operation*>& operations() const {
         return mOwnedOperations;
@@ -37,9 +39,15 @@ public:
         return mOwnedAttributes;
     }
 
+    /**
+     * @note This function takes ownership
+     */
     void addAttribute(Property* p);
     void removeAttribute(Property* p);
 
+    /**
+     * @note This function takes ownership
+     */
     void addOperation(Operation* c);
     void removeOperation(Operation* c);
 
@@ -47,7 +55,7 @@ public:
 
     QUML_CLONABLE(Class);
 private:
-    QList<Classifier*> mNestedClassifiers;
+    // QList<Classifier*> mNestedClassifiers;
     QList<Operation*> mOwnedOperations;
     QList<Property*> mOwnedAttributes;
 };

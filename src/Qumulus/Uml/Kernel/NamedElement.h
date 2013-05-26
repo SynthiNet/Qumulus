@@ -18,24 +18,19 @@
 
 QUML_BEGIN_NAMESPACE_UK
 
-class Namespace;
-
 class NamedElement : public virtual Element {
 public:
     NamedElement();
-    NamedElement(QString name, Namespace* n = 0);
+    NamedElement(QString name);
 
     QString separator() const {
         // TODO: do not assume C++.
         return "::";
     }
 
-    QString qualifiedName() const;
+    virtual QString qualifiedName() const = 0;
 
     // bool isDistinguishableFrom(NamedElement* n) const;
-
-    const Namespace* nameSpace() const { return mNameSpace; }
-    void setNameSpace(Namespace* n) { mNameSpace = n; }
 
     const QString& name() const { return mName; }
     void setName(const QString& n) { mName = n; }
@@ -47,7 +42,6 @@ public:
 private:
     QString mName;
     VisibilityKind mVisibility;
-    Namespace* mNameSpace;
 };
 
 QUML_END_NAMESPACE_UK

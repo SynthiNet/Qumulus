@@ -37,6 +37,12 @@ Type* Operation::type() const {
         return nullptr;
 }
 
+QString Operation::qualifiedName() const {
+    if(!mClass) return "";
+    QString s = mClass->qualifiedName();
+    return s == "" ? s : s + separator() + name(); 
+}
+
 QString Operation::toString() const {
     QString str = "";
 

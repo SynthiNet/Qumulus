@@ -17,4 +17,10 @@ EnumerationLiteral::EnumerationLiteral(QString name, Enumeration* o) :
     if(o) o->addLiteral(this);
 }
 
+QString EnumerationLiteral::qualifiedName() const {
+    if(!mEnumeration) return "";
+    QString s = mEnumeration->qualifiedName();
+    return s == "" ? s : s + separator() + name(); 
+}
+
 QUML_END_NAMESPACE_UK
