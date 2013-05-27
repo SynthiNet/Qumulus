@@ -12,6 +12,8 @@
 #include <QtCore/QPair>
 #include <QtCore/QPoint>
 
+#include <Gui/Diagram/ClassShape.h>
+
 class QVBoxLayout;
 
 QUML_BEGIN_NAMESPACE_GW
@@ -30,14 +32,19 @@ public:
 public:
     Popover(QWidget* parent = 0, QPoint pos = QPoint(0, 0), 
             Qt::Orientation orientation = Qt::Horizontal);
+    //Popover(QWidget* parent, QuGD::ClassShape* selected, QPoint pos, QPoint reversePos);
 
 protected:
     void resizeEvent(QResizeEvent* event) override;
+    void focusOutEvent(QFocusEvent * event) override;
     
 private:
     void generateMask(Direction direction, int offset);
     QPair<QPoint, Direction> findWindowLocation(QPoint mouse, int width, 
             int height, Qt::Orientation orientation, QRect available);
+
+signals:
+    void lostFocus();
 
 private:
     QBitmap* mMask;
