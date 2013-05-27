@@ -34,6 +34,6 @@ include_directories(..)
 add_definitions(-DLIBAVOID_EXPORTS)
 add_library(avoid SHARED ${LIBAVOID_SRC})
 
-if(WIN32)
-    install(TARGETS avoid DESTINATION .)
+if(WIN32 OR (UNIX AND NOT APPLE))
+    install(TARGETS avoid DESTINATION ${LIBRARY_DEST})
 endif()

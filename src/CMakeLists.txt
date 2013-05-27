@@ -116,6 +116,19 @@ elseif(WIN32)
         " COMPONENT RUNTIME)
 
     install(FILES ${QT5_LIBRARY_DIR}/libEGL.dll DESTINATION .)
+elseif(UNIX AND NOT APPLE)
+    install(CODE "
+        include(GetPrerequisites)
+
+        get_prerequisites(\${CMAKE_INSTALL_PREFIX}/${QUMULUS} 
+            LINUX_LIBRARIES 1 1 \"\" \"\")
+        
+        foreach(lib \${LINUX_LIBRARIES})
+            file(INSTALL \"\${lib}\" 
+                DESTINATION \${CMAKE_INSTALL_PREFIX}/${BINARY_DEST})
+        endforeach()
+
+        " COMPONENT RUNTIME)
 endif()
 
 

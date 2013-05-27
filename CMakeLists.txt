@@ -39,6 +39,7 @@ if(WIN32)
 
     set(BINARY_DEST ".")
     set(RESOURCE_DEST "data")
+    set(LIBRARY_DEST ".")
     set(QT_PLUGIN_DEST_DIR "plugins")
     set(QT_CONFIG_DEST_DIR ".")
 
@@ -61,10 +62,19 @@ elseif(APPLE)
     set(QT_CONFIG_DEST_DIR "${RESOURCE_DEST}")
 
 elseif(UNIX AND NOT APPLE)
+    set(CPACK_PACKAGE_FILE_NAME
+        "Qumulus-${QUMULUS_VERSION")
+    set(CPACK_GENERATOR "TGZ")
+
     set(QUMULUS "qumulus")
 
     set(BINARY_DEST "bin")
     set(RESOURCE_DEST "share")
+    set(LIBRARY_DEST "lib")
+
+    SET(CMAKE_SKIP_BUILD_RPATH FALSE)
+    SET(CMAKE_BUILD_WITH_INSTALL_RPATH FALSE) 
+    SET(CMAKE_INSTALL_RPATH "$ORIGIN/../lib")
 endif()
 
 # This needs to be done after we set all options
