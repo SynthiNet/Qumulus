@@ -32,6 +32,8 @@ public:
     void removeLiteral(EnumerationLiteral* l);
     
     QString sidebarIcon() const override { return "enumeration"; }
+    
+    void writeXml(QXmlStreamWriter& writer) const override;
 
     QUML_CLONABLE(Enumeration);
 private:

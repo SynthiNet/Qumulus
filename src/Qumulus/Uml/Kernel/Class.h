@@ -53,6 +53,8 @@ public:
 
     QString sidebarIcon() const override { return "class"; }
 
+    void writeXml(QXmlStreamWriter& writer) const override;
+
     QUML_CLONABLE(Class);
 private:
     // QList<Classifier*> mNestedClassifiers;

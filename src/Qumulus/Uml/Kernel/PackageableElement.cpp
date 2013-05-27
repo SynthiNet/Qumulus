@@ -23,6 +23,8 @@ PackageableElement::PackageableElement(QString name, Package* p) {
 QString PackageableElement::qualifiedName() const {
     if(name() != "") {
         if(package()) {
+            if(package()->rootPackage()) 
+                return name();
             QString s = package()->qualifiedName();
             if(s != "") {
                 return s + separator() + name();

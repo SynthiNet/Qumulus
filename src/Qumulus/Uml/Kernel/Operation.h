@@ -35,6 +35,8 @@ public:
     QString sidebarIcon() const { return "operation"; }
     QString sidebarText() const { return toString(); }
 
+    void writeXml(QXmlStreamWriter& writer) const override;
+
     QString toString() const;
 
     QUML_CLONABLE(Operation);

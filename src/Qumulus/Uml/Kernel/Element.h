@@ -18,6 +18,8 @@
 #include <QtCore/QList>
 #include <QtCore/QString>
 
+class QXmlStreamWriter;
+
 QUML_BEGIN_NAMESPACE_UK
 
 class Comment;
@@ -36,6 +38,8 @@ public:
     QString uniqueId() const;
     void setUniqueId(const QString& s);
     static Element* byId(const QString& s);
+
+    virtual void writeXml(QXmlStreamWriter& writer) const = 0;
 
     QUML_CLONABLE_ABSTRACT(Element)
 private:

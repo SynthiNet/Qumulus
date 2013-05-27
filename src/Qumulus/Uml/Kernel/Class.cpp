@@ -11,6 +11,7 @@
 #include "Operation.h"
 
 #include <Lib/Core/Functional.h>
+#include <QtCore/QXmlStreamWriter>
 
 QUML_BEGIN_NAMESPACE_UK
 
@@ -55,6 +56,28 @@ void Class::addAttribute(Property* p) {
 
 void Class::removeAttribute(Property* p) {
     mOwnedAttributes.removeAll(p);
+}
+
+void Class::writeXml(QXmlStreamWriter& writer) const {
+    writer.writeStartElement("Class");
+    writer.writeAttribute("id", uniqueId());
+    writer.writeAttribute("name", name());
+    writer.writeAttribute("abstract", QString::number(abstract()));
+    writer.writeAttribute("final", QString::number(final()));
+
+    for(auto& g : generalizations()) {
+        g->writeXml(writer);
+    }
+
+    for(auto& a : attributes()) {
+        a->writeXml(writer);
+    }
+
+    for(auto& o : operations()) {
+        o->writeXml(writer);
+    }
+
+    writer.writeEndElement();
 }
 
 QUML_END_NAMESPACE_UK

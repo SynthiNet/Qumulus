@@ -25,7 +25,7 @@ public:
     Classifier* specific() const;
     void setSpecific(Classifier*);
 
-    // void updateDiagramElement(QuUD::Diagram*, QSizeF) override {}
+    void writeXml(QXmlStreamWriter& writer) const override;
 
     QUML_CLONABLE(Generalization);
 };

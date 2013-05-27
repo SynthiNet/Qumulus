@@ -10,6 +10,8 @@
 #include <Uml/Kernel/Class.h>
 #include <Lib/Core/Nyi.h>
 
+#include <QtCore/QXmlStreamWriter>
+
 QUML_BEGIN_NAMESPACE_UK
 
 Property::Property(QString name, Class* c) : 
@@ -54,55 +56,18 @@ QString Property::toString() const {
     return str;
 }
 
-#if 0
-QuUD::FeatureLabel* Property::diagramElement() const {
-    return static_cast<QuUD::FeatureLabel*>(mDiagramElement);
+void Property::writeXml(QXmlStreamWriter& writer) const {
+    writer.writeStartElement("Property");
+    writer.writeAttribute("id", uniqueId());
+    writer.writeAttribute("name", name());
+    writer.writeAttribute("type", type() ? type()->uniqueId() : "");
+    writer.writeAttribute("lower", QString::number(lowerBound()));
+    writer.writeAttribute("upper", (QString)upperBound());
+    writer.writeAttribute("default", getDefault());
+    writer.writeAttribute("readonly", readOnly() ? "true" : "false");
+
+    writer.writeEndElement();
 }
-
-void Property::updateDiagramElement(QuUD::Diagram*, QSizeF) {
-    if(!mDiagramElement) {
-        mDiagramElement = new QuUD::FeatureLabel(*name(), this, 
-                mClass->diagramElement());
-    }
-    
-    auto d = static_cast<QuUD::FeatureLabel*>(mDiagramElement);
-    QString str = "";
-
-    if(visibility()) {
-        str += QString(QuUK::toChar(*visibility()));
-        str += " ";
-        str += *name();
-    } else {
-        str += *name();
-    }
-
-    if(type()) {
-        str += " : ";
-        str += *(type()->name());
-    }
-
-    if(multiplicityString() != "") {
-        str += " ";
-        str += multiplicityString();
-    }
-
-    if(getDefault()) {
-        str += " = ";
-        str += *(getDefault());
-    }
-
-    if(readOnly()) {
-        str += " {readOnly}";
-    }
-
-    d->setStatic(isStatic());
-
-    d->setText(str);
-
-    d->resize(static_cast<QuUD::Shape*>(
-                mClass->diagramElement())->width(), 0);
-}
-#endif
 
 QUML_END_NAMESPACE_UK
 

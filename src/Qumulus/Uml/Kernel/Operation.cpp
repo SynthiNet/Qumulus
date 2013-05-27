@@ -13,6 +13,8 @@
 
 #include "Class.h"
 
+#include <QtCore/QXmlStreamWriter>
+
 QUML_BEGIN_NAMESPACE_UK
 
 Operation::Operation(QString name, Class* c) : 
@@ -74,6 +76,27 @@ QString Operation::toString() const {
     }
 
     return str;
+}
+
+void Operation::writeXml(QXmlStreamWriter& writer) const {
+    writer.writeStartElement("Operation");
+    writer.writeAttribute("id", uniqueId());
+    writer.writeAttribute("name", name());
+    writer.writeAttribute("visibility", QuUK::toString(visibility()));
+    writer.writeAttribute("leaf", leaf() ? "true" : "false");
+    writer.writeAttribute("static", isStatic() ? "true" : "false");
+
+    for(auto& x : raisedExceptions()) {
+        writer.writeStartElement("Exception");
+        writer.writeAttribute("type", x->uniqueId());
+        writer.writeEndElement();
+    }
+
+    for(auto& x : parameters()) {
+        x->writeXml(writer);
+    }
+
+    writer.writeEndElement();
 }
 
 QUML_END_NAMESPACE_UK

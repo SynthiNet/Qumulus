@@ -30,6 +30,7 @@ public:
     AggregationKind aggregation() const { return mAggregation; }
     void setAggregation(AggregationKind k) { mAggregation = k; }
 
+    void writeXml(QXmlStreamWriter& writer) const override;
 private:
     AggregationKind mAggregation = AggregationKind::None;
 };

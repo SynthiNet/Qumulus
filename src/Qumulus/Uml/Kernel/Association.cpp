@@ -8,6 +8,8 @@
 
 #include "Classifier.h"
 
+#include <QtCore/QXmlStreamWriter>
+
 QUML_BEGIN_NAMESPACE_UK
 
 Association::Association(Classifier* source, Classifier* target) :
@@ -29,6 +31,11 @@ Classifier* Association::targetType() const {
 
 void Association::setTargetType(Classifier* c) {
     setTarget(c);
+}
+
+void Association::writeXml(QXmlStreamWriter& writer) const {
+    (void)writer;
+    NYI();
 }
 
 QUML_END_NAMESPACE_UK

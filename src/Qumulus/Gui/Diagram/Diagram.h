@@ -13,6 +13,7 @@
 #include "DiagramElement.h"
 
 #include <Gui/Widgets/internal_base.h>
+#include <Lib/Core/Exception.h>
 
 class QGraphicsScene;
 
@@ -65,12 +66,17 @@ public:
     QGraphicsScene* scene() const { return mScene; }
     QuGW::EditorView* editorView() const;
 
+    bool saveToXml(const QString& file) const;
+    void loadFromXml(const QString& file) throw(QuLC::ParseException);
+
     QUML_CLONABLE(Diagram);
 private:
     QString mName;
     double mResolution;
     QList<DiagramElement*> mElements;
     QGraphicsScene* mScene = nullptr;
+    QuUK::Package* mRootPackage;
+    QList<QuUK::Comment*> mComments; 
 };
 
 QUML_END_NAMESPACE_GD

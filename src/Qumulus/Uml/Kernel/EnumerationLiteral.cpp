@@ -8,6 +8,8 @@
 
 #include "Enumeration.h"
 
+#include <QtCore/QXmlStreamWriter>
+
 QUML_BEGIN_NAMESPACE_UK
 
 EnumerationLiteral::EnumerationLiteral() {}
@@ -21,6 +23,13 @@ QString EnumerationLiteral::qualifiedName() const {
     if(!mEnumeration) return "";
     QString s = mEnumeration->qualifiedName();
     return s == "" ? s : s + separator() + name(); 
+}
+
+void EnumerationLiteral::writeXml(QXmlStreamWriter& writer) const {
+    writer.writeStartElement("Literal");
+    writer.writeAttribute("id", uniqueId());
+    writer.writeAttribute("name", name());
+    writer.writeEndElement();
 }
 
 QUML_END_NAMESPACE_UK

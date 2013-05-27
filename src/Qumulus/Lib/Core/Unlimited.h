@@ -49,7 +49,7 @@ public:
     }
 
     explicit operator QString() const {
-        return mUnlimited ? "*" : QString(mValue);
+        return mUnlimited ? "*" : QString::number(mValue);
     }
 
 private:

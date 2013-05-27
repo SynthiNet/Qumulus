@@ -29,6 +29,8 @@ public:
     QString sidebarIcon() const override { return "literal"; }
     QString sidebarText() const override { return name(); }
 
+    void writeXml(QXmlStreamWriter& writer) const override;
+
     QUML_CLONABLE(EnumerationLiteral);
 private:
     Enumeration* mEnumeration;

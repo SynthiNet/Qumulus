@@ -40,10 +40,9 @@ public:
     QString sidebarIcon() const override { return "property"; }
     QString sidebarText() const override { return toString(); }
 
-    QString toString() const;
+    void writeXml(QXmlStreamWriter& writer) const override;
 
-    // QuUD::FeatureLabel* diagramElement() const override;
-    // void updateDiagramElement(QuUD::Diagram*, QSizeF s = QSizeF()) override;
+    QString toString() const;
 
     QUML_CLONABLE(Property);
 private:

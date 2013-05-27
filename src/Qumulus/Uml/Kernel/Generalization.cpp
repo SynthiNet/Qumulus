@@ -8,6 +8,8 @@
 
 #include "Classifier.h"
 
+#include <QtCore/QXmlStreamWriter>
+
 QUML_BEGIN_NAMESPACE_UK
 
 Generalization::Generalization() {}
@@ -31,6 +33,15 @@ Classifier* Generalization::specific() const {
 
 void Generalization::setSpecific(Classifier* c) {
     setTarget(c);
+}
+
+void Generalization::writeXml(QXmlStreamWriter& writer) const {
+    writer.writeStartElement("Generalization");
+
+    writer.writeAttribute("id", uniqueId());
+    writer.writeAttribute("general", general()->uniqueId());
+
+    writer.writeEndElement();
 }
 
 QUML_END_NAMESPACE_UK

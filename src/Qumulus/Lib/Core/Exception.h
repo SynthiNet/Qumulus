@@ -60,6 +60,7 @@ public: \
 QUML_CREATE_EXCEPTION(ArgumentException);
 QUML_CREATE_EXCEPTION(NullException);
 QUML_CREATE_EXCEPTION(StateException);
+QUML_CREATE_EXCEPTION(ParseException);
 
 QUML_END_NAMESPACE_LC
 

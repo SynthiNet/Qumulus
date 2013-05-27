@@ -6,6 +6,8 @@
 
 #include "Enumeration.h"
 
+#include <QtCore/QXmlStreamWriter>
+
 QUML_BEGIN_NAMESPACE_UK
 
 Enumeration::Enumeration() {
@@ -29,6 +31,19 @@ void Enumeration::addLiteral(EnumerationLiteral* l) {
 
 void Enumeration::removeLiteral(EnumerationLiteral* l) {
     mOwnedLiterals.removeAll(l);
+}
+
+void Enumeration::writeXml(QXmlStreamWriter& writer) const {
+    writer.writeStartElement("Enumeration");
+
+    writer.writeAttribute("id", uniqueId());
+    writer.writeAttribute("name", name());
+
+    for(auto& l : literals()) {
+        l->writeXml(writer);
+    }
+
+    writer.writeEndElement();
 }
 
 QUML_END_NAMESPACE_UK

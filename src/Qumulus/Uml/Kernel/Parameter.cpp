@@ -9,6 +9,8 @@
 #include "Operation.h"
 #include "Type.h"
 
+#include <QtCore/QXmlStreamWriter>
+
 QUML_BEGIN_NAMESPACE_UK
 
 Parameter::Parameter(QString name, Operation* o) :
@@ -62,6 +64,19 @@ QString Parameter::toString() const {
     }
 
     return str;
+}
+
+void Parameter::writeXml(QXmlStreamWriter& writer) const {
+    writer.writeStartElement("Parameter");
+    writer.writeAttribute("id", uniqueId());
+    writer.writeAttribute("name", name());
+    writer.writeAttribute("direction", QuUK::toString(direction()));
+    writer.writeAttribute("type", type() ? type()->uniqueId() : "");
+    writer.writeAttribute("lower", QString::number(lowerBound()));
+    writer.writeAttribute("upper", (QString)upperBound());
+    writer.writeAttribute("default", defaultValue());
+
+    writer.writeEndElement();
 }
 
 QUML_END_NAMESPACE_UK

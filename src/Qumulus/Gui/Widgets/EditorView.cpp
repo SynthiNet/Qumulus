@@ -77,8 +77,15 @@ EditorView::EditorView(QWidget* parent) : QGraphicsView(parent),
     mLiteralButtonItem->setZValue(10);
 
     // FIXME: this is temporary testing code!
+    auto package = new QuUK::Package("Uml");
+    auto pshape = mDiagram->createShape(package);
+    pshape->setVisible(true);
+    pshape->setPos(-200, -100);
+
+    // FIXME: this is temporary testing code!
     auto boolean = new QuUK::PrimitiveType("bool");
     auto ptshape = mDiagram->createShape(boolean);
+    boolean->setPackage(package);
     ptshape->setPos(-200, 0);
     ptshape->setVisible(true);
 
@@ -94,6 +101,7 @@ EditorView::EditorView(QWidget* parent) : QGraphicsView(parent),
     (new QuUK::Parameter("par2", oper))->setType(boolean);
     new QuUK::Property("naamGeinspireerdDoorHetWerkVanMarxVanTweeEeuwenTerug", classs);
     auto clshape = mDiagram->createShape(classs);
+    classs->setPackage(package);
     clshape->setPos(20, 0);
     clshape->setVisible(true);
 
@@ -104,14 +112,9 @@ EditorView::EditorView(QWidget* parent) : QGraphicsView(parent),
     new QuUK::EnumerationLiteral("Private", visibilityKind);
     new QuUK::EnumerationLiteral("FILE_NOT_FOUND", visibilityKind);
     auto eshape = mDiagram->createShape(visibilityKind);
+    visibilityKind->setPackage(package);
     eshape->setPos(-200, 50);
     eshape->setVisible(true);
-
-    // FIXME: this is temporary testing code!
-    auto package = new QuUK::Package("Uml");
-    auto pshape = mDiagram->createShape(package);
-    pshape->setVisible(true);
-    pshape->setPos(-200, -100);
 
     // FIXME: this is temporary testing code!
     auto comment = new QuUK::Comment(
@@ -120,6 +123,8 @@ EditorView::EditorView(QWidget* parent) : QGraphicsView(parent),
     auto cshape = mDiagram->createShape(comment);
     cshape->setVisible(true);
     cshape->setPos(-200, 200);
+
+    mDiagram->saveToXml("test.uml");
 }
 
 EditorView::~EditorView() noexcept {

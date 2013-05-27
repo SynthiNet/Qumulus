@@ -28,6 +28,8 @@ public:
     QString sidebarIcon() const override { return "comment"; }
     QString sidebarText() const override { return body(); }
 
+    void writeXml(QXmlStreamWriter& writer) const override;
+
     QUML_CLONABLE(Comment);
 private:
     QString mBody;

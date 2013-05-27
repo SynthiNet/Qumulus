@@ -20,6 +20,8 @@ public:
 
     QString sidebarIcon() const override { return "primitive"; }
 
+    void writeXml(QXmlStreamWriter& writer) const override;
+
     QUML_CLONABLE(PrimitiveType);
 private:
 };
