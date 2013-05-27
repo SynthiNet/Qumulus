@@ -65,12 +65,15 @@ public:
     QGraphicsScene* scene() const { return mScene; }
     QuGW::EditorView* editorView() const;
 
+    unsigned nextCounter() { return mCounter++; }
+
     QUML_CLONABLE(Diagram);
 private:
     QString mName;
     double mResolution;
     QList<DiagramElement*> mElements;
     QGraphicsScene* mScene = nullptr;
+    unsigned mCounter = 1;
 };
 
 QUML_END_NAMESPACE_GD
