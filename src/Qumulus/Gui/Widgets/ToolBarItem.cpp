@@ -5,7 +5,6 @@
  */
 
 #include "ToolBarItem.h"
-
 #include "ToolBar.h"
 
 QUML_BEGIN_NAMESPACE_GW
@@ -23,10 +22,12 @@ ToolBarItem::ToolBarItem(ElementItem elementItem) : mElementItem(elementItem) {
     mButton->setMaximumSize({32,32});
     mDropdown->setMaximumSize({9,32});
 
+    QAction* action = new QAction(mElementItem.icon(), mElementItem.text(), mButton);
+    action->setShortcuts({mElementItem.shortcut()});
+    mButton->addAction(action);
     mButton->setIcon(mElementItem.icon());
     mButton->setToolTip(mElementItem.text() + " [" + 
             mElementItem.shortcut().toString() + "]");
-    mButton->setShortcut(mElementItem.shortcut());
     mDropdown->setIcon(QIcon(":/data/img/toolbar/dropdown.png"));
 
     mLayout->addWidget(mButton);
@@ -37,6 +38,7 @@ ToolBarItem::ToolBarItem(ElementItem elementItem) : mElementItem(elementItem) {
     mDropdown->hide();
 
     connect(mButton, &QPushButton::clicked, mElementItem.slot());
+    connect(action, &QAction::triggered, mElementItem.slot());
 }
 
 const QString ToolBarItem::text() const {
