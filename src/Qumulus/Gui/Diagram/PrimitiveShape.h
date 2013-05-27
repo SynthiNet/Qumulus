@@ -27,6 +27,8 @@ public:
     void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, 
             QWidget* widget) override;
 
+    void writeXml(QXmlStreamWriter& writer) const override;
+
     QUML_CLONABLE(PrimitiveShape);
 private:
     int primitiveNameWidth() const;

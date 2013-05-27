@@ -31,6 +31,8 @@ public:
             QWidget* widget) override;
     void updateSizeConstraints() override;
 
+    void writeXml(QXmlStreamWriter& writer) const override;
+
     QUML_CLONABLE(CommentShape);
 private:
     QGraphicsTextItem* mText;

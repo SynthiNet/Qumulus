@@ -35,6 +35,8 @@ public:
     QuUK::Property* highlightedAttribute() const;
     QuUK::Operation* highlightedOperation() const;
 
+    void writeXml(QXmlStreamWriter& writer) const override;
+
     QUML_CLONABLE(ClassShape);
 private: 
     int classNameWidth() const;

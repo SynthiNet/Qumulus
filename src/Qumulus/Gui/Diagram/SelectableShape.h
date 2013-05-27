@@ -31,7 +31,6 @@ public:
     using Shape::prepareGeometryChange;
 
     QUML_CLONABLE_ABSTRACT(SelectableShape);
-
 protected:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
             QWidget *widget) override;

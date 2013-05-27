@@ -7,6 +7,7 @@
 
 #include "CommentShape.h"
 #include <Uml/Kernel/Comment.h>
+#include <QtCore/QXmlStreamWriter>
 #include <QtGui/QBrush>
 #include <QtGui/QPainter>
 
@@ -67,6 +68,19 @@ void CommentShape::updateSizeConstraints() {
     mText->setPlainText(dynamic_cast<QuUK::Comment*>(modelElement())->body());
     mText->setTextWidth(width()-10);
     setMinimumSize({100, 10 + std::max(30.0, mText->boundingRect().height())});
+}
+
+
+void CommentShape::writeXml(QXmlStreamWriter& writer) const {
+    writer.writeStartElement("Comment");
+    writer.writeAttribute("id", uniqueId());
+    writer.writeAttribute("x", QString::number(pos().x()));
+    writer.writeAttribute("y", QString::number(pos().y()));
+    writer.writeAttribute("width", QString::number(width()));
+    writer.writeAttribute("height", QString::number(height()));
+    writer.writeAttribute("modelelement", modelElement()->uniqueId());
+
+    writer.writeEndElement();
 }
 
 QUML_END_NAMESPACE_GD

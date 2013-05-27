@@ -34,6 +34,8 @@ public:
     float maximumHeight() const { return mMaximumHeight; }
     void setMaximumHeight(float f) { mMaximumHeight = f; }
 
+    void writeXml(QXmlStreamWriter&) const override {}
+
     QUML_CLONABLE(Compartment);
 private:
     QGraphicsRectItem* mRectItem;

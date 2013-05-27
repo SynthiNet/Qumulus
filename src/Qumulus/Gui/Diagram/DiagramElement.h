@@ -13,8 +13,11 @@
 
 #include <QtCore/QObject>
 #include <Lib/Core/Clonable.h>
+#include <Lib/Core/UniqueId.h>
 
 #include <Uml/Kernel/internal_base.h>
+
+class QXmlStreamWriter;
 
 QUML_BEGIN_NAMESPACE_UK
 class Element;
@@ -44,11 +47,19 @@ public:
     DiagramElement* owningElement() const { return mOwningElement; }
     virtual void setOwningElement(DiagramElement* e) { mOwningElement = e; }
 
+    QString uniqueId() const;
+    void setUniqueId(const QString& s);
+    static DiagramElement* byId(const QString& s);
+
+    virtual void writeXml(QXmlStreamWriter& writer) const = 0;
+
     QUML_CLONABLE_ABSTRACT(DiagramElement);
 private:
     QuUK::Element* mModelElement;
     Style* mLocalStyle;
     DiagramElement* mOwningElement;
+    QuLC::UniqueId mUniqueId;
+    static QHash<QString, DiagramElement*> mElementsById;
 };
 
 QUML_END_NAMESPACE_GD

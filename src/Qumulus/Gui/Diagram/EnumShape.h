@@ -32,8 +32,9 @@ public:
             const QVariant & value) override;
     QuUK::EnumerationLiteral* highlightedLiteral() const;
 
-    QUML_CLONABLE(EnumShape);
+    void writeXml(QXmlStreamWriter& writer) const override;
 
+    QUML_CLONABLE(EnumShape);
 private:
     Compartment* mHeader;
     Compartment* mBody;

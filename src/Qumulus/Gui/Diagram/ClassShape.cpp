@@ -11,6 +11,7 @@
 #include <Uml/Kernel/Property.h>
 #include <Uml/Kernel/Operation.h>
 
+#include <QtCore/QXmlStreamWriter>
 #include <QtGui/QPainter>
 #include <QtWidgets/QGraphicsSceneHoverEvent>
 
@@ -183,6 +184,18 @@ QVariant ClassShape::itemChange(GraphicsItemChange change,
     } 
 
     return SelectableShape::itemChange(change, value); 
+}
+
+void ClassShape::writeXml(QXmlStreamWriter& writer) const {
+    writer.writeStartElement("Class");
+    writer.writeAttribute("id", uniqueId());
+    writer.writeAttribute("x", QString::number(pos().x()));
+    writer.writeAttribute("y", QString::number(pos().y()));
+    writer.writeAttribute("width", QString::number(width()));
+    writer.writeAttribute("height", QString::number(height()));
+    writer.writeAttribute("modelelement", modelElement()->uniqueId());
+
+    writer.writeEndElement();
 }
 
 QUML_END_NAMESPACE_GD

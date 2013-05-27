@@ -30,7 +30,7 @@ public:
     void paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget*) override;
     void updateSizeConstraints() override;
 
-    QUML_CLONABLE(Edge);
+    QUML_CLONABLE_ABSTRACT(Edge);
 private:
     QuUK::Element* mSource;
     QuUK::Element* mTarget;

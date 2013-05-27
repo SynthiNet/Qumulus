@@ -40,9 +40,7 @@ constexpr static float kFontSize =
         10.0;
 #endif
 
-Diagram::Diagram(QString name, double resolution) :
-        mName(name),
-        mResolution(resolution),
+Diagram::Diagram() :
         mRootPackage(new QuUK::Package()){
     auto s = new Style;
     setLocalStyle(s);
@@ -145,6 +143,11 @@ bool Diagram::saveToXml(const QString& file) const {
     writer.writeEndElement();
 
     writer.writeStartElement("diagram");
+
+    for(auto& x : mElements) {
+        x->writeXml(writer);
+    }
+
     writer.writeEndElement();
 
     writer.writeEndElement();

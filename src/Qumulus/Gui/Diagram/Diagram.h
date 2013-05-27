@@ -43,15 +43,9 @@ class EnumShape;
 
 class Diagram : public DiagramElement {
 public:
-    Diagram(QString name = "", double resolution = 300);
+    Diagram();
     Diagram(const Diagram&);
     ~Diagram();
-
-    const QString& name() const { return mName; }
-    void setName(const QString& n) { mName = n; }
-
-    double resolution() const { return mResolution; }
-    void setResolution(double r) { mResolution = r; }
 
     PackageShape* createShape(QuUK::Package*);
     CommentShape* createShape(QuUK::Comment*);
@@ -69,10 +63,10 @@ public:
     bool saveToXml(const QString& file) const;
     void loadFromXml(const QString& file) throw(QuLC::ParseException);
 
+    void writeXml(QXmlStreamWriter&) const override {}
+
     QUML_CLONABLE(Diagram);
 private:
-    QString mName;
-    double mResolution;
     QList<DiagramElement*> mElements;
     QGraphicsScene* mScene = nullptr;
     QuUK::Package* mRootPackage;

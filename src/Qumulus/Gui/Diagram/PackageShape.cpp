@@ -6,6 +6,8 @@
  */
 
 #include "PackageShape.h"
+
+#include <QtCore/QXmlStreamWriter>
 #include <QtGui/QBrush>
 #include <QtGui/QPainter>
 
@@ -66,6 +68,18 @@ int PackageShape::packageNameWidth() const {
 
     QFontMetrics m(font);
     return m.width(modelElement()->name());
+}
+
+void PackageShape::writeXml(QXmlStreamWriter& writer) const {
+    writer.writeStartElement("Package");
+    writer.writeAttribute("id", uniqueId());
+    writer.writeAttribute("x", QString::number(pos().x()));
+    writer.writeAttribute("y", QString::number(pos().y()));
+    writer.writeAttribute("width", QString::number(width()));
+    writer.writeAttribute("height", QString::number(height()));
+    writer.writeAttribute("modelelement", modelElement()->uniqueId());
+
+    writer.writeEndElement();
 }
 
 QUML_END_NAMESPACE_GD

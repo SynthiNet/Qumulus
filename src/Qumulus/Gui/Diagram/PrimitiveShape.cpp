@@ -9,6 +9,7 @@
 #include <Uml/Kernel/PrimitiveType.h>
 
 #include <QtGui/QPainter>
+#include <QtCore/QXmlStreamWriter>
 
 QUML_BEGIN_NAMESPACE_GD
 
@@ -60,6 +61,18 @@ int PrimitiveShape::primitiveNameWidth() const {
 
     QFontMetrics m(font);
     return m.width(modelElement()->name());
+}
+
+void PrimitiveShape::writeXml(QXmlStreamWriter& writer) const {
+    writer.writeStartElement("PrimitiveType");
+    writer.writeAttribute("id", uniqueId());
+    writer.writeAttribute("x", QString::number(pos().x()));
+    writer.writeAttribute("y", QString::number(pos().y()));
+    writer.writeAttribute("width", QString::number(width()));
+    writer.writeAttribute("height", QString::number(height()));
+    writer.writeAttribute("modelelement", modelElement()->uniqueId());
+
+    writer.writeEndElement();
 }
 
 QUML_END_NAMESPACE_GD

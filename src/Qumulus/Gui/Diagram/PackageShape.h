@@ -31,6 +31,8 @@ public:
 
     void updateSizeConstraints() override;
 
+    void writeXml(QXmlStreamWriter& writer) const override;
+
     QUML_CLONABLE(PackageShape);
 private:
     int packageNameWidth() const;

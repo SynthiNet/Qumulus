@@ -10,6 +10,7 @@
 #include <QtGui/QPainter>
 #include <QtGui/QCursor>
 #include <QtCore/QDebug>
+#include <QtCore/QXmlStreamWriter>
 #include <QtWidgets/QGraphicsScene>
 #include <QtWidgets/QGraphicsView>
 #include <QtWidgets/QGraphicsSceneHoverEvent>
@@ -139,6 +140,18 @@ QVariant EnumShape::itemChange(GraphicsItemChange change,
     } 
 
     return SelectableShape::itemChange(change, value); 
+}
+
+void EnumShape::writeXml(QXmlStreamWriter& writer) const {
+    writer.writeStartElement("Enumeration");
+    writer.writeAttribute("id", uniqueId());
+    writer.writeAttribute("x", QString::number(pos().x()));
+    writer.writeAttribute("y", QString::number(pos().y()));
+    writer.writeAttribute("width", QString::number(width()));
+    writer.writeAttribute("height", QString::number(height()));
+    writer.writeAttribute("modelelement", modelElement()->uniqueId());
+
+    writer.writeEndElement();
 }
 
 QUML_END_NAMESPACE_GD

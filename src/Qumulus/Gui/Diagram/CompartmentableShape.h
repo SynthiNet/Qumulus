@@ -35,7 +35,7 @@ public:
     void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, 
             QWidget* widget) override;
 
-    QUML_CLONABLE(CompartmentableShape);
+    QUML_CLONABLE_ABSTRACT(CompartmentableShape);
 private:
     QList<Compartment*> mCompartments;
 };
