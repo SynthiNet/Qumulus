@@ -27,6 +27,21 @@ class SideBar;
 class ToolBarMenu;
 class ToolBarItem;
 
+enum CursorState {
+    Normal,
+    Aggregation, 
+    Class,
+    Comment,
+    Containment,
+    Enum,
+    Inheritance,
+    Interface,
+    PackageMembership,
+    Package,
+    Primitive,
+    Association
+};
+
 class MainWindow : public QMainWindow {
     Q_OBJECT
 
@@ -37,6 +52,8 @@ public:
     StatusBar* statusBar() const { return mStatusBar; }
     SideBar* sideBar() const { return mSideBar; }
     QUndoStack* undoStack() const { return mUndoStack; }
+    CursorState cursorState() const { return mCursorState; }
+    void setCursorState(CursorState cursorState);
 
 private:
     void createMenus();
@@ -111,6 +128,7 @@ private:
 #endif
 
     QHash<QString, QCursor> mCursors;
+    CursorState mCursorState = CursorState::Normal;
 };
 
 QUML_END_NAMESPACE_GW

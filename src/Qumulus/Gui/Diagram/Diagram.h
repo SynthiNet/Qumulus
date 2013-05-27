@@ -60,15 +60,19 @@ public:
     QGraphicsScene* scene() const { return mScene; }
     QuGW::EditorView* editorView() const;
 
+    unsigned nextCounter() { return mCounter++; }
+
     bool saveToXml(const QString& file) const;
     void loadFromXml(const QString& file) throw(QuLC::ParseException);
 
     void writeXml(QXmlStreamWriter&) const override {}
 
+
     QUML_CLONABLE(Diagram);
 private:
     QList<DiagramElement*> mElements;
     QGraphicsScene* mScene = nullptr;
+    unsigned mCounter = 1;
     QuUK::Package* mRootPackage;
     QList<QuUK::Comment*> mComments; 
 };

@@ -87,7 +87,7 @@ MainWindow::MainWindow() :
     mCancelAction->setShortcuts({QKeySequence(tr("Esc"))});
     addAction(mCancelAction);
     connect(mCancelAction, &QAction::triggered, 
-            [&]{unsetCursor();});
+            [&]{setCursorState(CursorState::Normal);});
 
     connect(mStatusBar->slider(), &ZoomSlider::zoomChanged,
             mEditorView, &EditorView::zoom);
@@ -102,24 +102,19 @@ void MainWindow::populateToolbar() {
             ElementItem("Class", 
                     QIcon(":/data/img/toolbar/class.png"), 
                     QKeySequence(tr("C")),
-                    [&]{setCursor(mCursors["class"]);}));
+                    [&]{setCursorState(CursorState::Class);}));
 
     mClassMenu = new ToolBarMenu();
-    /*mClassMenu->addItem(
-            ElementItem("Template Class", 
-                    QIcon(":/data/img/toolbar/template-class.png"),
-                    QKeySequence(tr("T")),
-                    [&]{setCursor(mCursors["template-class"]);}));*/
     mClassMenu->addItem(
             ElementItem("Enum", 
                     QIcon(":/data/img/toolbar/enum.png"),
                     QKeySequence(tr("E")),
-                    [&]{setCursor(mCursors["enum"]);}));
+                    [&]{setCursorState(CursorState::Enum);}));
     mClassMenu->addItem(
             ElementItem("Primitive Datatype", 
                     QIcon(":/data/img/toolbar/primitive.png"),
                     QKeySequence(tr("D")), 
-                    [&]{setCursor(mCursors["primitive"]);}));
+                    [&]{setCursorState(CursorState::Primitive);}));
     mClassItem->setMenu(mClassMenu);
     mToolBar->addWidget(mClassItem);
 
@@ -129,14 +124,14 @@ void MainWindow::populateToolbar() {
             ElementItem("Package", 
                     QIcon(":/data/img/toolbar/package.png"), 
                     QKeySequence(tr("P")),
-                    [&]{setCursor(mCursors["package"]);}));
+                    [&]{setCursorState(CursorState::Package);}));
 
     mPackageMenu = new ToolBarMenu();
     mPackageMenu->addItem(
             ElementItem("Comment", 
                     QIcon(":/data/img/toolbar/comment.png"),
                     QKeySequence(tr("H")),
-                    [&]{setCursor(mCursors["comment"]);}));
+                    [&]{setCursorState(CursorState::Comment);}));
     mPackageItem->setMenu(mPackageMenu);
     mToolBar->addWidget(mPackageItem);
 
@@ -149,15 +144,7 @@ void MainWindow::populateToolbar() {
             ElementItem("Inheritance", 
                     QIcon(":/data/img/toolbar/inheritance.png"), 
                     QKeySequence(tr("I")),
-                    [&]{setCursor(mCursors["inheritance"]);}));
-
-    // mInheritanceMenu = new ToolBarMenu();
-    // mInheritanceMenu->addItem(
-    //         ElementItem("Template Specialization", 
-    //                 QIcon(":/data/img/toolbar/template-specialization.png"),
-    //                 QKeySequence(tr("S")),
-    //                 [&]{setCursor(mCursors["template-specialization"]);}));
-    // mInheritanceItem->setMenu(mInheritanceMenu);
+                    [&]{setCursorState(CursorState::Inheritance);}));
     mToolBar->addWidget(mInheritanceItem);
 
 
@@ -166,14 +153,14 @@ void MainWindow::populateToolbar() {
             ElementItem("Aggregation", 
                     QIcon(":/data/img/toolbar/aggregation.png"), 
                     QKeySequence(tr("G")),
-                    [&]{setCursor(mCursors["aggregation"]);}));
+                    [&]{setCursorState(CursorState::Aggregation);}));
 
     mAggregationMenu = new ToolBarMenu();
     mAggregationMenu->addItem(
             ElementItem("Containment", 
                     QIcon(":/data/img/toolbar/containment.png"),
                     QKeySequence(tr("N")),
-                    [&]{setCursor(mCursors["containment"]);}));
+                    [&]{setCursorState(CursorState::Containment);}));
     mAggregationItem->setMenu(mAggregationMenu);
     mToolBar->addWidget(mAggregationItem);
 
@@ -183,14 +170,14 @@ void MainWindow::populateToolbar() {
             ElementItem("Package Membership", 
                     QIcon(":/data/img/toolbar/package-membership.png"), 
                     QKeySequence(tr("M")),
-                    [&]{setCursor(mCursors["package-membership"]);}));
+                    [&]{setCursorState(CursorState::PackageMembership);}));
 
     mRelationshipMenu = new ToolBarMenu();
     mRelationshipMenu->addItem(
             ElementItem("Association", 
                     QIcon(":/data/img/toolbar/association.png"),
                     QKeySequence(tr("R")),
-                    [&]{setCursor(mCursors["association"]);}));
+                    [&]{setCursorState(CursorState::Association);}));
     mRelationshipItem->setMenu(mRelationshipMenu);
     mToolBar->addWidget(mRelationshipItem);
 }
@@ -395,6 +382,49 @@ void MainWindow::createMenus() {
     mHelpMenu->addAction(mAboutAction);
 }
 
+void MainWindow::setCursorState(CursorState c) {
+    mCursorState = c;
+
+    switch(c) {
+    case Normal:
+        unsetCursor();
+        break;
+    case Aggregation:
+        setCursor(mCursors["aggregation"]);
+        break;
+    case Class:
+        setCursor(mCursors["class"]);
+        break;
+    case Comment:
+        setCursor(mCursors["comment"]);
+        break;
+    case Containment:
+        setCursor(mCursors["containment"]);
+        break;
+    case Enum:
+        setCursor(mCursors["enum"]);
+        break;
+    case Inheritance:
+        setCursor(mCursors["inheritance"]);
+        break;
+    case Interface:
+        setCursor(mCursors["interface"]);
+        break;
+    case PackageMembership:
+        setCursor(mCursors["package-membership"]);
+        break;
+    case Package:
+        setCursor(mCursors["package"]);
+        break;
+    case Primitive:
+        setCursor(mCursors["primitive"]);
+        break;
+    case Association:
+        setCursor(mCursors["association"]);
+        break;
+    }
+}
+
 void MainWindow::createCursors() {
     mCursors["aggregation"] = 
         QCursor(QPixmap(":/data/img/cursor/aggregation.png"), -1, -1);
@@ -418,10 +448,6 @@ void MainWindow::createCursors() {
         QCursor(QPixmap(":/data/img/cursor/primitive.png"), -1, -1);
     mCursors["association"] = 
         QCursor(QPixmap(":/data/img/cursor/association.png"), -1, -1);
-    mCursors["template-class"] = 
-        QCursor(QPixmap(":/data/img/cursor/template-class.png"), -1, -1);
-    mCursors["template-specialization"] = 
-        QCursor(QPixmap(":/data/img/cursor/template-specialization.png"), -1, -1);
 }
 
 QUML_END_NAMESPACE_GW

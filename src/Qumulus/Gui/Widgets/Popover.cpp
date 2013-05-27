@@ -22,6 +22,7 @@ QUML_BEGIN_NAMESPACE_GW
 Popover::Popover(QWidget* parent, QPoint pos, Qt::Orientation orientation) : 
         QWidget(parent), mLayout(new QVBoxLayout()) {
     setWindowFlags(Qt::Popup | Qt::Window);
+    setAttribute(Qt::WA_DeleteOnClose);
 
     int kWidth = 400;
     int kHeight = 200;
@@ -56,6 +57,8 @@ Popover::Popover(QWidget* parent, QPoint pos, Qt::Orientation orientation) :
     }
 
     generateMask(location.second, offset);
+
+    setFocus();
 }
 
 void Popover::resizeEvent(QResizeEvent*) {}
@@ -176,6 +179,12 @@ QPair<QPoint, Popover::Direction> Popover::findWindowLocation(QPoint origin,
     }
 
     return ret;
+}
+
+void Popover::focusOutEvent(QFocusEvent* e) {
+    (void) e;
+    emit lostFocus();
+    close();
 }
 QUML_END_NAMESPACE_GW
 
