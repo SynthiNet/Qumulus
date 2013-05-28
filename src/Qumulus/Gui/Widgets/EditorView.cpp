@@ -59,7 +59,6 @@ EditorView::EditorView(MainWindow* parent) : QGraphicsView(parent),
 
     mDiagram->setScene(mScene);
     mSelectionRect = new QGraphicsRectItem();
-    mSelectionRect->setBrush(QBrush({0, 0, 255, 32}));
     mSelectionRect->setZValue(9001);
     mSelectionRect->setVisible(false);
     mScene->addItem(mSelectionRect);
@@ -321,8 +320,35 @@ void EditorView::mouseMoveEvent(QMouseEvent* e) {
                 rect.setTopLeft(mMousePosition);
             }
         }
+
+        switch(mMouseState.startCursor) {
+        case Class:
+            mSelectionRect->setBrush(QBrush({0, 0, 255, 32}));
+            mSelectionRect->setPen(QPen(Qt::blue, 2/mCurrentZoom, Qt::DashLine));
+            break;
+        case Enum:
+            mSelectionRect->setBrush(QBrush({255, 0, 0, 32}));
+            mSelectionRect->setPen(QPen(Qt::red, 2/mCurrentZoom, Qt::DashLine));
+            break;
+        case Comment:
+            mSelectionRect->setBrush(QBrush({127, 127, 127, 32}));
+            mSelectionRect->setPen(QPen(Qt::gray, 2/mCurrentZoom, Qt::DashLine));
+            break;
+        case Package:
+            mSelectionRect->setBrush(QBrush({0, 127, 0, 32}));
+            mSelectionRect->setPen(QPen(QColor{0, 127, 0}, 2/mCurrentZoom, Qt::DashLine));
+            break;
+        case Primitive:
+            mSelectionRect->setBrush(QBrush({255, 255, 0, 32}));
+            mSelectionRect->setPen(QPen(Qt::yellow, 2/mCurrentZoom, Qt::DashLine));
+            break;
+        default:
+            mSelectionRect->setBrush(QBrush({0, 0, 0, 32}));
+            mSelectionRect->setPen(QPen(Qt::black, 2/mCurrentZoom, Qt::DashLine));
+            break;
+        }
+
         mSelectionRect->setRect(rect);
-        mSelectionRect->setPen(QPen(Qt::blue, 2 / mCurrentZoom, Qt::DashLine));
         mSelectionRect->setVisible(true);
     }
 
