@@ -257,7 +257,6 @@ void MainWindow::createMenus() {
                     mEditorView->scene()->sceneRect().height(),
                     QImage::Format_ARGB32_Premultiplied);
                 QPainter painter(&img);
-                painter.setRenderHint(QPainter::Antialiasing);
                 mEditorView->scene()->render(&painter);
                 painter.end();
                 if(!img.save(&outFile)) {
