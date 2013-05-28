@@ -218,8 +218,10 @@ void MainWindow::createMenus() {
                     "JPG image (*.jpg);;"
                     "SVG file (*.svg);;"
                     "PDF file (*.pdf)"));
+            if(fName.isNull()) return; // No filename chosen.
             mEditorView->scene()->clearSelection();
-            if(!fName.contains(".")) {
+            if(!fName.contains(QRegExp(R"(\.(png|bmp|jpg|svg|pdf)$)", 
+                    Qt::CaseInsensitive))) {
                 // Assume PNG
                 fName += ".png";
             }
