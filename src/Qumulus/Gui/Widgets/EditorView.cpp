@@ -22,6 +22,7 @@
 #include <Uml/Kernel/Operation.h>
 #include <Uml/Kernel/Parameter.h>
 #include <Uml/Kernel/Property.h>
+#include <Uml/Kernel/Association.h>
 
 #include <Gui/Diagram/SelectableShape.h>
 #include <Gui/Diagram/PackageShape.h>
@@ -137,6 +138,10 @@ EditorView::EditorView(MainWindow* parent) : QGraphicsView(parent),
     auto cshape = mDiagram->createShape(comment);
     cshape->setVisible(true);
     cshape->setPos(-200, 200);
+
+    // FIXME: this is temporary testing code!
+    auto assoc = new QuUK::Association(classs, visibilityKind);
+    (void) assoc;
 
     // FIXME: this is temporary testing code!
     // Add a line between the comment and the class.

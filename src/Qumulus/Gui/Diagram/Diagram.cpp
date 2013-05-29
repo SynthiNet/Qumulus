@@ -14,6 +14,7 @@
 #include "PrimitiveShape.h"
 #include "ClassShape.h"
 #include "EnumShape.h"
+#include "AssociationEdge.h"
 
 #include <Lib/Core/Nyi.h>
 
@@ -117,6 +118,12 @@ EnumShape* Diagram::createShape(QuUK::Enumeration* e) {
     eshape->passRouter(mRouter);
     e->setPackage(mRootPackage);
     return eshape;
+}
+
+AssociationEdge* Diagram::createEdge(QuUK::Association*) {
+    //auto aedge = new AssociationEdge(a, this);
+    //addElement(aedge);
+    return nullptr;
 }
 
 QuGW::EditorView* Diagram::editorView() const {
