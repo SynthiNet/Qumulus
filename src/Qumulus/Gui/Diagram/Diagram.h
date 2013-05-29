@@ -14,6 +14,7 @@
 
 #include <Gui/Widgets/internal_base.h>
 #include <Lib/Core/Exception.h>
+#include <libavoid/router.h>
 
 class QGraphicsScene;
 
@@ -67,7 +68,6 @@ public:
 
     void writeXml(QXmlStreamWriter&) const override {}
 
-
     QUML_CLONABLE(Diagram);
 private:
     QList<DiagramElement*> mElements;
@@ -75,6 +75,7 @@ private:
     unsigned mCounter = 1;
     QuUK::Package* mRootPackage;
     QList<QuUK::Comment*> mComments; 
+    Avoid::Router* mRouter;
 };
 
 QUML_END_NAMESPACE_GD

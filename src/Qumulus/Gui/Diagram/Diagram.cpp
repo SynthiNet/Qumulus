@@ -31,6 +31,7 @@
 #include <QtXml/QDomDocument>
 #include <QtXml/QDomNode>
 
+
 QUML_BEGIN_NAMESPACE_GD
 
 constexpr static float kFontSize =
@@ -41,7 +42,8 @@ constexpr static float kFontSize =
 #endif
 
 Diagram::Diagram() :
-        mRootPackage(new QuUK::Package()){
+        mRootPackage(new QuUK::Package()), 
+        mRouter(new Avoid::Router(Avoid::OrthogonalRouting)) {
     auto s = new Style;
     setLocalStyle(s);
     s->setFontName("sans-serif");
@@ -58,6 +60,7 @@ Diagram::~Diagram() {
     for(auto& p : mElements) {
         delete p;
     }
+    delete mRouter;
 }
 
 void Diagram::addElement(DiagramElement* e) {
@@ -79,6 +82,7 @@ void Diagram::setScene(QGraphicsScene* e) {
 PackageShape* Diagram::createShape(QuUK::Package* p) {
     auto pshape = new PackageShape(p, this);
     addElement(pshape);
+    pshape->passRouter(mRouter);
     p->setPackage(mRootPackage);
     return pshape;
 }
@@ -86,6 +90,7 @@ PackageShape* Diagram::createShape(QuUK::Package* p) {
 CommentShape* Diagram::createShape(QuUK::Comment* c) {
     auto cshape = new CommentShape(c, this);
     addElement(cshape);
+    cshape->passRouter(mRouter);
     mComments.append(c);
     return cshape;
 }
@@ -93,6 +98,7 @@ CommentShape* Diagram::createShape(QuUK::Comment* c) {
 PrimitiveShape* Diagram::createShape(QuUK::PrimitiveType* p) {
     auto pshape = new PrimitiveShape(p, this);
     addElement(pshape);
+    pshape->passRouter(mRouter);
     p->setPackage(mRootPackage);
     return pshape;
 }
@@ -100,6 +106,7 @@ PrimitiveShape* Diagram::createShape(QuUK::PrimitiveType* p) {
 ClassShape* Diagram::createShape(QuUK::Class* c) {
     auto cshape = new ClassShape(c, this);
     addElement(cshape);
+    cshape->passRouter(mRouter);
     c->setPackage(mRootPackage);
     return cshape;
 }
@@ -107,6 +114,7 @@ ClassShape* Diagram::createShape(QuUK::Class* c) {
 EnumShape* Diagram::createShape(QuUK::Enumeration* e) {
     auto eshape = new EnumShape(e, this);
     addElement(eshape);
+    eshape->passRouter(mRouter);
     e->setPackage(mRootPackage);
     return eshape;
 }

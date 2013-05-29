@@ -34,6 +34,9 @@
 
 #include <cmath>
 
+#include <libavoid/connend.h>
+#include <QtWidgets/QAction>
+
 QUML_BEGIN_NAMESPACE_GW
 
 EditorView::EditorView(MainWindow* parent) : QGraphicsView(parent), 
@@ -134,6 +137,27 @@ EditorView::EditorView(MainWindow* parent) : QGraphicsView(parent),
     auto cshape = mDiagram->createShape(comment);
     cshape->setVisible(true);
     cshape->setPos(-200, 200);
+
+    // FIXME: this is temporary testing code!
+    // Add a line between the comment and the class.
+    // QAction* action = new QAction(this);
+    // this->addAction(action);
+    // action->setShortcuts({Qt::Key_0});
+    // connect(action, &QAction::triggered, [&]{
+    //     Avoid::ConnEnd src(cshape->shapeRef(), 1);
+    //     Avoid::ConnEnd end(clshape->shapeRef(), 1);
+    //     auto conn = new Avoid::ConnRef(
+    //         mDiagram->router(), 
+    //         src, 
+    //         end);
+
+    //     mDiagram->router()->processTransaction();
+    //     auto route = conn->displayRoute();
+    //     for (size_t i = 1; i < route.size(); ++i) {
+    //         Avoid::Point point = route.at(i);
+    //         mScene->addLine(route.at(i-1).x, route.at(i-1).y, point.x, point.y);
+    //     }
+    // });
 
     // mDiagram->saveToXml("test.uml");
 }
