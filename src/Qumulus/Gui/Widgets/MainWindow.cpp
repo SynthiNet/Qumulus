@@ -218,8 +218,10 @@ void MainWindow::createMenus() {
                     "JPG image (*.jpg);;"
                     "SVG file (*.svg);;"
                     "PDF file (*.pdf)"));
+            if(fName.isNull()) return; // No filename chosen.
             mEditorView->scene()->clearSelection();
-            if(!fName.contains(".")) {
+            if(!fName.contains(QRegExp(R"(\.(png|bmp|jpg|svg|pdf)$)", 
+                    Qt::CaseInsensitive))) {
                 // Assume PNG
                 fName += ".png";
             }
@@ -255,7 +257,6 @@ void MainWindow::createMenus() {
                     mEditorView->scene()->sceneRect().height(),
                     QImage::Format_ARGB32_Premultiplied);
                 QPainter painter(&img);
-                painter.setRenderHint(QPainter::Antialiasing);
                 mEditorView->scene()->render(&painter);
                 painter.end();
                 if(!img.save(&outFile)) {

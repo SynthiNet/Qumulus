@@ -14,8 +14,6 @@
 
 #include <Uml/Kernel/Comment.h>
 
-#include <QtWidgets/QGraphicsTextItem>
-
 QUML_BEGIN_NAMESPACE_GD
 
 class CommentShape : public SelectableShape {
@@ -34,8 +32,6 @@ public:
     void writeXml(QXmlStreamWriter& writer) const override;
 
     QUML_CLONABLE(CommentShape);
-private:
-    QGraphicsTextItem* mText;
 };
 
 QUML_END_NAMESPACE_GD

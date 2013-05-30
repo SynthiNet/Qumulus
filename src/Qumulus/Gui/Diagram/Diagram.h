@@ -14,6 +14,7 @@
 
 #include <Gui/Widgets/internal_base.h>
 #include <Lib/Core/Exception.h>
+#include <libavoid/router.h>
 
 class QGraphicsScene;
 
@@ -24,6 +25,7 @@ class Comment;
 class Class;
 class PrimitiveType;
 class Enumeration;
+class Association;
 
 QUML_END_NAMESPACE_UK
 
@@ -41,6 +43,8 @@ class PrimitiveShape;
 class ClassShape;
 class EnumShape;
 
+class AssociationEdge;
+
 class Diagram : public DiagramElement {
 public:
     Diagram();
@@ -52,6 +56,8 @@ public:
     PrimitiveShape* createShape(QuUK::PrimitiveType*);
     ClassShape* createShape(QuUK::Class*);
     EnumShape* createShape(QuUK::Enumeration*);
+
+    AssociationEdge* createEdge(QuUK::Association*);
 
     void addElement(DiagramElement* e);
     void removeElement(DiagramElement* e);
@@ -67,7 +73,6 @@ public:
 
     void writeXml(QXmlStreamWriter&) const override {}
 
-
     QUML_CLONABLE(Diagram);
 private:
     QList<DiagramElement*> mElements;
@@ -75,6 +80,7 @@ private:
     unsigned mCounter = 1;
     QuUK::Package* mRootPackage;
     QList<QuUK::Comment*> mComments; 
+    Avoid::Router* mRouter;
 };
 
 QUML_END_NAMESPACE_GD

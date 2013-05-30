@@ -12,6 +12,12 @@
 #include "DiagramElement.h"
 
 #include <QtWidgets/QGraphicsItemGroup>
+#include <libavoid/geomtypes.h>
+
+namespace Avoid { 
+    class ShapeRef; 
+    class Router;
+}
 
 QUML_BEGIN_NAMESPACE_GD
 
@@ -19,6 +25,7 @@ class Shape : public DiagramElement, public QGraphicsItemGroup {
 public:
     Shape(QuUK::Element* e = 0, DiagramElement* p = 0);
     Shape(const Shape&);
+    ~Shape();
 
     QSizeF size() const { return mSize; }
 
@@ -30,6 +37,7 @@ public:
     void resize(QSizeF s) { resize(s.width(), s.height()); }
     virtual void resize(double w, double h) = 0;
     virtual void updateSizeConstraints() = 0;
+    void passRouter(Avoid::Router* r);
 
     QSizeF minimumSize() const { return mMinimumSize; }
     void setMinimumSize(QSizeF s) { mMinimumSize = s; }
@@ -40,17 +48,23 @@ public:
     QSizeF optimalSize() const;
     void setSizeHint(QSizeF s) { mSizeHint = s; }
 
+    Avoid::ShapeRef* shapeRef() { return mShapeRef; }
+
     void setOwningElement(DiagramElement* e); 
 
     QUML_CLONABLE_ABSTRACT(Shape);
+
 protected:
-    void setSize(QSizeF s) { mSize = s; }
+    void setSize(QSizeF s);
 
 private:
     QSizeF mSize = QSizeF();
     QSizeF mMinimumSize = QSizeF();
     QSizeF mMaximumSize = QSizeF();
     QSizeF mSizeHint = QSizeF();
+    Avoid::Rectangle mRoutingBox;
+    Avoid::ShapeRef* mShapeRef = nullptr;
+    Avoid::Router* mRouter = nullptr;
 };
 
 QUML_END_NAMESPACE_GD

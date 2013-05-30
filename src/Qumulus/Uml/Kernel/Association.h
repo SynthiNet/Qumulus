@@ -31,6 +31,8 @@ public:
     void setAggregation(AggregationKind k) { mAggregation = k; }
 
     void writeXml(QXmlStreamWriter& writer) const override;
+
+    QUML_CLONABLE(Association);
 private:
     AggregationKind mAggregation = AggregationKind::None;
 };

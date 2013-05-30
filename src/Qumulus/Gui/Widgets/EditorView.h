@@ -13,6 +13,8 @@
 #include <QtCore/QPointF>
 #include <Gui/Diagram/Diagram.h>
 #include <Gui/Widgets/MainWindow.h>
+#include <Gui/Diagram/ClassShape.h>
+#include <Gui/Diagram/CommentShape.h>
 
 class QPushButton;
 class QGraphicsProxyWidget;

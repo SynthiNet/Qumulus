@@ -10,16 +10,13 @@
 #include <QtCore/QXmlStreamWriter>
 #include <QtGui/QBrush>
 #include <QtGui/QPainter>
+#include <QtCore/QDebug>
 
 QUML_BEGIN_NAMESPACE_GD
 
 CommentShape::CommentShape(QuUK::Element* e, 
         DiagramElement* p) :
-        SelectableShape(e, p),
-        mText(new QGraphicsTextItem(this)){
-    addToGroup(mText);
-    mText->setPos(5, 10);
-    updateSizeConstraints();
+        SelectableShape(e, p) {
     resize(0,0);
 }
 
@@ -52,7 +49,10 @@ void CommentShape::paint(QPainter* painter,
 
     QFont font = sharedStyle()->font();
     painter->setFont(font);
-    // painter->drawText((width() / 2) - (twidth / 2), 25, packageName());
+
+    painter->drawText(5, 15, width()-10, height()-15, 
+            Qt::AlignLeft | Qt::AlignTop | Qt::TextWordWrap, 
+            dynamic_cast<QuUK::Comment*>(modelElement())->body());
 
     SelectableShape::paint(painter, option, widget);
 }
@@ -65,9 +65,7 @@ void CommentShape::resize(double w, double h) {
 }
 
 void CommentShape::updateSizeConstraints() {
-    mText->setPlainText(dynamic_cast<QuUK::Comment*>(modelElement())->body());
-    mText->setTextWidth(width()-10);
-    setMinimumSize({100, 10 + std::max(30.0, mText->boundingRect().height())});
+    setMinimumSize({100, 60});
 }
 
 

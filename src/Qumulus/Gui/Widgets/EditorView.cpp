@@ -22,6 +22,7 @@
 #include <Uml/Kernel/Operation.h>
 #include <Uml/Kernel/Parameter.h>
 #include <Uml/Kernel/Property.h>
+#include <Uml/Kernel/Association.h>
 
 #include <Gui/Diagram/SelectableShape.h>
 #include <Gui/Diagram/PackageShape.h>
@@ -33,6 +34,9 @@
 #include <Gui/Widgets/Popover.h>
 
 #include <cmath>
+
+#include <libavoid/connend.h>
+#include <QtWidgets/QAction>
 
 QUML_BEGIN_NAMESPACE_GW
 
@@ -59,7 +63,6 @@ EditorView::EditorView(MainWindow* parent) : QGraphicsView(parent),
 
     mDiagram->setScene(mScene);
     mSelectionRect = new QGraphicsRectItem();
-    mSelectionRect->setBrush(QBrush({0, 0, 255, 32}));
     mSelectionRect->setZValue(9001);
     mSelectionRect->setVisible(false);
     mScene->addItem(mSelectionRect);
@@ -135,6 +138,31 @@ EditorView::EditorView(MainWindow* parent) : QGraphicsView(parent),
     auto cshape = mDiagram->createShape(comment);
     cshape->setVisible(true);
     cshape->setPos(-200, 200);
+
+    // FIXME: this is temporary testing code!
+    auto assoc = new QuUK::Association(classs, visibilityKind);
+    (void) assoc;
+
+    // FIXME: this is temporary testing code!
+    // Add a line between the comment and the class.
+    // QAction* action = new QAction(this);
+    // this->addAction(action);
+    // action->setShortcuts({Qt::Key_0});
+    // connect(action, &QAction::triggered, [&]{
+    //     Avoid::ConnEnd src(cshape->shapeRef(), 1);
+    //     Avoid::ConnEnd end(clshape->shapeRef(), 1);
+    //     auto conn = new Avoid::ConnRef(
+    //         mDiagram->router(), 
+    //         src, 
+    //         end);
+
+    //     mDiagram->router()->processTransaction();
+    //     auto route = conn->displayRoute();
+    //     for (size_t i = 1; i < route.size(); ++i) {
+    //         Avoid::Point point = route.at(i);
+    //         mScene->addLine(route.at(i-1).x, route.at(i-1).y, point.x, point.y);
+    //     }
+    // });
 
     // mDiagram->saveToXml("test.uml");
 }
@@ -321,8 +349,35 @@ void EditorView::mouseMoveEvent(QMouseEvent* e) {
                 rect.setTopLeft(mMousePosition);
             }
         }
+
+        switch(mMouseState.startCursor) {
+        case Class:
+            mSelectionRect->setBrush(QBrush({0, 0, 255, 32}));
+            mSelectionRect->setPen(QPen(Qt::blue, 2/mCurrentZoom, Qt::DashLine));
+            break;
+        case Enum:
+            mSelectionRect->setBrush(QBrush({255, 0, 0, 32}));
+            mSelectionRect->setPen(QPen(Qt::red, 2/mCurrentZoom, Qt::DashLine));
+            break;
+        case Comment:
+            mSelectionRect->setBrush(QBrush({127, 127, 127, 32}));
+            mSelectionRect->setPen(QPen(Qt::gray, 2/mCurrentZoom, Qt::DashLine));
+            break;
+        case Package:
+            mSelectionRect->setBrush(QBrush({0, 127, 0, 32}));
+            mSelectionRect->setPen(QPen(QColor{0, 127, 0}, 2/mCurrentZoom, Qt::DashLine));
+            break;
+        case Primitive:
+            mSelectionRect->setBrush(QBrush({255, 255, 0, 32}));
+            mSelectionRect->setPen(QPen(Qt::yellow, 2/mCurrentZoom, Qt::DashLine));
+            break;
+        default:
+            mSelectionRect->setBrush(QBrush({0, 0, 0, 32}));
+            mSelectionRect->setPen(QPen(Qt::black, 2/mCurrentZoom, Qt::DashLine));
+            break;
+        }
+
         mSelectionRect->setRect(rect);
-        mSelectionRect->setPen(QPen(Qt::blue, 2 / mCurrentZoom, Qt::DashLine));
         mSelectionRect->setVisible(true);
     }
 
