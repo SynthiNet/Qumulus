@@ -117,19 +117,31 @@ elseif(WIN32)
 
     install(FILES ${QT5_LIBRARY_DIR}/libEGL.dll DESTINATION .)
 elseif(UNIX AND NOT APPLE)
+    # Install required libraries
     install(CODE "
         include(GetPrerequisites)
 
-        get_prerequisites(\${CMAKE_INSTALL_PREFIX}/${QUMULUS} 
-            LINUX_LIBRARIES 1 1 \"\" \"\")
+        get_prerequisites(\${CMAKE_INSTALL_PREFIX}/${BINARY_DEST}/${QUMULUS} 
+            LINUX_LIBRARIES 0 1 \"\" \"${QT5_LIBRARY_DIR}\")
         
         foreach(lib \${LINUX_LIBRARIES})
-            file(INSTALL \"\${lib}\" 
-                DESTINATION \${CMAKE_INSTALL_PREFIX}/${BINARY_DEST})
+            if(\"\${lib}\" MATCHES \".*Qt.*\")
+                get_filename_component(lib_realpath_\${lib} 
+                    \"\${lib}\" REALPATH)
+                get_filename_component(lib_name_\${lib}
+                    \"\${lib}\" NAME)
+                get_filename_component(lib_rpname_\${lib}
+                    \"\${lib_realpath_\${lib}}\" NAME)
+                file(INSTALL \"\${lib_realpath_\${lib}}\" 
+                    DESTINATION 
+                    \${CMAKE_INSTALL_PREFIX}/${LIBRARY_DEST})
+                file(RENAME 
+                    \${CMAKE_INSTALL_PREFIX}/${LIBRARY_DEST}/\${lib_rpname_\${lib}}
+                    \${CMAKE_INSTALL_PREFIX}/${LIBRARY_DEST}/\${lib_name_\${lib}}
+                    )
+            endif()
         endforeach()
 
         " COMPONENT RUNTIME)
 endif()
-
-
 

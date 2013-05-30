@@ -63,7 +63,7 @@ elseif(APPLE)
 
 elseif(UNIX AND NOT APPLE)
     set(CPACK_PACKAGE_FILE_NAME
-        "Qumulus-${QUMULUS_VERSION")
+        "Qumulus-${QUMULUS_VERSION}")
     set(CPACK_GENERATOR "TGZ")
 
     set(QUMULUS "qumulus")
