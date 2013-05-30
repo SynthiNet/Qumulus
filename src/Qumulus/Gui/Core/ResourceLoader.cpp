@@ -13,9 +13,9 @@ QString getResource(const QString& s) {
 #ifdef Q_OS_WIN32
     return QCoreApplication::applicationDirPath() + "/resources/" + s;
 #elif defined(Q_OS_MAC)
-    return QCoreApplication::applicationDirPath() + "../Resources/" + s;
+    return QCoreApplication::applicationDirPath() + "/../Resources/" + s;
 #else
-    return QCoreApplication::applicationDirPath() + "../share/" + s;
+    return QCoreApplication::applicationDirPath() + "/share/" + s;
 #endif
 }
 

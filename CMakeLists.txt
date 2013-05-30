@@ -68,7 +68,7 @@ elseif(UNIX AND NOT APPLE)
 
     set(QUMULUS "qumulus")
 
-    set(BINARY_DEST "bin")
+    set(BINARY_DEST ".")
     set(RESOURCE_DEST "share")
     set(LIBRARY_DEST "lib")
     set(QT_PLUGIN_DEST_DIR "${BINARY_DEST}/plugins")
