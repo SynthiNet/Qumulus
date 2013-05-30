@@ -69,6 +69,7 @@ ConnRef::ConnRef(Router *router, const unsigned int id)
     m_route.clear();
 
     m_reroute_flag_ptr = m_router->m_conn_reroute_flags.addConn(this);
+    COLA_ASSERT(m_reroute_flag_ptr != nullptr);
 }
 
 
@@ -98,6 +99,7 @@ ConnRef::ConnRef(Router *router, const ConnEnd& src, const ConnEnd& dst,
     setEndpoints(src, dst);
 
     m_reroute_flag_ptr = m_router->m_conn_reroute_flags.addConn(this);
+    COLA_ASSERT(m_reroute_flag_ptr != nullptr);
 }
 
 
@@ -918,7 +920,7 @@ bool ConnRef::generatePath(void)
     COLA_ASSERT(vertices.size() >= 2);
     COLA_ASSERT(vertices[0] == src());
     COLA_ASSERT(vertices[vertices.size() - 1] == dst());
-    COLA_ASSERT(m_reroute_flag_ptr != NULL);
+    COLA_ASSERT(m_reroute_flag_ptr != nullptr);
 
     for (size_t i = 1; i < vertices.size(); ++i)
     {

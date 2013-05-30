@@ -10,6 +10,8 @@ QUML_BEGIN_NAMESPACE_GD
 
 Edge::Edge(QuUK::Element* e, DiagramElement* p) :
         Shape(e, p) {
+    (void) mConnectionReference;
+    (void) mRouter;
 }
 
 Edge::Edge(const Edge& e) :
@@ -25,8 +27,6 @@ void Edge::paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget*) {
 
 }
 
-void Edge::updateSizeConstraints() {
-
-}
+void Edge::updateSizeConstraints() {}
 
 QUML_END_NAMESPACE_GD

@@ -11,6 +11,11 @@
 
 #include "Shape.h"
 
+namespace Avoid { 
+    class ConnRef; 
+    class Router;
+}
+
 QUML_BEGIN_NAMESPACE_GD
 
 class Edge : public Shape {
@@ -18,11 +23,11 @@ public:
     Edge(QuUK::Element* e = 0, DiagramElement* p = 0);
     Edge(const Edge&);
 
-    QuUK::Element* source() const { return mSource; }
-    void setSource(QuUK::Element* e) { mSource = e; } 
+    Shape* source() const { return mSource; }
+    void setSource(Shape* e) { mSource = e; } 
 
-    QuUK::Element* target() const { return mTarget; }
-    void setTarget(QuUK::Element* e) { mTarget = e; } 
+    Shape* target() const { return mTarget; }
+    void setTarget(Shape* e) { mTarget = e; } 
 
     void resize(double, double) override {}
 
@@ -32,10 +37,10 @@ public:
 
     QUML_CLONABLE_ABSTRACT(Edge);
 private:
-    QuUK::Element* mSource;
-    QuUK::Element* mTarget;
-
-    QList<QPoint> mWaypoints;
+    Shape* mSource;
+    Shape* mTarget;
+    Avoid::Router* mRouter;
+    Avoid::ConnRef* mConnectionReference;
 };
 
 QUML_END_NAMESPACE_GD
