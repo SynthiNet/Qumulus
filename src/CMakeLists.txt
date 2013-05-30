@@ -109,8 +109,10 @@ elseif(WIN32)
         
         foreach(lib \${WINDOWS_LIBRARIES})
             find_program(lib_path_\${lib} \${lib})
-            file(INSTALL \"\${lib_path_\${lib}}\" 
-                DESTINATION \${CMAKE_INSTALL_PREFIX}/${BINARY_DEST})
+            if(NOT (\"\${lib_path_\${lib}}\" MATCHES \"NOTFOUND\"))
+                file(INSTALL \"\${lib_path_\${lib}}\" 
+                    DESTINATION \${CMAKE_INSTALL_PREFIX}/${BINARY_DEST})
+            endif()
         endforeach()
 
         " COMPONENT RUNTIME)
