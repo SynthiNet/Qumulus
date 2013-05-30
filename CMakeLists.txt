@@ -71,10 +71,12 @@ elseif(UNIX AND NOT APPLE)
     set(BINARY_DEST "bin")
     set(RESOURCE_DEST "share")
     set(LIBRARY_DEST "lib")
+    set(QT_PLUGIN_DEST_DIR "${BINARY_DEST}/plugins")
+    set(QT_CONFIG_DEST_DIR "${BINARY_DEST}")
 
     SET(CMAKE_SKIP_BUILD_RPATH FALSE)
     SET(CMAKE_BUILD_WITH_INSTALL_RPATH FALSE) 
-    SET(CMAKE_INSTALL_RPATH "$ORIGIN/../lib")
+    SET(CMAKE_INSTALL_RPATH "$ORIGIN")
 endif()
 
 # This needs to be done after we set all options
