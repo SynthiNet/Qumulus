@@ -40,10 +40,11 @@
 
 QUML_BEGIN_NAMESPACE_GW
 
-EditorView::EditorView(MainWindow* parent) : QGraphicsView(parent), 
+EditorView::EditorView(MainWindow* parent, QuGD::Diagram* d) : 
+        QGraphicsView(parent), 
         mScene(new QGraphicsScene(this)),
         mPopover(nullptr),
-        mDiagram(new QuGD::Diagram()),
+        mDiagram(d),
         mAttributeButton(new QPushButton(
                     QIcon(":/data/img/editor/add-attribute.png"), "")),
         mOperationButton(new QPushButton(
@@ -168,7 +169,6 @@ EditorView::EditorView(MainWindow* parent) : QGraphicsView(parent),
 }
 
 EditorView::~EditorView() noexcept {
-    delete mDiagram;    
 }
 
 void EditorView::zoom(double value) {

@@ -34,11 +34,12 @@
 QUML_BEGIN_NAMESPACE_GW
 
 MainWindow::MainWindow() : 
+        mDiagram(new QuGD::Diagram()),
         mToolBar(new ToolBar(this)), 
-        mSideBar(new SideBar(this)),
+        mSideBar(new SideBar(this, mDiagram)),
         mSplitter(new QSplitter(this)),
         mStatusBar(new StatusBar(this)),
-        mEditorView(new EditorView(this)),
+        mEditorView(new EditorView(this, mDiagram)),
         mUndoStack(new QUndoStack(this)) {
     constexpr unsigned kWidth = 700, kHeight = 480, kSideWidth = 220;
     createCursors();
@@ -91,6 +92,10 @@ MainWindow::MainWindow() :
 
     connect(mStatusBar->slider(), &ZoomSlider::zoomChanged,
             mEditorView, &EditorView::zoom);
+}
+
+MainWindow::~MainWindow() {
+    delete mDiagram;
 }
 
 void MainWindow::populateToolbar() {
