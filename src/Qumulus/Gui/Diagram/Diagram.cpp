@@ -23,6 +23,7 @@
 #include <Uml/Kernel/PrimitiveType.h>
 #include <Uml/Kernel/Class.h>
 #include <Uml/Kernel/Enumeration.h>
+#include <Uml/Kernel/Association.h>
 
 #include <Gui/Widgets/EditorView.h>
 
@@ -68,11 +69,15 @@ void Diagram::addElement(DiagramElement* e) {
     mElements.append(e);
     if(Shape* p = dynamic_cast<Shape*>(e))
         mScene->addItem(p);
+    if(Edge* p = dynamic_cast<Edge*>(e))
+        mScene->addItem(p);
 }
 
 void Diagram::removeElement(DiagramElement* e) {
     mElements.removeAll(e);
     if(Shape* p = dynamic_cast<Shape*>(e))
+        mScene->removeItem(p);
+    if(Edge* p = dynamic_cast<Edge*>(e))
         mScene->removeItem(p);
 }
 
@@ -120,10 +125,15 @@ EnumShape* Diagram::createShape(QuUK::Enumeration* e) {
     return eshape;
 }
 
-AssociationEdge* Diagram::createEdge(QuUK::Association*) {
-    //auto aedge = new AssociationEdge(a, this);
-    //addElement(aedge);
-    return nullptr;
+AssociationEdge* Diagram::createEdge(QuUK::Association* a, Shape* src,
+        Shape* dst) {
+    auto aedge = new AssociationEdge(a, this);
+    addElement(aedge);
+    aedge->passRouter(mRouter);
+    aedge->setSource(src);
+    aedge->setTarget(dst);
+    aedge->connect();
+    return aedge;
 }
 
 QuGW::EditorView* Diagram::editorView() const {

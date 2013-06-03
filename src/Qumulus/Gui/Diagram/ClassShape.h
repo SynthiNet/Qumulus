@@ -35,6 +35,9 @@ public:
     QuUK::Property* highlightedAttribute() const;
     QuUK::Operation* highlightedOperation() const;
 
+    virtual bool acceptsAssociationSource() override { return true; }
+    virtual bool acceptsAssociationTarget() override { return true; }
+
     void writeXml(QXmlStreamWriter& writer) const override;
 
     QUML_CLONABLE(ClassShape);

@@ -32,6 +32,8 @@ public:
             const QVariant & value) override;
     QuUK::EnumerationLiteral* highlightedLiteral() const;
 
+    virtual bool acceptsAssociationTarget() override { return true; }
+
     void writeXml(QXmlStreamWriter& writer) const override;
 
     QUML_CLONABLE(EnumShape);

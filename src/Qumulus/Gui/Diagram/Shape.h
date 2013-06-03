@@ -48,6 +48,9 @@ public:
     QSizeF optimalSize() const;
     void setSizeHint(QSizeF s) { mSizeHint = s; }
 
+    virtual bool acceptsAssociationSource() { return false; }
+    virtual bool acceptsAssociationTarget() { return false; }
+
     Avoid::ShapeRef* shapeRef() { return mShapeRef; }
 
     void setOwningElement(DiagramElement* e); 

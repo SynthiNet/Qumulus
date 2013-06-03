@@ -37,6 +37,7 @@ public:
     const QuGD::Diagram* diagram() const { return mDiagram; }
 
     void updateButtonsPosition();
+    void resetSelection();
 
 public slots:
     void zoom(double value);
@@ -71,6 +72,7 @@ private:
     bool mIsDragging = false;
     double mCurrentZoom = 1;
     bool mScrollable = true;
+    QuGD::Shape* mSource = nullptr;
 };
 
 QUML_END_NAMESPACE_GW
