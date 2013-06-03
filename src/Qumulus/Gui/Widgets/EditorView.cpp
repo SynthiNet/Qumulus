@@ -30,6 +30,7 @@
 #include <Gui/Diagram/ClassShape.h>
 #include <Gui/Diagram/EnumShape.h>
 #include <Gui/Diagram/PrimitiveShape.h>
+#include <Gui/Diagram/AssociationEdge.h>
 
 #include <Gui/Widgets/Popover.h>
 
@@ -138,31 +139,6 @@ EditorView::EditorView(MainWindow* parent) : QGraphicsView(parent),
     auto cshape = mDiagram->createShape(comment);
     cshape->setVisible(true);
     cshape->setPos(-200, 200);
-
-    // FIXME: this is temporary testing code!
-    auto assoc = new QuUK::Association(classs, visibilityKind);
-    (void) assoc;
-
-    // FIXME: this is temporary testing code!
-    // Add a line between the comment and the class.
-    // QAction* action = new QAction(this);
-    // this->addAction(action);
-    // action->setShortcuts({Qt::Key_0});
-    // connect(action, &QAction::triggered, [&]{
-    //     Avoid::ConnEnd src(cshape->shapeRef(), 1);
-    //     Avoid::ConnEnd end(clshape->shapeRef(), 1);
-    //     auto conn = new Avoid::ConnRef(
-    //         mDiagram->router(), 
-    //         src, 
-    //         end);
-
-    //     mDiagram->router()->processTransaction();
-    //     auto route = conn->displayRoute();
-    //     for (size_t i = 1; i < route.size(); ++i) {
-    //         Avoid::Point point = route.at(i);
-    //         mScene->addLine(route.at(i-1).x, route.at(i-1).y, point.x, point.y);
-    //     }
-    // });
 
     // mDiagram->saveToXml("test.uml");
 }
@@ -320,11 +296,31 @@ void EditorView::mouseReleaseEvent(QMouseEvent* e) {
         primitiveShape->setVisible(true);
         break;
     }
-    case CursorState::Association:
-        break;
+    case CursorState::Association: {
+        auto selected = mScene->itemAt(mapToScene(e->pos()), QTransform());
+        QuGD::Shape* shape = dynamic_cast<QuGD::Shape*>(selected);
+        if(!mSource && shape && shape->acceptsAssociationSource()) {
+            mSource = shape;
+            return;
+        } else if(mSource && shape && shape->acceptsAssociationTarget()) {
+            auto assoc = new QuUK::Association(
+                    dynamic_cast<QuUK::Classifier*>(mSource->modelElement()), 
+                    dynamic_cast<QuUK::Classifier*>(shape->modelElement()));
+            auto ashape = mDiagram->createEdge(assoc, mSource, shape);
+            ashape->setVisible(true);
+            mSource = nullptr;
+            break;
+        } else {
+            break;
+        }
+    }
     }
 
     mMainWindow->setCursorState(CursorState::Normal);
+}
+
+void EditorView::resetSelection() {
+    mSource = nullptr;
 }
 
 void EditorView::mouseMoveEvent(QMouseEvent* e) {

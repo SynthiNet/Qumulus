@@ -8,39 +8,47 @@
 #define UML_DIAGRAM_EDGE_H_
 
 #include "internal_base.h"
-
+#include "DiagramElement.h"
 #include "Shape.h"
+#include <QtWidgets/QGraphicsItemGroup>
+#include <libavoid/geomtypes.h>
 
 namespace Avoid { 
     class ConnRef; 
     class Router;
+    class ConnEnd;
 }
 
 QUML_BEGIN_NAMESPACE_GD
 
-class Edge : public Shape {
+class Edge : public DiagramElement, public QGraphicsItemGroup {
 public:
     Edge(QuUK::Element* e = 0, DiagramElement* p = 0);
     Edge(const Edge&);
 
     Shape* source() const { return mSource; }
-    void setSource(Shape* e) { mSource = e; } 
+    void setSource(Shape* e); 
 
     Shape* target() const { return mTarget; }
-    void setTarget(Shape* e) { mTarget = e; } 
+    void setTarget(Shape* e);
 
-    void resize(double, double) override {}
+    void resize(double, double) {}
 
     QRectF boundingRect() const override;
     void paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget*) override;
-    void updateSizeConstraints() override;
+    void updateSizeConstraints();
+
+    void connect();
+    void passRouter(Avoid::Router* r) { mRouter = r; };
 
     QUML_CLONABLE_ABSTRACT(Edge);
 private:
     Shape* mSource;
     Shape* mTarget;
-    Avoid::Router* mRouter;
-    Avoid::ConnRef* mConnectionReference;
+    Avoid::ConnEnd* mSrc = nullptr;
+    Avoid::ConnEnd* mEnd = nullptr;
+    Avoid::ConnRef* mConnectionReference = nullptr;
+    Avoid::Router* mRouter = nullptr;
 };
 
 QUML_END_NAMESPACE_GD

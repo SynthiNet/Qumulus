@@ -42,6 +42,7 @@ class CommentShape;
 class PrimitiveShape;
 class ClassShape;
 class EnumShape;
+class Shape;
 
 class AssociationEdge;
 
@@ -57,7 +58,7 @@ public:
     ClassShape* createShape(QuUK::Class*);
     EnumShape* createShape(QuUK::Enumeration*);
 
-    AssociationEdge* createEdge(QuUK::Association*);
+    AssociationEdge* createEdge(QuUK::Association*, Shape*, Shape*);
 
     void addElement(DiagramElement* e);
     void removeElement(DiagramElement* e);

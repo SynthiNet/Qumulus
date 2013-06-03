@@ -33,10 +33,8 @@ SelectableShape::SelectableShape(QuUK::Element* e, DiagramElement* p) :
 
 SelectableShape::SelectableShape(const SelectableShape& c) : Shape(c) {}
 
-void SelectableShape::paint(QPainter* p, const QStyleOptionGraphicsItem* o, 
-            QWidget* w) {
-    (void) o;
-    (void) w;
+void SelectableShape::paint(QPainter* p, const QStyleOptionGraphicsItem*, 
+            QWidget*) {
 
     if(isSelected()) {
         p->setBrush(QBrush({64, 193, 255}));
