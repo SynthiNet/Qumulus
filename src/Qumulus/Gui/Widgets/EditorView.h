@@ -32,7 +32,7 @@ class EditorView : public QGraphicsView {
     Q_OBJECT
 
 public:
-    EditorView(MainWindow* parent = 0);
+    EditorView(MainWindow* parent, QuGD::Diagram* diagram);
     ~EditorView() noexcept;
     const QuGD::Diagram* diagram() const { return mDiagram; }
 

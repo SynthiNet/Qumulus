@@ -9,7 +9,9 @@
 
 QUML_BEGIN_NAMESPACE_GW
 
-SideBar::SideBar(QWidget* parent) : QTreeView(parent) {
+SideBar::SideBar(MainWindow* parent, QuGD::Diagram* d) : 
+        QTreeView(parent),
+        mDiagram(d) {
 #ifdef Q_OS_MAC
     setStyleType(StyleType::Active);
     setAttribute(Qt::WA_MacShowFocusRect, false);

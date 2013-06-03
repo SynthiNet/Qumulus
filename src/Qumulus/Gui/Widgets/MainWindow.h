@@ -12,6 +12,7 @@
 #include <QtCore/QHash>
 #include <QtCore/QString>
 #include <QtWidgets/QUndoStack>
+#include <Gui/Diagram/Diagram.h>
 
 class QMenu;
 class QSplitter;
@@ -47,6 +48,7 @@ class MainWindow : public QMainWindow {
 
 public:
     MainWindow();
+    ~MainWindow();
 
     ToolBar* toolBar() const { return mToolBar; }
     StatusBar* statusBar() const { return mStatusBar; }
@@ -61,6 +63,8 @@ private:
     void createCursors();
 
 private:
+    QuGD::Diagram* mDiagram;
+
     ToolBar* mToolBar;
     SideBar* mSideBar;
     QSplitter* mSplitter;
