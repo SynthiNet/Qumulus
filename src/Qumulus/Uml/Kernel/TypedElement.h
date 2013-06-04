@@ -20,7 +20,7 @@ public:
     TypedElement(Type* type = 0) : mType(type) {}
 
     Type* type() const { return mType; }
-    void setType(Type* c) { mType = c; }
+    void setType(Type* c) { mType = c; elementChanged(); }
 
     QUML_CLONABLE_ABSTRACT(TypedElement);
 private:

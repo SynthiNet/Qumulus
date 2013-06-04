@@ -18,11 +18,6 @@ public:
     Type() {}
     Type(QString name, Package* p = 0) : PackageableElement(name, p) {}
 
-    virtual bool conformsTo(Type* other) const {
-        (void)other;
-        return false;
-    }
-
     QUML_CLONABLE_ABSTRACT(Type);
 };
 

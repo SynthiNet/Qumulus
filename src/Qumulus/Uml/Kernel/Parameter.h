@@ -24,10 +24,16 @@ public:
     Parameter(QString name, Operation* o = 0);
 
     const QString& defaultValue() const { return mDefaultValue; }
-    void setDefaultValue(const QString& s) { mDefaultValue = s; }
+    void setDefaultValue(const QString& s) { 
+        mDefaultValue = s; 
+        elementChanged();
+    }
 
     ParameterDirectionKind direction() const { return mDirection; }
-    void setDirection(ParameterDirectionKind d) { mDirection = d; }
+    void setDirection(ParameterDirectionKind d) { 
+        mDirection = d; 
+        elementChanged();
+    }
 
     Operation* operation() const { return mOperation; }
     void setOperation(Operation* o);

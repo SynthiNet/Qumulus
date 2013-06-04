@@ -30,13 +30,13 @@ public:
     int index() const override;
 
     Class* getClass() const { return mClass; }
-    void setClass(Class* c) { mClass = c; }
+    void setClass(Class* c) { mClass = c; elementChanged(); }
 
     Association* association() const { return mAssociation; }
-    void setAssociation(Association* a) { mAssociation = a; }
+    void setAssociation(Association* a) { mAssociation = a; elementChanged(); }
 
     const QString& getDefault() const { return mDefault; }
-    void setDefault(const QString& d) { mDefault = d; }
+    void setDefault(const QString& d) { mDefault = d; elementChanged(); }
 
     QString qualifiedName() const override;
 

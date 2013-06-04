@@ -57,10 +57,15 @@ void Class::removeAttribute(Property* p) {
 
 void Class::addOperation(Operation* c) {
     mOwnedOperations.append(c);
+
+    elementChanged();
 }
 
 void Class::removeOperation(Operation* c) {
-    mOwnedOperations.append(c);
+    if(mOwnedOperations.contains(c)) {
+        mOwnedOperations.append(c);
+        elementChanged();
+    }
 }
 
 void Class::writeXml(QXmlStreamWriter& writer) const {

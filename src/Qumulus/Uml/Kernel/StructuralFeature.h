@@ -22,7 +22,7 @@ class StructuralFeature :
 public:
     StructuralFeature();
     bool readOnly() const { return mReadOnly; }
-    void setReadOnly(bool b) { mReadOnly = b; }
+    void setReadOnly(bool b) { mReadOnly = b; elementChanged(); }
 
     QUML_CLONABLE_ABSTRACT(StructuralFeature);
 private:

@@ -28,10 +28,10 @@ public:
     int index() const override;
 
     bool isQuery() const { return mQuery; }
-    void setQuery(bool b) { mQuery = b; }
+    void setQuery(bool b) { mQuery = b; elementChanged(); }
 
     Class* getClass() const { return mClass; }
-    void setClass(Class* c) { mClass = c; }
+    void setClass(Class* c) { mClass = c; elementChanged(); }
 
     QString qualifiedName() const override;
 

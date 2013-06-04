@@ -30,10 +30,15 @@ const QSet<Classifier*> Classifier::general() const {
 
 void Classifier::addGeneralization(Generalization* c) {
     mGeneralizations.insert(c);
+
+    elementChanged();
 }
 
 void Classifier::removeGeneralization(Generalization* c) {
-    mGeneralizations.remove(c);
+    if(mGeneralizations.contains(c)) {
+        mGeneralizations.remove(c);
+        elementChanged();
+    }
 }
 
 QUML_END_NAMESPACE_UK

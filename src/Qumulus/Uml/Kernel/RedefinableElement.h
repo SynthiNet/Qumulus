@@ -22,7 +22,7 @@ public:
     RedefinableElement();
 
     bool leaf() const { return mLeaf; }
-    void setLeaf(bool l) { mLeaf = l; }
+    void setLeaf(bool l) { mLeaf = l; elementChanged(); }
 
     QUML_CLONABLE_ABSTRACT(RedefinableElement);
 private:

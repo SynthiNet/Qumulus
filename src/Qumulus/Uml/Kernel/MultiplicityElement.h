@@ -32,6 +32,7 @@ public:
 
     void setLowerBound(unsigned u) {
         mLower = u;
+        elementChanged();
     }
 
     QuLC::Unlimited upperBound() const {
@@ -40,6 +41,7 @@ public:
 
     void setUpperBound(QuLC::Unlimited u) {
         mUpper = u;
+        elementChanged();
     }
 
     QString multiplicityString() const;

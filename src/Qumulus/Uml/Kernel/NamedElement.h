@@ -33,10 +33,10 @@ public:
     // bool isDistinguishableFrom(NamedElement* n) const;
 
     const QString& name() const { return mName; }
-    void setName(const QString& n) { mName = n; }
+    void setName(const QString& n) { mName = n; elementChanged(); }
 
     VisibilityKind visibility() const { return mVisibility; }
-    void setVisiblity(VisibilityKind v) { mVisibility = v; }
+    void setVisiblity(VisibilityKind v) { mVisibility = v; elementChanged(); }
 
     QUML_CLONABLE_ABSTRACT(NamedElement)
 private:

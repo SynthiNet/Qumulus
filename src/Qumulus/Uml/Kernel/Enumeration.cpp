@@ -27,10 +27,15 @@ Enumeration::Enumeration(QString name, Package* p) :
 
 void Enumeration::addLiteral(EnumerationLiteral* l) {
     mOwnedLiterals.append(l);
+
+    elementChanged();
 }
 
 void Enumeration::removeLiteral(EnumerationLiteral* l) {
-    mOwnedLiterals.removeAll(l);
+    if(mOwnedLiterals.contains(l)) {
+        mOwnedLiterals.removeAll(l);
+        elementChanged();
+    }
 }
 
 void Enumeration::writeXml(QXmlStreamWriter& writer) const {

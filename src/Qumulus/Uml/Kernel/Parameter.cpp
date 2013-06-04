@@ -22,6 +22,7 @@ Parameter::Parameter(QString name, Operation* o) :
 
 void Parameter::setOperation(Operation* o) {
     mOperation = o;
+    elementChanged();
 }
 
 QString Parameter::toString() const {

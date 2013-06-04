@@ -27,11 +27,17 @@ Package::~Package() {
 }
 
 void Package::addPackagedElement(PackageableElement* e) {
+    if(mPackagedElements.contains(e)) return;
     mPackagedElements.append(e);
+
+    elementChanged();
 }
 
 void Package::removePackagedElement(PackageableElement* e) {
-    mPackagedElements.removeAll(e);
+    if(mPackagedElements.contains(e)) {
+        mPackagedElements.removeAll(e);
+        elementChanged();
+    }
 }
 
 void Package::writeXml(QXmlStreamWriter& writer) const {

@@ -21,7 +21,7 @@ public:
     int index() const override { return -1; }
 
     const QString& body() const { return mBody; }
-    void setBody(const QString& b) { mBody = b; }
+    void setBody(const QString& b) { mBody = b; elementChanged(); }
 
     bool isTopLevel() const override { return true; }
     QString sidebarIcon() const override { return "comment"; }
