@@ -16,7 +16,6 @@ QUML_BEGIN_NAMESPACE_UK
 class Type;
 
 class Package : public PackageableElement {
-    Q_OBJECT
 public:
     Package();
     Package(QString name, Package* p = 0);

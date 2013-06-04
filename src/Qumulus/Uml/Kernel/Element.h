@@ -28,8 +28,7 @@ class Comment;
 /**
  * Element is the base class for all UML elements
  */
-class Element : public QuLC::Clonable, public QObject {
-    Q_OBJECT
+class Element : public QuLC::Clonable {
 public:
     Element();
     Element(const Element& other);
@@ -53,7 +52,7 @@ public:
      *
      * This is an internal function and should not be called from user code!
      */
-    void setIndex(int index) { mIndex = -1; }
+    void setIndex(int index) { mIndex = index; }
 
     virtual bool isTopLevel() const { return false; };
 

@@ -14,7 +14,6 @@
 QUML_BEGIN_NAMESPACE_UK
 
 class PrimitiveType : public DataType {
-    Q_OBJECT
 public:
     PrimitiveType();
     PrimitiveType(QString name, Package* p = 0) : DataType(name, p) {}

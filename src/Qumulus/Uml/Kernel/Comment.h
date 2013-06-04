@@ -14,7 +14,6 @@
 QUML_BEGIN_NAMESPACE_UK
 
 class Comment : public Element {
-    Q_OBJECT
 public:
     Comment(const QString& body = "");
     ~Comment();

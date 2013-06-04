@@ -18,7 +18,6 @@ QUML_BEGIN_NAMESPACE_UK
 class Classifier;
 
 class RedefinableElement : public virtual NamedElement {
-    Q_OBJECT
 public:
     RedefinableElement();
 

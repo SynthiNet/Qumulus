@@ -17,7 +17,6 @@ class Enumeration;
 struct EnumerationLiteralGraphics;
 
 class EnumerationLiteral : public NamedElement {
-    Q_OBJECT
 public:
     EnumerationLiteral();
     EnumerationLiteral(QString name, Enumeration* o = nullptr);

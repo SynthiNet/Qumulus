@@ -17,7 +17,6 @@ class Operation;
 QUML_BEGIN_NAMESPACE_UK
 
 class DataType : public Classifier {
-    Q_OBJECT
 public:
     DataType() {}
     DataType(QString name, Package* p = 0) : Classifier(name, p) {}

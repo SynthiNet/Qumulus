@@ -15,7 +15,6 @@
 QUML_BEGIN_NAMESPACE_UK
 
 class Enumeration : public DataType {
-    Q_OBJECT
 public:
     Enumeration();
     Enumeration(QString name, Package* p = 0);

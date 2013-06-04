@@ -23,7 +23,6 @@ class Class;
 class Association;
 
 class Property : public StructuralFeature {
-    Q_OBJECT
 public:
     Property(QString name, Class* c = 0);
 

@@ -18,7 +18,6 @@ class Class;
 class Parameter;
 
 class Operation : public BehavioralFeature {
-    Q_OBJECT
 public:
     Operation(QString name, Class* c = 0);
 

@@ -17,7 +17,6 @@ QUML_BEGIN_NAMESPACE_UK
 class Classifier;
 
 class Association : public DirectedRelationship {
-    Q_OBJECT
 public:
     Association() = default;
     Association(Classifier* source, Classifier* target);

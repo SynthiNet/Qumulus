@@ -18,7 +18,6 @@ class Property;
 class Operation;
 
 class Class : public Classifier {
-    Q_OBJECT
 public:
     Class();
     Class(QString name, Package* p = nullptr);
