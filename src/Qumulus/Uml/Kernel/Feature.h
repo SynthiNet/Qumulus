@@ -23,10 +23,13 @@ public:
     Feature(Classifier* c = 0);
 
     bool isStatic() const { return mStatic; }
-    void setStatic(bool s) { mStatic = s; }
+    void setStatic(bool s) { mStatic = s; elementChanged(); }
 
     Classifier* featuringClassifier() const { return mFeaturingClassifier; }
-    void setFeaturingClassifier(Classifier* c) { mFeaturingClassifier = c; }
+    void setFeaturingClassifier(Classifier* c) { 
+        mFeaturingClassifier = c; 
+        elementChanged();
+    }
 
     QUML_CLONABLE_ABSTRACT(Feature);
 private:
