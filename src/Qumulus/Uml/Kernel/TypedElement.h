@@ -16,6 +16,7 @@ QUML_BEGIN_NAMESPACE_UK
 class Type;
 
 class TypedElement : public virtual NamedElement {
+    Q_OBJECT
 public:
     TypedElement(Type* type = 0) : mType(type) {}
 

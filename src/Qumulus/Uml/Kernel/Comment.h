@@ -11,12 +11,10 @@
 
 #include "Element.h"
 
-// #include <Uml/Diagram/CommentShape.h>
-
 QUML_BEGIN_NAMESPACE_UK
 
 class Comment : public Element {
-    friend struct CommentGraphics;
+    Q_OBJECT
 public:
     Comment(const QString& body = "");
     ~Comment();

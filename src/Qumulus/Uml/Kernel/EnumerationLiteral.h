@@ -17,9 +17,12 @@ class Enumeration;
 struct EnumerationLiteralGraphics;
 
 class EnumerationLiteral : public NamedElement {
+    Q_OBJECT
 public:
     EnumerationLiteral();
     EnumerationLiteral(QString name, Enumeration* o = nullptr);
+
+    Element* parent() const override;
 
     Enumeration* enumeration() const { return mEnumeration; }
     void setEnumeration(Enumeration* e) { mEnumeration = e; }

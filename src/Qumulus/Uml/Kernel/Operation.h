@@ -18,11 +18,14 @@ class Class;
 class Parameter;
 
 class Operation : public BehavioralFeature {
+    Q_OBJECT
 public:
     Operation(QString name, Class* c = 0);
 
     Parameter* returnResult() const;
     Type* type() const;
+
+    Element* parent() const override;
 
     bool isQuery() const { return mQuery; }
     void setQuery(bool b) { mQuery = b; }

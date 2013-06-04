@@ -19,6 +19,7 @@ class StructuralFeature :
         public virtual MultiplicityElement,
         public virtual TypedElement, 
         public virtual Feature {
+    Q_OBJECT
 public:
     StructuralFeature();
     bool readOnly() const { return mReadOnly; }

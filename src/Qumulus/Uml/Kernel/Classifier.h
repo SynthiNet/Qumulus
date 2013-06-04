@@ -19,6 +19,7 @@ class Property;
 class Feature;
 
 class Classifier : public Type, public RedefinableElement {
+    Q_OBJECT
 public:
     Classifier();
     Classifier(QString name, Package* p = 0);

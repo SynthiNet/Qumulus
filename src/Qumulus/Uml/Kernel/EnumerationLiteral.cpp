@@ -19,6 +19,10 @@ EnumerationLiteral::EnumerationLiteral(QString name, Enumeration* o) :
     if(o) o->addLiteral(this);
 }
 
+Element* EnumerationLiteral::parent() const {
+    return enumeration();
+}
+
 QString EnumerationLiteral::qualifiedName() const {
     if(!mEnumeration) return "";
     QString s = mEnumeration->qualifiedName();

@@ -20,6 +20,10 @@ PackageableElement::PackageableElement(QString name, Package* p) {
     setVisiblity(VisibilityKind::Public);
 }
 
+Element* PackageableElement::parent() const {
+    return package();
+}
+
 QString PackageableElement::qualifiedName() const {
     if(name() != "") {
         if(package()) {

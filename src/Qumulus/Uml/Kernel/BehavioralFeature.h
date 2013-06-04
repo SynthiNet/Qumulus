@@ -17,6 +17,7 @@ class Parameter;
 class Type;
 
 class BehavioralFeature : public Feature {
+    Q_OBJECT
 public:
     ~BehavioralFeature();
 

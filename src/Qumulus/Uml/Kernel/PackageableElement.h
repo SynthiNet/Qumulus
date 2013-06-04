@@ -16,6 +16,7 @@ QUML_BEGIN_NAMESPACE_UK
 class Package;
 
 class PackageableElement : public virtual NamedElement {
+    Q_OBJECT
 public:
     PackageableElement();
     PackageableElement(QString name, Package* p = 0);
@@ -23,6 +24,8 @@ public:
     Package* package() const {
         return mPackage;
     }
+
+    Element* parent() const override;
 
     QString qualifiedName() const;
 

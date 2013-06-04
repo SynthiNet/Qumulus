@@ -39,6 +39,10 @@ Type* Operation::type() const {
         return nullptr;
 }
 
+Element* Operation::parent() const {
+    return getClass();
+}
+
 QString Operation::qualifiedName() const {
     if(!mClass) return "";
     QString s = mClass->qualifiedName();

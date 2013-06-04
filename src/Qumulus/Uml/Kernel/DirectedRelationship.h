@@ -14,6 +14,7 @@
 QUML_BEGIN_NAMESPACE_UK
 
 class DirectedRelationship : public Element {
+    Q_OBJECT
 public:
     DirectedRelationship() = default;
     DirectedRelationship(Element* source, Element* target) : 

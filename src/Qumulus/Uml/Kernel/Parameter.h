@@ -20,6 +20,7 @@ class Operation;
 class Parameter : 
         public virtual MultiplicityElement, 
         public virtual TypedElement {
+    Q_OBJECT
 public:
     Parameter(QString name, Operation* o = 0);
 

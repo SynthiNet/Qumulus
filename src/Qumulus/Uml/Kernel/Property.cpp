@@ -21,6 +21,10 @@ Property::Property(QString name, Class* c) :
     setName(name);
 }
 
+Element* Property::parent() const {
+    return getClass();
+}
+
 QString Property::qualifiedName() const {
     if(!mClass) return "";
     QString s = mClass->qualifiedName();

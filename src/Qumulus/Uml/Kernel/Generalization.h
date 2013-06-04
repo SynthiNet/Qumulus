@@ -15,6 +15,7 @@ QUML_BEGIN_NAMESPACE_UK
 class Classifier;
 
 class Generalization : public DirectedRelationship {
+    Q_OBJECT
 public:
     Generalization();
     Generalization(Classifier* general, Classifier* specific);

@@ -15,7 +15,7 @@
 QUML_BEGIN_NAMESPACE_UK
 
 class Enumeration : public DataType {
-    friend struct EnumerationGraphics;
+    Q_OBJECT
 public:
     Enumeration();
     Enumeration(QString name, Package* p = 0);
