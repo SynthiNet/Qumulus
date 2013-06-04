@@ -34,6 +34,8 @@ public:
 
     QString qualifiedName() const override { return name(); }
 
+    int index() const override { return -1; }
+
     QString sidebarIcon() const override { return ""; }
     QString sidebarText() const override { return ""; }
 

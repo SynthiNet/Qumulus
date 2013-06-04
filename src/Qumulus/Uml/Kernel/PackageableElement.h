@@ -26,6 +26,8 @@ public:
 
     Element* parent() const override;
 
+    int index() const override;
+
     QString qualifiedName() const;
 
     void setPackage(Package* p);

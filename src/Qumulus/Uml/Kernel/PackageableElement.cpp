@@ -24,6 +24,11 @@ Element* PackageableElement::parent() const {
     return package();
 }
 
+int PackageableElement::index() const {
+    return package()->packagedElements().indexOf(
+            const_cast<PackageableElement*>(this));
+}
+
 QString PackageableElement::qualifiedName() const {
     if(name() != "") {
         if(package()) {

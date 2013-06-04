@@ -27,6 +27,7 @@ public:
     Property(QString name, Class* c = 0);
 
     Element* parent() const override;
+    int index() const override;
 
     Class* getClass() const { return mClass; }
     void setClass(Class* c) { mClass = c; }

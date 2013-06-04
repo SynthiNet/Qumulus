@@ -23,6 +23,11 @@ Element* EnumerationLiteral::parent() const {
     return enumeration();
 }
 
+int EnumerationLiteral::index() const {
+    return enumeration()->literals().indexOf(
+            const_cast<EnumerationLiteral*>(this));
+}
+
 QString EnumerationLiteral::qualifiedName() const {
     if(!mEnumeration) return "";
     QString s = mEnumeration->qualifiedName();

@@ -42,20 +42,25 @@ Class::~Class() {
 //     mNestedClassifiers.removeAll(c);
 // }
 
+void Class::addAttribute(Property* p) {
+    mOwnedAttributes.append(p);
+
+    elementChanged();
+}
+
+void Class::removeAttribute(Property* p) {
+    if(mOwnedAttributes.contains(p)) {
+        mOwnedAttributes.removeAll(p);
+        elementChanged();
+    }
+}
+
 void Class::addOperation(Operation* c) {
     mOwnedOperations.append(c);
 }
 
 void Class::removeOperation(Operation* c) {
     mOwnedOperations.append(c);
-}
-
-void Class::addAttribute(Property* p) {
-    mOwnedAttributes.append(p);
-}
-
-void Class::removeAttribute(Property* p) {
-    mOwnedAttributes.removeAll(p);
 }
 
 void Class::writeXml(QXmlStreamWriter& writer) const {

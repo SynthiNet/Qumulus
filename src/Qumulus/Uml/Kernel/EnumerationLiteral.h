@@ -22,6 +22,7 @@ public:
     EnumerationLiteral(QString name, Enumeration* o = nullptr);
 
     Element* parent() const override;
+    int index() const override;
 
     Enumeration* enumeration() const { return mEnumeration; }
     void setEnumeration(Enumeration* e) { mEnumeration = e; }

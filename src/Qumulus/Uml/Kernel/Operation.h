@@ -25,6 +25,7 @@ public:
     Type* type() const;
 
     Element* parent() const override;
+    int index() const override;
 
     bool isQuery() const { return mQuery; }
     void setQuery(bool b) { mQuery = b; }

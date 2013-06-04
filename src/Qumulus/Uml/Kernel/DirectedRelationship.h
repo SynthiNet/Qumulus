@@ -22,6 +22,8 @@ public:
 
     }
 
+    int index() const override { return -1; }
+
     QString sidebarIcon() const override { return ""; }
     QString sidebarText() const override { return ""; }
 

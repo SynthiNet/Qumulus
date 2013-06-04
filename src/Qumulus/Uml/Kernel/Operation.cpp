@@ -43,6 +43,13 @@ Element* Operation::parent() const {
     return getClass();
 }
 
+int Operation::index() const {
+    int i = getClass()->operations().indexOf(
+            const_cast<Operation*>(this));
+    if(i == -1) return -1;
+    else return getClass()->attributes().size() + i;
+}
+
 QString Operation::qualifiedName() const {
     if(!mClass) return "";
     QString s = mClass->qualifiedName();

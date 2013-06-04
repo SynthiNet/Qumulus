@@ -18,6 +18,8 @@ public:
     Comment(const QString& body = "");
     ~Comment();
 
+    int index() const override { return -1; }
+
     const QString& body() const { return mBody; }
     void setBody(const QString& b) { mBody = b; }
 

@@ -46,14 +46,7 @@ public:
     /**
      * Gets the index relative to the parent, or -1 if there is no parent
      */
-    int index() const { return mIndex; }
-
-    /**
-     * Sets the index relative to the parent. 
-     *
-     * This is an internal function and should not be called from user code!
-     */
-    void setIndex(int index) { mIndex = index; }
+    virtual int index() const = 0;
 
     virtual bool isTopLevel() const { return false; };
 
@@ -101,7 +94,6 @@ public:
 private:
     static QHash<QString, Element*> mElementsById;
     QuLC::UniqueId mUniqueId;
-    int mIndex = -1;
 };
 
 QUML_END_NAMESPACE_UK

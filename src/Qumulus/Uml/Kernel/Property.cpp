@@ -25,6 +25,11 @@ Element* Property::parent() const {
     return getClass();
 }
 
+int Property::index() const {
+    return getClass()->attributes().indexOf(
+            const_cast<Property*>(this));
+}
+
 QString Property::qualifiedName() const {
     if(!mClass) return "";
     QString s = mClass->qualifiedName();

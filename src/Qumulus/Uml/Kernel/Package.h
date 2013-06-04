@@ -21,7 +21,7 @@ public:
     Package(QString name, Package* p = 0);
     ~Package();
 
-    const QSet<PackageableElement*> packagedElements() const {
+    const QList<PackageableElement*> packagedElements() const {
         return mPackagedElements;
     }
 
@@ -38,7 +38,7 @@ public:
 
     QUML_CLONABLE(Package)
 private:
-    QSet<PackageableElement*> mPackagedElements;
+    QList<PackageableElement*> mPackagedElements;
     bool mRootPackage = false;
 };
 
