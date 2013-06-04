@@ -13,6 +13,7 @@
 #include <Lib/Core/Nyi.h>
 #include <Lib/Core/Functional.h>
 #include <Lib/Core/UniqueId.h>
+#include <Lib/Core/Signal.h>
 
 #include <QtCore/QSet>
 #include <QtCore/QList>
@@ -86,6 +87,17 @@ public:
     virtual void writeXml(QXmlStreamWriter& writer) const = 0;
 
     QUML_CLONABLE_ABSTRACT(Element)
+public:
+
+    /**
+     * Emitted whenever the element changes.
+     */
+    QuLC::Signal<void()> elementChanged;
+
+    /**
+     * Emitted whenever the element or any of its children changes.
+     */
+    QuLC::Signal<void()> childElementChanged;
 private:
     static QHash<QString, Element*> mElementsById;
     QuLC::UniqueId mUniqueId;

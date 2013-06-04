@@ -14,6 +14,12 @@ QHash<QString, Element*> Element::mElementsById;
 
 Element::Element() {
     mElementsById.insert(uniqueId(), this);
+
+    elementChanged += [=] {
+        this->childElementChanged();
+        if(this->parent())
+            this->parent()->childElementChanged();
+    };
 }
 
 Element::Element(const Element&) {
