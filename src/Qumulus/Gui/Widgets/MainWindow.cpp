@@ -33,9 +33,9 @@
 
 QUML_BEGIN_NAMESPACE_GW
 
-MainWindow::MainWindow() : 
+MainWindow::MainWindow() :
         mDiagram(new QuGD::Diagram()),
-        mToolBar(new ToolBar(this)), 
+        mToolBar(new ToolBar(this)),
         mSideBar(new SideBar(this, mDiagram)),
         mSplitter(new QSplitter(this)),
         mStatusBar(new StatusBar(this)),
@@ -87,11 +87,14 @@ MainWindow::MainWindow() :
     mCancelAction = new QAction(this);
     mCancelAction->setShortcuts({QKeySequence(tr("Esc"))});
     addAction(mCancelAction);
-    connect(mCancelAction, &QAction::triggered, 
+    connect(mCancelAction, &QAction::triggered,
             [&]{setCursorState(CursorState::Normal);});
 
     connect(mStatusBar->slider(), &ZoomSlider::zoomChanged,
             mEditorView, &EditorView::zoom);
+
+    // Expand sidebar
+    mSideBar->expandAll();
 }
 
 MainWindow::~MainWindow() {
@@ -104,21 +107,21 @@ void MainWindow::populateToolbar() {
 
     // Class and submenu.
     mClassItem = new ToolBarItem(
-            ElementItem("Class", 
-                    QIcon(":/data/img/toolbar/class.png"), 
+            ElementItem("Class",
+                    QIcon(":/data/img/toolbar/class.png"),
                     QKeySequence(tr("C")),
                     [&]{setCursorState(CursorState::Class);}));
 
     mClassMenu = new ToolBarMenu();
     mClassMenu->addItem(
-            ElementItem("Enum", 
+            ElementItem("Enum",
                     QIcon(":/data/img/toolbar/enum.png"),
                     QKeySequence(tr("E")),
                     [&]{setCursorState(CursorState::Enum);}));
     mClassMenu->addItem(
-            ElementItem("Primitive Datatype", 
+            ElementItem("Primitive Datatype",
                     QIcon(":/data/img/toolbar/primitive.png"),
-                    QKeySequence(tr("D")), 
+                    QKeySequence(tr("D")),
                     [&]{setCursorState(CursorState::Primitive);}));
     mClassItem->setMenu(mClassMenu);
     mToolBar->addWidget(mClassItem);
@@ -126,14 +129,14 @@ void MainWindow::populateToolbar() {
 
     // Package and submenu.
     mPackageItem = new ToolBarItem(
-            ElementItem("Package", 
-                    QIcon(":/data/img/toolbar/package.png"), 
+            ElementItem("Package",
+                    QIcon(":/data/img/toolbar/package.png"),
                     QKeySequence(tr("P")),
                     [&]{setCursorState(CursorState::Package);}));
 
     mPackageMenu = new ToolBarMenu();
     mPackageMenu->addItem(
-            ElementItem("Comment", 
+            ElementItem("Comment",
                     QIcon(":/data/img/toolbar/comment.png"),
                     QKeySequence(tr("H")),
                     [&]{setCursorState(CursorState::Comment);}));
@@ -146,8 +149,8 @@ void MainWindow::populateToolbar() {
 
     // Inheritance and submenu.
     mInheritanceItem = new ToolBarItem(
-            ElementItem("Inheritance", 
-                    QIcon(":/data/img/toolbar/inheritance.png"), 
+            ElementItem("Inheritance",
+                    QIcon(":/data/img/toolbar/inheritance.png"),
                     QKeySequence(tr("I")),
                     [&]{setCursorState(CursorState::Inheritance);}));
     mToolBar->addWidget(mInheritanceItem);
@@ -155,14 +158,14 @@ void MainWindow::populateToolbar() {
 
     // Aggregation and submenu.
     mAggregationItem = new ToolBarItem(
-            ElementItem("Aggregation", 
-                    QIcon(":/data/img/toolbar/aggregation.png"), 
+            ElementItem("Aggregation",
+                    QIcon(":/data/img/toolbar/aggregation.png"),
                     QKeySequence(tr("G")),
                     [&]{setCursorState(CursorState::Aggregation);}));
 
     mAggregationMenu = new ToolBarMenu();
     mAggregationMenu->addItem(
-            ElementItem("Containment", 
+            ElementItem("Containment",
                     QIcon(":/data/img/toolbar/containment.png"),
                     QKeySequence(tr("N")),
                     [&]{setCursorState(CursorState::Containment);}));
@@ -172,14 +175,14 @@ void MainWindow::populateToolbar() {
 
     // Relationship and submenu.
     mRelationshipItem = new ToolBarItem(
-            ElementItem("Package Membership", 
-                    QIcon(":/data/img/toolbar/package-membership.png"), 
+            ElementItem("Package Membership",
+                    QIcon(":/data/img/toolbar/package-membership.png"),
                     QKeySequence(tr("M")),
                     [&]{setCursorState(CursorState::PackageMembership);}));
 
     mRelationshipMenu = new ToolBarMenu();
     mRelationshipMenu->addItem(
-            ElementItem("Association", 
+            ElementItem("Association",
                     QIcon(":/data/img/toolbar/association.png"),
                     QKeySequence(tr("R")),
                     [&]{setCursorState(CursorState::Association);}));
@@ -203,7 +206,7 @@ void MainWindow::createMenus() {
 
     mCloseAction = new QAction(tr("Close"), this);
     mCloseAction->setShortcuts(QKeySequence::Close);
-    
+
     mPrintAction = new QAction(tr("&Print..."), this);
     mPrintAction->setShortcuts(QKeySequence::Print);
     connect(mPrintAction, &QAction::triggered, [&]{
@@ -213,7 +216,7 @@ void MainWindow::createMenus() {
                 painter.setRenderHint(QPainter::Antialiasing);
                 mEditorView->scene()->render(&painter);
             }});
-    
+
     mExportAction = new QAction(tr("&Export..."), this);
     connect(mExportAction, &QAction::triggered, [&]{
             QString fName = QFileDialog::getSaveFileName(
@@ -225,15 +228,15 @@ void MainWindow::createMenus() {
                     "PDF file (*.pdf)"));
             if(fName.isNull()) return; // No filename chosen.
             mEditorView->scene()->clearSelection();
-            if(!fName.contains(QRegExp(R"(\.(png|bmp|jpg|svg|pdf)$)", 
+            if(!fName.contains(QRegExp(R"(\.(png|bmp|jpg|svg|pdf)$)",
                     Qt::CaseInsensitive))) {
                 // Assume PNG
                 fName += ".png";
             }
-            
+
             QFile outFile(fName);
             if(!outFile.open(QIODevice::WriteOnly)) {
-                MessageBox::warning(this, tr("Could not save file"), 
+                MessageBox::warning(this, tr("Could not save file"),
                         tr("Unable to export to file %1").arg(fName));
                 return;
             }
@@ -256,7 +259,7 @@ void MainWindow::createMenus() {
                 pdf.setPageSizeMM(mEditorView->scene()->sceneRect().size() * 2.835);
                 QPainter painter(&pdf);
                 mEditorView->scene()->render(&painter);
-                painter.end();            
+                painter.end();
             } else {
                 QImage img(mEditorView->scene()->sceneRect().width(),
                     mEditorView->scene()->sceneRect().height(),
@@ -265,14 +268,14 @@ void MainWindow::createMenus() {
                 mEditorView->scene()->render(&painter);
                 painter.end();
                 if(!img.save(&outFile)) {
-                    MessageBox::warning(this, tr("Could not save file"), 
+                    MessageBox::warning(this, tr("Could not save file"),
                             tr("Unable to export to file %1").arg(fName));
                 }
             }});
 
     mPrefsAction = new QAction(tr("Settings"), this);
     mPrefsAction->setShortcuts(QKeySequence::Preferences);
-    
+
     mQuitAction = new QAction(tr("&Quit"), this);
     mQuitAction->setShortcuts(QKeySequence::Quit);
     connect(mQuitAction, &QAction::triggered, &QApplication::exit);
@@ -286,24 +289,24 @@ void MainWindow::createMenus() {
     mFileMenu->addAction(mPrintAction);
     mFileMenu->addSeparator();
     mFileMenu->addAction(mPrefsAction);
-    mFileMenu->addAction(mQuitAction);    
-    
+    mFileMenu->addAction(mQuitAction);
+
     // Edit Menu
-    mUndoAction = mUndoStack->createUndoAction(this); 
+    mUndoAction = mUndoStack->createUndoAction(this);
     mUndoAction->setShortcuts(QKeySequence::Undo);
-    
+
     mRedoAction = mUndoStack->createRedoAction(this);
     mRedoAction->setShortcuts(QKeySequence::Redo);
-    
+
     mCutAction = new QAction(tr("&Cut"), this);
     mCutAction->setShortcuts(QKeySequence::Cut);
-    
+
     mCopyAction = new QAction(tr("C&opy"), this);
     mCopyAction->setShortcuts(QKeySequence::Copy);
-    
+
     mPasteAction = new QAction(tr("&Paste"), this);
     mPasteAction->setShortcuts(QKeySequence::Paste);
-    
+
     mDeleteAction = new QAction(tr("&Delete"), this);
     mDeleteAction->setShortcuts({QKeySequence(Qt::Key_Backspace),
             QKeySequence(Qt::Key_Delete)});
@@ -357,7 +360,7 @@ void MainWindow::createMenus() {
     mFullScreenAction = new QAction(tr("Toggle &Full Screen"), this);
     mFullScreenAction->setShortcuts(QKeySequence::FullScreen);
     addAction(mFullScreenAction);
-    connect(mFullScreenAction, &QAction::triggered, 
+    connect(mFullScreenAction, &QAction::triggered,
             [&]{if(this->isFullScreen())
                 this->showNormal();
             else
@@ -378,8 +381,8 @@ void MainWindow::createMenus() {
     mAboutAction = new QAction(tr("&About Qumulus"), this);
     connect(mAboutAction, &QAction::triggered, [&]{
             this->setWindowIcon(QIcon(":/logo/qumulus-256.png"));
-            QMessageBox::about(this, 
-                "About Qumulus", 
+            QMessageBox::about(this,
+                "About Qumulus",
                 "Qumulus\n"
                 "Version 0.1\n\n"
                 "Authors: Frank Erens & Randy Thiemann");
@@ -433,27 +436,27 @@ void MainWindow::setCursorState(CursorState c) {
 }
 
 void MainWindow::createCursors() {
-    mCursors["aggregation"] = 
+    mCursors["aggregation"] =
         QCursor(QPixmap(":/data/img/cursor/aggregation.png"), -1, -1);
-    mCursors["class"] = 
+    mCursors["class"] =
         QCursor(QPixmap(":/data/img/cursor/class.png"), -1, -1);
-    mCursors["comment"] = 
+    mCursors["comment"] =
         QCursor(QPixmap(":/data/img/cursor/comment.png"), -1, -1);
-    mCursors["containment"] = 
+    mCursors["containment"] =
         QCursor(QPixmap(":/data/img/cursor/containment.png"), -1, -1);
-    mCursors["enum"] = 
+    mCursors["enum"] =
         QCursor(QPixmap(":/data/img/cursor/enum.png"), -1, -1);
-    mCursors["inheritance"] = 
+    mCursors["inheritance"] =
         QCursor(QPixmap(":/data/img/cursor/inheritance.png"), -1, -1);
-    mCursors["interface"] = 
+    mCursors["interface"] =
         QCursor(QPixmap(":/data/img/cursor/interface.png"), -1, -1);
-    mCursors["package-membership"] = 
+    mCursors["package-membership"] =
         QCursor(QPixmap(":/data/img/cursor/package-membership.png"), -1, -1);
-    mCursors["package"] = 
+    mCursors["package"] =
         QCursor(QPixmap(":/data/img/cursor/package.png"), -1, -1);
-    mCursors["primitive"] = 
+    mCursors["primitive"] =
         QCursor(QPixmap(":/data/img/cursor/primitive.png"), -1, -1);
-    mCursors["association"] = 
+    mCursors["association"] =
         QCursor(QPixmap(":/data/img/cursor/association.png"), -1, -1);
 }
 

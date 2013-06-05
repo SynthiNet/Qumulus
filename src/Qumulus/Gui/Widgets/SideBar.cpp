@@ -21,6 +21,7 @@ SideBar::SideBar(MainWindow* parent, QuGD::Diagram* d) :
 #ifdef Q_OS_MAC
     setStyleType(StyleType::Active);
     setAttribute(Qt::WA_MacShowFocusRect, false);
+    setAnimated(true);
 #endif
     setMinimumWidth(100);
     QSizePolicy sideBarSizePolicy = sizePolicy();
