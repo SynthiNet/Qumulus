@@ -14,18 +14,47 @@
 
 QUML_BEGIN_NAMESPACE_GD
 
+static void grow(QRectF& r, int i) {
+    r.adjust(-i, -i, i, i);
+}
+
 Edge::Edge(QuUK::Element* e, DiagramElement* p) :
         DiagramElement(e, p),
         QGraphicsItemGroup(dynamic_cast<Shape*>(p)) {
     setVisible(false);
     setZValue(-9001);
+    setFlag(QGraphicsItem::ItemIsSelectable);
+    setFlag(QGraphicsItem::ItemSendsGeometryChanges);
 }
 
 Edge::Edge(const Edge& e) :
         DiagramElement(e) {}
 
 QRectF Edge::boundingRect() const {
-    return QRectF(-1000, -1000, 2000, 2000);
+    return shape().boundingRect();
+}
+
+QPainterPath Edge::shape() const {
+    QPainterPath p;
+
+    auto route = mConnectionReference->displayRoute();
+    std::vector<QRectF> v;
+    for(size_t i = 0; i < route.size() - 1; ++i) {
+        QPointF p1(route.at(i).x, route.at(i).y);
+        QPointF p2(route.at(i+1).x, route.at(i+1).y);
+        QRectF r(p1, p2);
+        grow(r, 10);
+        v.push_back(r);
+    }
+
+    QPolygonF poly;
+    for(auto r : v) {
+        poly = poly.united(r);
+    }
+
+    p.addPolygon(poly);
+    p.closeSubpath();
+    return p;
 }
 
 void Edge::paint(QPainter* p, const QStyleOptionGraphicsItem*, QWidget*) {
