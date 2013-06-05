@@ -31,6 +31,7 @@
 #include <Gui/Diagram/EnumShape.h>
 #include <Gui/Diagram/PrimitiveShape.h>
 #include <Gui/Diagram/AssociationEdge.h>
+#include <Gui/Diagram/GeneralizationEdge.h>
 
 #include <Gui/Widgets/Popover.h>
 
@@ -141,7 +142,6 @@ EditorView::EditorView(MainWindow* parent, QuGD::Diagram* d) :
     cshape->setVisible(true);
     cshape->setPos(-200, 200);
 
-    // mDiagram->saveToXml("test.uml");
 }
 
 EditorView::~EditorView() noexcept {
@@ -241,8 +241,25 @@ void EditorView::mouseReleaseEvent(QMouseEvent* e) {
     case CursorState::Normal:
         QGraphicsView::mouseReleaseEvent(e);
         break;
-    case CursorState::Aggregation:
-        break;
+    case CursorState::Aggregation: {
+        auto selected = mScene->itemAt(mapToScene(e->pos()), QTransform());
+        QuGD::Shape* shape = dynamic_cast<QuGD::Shape*>(selected);
+        if(!mSource && shape && shape->acceptsAssociationSource()) {
+            mSource = shape;
+            return;
+        } else if(mSource && shape && shape->acceptsAssociationTarget()) {
+            auto assoc = new QuUK::Association(
+                    dynamic_cast<QuUK::Classifier*>(mSource->modelElement()), 
+                    dynamic_cast<QuUK::Classifier*>(shape->modelElement()));
+            assoc->setAggregation(QuUK::AggregationKind::Shared);
+            auto ashape = mDiagram->createEdge(assoc, mSource, shape);
+            ashape->setVisible(true);
+            mSource = nullptr;
+            break;
+        } else {
+            break;
+        }
+    }
     case CursorState::Class: {
         QString name = "Class" + QString::number(mDiagram->nextCounter());
         auto classElement = new QuUK::Class(name);
@@ -261,8 +278,25 @@ void EditorView::mouseReleaseEvent(QMouseEvent* e) {
         commentShape->setVisible(true);
         break;
     }
-    case CursorState::Containment:
-        break;
+    case CursorState::Composition: {
+        auto selected = mScene->itemAt(mapToScene(e->pos()), QTransform());
+        QuGD::Shape* shape = dynamic_cast<QuGD::Shape*>(selected);
+        if(!mSource && shape && shape->acceptsAssociationSource()) {
+            mSource = shape;
+            return;
+        } else if(mSource && shape && shape->acceptsAssociationTarget()) {
+            auto assoc = new QuUK::Association(
+                    dynamic_cast<QuUK::Classifier*>(mSource->modelElement()), 
+                    dynamic_cast<QuUK::Classifier*>(shape->modelElement()));
+            assoc->setAggregation(QuUK::AggregationKind::Composite);
+            auto ashape = mDiagram->createEdge(assoc, mSource, shape);
+            ashape->setVisible(true);
+            mSource = nullptr;
+            break;
+        } else {
+            break;
+        }
+    }
     case CursorState::Enum: {
         QString name = "Enumeration" + QString::number(mDiagram->nextCounter());
         auto enumElement = new QuUK::Enumeration(name);
@@ -272,8 +306,24 @@ void EditorView::mouseReleaseEvent(QMouseEvent* e) {
         enumShape->setVisible(true);
         break;
     }
-    case CursorState::Inheritance:
-        break;
+    case CursorState::Inheritance: {
+        auto selected = mScene->itemAt(mapToScene(e->pos()), QTransform());
+        QuGD::Shape* shape = dynamic_cast<QuGD::Shape*>(selected);
+        if(!mSource && shape && shape->acceptsGeneralizationSource()) {
+            mSource = shape;
+            return;
+        } else if(mSource && shape && shape->acceptsGeneralizationTarget()) {
+            auto gen = new QuUK::Generalization(
+                    dynamic_cast<QuUK::Classifier*>(mSource->modelElement()), 
+                    dynamic_cast<QuUK::Classifier*>(shape->modelElement()));
+            auto gshape = mDiagram->createEdge(gen, mSource, shape);
+            gshape->setVisible(true);
+            mSource = nullptr;
+            break;
+        } else {
+            break;
+        }
+    }
     case CursorState::Interface:
         break;
     case CursorState::PackageMembership:

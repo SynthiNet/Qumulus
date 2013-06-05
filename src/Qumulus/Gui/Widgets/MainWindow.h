@@ -33,7 +33,7 @@ enum CursorState {
     Aggregation, 
     Class,
     Comment,
-    Containment,
+    Composition,
     Enum,
     Inheritance,
     Interface,
@@ -99,6 +99,8 @@ private:
     // File Menu
     QAction* mNewAction;
     QAction* mOpenAction;
+    QAction* mSaveAction;
+    QAction* mSaveAsAction;
     QAction* mCloseAction;
     QAction* mPrintAction;
     QAction* mExportAction;
