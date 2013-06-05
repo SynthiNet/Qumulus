@@ -16,13 +16,15 @@ QUML_BEGIN_NAMESPACE_UK
 class DirectedRelationship : public Element {
 public:
     DirectedRelationship() = default;
-    DirectedRelationship(Element* source, Element* target) : 
+    DirectedRelationship(Element* source, Element* target) :
             mSource(source),
             mTarget(target) {
 
     }
 
     int index() const override { return -1; }
+    size_t size() const override { return 0; }
+    Element* operator[](size_t) const override { return nullptr; }
 
     QString sidebarIcon() const override { return ""; }
     QString sidebarText() const override { return ""; }

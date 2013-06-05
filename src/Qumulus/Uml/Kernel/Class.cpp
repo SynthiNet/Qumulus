@@ -42,6 +42,18 @@ Class::~Class() {
 //     mNestedClassifiers.removeAll(c);
 // }
 
+size_t Class::size() const {
+    return mOwnedAttributes.size() + mOwnedOperations.size();
+}
+
+Element* Class::operator[](size_t idx) const {
+    if(idx >= (size_t)mOwnedAttributes.size()) {
+        return mOwnedOperations[idx - mOwnedAttributes.size()];
+    } else {
+        return mOwnedAttributes[idx];
+    }
+}
+
 void Class::addAttribute(Property* p) {
     mOwnedAttributes.append(p);
 

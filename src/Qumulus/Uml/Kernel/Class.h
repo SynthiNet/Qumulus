@@ -22,7 +22,7 @@ public:
     Class();
     Class(QString name, Package* p = nullptr);
     ~Class();
-    
+
     // TODO: nested classifiers
     // const QList<Classifier*>& nestedClassifiers() const {
     //     return mNestedClassifiers;
@@ -30,6 +30,9 @@ public:
 
     // void addNestedClassifier(Classifier* c);
     // void removeNestedClassifier(Classifier* c);
+
+    size_t size() const override;
+    Element* operator[](size_t idx) const override;
 
     const QList<Operation*>& operations() const {
         return mOwnedOperations;

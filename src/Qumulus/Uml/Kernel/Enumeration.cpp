@@ -25,6 +25,14 @@ Enumeration::Enumeration(QString name, Package* p) :
 
 }
 
+size_t Enumeration::size() const {
+    return mOwnedLiterals.size();
+}
+
+Element* Enumeration::operator[](size_t idx) const {
+    return mOwnedLiterals[idx];
+}
+
 void Enumeration::addLiteral(EnumerationLiteral* l) {
     mOwnedLiterals.append(l);
 
