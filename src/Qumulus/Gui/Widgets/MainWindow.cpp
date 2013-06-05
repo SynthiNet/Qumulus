@@ -158,17 +158,17 @@ void MainWindow::populateToolbar() {
 
     // Aggregation and submenu.
     mAggregationItem = new ToolBarItem(
-            ElementItem("Aggregation",
-                    QIcon(":/data/img/toolbar/aggregation.png"),
-                    QKeySequence(tr("G")),
-                    [&]{setCursorState(CursorState::Aggregation);}));
+            ElementItem("Composition", 
+                    QIcon(":/data/img/toolbar/containment.png"),
+                    QKeySequence(tr("N")),
+                    [&]{setCursorState(CursorState::Composition);}));
 
     mAggregationMenu = new ToolBarMenu();
     mAggregationMenu->addItem(
-            ElementItem("Containment",
-                    QIcon(":/data/img/toolbar/containment.png"),
-                    QKeySequence(tr("N")),
-                    [&]{setCursorState(CursorState::Containment);}));
+            ElementItem("Aggregation", 
+                    QIcon(":/data/img/toolbar/aggregation.png"), 
+                    QKeySequence(tr("G")),
+                    [&]{setCursorState(CursorState::Aggregation);}));
     mAggregationItem->setMenu(mAggregationMenu);
     mToolBar->addWidget(mAggregationItem);
 
@@ -203,6 +203,33 @@ void MainWindow::createMenus() {
 
     mOpenAction = new QAction(tr("&Open..."), this);
     mOpenAction->setShortcuts(QKeySequence::Open);
+
+    mSaveAction = new QAction(tr("&Save..."), this);
+    mSaveAction->setShortcuts(QKeySequence::Save);
+    connect(mSaveAction, &QAction::triggered, [&]{
+            // TODO: Check for existing filename.
+            QString fName = QFileDialog::getSaveFileName(
+                this, tr("Save Diagram"), "",
+                tr("UML Diagram (*.uml)"));
+            if(fName.isNull()) return; // No filename chosen.
+            if(!fName.contains(QRegExp(R"(\.(uml)$)", 
+                    Qt::CaseInsensitive))) {
+                fName += ".uml";
+            }
+            mDiagram->saveToXml(fName);});
+
+    mSaveAsAction = new QAction(tr("Save &As..."), this);
+    mSaveAsAction->setShortcuts(QKeySequence::SaveAs);
+    connect(mSaveAsAction, &QAction::triggered, [&]{
+            QString fName = QFileDialog::getSaveFileName(
+                this, tr("Save Diagram"), "",
+                tr("UML Diagram (*.uml)"));
+            if(fName.isNull()) return; // No filename chosen.
+            if(!fName.contains(QRegExp(R"(\.(uml)$)", 
+                    Qt::CaseInsensitive))) {
+                fName += ".uml";
+            }
+            mDiagram->saveToXml(fName);});
 
     mCloseAction = new QAction(tr("Close"), this);
     mCloseAction->setShortcuts(QKeySequence::Close);
@@ -283,6 +310,8 @@ void MainWindow::createMenus() {
     mFileMenu->addAction(mNewAction);
     mFileMenu->addSeparator();
     mFileMenu->addAction(mOpenAction);
+    mFileMenu->addAction(mSaveAction);
+    mFileMenu->addAction(mSaveAsAction);
     mFileMenu->addSeparator();
     mFileMenu->addAction(mCloseAction);
     mFileMenu->addAction(mExportAction);
@@ -408,7 +437,7 @@ void MainWindow::setCursorState(CursorState c) {
     case Comment:
         setCursor(mCursors["comment"]);
         break;
-    case Containment:
+    case Composition:
         setCursor(mCursors["containment"]);
         break;
     case Enum:

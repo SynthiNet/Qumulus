@@ -15,6 +15,7 @@
 #include "ClassShape.h"
 #include "EnumShape.h"
 #include "AssociationEdge.h"
+#include "GeneralizationEdge.h"
 
 #include <Lib/Core/Nyi.h>
 
@@ -24,6 +25,7 @@
 #include <Uml/Kernel/Class.h>
 #include <Uml/Kernel/Enumeration.h>
 #include <Uml/Kernel/Association.h>
+#include <Uml/Kernel/Generalization.h>
 
 #include <Gui/Widgets/EditorView.h>
 
@@ -128,6 +130,17 @@ EnumShape* Diagram::createShape(QuUK::Enumeration* e) {
     eshape->passRouter(mRouter);
     e->setPackage(mRootPackage);
     return eshape;
+}
+
+GeneralizationEdge* Diagram::createEdge(QuUK::Generalization* a, Shape* src,
+        Shape* dst) {
+    auto gedge = new GeneralizationEdge(a, this);
+    addElement(gedge);
+    gedge->passRouter(mRouter);
+    gedge->setSource(src);
+    gedge->setTarget(dst);
+    gedge->connect();
+    return gedge;
 }
 
 AssociationEdge* Diagram::createEdge(QuUK::Association* a, Shape* src,

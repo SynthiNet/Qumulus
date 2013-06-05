@@ -27,6 +27,7 @@ class Class;
 class PrimitiveType;
 class Enumeration;
 class Association;
+class Generalization;
 
 QUML_END_NAMESPACE_UK
 
@@ -46,6 +47,7 @@ class EnumShape;
 class Shape;
 
 class AssociationEdge;
+class GeneralizationEdge;
 
 class Diagram : public DiagramElement {
 public:
@@ -60,6 +62,7 @@ public:
     EnumShape* createShape(QuUK::Enumeration*);
 
     AssociationEdge* createEdge(QuUK::Association*, Shape*, Shape*);
+    GeneralizationEdge* createEdge(QuUK::Generalization*, Shape*, Shape*);
 
     void addElement(DiagramElement* e);
     void removeElement(DiagramElement* e);

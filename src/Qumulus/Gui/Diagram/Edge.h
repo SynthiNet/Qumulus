@@ -21,6 +21,13 @@ namespace Avoid {
 
 QUML_BEGIN_NAMESPACE_GD
 
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right
+};
+
 class Edge : public DiagramElement, public QGraphicsItemGroup {
 public:
     Edge(QuUK::Element* e = 0, DiagramElement* p = 0);
@@ -31,6 +38,9 @@ public:
 
     Shape* target() const { return mTarget; }
     void setTarget(Shape* e);
+
+    Direction targetEntry() { return mTargetEntry; }
+    Direction sourceExit() { return mSourceExit; }
 
     void resize(double, double) {}
 
@@ -46,6 +56,8 @@ public:
 private:
     Shape* mSource;
     Shape* mTarget;
+    Direction mTargetEntry;
+    Direction mSourceExit;
     Avoid::ConnEnd* mSrc = nullptr;
     Avoid::ConnEnd* mEnd = nullptr;
     Avoid::ConnRef* mConnectionReference = nullptr;

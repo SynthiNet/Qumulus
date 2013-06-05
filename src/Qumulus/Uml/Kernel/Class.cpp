@@ -84,8 +84,8 @@ void Class::writeXml(QXmlStreamWriter& writer) const {
     writer.writeStartElement("Class");
     writer.writeAttribute("id", uniqueId());
     writer.writeAttribute("name", name());
-    writer.writeAttribute("abstract", QString::number(abstract()));
-    writer.writeAttribute("final", QString::number(final()));
+    writer.writeAttribute("abstract", abstract() ? "true" : "false");
+    writer.writeAttribute("final", final() ? "true" : "false");
 
     for(auto& g : generalizations()) {
         g->writeXml(writer);
