@@ -34,6 +34,7 @@ public:
 
     void resize(double, double) {}
 
+    QPainterPath shape() const override;
     QRectF boundingRect() const override;
     void paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget*) override;
     void updateSizeConstraints();
