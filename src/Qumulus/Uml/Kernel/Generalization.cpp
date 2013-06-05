@@ -16,6 +16,7 @@ Generalization::Generalization() {}
 
 Generalization::Generalization(Classifier* general, Classifier* specific) :
         DirectedRelationship(general, specific) {
+    specific->addGeneralization(this);
 
 }
 

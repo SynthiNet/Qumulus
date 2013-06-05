@@ -28,6 +28,7 @@ public:
             QWidget* widget) override;
 
     virtual bool acceptsAssociationTarget() override { return true; }
+    virtual bool acceptsGeneralizationTarget() override { return true; }
 
     void writeXml(QXmlStreamWriter& writer) const override;
 

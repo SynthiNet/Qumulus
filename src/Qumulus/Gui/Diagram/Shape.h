@@ -50,6 +50,8 @@ public:
 
     virtual bool acceptsAssociationSource() { return false; }
     virtual bool acceptsAssociationTarget() { return false; }
+    virtual bool acceptsGeneralizationSource() { return false; }
+    virtual bool acceptsGeneralizationTarget() { return false; }
 
     Avoid::ShapeRef* shapeRef() { return mShapeRef; }
 
