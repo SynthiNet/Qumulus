@@ -17,21 +17,24 @@ QUML_BEGIN_NAMESPACE_UK
 
 class Operation;
 
-class Parameter : 
-        public virtual MultiplicityElement, 
+class Parameter :
+        public virtual MultiplicityElement,
         public virtual TypedElement {
 public:
     Parameter(QString name, Operation* o = 0);
 
     const QString& defaultValue() const { return mDefaultValue; }
-    void setDefaultValue(const QString& s) { 
-        mDefaultValue = s; 
+    void setDefaultValue(const QString& s) {
+        mDefaultValue = s;
         elementChanged();
     }
 
+    size_t size() const override { return 0; }
+    Element* operator[](size_t) const override { return nullptr; }
+
     ParameterDirectionKind direction() const { return mDirection; }
-    void setDirection(ParameterDirectionKind d) { 
-        mDirection = d; 
+    void setDirection(ParameterDirectionKind d) {
+        mDirection = d;
         elementChanged();
     }
 

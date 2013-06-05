@@ -35,7 +35,7 @@ public:
     Element(const Element& other);
 
     virtual ~Element();
-    
+
     /**
      * Returns the parent element, or @c nullptr if there is no parent.
      *
@@ -48,6 +48,24 @@ public:
      */
     virtual int index() const = 0;
 
+    /**
+     * Returns the amount of children this Element has
+     *
+     * @return The amount of children of this element.
+     */
+    virtual size_t size() const = 0;
+
+    /**
+     * Returns the child at the given index.
+     *
+     * @return The child at the given index.
+     */
+
+    virtual Element* operator[](size_t idx) const = 0;
+
+    /**
+     * Returns whether this element is top-level (and therefore has no parent).
+     */
     virtual bool isTopLevel() const { return false; };
 
     /**

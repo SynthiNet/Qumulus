@@ -25,6 +25,9 @@ public:
         return mPackagedElements;
     }
 
+    size_t size() const override;
+    Element* operator[](size_t idx) const override;
+
     void addPackagedElement(PackageableElement* e);
     void removePackagedElement(PackageableElement* e);
 

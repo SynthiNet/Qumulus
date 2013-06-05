@@ -29,6 +29,9 @@ public:
     Element* parent() const override;
     int index() const override;
 
+    size_t size() const override { return 0; }
+    Element* operator[](size_t) const override { return nullptr; }
+
     Class* getClass() const { return mClass; }
     void setClass(Class* c) { mClass = c; elementChanged(); }
 
@@ -40,7 +43,7 @@ public:
 
     QString qualifiedName() const override;
 
-    QString sidebarIcon() const override { return "property"; }
+    QString sidebarIcon() const override { return "attribute"; }
     QString sidebarText() const override { return toString(); }
 
     void writeXml(QXmlStreamWriter& writer) const override;

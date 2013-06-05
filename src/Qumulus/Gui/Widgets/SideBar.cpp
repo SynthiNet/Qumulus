@@ -1,5 +1,6 @@
 /*
  * Qumulus UML editor
+ * Author: Frank Erens
  * Author: Randy Thiemann
  *
  */
@@ -7,21 +8,33 @@
 #include "SideBar.h"
 #include <Gui/Widgets/MainWindow.h>
 
+#include <QtWidgets/QHeaderView>
+
+#include <iostream>
+
 QUML_BEGIN_NAMESPACE_GW
 
-SideBar::SideBar(MainWindow* parent, QuGD::Diagram* d) : 
+SideBar::SideBar(MainWindow* parent, QuGD::Diagram* d) :
         QTreeView(parent),
-        mDiagram(d) {
+        mDiagram(d),
+        mModel(new QuGC::SideBarModel(mDiagram)){
 #ifdef Q_OS_MAC
     setStyleType(StyleType::Active);
     setAttribute(Qt::WA_MacShowFocusRect, false);
+    setAnimated(true);
 #endif
     setMinimumWidth(100);
     QSizePolicy sideBarSizePolicy = sizePolicy();
     sideBarSizePolicy.setHorizontalPolicy(QSizePolicy::Minimum);
     setSizePolicy(sideBarSizePolicy);
+    setModel(mModel);
+    header()->close();
 }
-    
+
+SideBar::~SideBar() {
+    delete mModel;
+}
+
 MainWindow* SideBar::window() {
     return static_cast<MainWindow*>(parent());
 }
@@ -42,6 +55,7 @@ void SideBar::setStyleType(StyleType s) {
                     "stop: 1 rgb(33, 108, 183));"
             "border-top: 1px solid silver;"
             "border-bottom: 1px solid silver;"
+            "font-size: 11pt;"
         );
         break;
     case StyleType::Inactive:
@@ -57,9 +71,11 @@ void SideBar::setStyleType(StyleType s) {
                     "stop: 1 rgb(33, 108, 183));"
             "border-top: 1px solid silver;"
             "border-bottom: 1px solid silver;"
+            "font-size: 11pt;"
         );
         break;
     }
+
 }
 #endif
 

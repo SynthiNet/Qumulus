@@ -26,6 +26,14 @@ Package::~Package() {
     }
 }
 
+size_t Package::size() const {
+    return mPackagedElements.size();
+}
+
+Element* Package::operator[](size_t idx) const {
+    return mPackagedElements[idx];
+}
+
 void Package::addPackagedElement(PackageableElement* e) {
     if(mPackagedElements.contains(e)) return;
     mPackagedElements.append(e);

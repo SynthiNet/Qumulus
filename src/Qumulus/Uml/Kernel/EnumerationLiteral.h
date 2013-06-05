@@ -24,6 +24,9 @@ public:
     Element* parent() const override;
     int index() const override;
 
+    size_t size() const override { return 0; }
+    Element* operator[](size_t) const override { return nullptr; }
+
     Enumeration* enumeration() const { return mEnumeration; }
     void setEnumeration(Enumeration* e) { mEnumeration = e; }
 

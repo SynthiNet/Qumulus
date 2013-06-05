@@ -18,6 +18,9 @@ public:
     PrimitiveType();
     PrimitiveType(QString name, Package* p = 0) : DataType(name, p) {}
 
+    size_t size() const override { return 0; }
+    Element* operator[](size_t) const override { return nullptr; }
+
     QString sidebarIcon() const override { return "primitive"; }
 
     void writeXml(QXmlStreamWriter& writer) const override;

@@ -20,6 +20,9 @@ public:
 
     int index() const override { return -1; }
 
+    size_t size() const override { return 0; }
+    Element* operator[](size_t) const override { return nullptr; }
+
     const QString& body() const { return mBody; }
     void setBody(const QString& b) { mBody = b; elementChanged(); }
 

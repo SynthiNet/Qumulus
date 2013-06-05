@@ -27,6 +27,9 @@ public:
     Element* parent() const override;
     int index() const override;
 
+    size_t size() const override { return 0; }
+    Element* operator[](size_t) const override { return nullptr; }
+
     bool isQuery() const { return mQuery; }
     void setQuery(bool b) { mQuery = b; elementChanged(); }
 
