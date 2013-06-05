@@ -14,7 +14,7 @@
 
 QUML_BEGIN_NAMESPACE_GW
 
-SideBar::SideBar(MainWindow* parent, QuGD::Diagram* d) : 
+SideBar::SideBar(MainWindow* parent, QuGD::Diagram* d) :
         QTreeView(parent),
         mDiagram(d),
         mModel(new QuGC::SideBarModel(mDiagram)){
@@ -29,7 +29,7 @@ SideBar::SideBar(MainWindow* parent, QuGD::Diagram* d) :
     setModel(mModel);
     header()->close();
 }
-    
+
 SideBar::~SideBar() {
     delete mModel;
 }
@@ -54,6 +54,7 @@ void SideBar::setStyleType(StyleType s) {
                     "stop: 1 rgb(33, 108, 183));"
             "border-top: 1px solid silver;"
             "border-bottom: 1px solid silver;"
+            "font-size: 11pt;"
         );
         break;
     case StyleType::Inactive:
@@ -69,9 +70,11 @@ void SideBar::setStyleType(StyleType s) {
                     "stop: 1 rgb(33, 108, 183));"
             "border-top: 1px solid silver;"
             "border-bottom: 1px solid silver;"
+            "font-size: 11pt;"
         );
         break;
     }
+
 }
 #endif
 
