@@ -14,6 +14,7 @@
 
 #include <Gui/Widgets/internal_base.h>
 #include <Lib/Core/Exception.h>
+#include <Lib/Core/Signal.h>
 #include <libavoid/router.h>
 
 class QGraphicsScene;
@@ -62,7 +63,7 @@ public:
 
     void addElement(DiagramElement* e);
     void removeElement(DiagramElement* e);
-    
+
     QuUK::Package* rootPackage() const { return mRootPackage; }
     const QList<QuUK::Comment*>& comments() const { return mComments; }
 
@@ -78,12 +79,14 @@ public:
     void writeXml(QXmlStreamWriter&) const override {}
 
     QUML_CLONABLE(Diagram);
+public:
+    QuLC::Signal<void()> diagramChanged;
 private:
     QList<DiagramElement*> mElements;
     QGraphicsScene* mScene = nullptr;
     unsigned mCounter = 1;
     QuUK::Package* mRootPackage;
-    QList<QuUK::Comment*> mComments; 
+    QList<QuUK::Comment*> mComments;
     Avoid::Router* mRouter;
 };
 
