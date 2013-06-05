@@ -10,10 +10,10 @@
 
 #include "internal_base.h"
 #include <QtWidgets/QTreeView>
+#include <Gui/Core/SideBarModel.h>
 #include <Gui/Widgets/StyleType.h>
 #include <Gui/Diagram/Diagram.h>
 #include <Lib/Core/Ptr.h>
-
 
 QUML_BEGIN_NAMESPACE_GW
 
@@ -24,6 +24,7 @@ class SideBar : public QTreeView {
 
 public:
     SideBar(MainWindow* w, QuGD::Diagram* diagram);
+    ~SideBar();
     MainWindow* window();
     QuGD::Diagram* diagram() const { return mDiagram; }
 
@@ -32,6 +33,7 @@ public:
 #endif
 private:
     QuGD::Diagram* mDiagram;
+    QuGC::SideBarModel* mModel;
 };
 
 QUML_END_NAMESPACE_GW

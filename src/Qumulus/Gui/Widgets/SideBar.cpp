@@ -1,5 +1,6 @@
 /*
  * Qumulus UML editor
+ * Author: Frank Erens
  * Author: Randy Thiemann
  *
  */
@@ -7,11 +8,16 @@
 #include "SideBar.h"
 #include <Gui/Widgets/MainWindow.h>
 
+#include <QtWidgets/QHeaderView>
+
+#include <iostream>
+
 QUML_BEGIN_NAMESPACE_GW
 
 SideBar::SideBar(MainWindow* parent, QuGD::Diagram* d) : 
         QTreeView(parent),
-        mDiagram(d) {
+        mDiagram(d),
+        mModel(new QuGC::SideBarModel(mDiagram)){
 #ifdef Q_OS_MAC
     setStyleType(StyleType::Active);
     setAttribute(Qt::WA_MacShowFocusRect, false);
@@ -20,8 +26,14 @@ SideBar::SideBar(MainWindow* parent, QuGD::Diagram* d) :
     QSizePolicy sideBarSizePolicy = sizePolicy();
     sideBarSizePolicy.setHorizontalPolicy(QSizePolicy::Minimum);
     setSizePolicy(sideBarSizePolicy);
+    setModel(mModel);
+    header()->close();
 }
     
+SideBar::~SideBar() {
+    delete mModel;
+}
+
 MainWindow* SideBar::window() {
     return static_cast<MainWindow*>(parent());
 }
