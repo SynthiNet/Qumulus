@@ -154,6 +154,7 @@ void EditorView::zoom(double value) {
 }
 
 void EditorView::selectionChanged() {
+    mDiagram->setModified();
     if(scene()->selectedItems().size() != 1) {
         mAttributeButtonItem->setVisible(false);
         mOperationButtonItem->setVisible(false);
@@ -431,13 +432,16 @@ void EditorView::mouseMoveEvent(QMouseEvent* e) {
         if(auto p = dynamic_cast<QuGD::SelectableShape*>(i)) {
             if(p->shouldShowBDiag(mapToScene(e->pos()))) {
                 QApplication::setOverrideCursor(Qt::SizeBDiagCursor);
+                mDiagram->setModified();
                 mCursorOverride = true;
             } else if(p->shouldShowFDiag(mapToScene(e->pos()))) {
                 QApplication::setOverrideCursor(Qt::SizeFDiagCursor);
+                mDiagram->setModified();
                 mCursorOverride = true;
             } else {
                 mCursorOverride = false;
                 QApplication::restoreOverrideCursor();
+                mDiagram->setModified();
             }
         }
     }
@@ -467,6 +471,7 @@ void EditorView::wheelEvent(QWheelEvent* e) {
 
 void EditorView::mouseDoubleClickEvent(QMouseEvent* e) {
     mScrollable = false;
+    mDiagram->setModified();
     auto popover = new Popover(this, e->globalPos());
     popover->setVisible(true);
     connect(popover, &Popover::lostFocus, [&]{mScrollable = true;});
