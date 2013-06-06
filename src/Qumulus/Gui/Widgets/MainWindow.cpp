@@ -30,6 +30,7 @@
 #include <QtGui/QPixmap>
 #include <QtGui/QPdfWriter>
 #include <QtGui/QImage>
+#include <QtCore/QTimer>
 
 QUML_BEGIN_NAMESPACE_GW
 
@@ -200,9 +201,11 @@ void MainWindow::createMenus() {
     // File Menu
     mNewAction = new QAction(tr("&New"), this);
     mNewAction->setShortcuts(QKeySequence::New);
+    // check mDiagram->isModified(); !
 
     mOpenAction = new QAction(tr("&Open..."), this);
     mOpenAction->setShortcuts(QKeySequence::Open);
+    // check mDiagram->isModified(); !
 
     mSaveAction = new QAction(tr("&Save..."), this);
     mSaveAction->setShortcuts(QKeySequence::Save);
@@ -232,6 +235,7 @@ void MainWindow::createMenus() {
                     Qt::CaseInsensitive))) {
                 fName += ".uml";
             }
+            mFileName = fName;
             mDiagram->saveToXml(fName);
             mDiagram->clearModified();});
 
@@ -309,7 +313,19 @@ void MainWindow::createMenus() {
 
     mQuitAction = new QAction(tr("&Quit"), this);
     mQuitAction->setShortcuts(QKeySequence::Quit);
-    connect(mQuitAction, &QAction::triggered, &QApplication::exit);
+    connect(mQuitAction, &QAction::triggered, [&]{close();});
+    // connect(mQuitAction, &QAction::triggered, [&]{
+    //         if(mDiagram->isModified()) {
+    //             if(QMessageBox::Yes == 
+    //                     QMessageBox::question(this, "Are you sure?", 
+    //                         "Your document contains unsaved changes, "
+    //                         "are you sure you want to quit?", 
+    //                         QMessageBox::Yes|QMessageBox::No)){
+    //                 QApplication::exit();
+    //             }
+    //         } else {
+    //             QApplication::exit();
+    //         }});
 
     mFileMenu->addAction(mNewAction);
     mFileMenu->addSeparator();
@@ -491,6 +507,27 @@ void MainWindow::createCursors() {
         QCursor(QPixmap(":/data/img/cursor/primitive.png"), -1, -1);
     mCursors["association"] =
         QCursor(QPixmap(":/data/img/cursor/association.png"), -1, -1);
+}
+
+void MainWindow::closeEvent(QCloseEvent* event) {
+    if(mDiagram->isModified()) {
+        if(QMessageBox::Yes == 
+                QMessageBox::question(this, "Are you sure?", 
+                    "Your document contains unsaved changes, "
+                    "are you sure you want to quit?", 
+                    QMessageBox::Yes|QMessageBox::No)){
+            event->accept();
+        } else {
+            event->ignore();
+#ifdef Q_OS_MAC
+            // Ugly workaround for a Qt5 bug on OS X.
+            QTimer::singleShot(0,this,SLOT(hide()));
+            QTimer::singleShot(10,this,SLOT(show()));
+#endif
+        }
+    } else {
+        event->accept();
+    }
 }
 
 QUML_END_NAMESPACE_GW

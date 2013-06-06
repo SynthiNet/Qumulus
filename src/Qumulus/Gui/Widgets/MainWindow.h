@@ -57,6 +57,9 @@ public:
     CursorState cursorState() const { return mCursorState; }
     void setCursorState(CursorState cursorState);
 
+protected:
+    void closeEvent(QCloseEvent*);
+
 private:
     void createMenus();
     void populateToolbar();
