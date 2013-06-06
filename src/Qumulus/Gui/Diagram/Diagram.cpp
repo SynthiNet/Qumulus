@@ -77,6 +77,7 @@ void Diagram::addElement(DiagramElement* e) {
     if(Edge* p = dynamic_cast<Edge*>(e))
         mScene->addItem(p);
     diagramChanged();
+    mIsModified = true;
 }
 
 void Diagram::removeElement(DiagramElement* e) {
@@ -86,6 +87,7 @@ void Diagram::removeElement(DiagramElement* e) {
     if(Edge* p = dynamic_cast<Edge*>(e))
         mScene->removeItem(p);
     diagramChanged();
+    mIsModified = true;
 }
 
 void Diagram::setScene(QGraphicsScene* e) {

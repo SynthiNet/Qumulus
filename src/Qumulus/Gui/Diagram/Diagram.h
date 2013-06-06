@@ -81,6 +81,10 @@ public:
 
     void writeXml(QXmlStreamWriter&) const override {}
 
+    void clearModified() { mIsModified = false; }
+    void setModified() { mIsModified = true; }
+    bool isModified() { return mIsModified; }
+
     QUML_CLONABLE(Diagram);
 public:
     QuLC::Signal<void()> diagramChanged;
@@ -88,6 +92,7 @@ private:
     QList<DiagramElement*> mElements;
     QGraphicsScene* mScene = nullptr;
     unsigned mCounter = 1;
+    bool mIsModified = false;
     QuUK::Package* mRootPackage;
     QList<QuUK::Comment*> mComments;
     Avoid::Router* mRouter;

@@ -193,7 +193,7 @@ void MainWindow::populateToolbar() {
 void MainWindow::createMenus() {
     mFileMenu = menuBar()->addMenu(tr("&File"));
     mEditMenu = menuBar()->addMenu(tr("&Edit"));
-    mInsertMenu = menuBar()->addMenu(tr("&Insert"));
+    // mInsertMenu = menuBar()->addMenu(tr("&Insert"));
     mViewMenu = menuBar()->addMenu(tr("&View"));
     mHelpMenu = menuBar()->addMenu(tr("&Help"));
 
@@ -207,16 +207,19 @@ void MainWindow::createMenus() {
     mSaveAction = new QAction(tr("&Save..."), this);
     mSaveAction->setShortcuts(QKeySequence::Save);
     connect(mSaveAction, &QAction::triggered, [&]{
-            // TODO: Check for existing filename.
-            QString fName = QFileDialog::getSaveFileName(
-                this, tr("Save Diagram"), "",
-                tr("UML Diagram (*.uml)"));
-            if(fName.isNull()) return; // No filename chosen.
-            if(!fName.contains(QRegExp(R"(\.(uml)$)", 
-                    Qt::CaseInsensitive))) {
-                fName += ".uml";
+            if(mFileName == "") {
+                QString fName = QFileDialog::getSaveFileName(
+                    this, tr("Save Diagram"), "",
+                    tr("UML Diagram (*.uml)"));
+                if(fName.isNull()) return; // No filename chosen.
+                if(!fName.contains(QRegExp(R"(\.(uml)$)", 
+                        Qt::CaseInsensitive))) {
+                    fName += ".uml";
+                }
+                mFileName = fName;
             }
-            mDiagram->saveToXml(fName);});
+            mDiagram->saveToXml(mFileName);
+            mDiagram->clearModified();});
 
     mSaveAsAction = new QAction(tr("Save &As..."), this);
     mSaveAsAction->setShortcuts(QKeySequence::SaveAs);
@@ -229,10 +232,11 @@ void MainWindow::createMenus() {
                     Qt::CaseInsensitive))) {
                 fName += ".uml";
             }
-            mDiagram->saveToXml(fName);});
+            mDiagram->saveToXml(fName);
+            mDiagram->clearModified();});
 
-    mCloseAction = new QAction(tr("Close"), this);
-    mCloseAction->setShortcuts(QKeySequence::Close);
+    // mCloseAction = new QAction(tr("Close"), this);
+    // mCloseAction->setShortcuts(QKeySequence::Close);
 
     mPrintAction = new QAction(tr("&Print..."), this);
     mPrintAction->setShortcuts(QKeySequence::Print);
@@ -300,8 +304,8 @@ void MainWindow::createMenus() {
                 }
             }});
 
-    mPrefsAction = new QAction(tr("Settings"), this);
-    mPrefsAction->setShortcuts(QKeySequence::Preferences);
+    // mPrefsAction = new QAction(tr("Settings"), this);
+    // mPrefsAction->setShortcuts(QKeySequence::Preferences);
 
     mQuitAction = new QAction(tr("&Quit"), this);
     mQuitAction->setShortcuts(QKeySequence::Quit);
@@ -313,11 +317,11 @@ void MainWindow::createMenus() {
     mFileMenu->addAction(mSaveAction);
     mFileMenu->addAction(mSaveAsAction);
     mFileMenu->addSeparator();
-    mFileMenu->addAction(mCloseAction);
+    // mFileMenu->addAction(mCloseAction);
     mFileMenu->addAction(mExportAction);
     mFileMenu->addAction(mPrintAction);
     mFileMenu->addSeparator();
-    mFileMenu->addAction(mPrefsAction);
+    // mFileMenu->addAction(mPrefsAction);
     mFileMenu->addAction(mQuitAction);
 
     // Edit Menu
@@ -327,14 +331,14 @@ void MainWindow::createMenus() {
     mRedoAction = mUndoStack->createRedoAction(this);
     mRedoAction->setShortcuts(QKeySequence::Redo);
 
-    mCutAction = new QAction(tr("&Cut"), this);
-    mCutAction->setShortcuts(QKeySequence::Cut);
+    // mCutAction = new QAction(tr("&Cut"), this);
+    // mCutAction->setShortcuts(QKeySequence::Cut);
 
-    mCopyAction = new QAction(tr("C&opy"), this);
-    mCopyAction->setShortcuts(QKeySequence::Copy);
+    // mCopyAction = new QAction(tr("C&opy"), this);
+    // mCopyAction->setShortcuts(QKeySequence::Copy);
 
-    mPasteAction = new QAction(tr("&Paste"), this);
-    mPasteAction->setShortcuts(QKeySequence::Paste);
+    // mPasteAction = new QAction(tr("&Paste"), this);
+    // mPasteAction->setShortcuts(QKeySequence::Paste);
 
     mDeleteAction = new QAction(tr("&Delete"), this);
     mDeleteAction->setShortcuts({QKeySequence(Qt::Key_Backspace),
@@ -356,9 +360,9 @@ void MainWindow::createMenus() {
 
     mEditMenu->addAction(mUndoAction);
     mEditMenu->addAction(mRedoAction);
-    mEditMenu->addAction(mCutAction);
-    mEditMenu->addAction(mCopyAction);
-    mEditMenu->addAction(mPasteAction);
+    // mEditMenu->addAction(mCutAction);
+    // mEditMenu->addAction(mCopyAction);
+    // mEditMenu->addAction(mPasteAction);
     mEditMenu->addAction(mDeleteAction);
     //mEditMenu->addAction(mDuplicateAction);
 

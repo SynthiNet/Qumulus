@@ -88,12 +88,12 @@ private:
     // Main menu members
     QMenu* mFileMenu;
     QMenu* mEditMenu;
-    QMenu* mInsertMenu;
+    // QMenu* mInsertMenu;
     QMenu* mViewMenu;
     QMenu* mHelpMenu;
 
     // Application Menu
-    QAction* mPrefsAction;
+    // QAction* mPrefsAction;
     QAction* mQuitAction;
 
     // File Menu
@@ -101,18 +101,18 @@ private:
     QAction* mOpenAction;
     QAction* mSaveAction;
     QAction* mSaveAsAction;
-    QAction* mCloseAction;
+    // QAction* mCloseAction;
     QAction* mPrintAction;
     QAction* mExportAction;
     
     // Edit Menu
     QAction* mUndoAction;
     QAction* mRedoAction;
-    QAction* mCutAction;
-    QAction* mCopyAction;
-    QAction* mPasteAction;
+    // QAction* mCutAction;
+    // QAction* mCopyAction;
+    // QAction* mPasteAction;
     QAction* mDeleteAction;
-    QAction* mDuplicateAction;
+    // QAction* mDuplicateAction;
 
     // Insert Menu
      
@@ -135,6 +135,7 @@ private:
 
     QHash<QString, QCursor> mCursors;
     CursorState mCursorState = CursorState::Normal;
+    QString mFileName = "";
 };
 
 QUML_END_NAMESPACE_GW
