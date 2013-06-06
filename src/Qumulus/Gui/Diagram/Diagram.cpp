@@ -46,13 +46,16 @@ constexpr static float kFontSize =
 #endif
 
 Diagram::Diagram() :
-        mRootPackage(new QuUK::Package()), 
+        mRootPackage(new QuUK::Package()),
         mRouter(new Avoid::Router(Avoid::OrthogonalRouting)) {
     auto s = new Style;
     setLocalStyle(s);
     s->setFontName("sans-serif");
     s->setFontSize(kFontSize);
     mRootPackage->setRootPackage(true);
+    mRootPackage->childElementChanged += [this] {
+        diagramChanged();
+    };
 }
 
 Diagram::Diagram(const Diagram& d) :
@@ -73,6 +76,7 @@ void Diagram::addElement(DiagramElement* e) {
         mScene->addItem(p);
     if(Edge* p = dynamic_cast<Edge*>(e))
         mScene->addItem(p);
+    diagramChanged();
 }
 
 void Diagram::removeElement(DiagramElement* e) {
@@ -81,6 +85,7 @@ void Diagram::removeElement(DiagramElement* e) {
         mScene->removeItem(p);
     if(Edge* p = dynamic_cast<Edge*>(e))
         mScene->removeItem(p);
+    diagramChanged();
 }
 
 void Diagram::setScene(QGraphicsScene* e) {
