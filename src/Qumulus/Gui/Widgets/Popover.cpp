@@ -5,6 +5,12 @@
  */
 
 #include "Popover.h"
+#include "PopoverClass.h"
+#include "PopoverComment.h"
+#include "PopoverPackage.h"
+#include "PopoverPrimitive.h"
+#include "PopoverEnumeration.h"
+#include "PopoverAttribute.h"
 #include <algorithm>
 #include <QtGui/QPainter>
 #include <QtGui/QPixmap>
@@ -19,46 +25,88 @@
 
 QUML_BEGIN_NAMESPACE_GW
 
-Popover::Popover(QWidget* parent, QPoint pos, Qt::Orientation orientation) : 
+Popover::Popover(QWidget* parent, QPoint pos, Qt::Orientation orientation) :
         QWidget(parent), mLayout(new QVBoxLayout()) {
-    setWindowFlags(Qt::Popup | Qt::Window);
+    setWindowFlags(Qt::Popup | Qt::Window | Qt::CustomizeWindowHint);
     setAttribute(Qt::WA_DeleteOnClose);
 
-    int kWidth = 400;
-    int kHeight = 200;
-
-    QPoint mouse = pos;
+    mMouse = pos;
+    mOrientation = orientation;
 
     // Slightly shift the origin for looks.
-    if(orientation == Qt::Horizontal) {
+    if(mOrientation == Qt::Horizontal) {
         pos.ry() -= 26;
     } else {
         pos.rx() -= 26;
     }
 
-    // We need to find a suitable position for the window.
-    auto location = findWindowLocation(pos, kWidth, kHeight, orientation, 
-            QApplication::desktop()->availableGeometry(mouse)); 
+    mPos = pos;
 
-    setGeometry(location.first.x(), location.first.y(), 0, 0);
-    setFixedSize(kWidth, kHeight);
     setWindowOpacity(0.85);
 
     setLayout(mLayout);
     mLayout->setAlignment(Qt::AlignTop);
-    mLayout->addWidget(new QPushButton("MANGO CHUTNEY!"));
-
-    // Calculate offset of triangle tip.
-    int offset;
-    if(orientation == Qt::Horizontal) {
-        offset = mouse.y() - location.first.y();
-    } else {
-        offset = mouse.x() - location.first.x();
-    }
-
-    generateMask(location.second, offset);
 
     setFocus();
+}
+
+void Popover::setupUi(PopoverType type) {
+    mType = type;
+    switch(mType) {
+    case Class:
+        mForm = new PopoverClass();
+        mForm->setupUi();
+        break;
+    case Package:
+        mForm = new PopoverPackage();
+        mForm->setupUi();
+        break;
+    case Primitive:
+        mForm = new PopoverPrimitive();
+        mForm->setupUi();
+        break;
+    case Enumeration:
+        mForm = new PopoverEnumeration();
+        mForm->setupUi();
+        break;
+    case Comment:
+        mForm = new PopoverComment();
+        mForm->setupUi();
+        break;
+    case Attribute:
+        mForm = new PopoverAttribute();
+        mForm->setupUi();
+        break;
+    default:;
+    }
+
+    if(mForm) {
+        mLayout->addWidget(dynamic_cast<QWidget*>(mForm));
+        auto location = findWindowLocation(mPos,
+                dynamic_cast<QWidget*>(mForm)->width() + 20,
+                dynamic_cast<QWidget*>(mForm)->height() + 20, mOrientation,
+                QApplication::desktop()->availableGeometry(mMouse));
+
+        setGeometry(location.first.x(), location.first.y(), 0, 0);
+        setFixedSize(dynamic_cast<QWidget*>(mForm)->width() + 20,
+                dynamic_cast<QWidget*>(mForm)->height() + 20);
+
+        setLayout(mLayout);
+        mLayout->setAlignment(Qt::AlignTop);
+
+        int offset;
+        if(mOrientation == Qt::Horizontal) {
+            offset = mMouse.y() - location.first.y();
+        } else {
+            offset = mMouse.x() - location.first.x();
+        }
+
+        generateMask(location.second, offset);
+    }
+}
+
+void Popover::bindModel(QuGD::Shape* s) {
+    if(mForm) mForm->bindModel(s);
 }
 
 void Popover::resizeEvent(QResizeEvent*) {}
@@ -139,7 +187,7 @@ void Popover::generateMask(Direction direction, int offset) {
     setMask(*mMask);
 }
 
-QPair<QPoint, Popover::Direction> Popover::findWindowLocation(QPoint origin, 
+QPair<QPoint, Popover::Direction> Popover::findWindowLocation(QPoint origin,
         int width, int height, Qt::Orientation orientation, QRect available) {
     QPair<QPoint, Direction> ret = qMakePair(QPoint(0,0), Left);
     bool flipped = false;
@@ -181,10 +229,12 @@ QPair<QPoint, Popover::Direction> Popover::findWindowLocation(QPoint origin,
     return ret;
 }
 
-void Popover::focusOutEvent(QFocusEvent* e) {
-    (void) e;
+void Popover::focusOutEvent(QFocusEvent*) {
+    if(mForm && mForm->isInFocus())
+        return;
     emit lostFocus();
     close();
 }
+
 QUML_END_NAMESPACE_GW
 

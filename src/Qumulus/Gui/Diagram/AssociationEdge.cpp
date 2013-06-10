@@ -22,8 +22,8 @@ void AssociationEdge::paint(QPainter* p,
         const QStyleOptionGraphicsItem* o, 
         QWidget* w) {
     Edge::paint(p, o, w);
-    Shape* t = target();
-    Direction entry = targetEntry();
+    Shape* t = source();
+    Direction entry = sourceExit();
     QuUK::AggregationKind aggregationKind = 
         static_cast<QuUK::Association*>(modelElement())->aggregation();
     QPointF origin = {t->pos().x() + t->width() / 2, 

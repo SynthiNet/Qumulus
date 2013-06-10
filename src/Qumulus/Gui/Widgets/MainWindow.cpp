@@ -30,6 +30,7 @@
 #include <QtGui/QPixmap>
 #include <QtGui/QPdfWriter>
 #include <QtGui/QImage>
+#include <QtCore/QTimer>
 
 QUML_BEGIN_NAMESPACE_GW
 
@@ -193,30 +194,35 @@ void MainWindow::populateToolbar() {
 void MainWindow::createMenus() {
     mFileMenu = menuBar()->addMenu(tr("&File"));
     mEditMenu = menuBar()->addMenu(tr("&Edit"));
-    mInsertMenu = menuBar()->addMenu(tr("&Insert"));
+    // mInsertMenu = menuBar()->addMenu(tr("&Insert"));
     mViewMenu = menuBar()->addMenu(tr("&View"));
     mHelpMenu = menuBar()->addMenu(tr("&Help"));
 
     // File Menu
     mNewAction = new QAction(tr("&New"), this);
     mNewAction->setShortcuts(QKeySequence::New);
+    // check mDiagram->isModified(); !
 
     mOpenAction = new QAction(tr("&Open..."), this);
     mOpenAction->setShortcuts(QKeySequence::Open);
+    // check mDiagram->isModified(); !
 
     mSaveAction = new QAction(tr("&Save..."), this);
     mSaveAction->setShortcuts(QKeySequence::Save);
     connect(mSaveAction, &QAction::triggered, [&]{
-            // TODO: Check for existing filename.
-            QString fName = QFileDialog::getSaveFileName(
-                this, tr("Save Diagram"), "",
-                tr("UML Diagram (*.uml)"));
-            if(fName.isNull()) return; // No filename chosen.
-            if(!fName.contains(QRegExp(R"(\.(uml)$)", 
-                    Qt::CaseInsensitive))) {
-                fName += ".uml";
+            if(mFileName == "") {
+                QString fName = QFileDialog::getSaveFileName(
+                    this, tr("Save Diagram"), "",
+                    tr("UML Diagram (*.uml)"));
+                if(fName.isNull()) return; // No filename chosen.
+                if(!fName.contains(QRegExp(R"(\.(uml)$)", 
+                        Qt::CaseInsensitive))) {
+                    fName += ".uml";
+                }
+                mFileName = fName;
             }
-            mDiagram->saveToXml(fName);});
+            mDiagram->saveToXml(mFileName);
+            mDiagram->clearModified();});
 
     mSaveAsAction = new QAction(tr("Save &As..."), this);
     mSaveAsAction->setShortcuts(QKeySequence::SaveAs);
@@ -229,10 +235,12 @@ void MainWindow::createMenus() {
                     Qt::CaseInsensitive))) {
                 fName += ".uml";
             }
-            mDiagram->saveToXml(fName);});
+            mFileName = fName;
+            mDiagram->saveToXml(fName);
+            mDiagram->clearModified();});
 
-    mCloseAction = new QAction(tr("Close"), this);
-    mCloseAction->setShortcuts(QKeySequence::Close);
+    // mCloseAction = new QAction(tr("Close"), this);
+    // mCloseAction->setShortcuts(QKeySequence::Close);
 
     mPrintAction = new QAction(tr("&Print..."), this);
     mPrintAction->setShortcuts(QKeySequence::Print);
@@ -300,12 +308,24 @@ void MainWindow::createMenus() {
                 }
             }});
 
-    mPrefsAction = new QAction(tr("Settings"), this);
-    mPrefsAction->setShortcuts(QKeySequence::Preferences);
+    // mPrefsAction = new QAction(tr("Settings"), this);
+    // mPrefsAction->setShortcuts(QKeySequence::Preferences);
 
     mQuitAction = new QAction(tr("&Quit"), this);
     mQuitAction->setShortcuts(QKeySequence::Quit);
-    connect(mQuitAction, &QAction::triggered, &QApplication::exit);
+    connect(mQuitAction, &QAction::triggered, [&]{close();});
+    // connect(mQuitAction, &QAction::triggered, [&]{
+    //         if(mDiagram->isModified()) {
+    //             if(QMessageBox::Yes == 
+    //                     QMessageBox::question(this, "Are you sure?", 
+    //                         "Your document contains unsaved changes, "
+    //                         "are you sure you want to quit?", 
+    //                         QMessageBox::Yes|QMessageBox::No)){
+    //                 QApplication::exit();
+    //             }
+    //         } else {
+    //             QApplication::exit();
+    //         }});
 
     mFileMenu->addAction(mNewAction);
     mFileMenu->addSeparator();
@@ -313,11 +333,11 @@ void MainWindow::createMenus() {
     mFileMenu->addAction(mSaveAction);
     mFileMenu->addAction(mSaveAsAction);
     mFileMenu->addSeparator();
-    mFileMenu->addAction(mCloseAction);
+    // mFileMenu->addAction(mCloseAction);
     mFileMenu->addAction(mExportAction);
     mFileMenu->addAction(mPrintAction);
     mFileMenu->addSeparator();
-    mFileMenu->addAction(mPrefsAction);
+    // mFileMenu->addAction(mPrefsAction);
     mFileMenu->addAction(mQuitAction);
 
     // Edit Menu
@@ -327,14 +347,14 @@ void MainWindow::createMenus() {
     mRedoAction = mUndoStack->createRedoAction(this);
     mRedoAction->setShortcuts(QKeySequence::Redo);
 
-    mCutAction = new QAction(tr("&Cut"), this);
-    mCutAction->setShortcuts(QKeySequence::Cut);
+    // mCutAction = new QAction(tr("&Cut"), this);
+    // mCutAction->setShortcuts(QKeySequence::Cut);
 
-    mCopyAction = new QAction(tr("C&opy"), this);
-    mCopyAction->setShortcuts(QKeySequence::Copy);
+    // mCopyAction = new QAction(tr("C&opy"), this);
+    // mCopyAction->setShortcuts(QKeySequence::Copy);
 
-    mPasteAction = new QAction(tr("&Paste"), this);
-    mPasteAction->setShortcuts(QKeySequence::Paste);
+    // mPasteAction = new QAction(tr("&Paste"), this);
+    // mPasteAction->setShortcuts(QKeySequence::Paste);
 
     mDeleteAction = new QAction(tr("&Delete"), this);
     mDeleteAction->setShortcuts({QKeySequence(Qt::Key_Backspace),
@@ -356,9 +376,9 @@ void MainWindow::createMenus() {
 
     mEditMenu->addAction(mUndoAction);
     mEditMenu->addAction(mRedoAction);
-    mEditMenu->addAction(mCutAction);
-    mEditMenu->addAction(mCopyAction);
-    mEditMenu->addAction(mPasteAction);
+    // mEditMenu->addAction(mCutAction);
+    // mEditMenu->addAction(mCopyAction);
+    // mEditMenu->addAction(mPasteAction);
     mEditMenu->addAction(mDeleteAction);
     //mEditMenu->addAction(mDuplicateAction);
 
@@ -487,6 +507,27 @@ void MainWindow::createCursors() {
         QCursor(QPixmap(":/data/img/cursor/primitive.png"), -1, -1);
     mCursors["association"] =
         QCursor(QPixmap(":/data/img/cursor/association.png"), -1, -1);
+}
+
+void MainWindow::closeEvent(QCloseEvent* event) {
+    if(mDiagram->isModified()) {
+        if(QMessageBox::Yes == 
+                QMessageBox::question(this, "Are you sure?", 
+                    "Your document contains unsaved changes, "
+                    "are you sure you want to quit?", 
+                    QMessageBox::Yes|QMessageBox::No)){
+            event->accept();
+        } else {
+            event->ignore();
+#ifdef Q_OS_MAC
+            // Ugly workaround for a Qt5 bug on OS X.
+            QTimer::singleShot(0,this,SLOT(hide()));
+            QTimer::singleShot(10,this,SLOT(show()));
+#endif
+        }
+    } else {
+        event->accept();
+    }
 }
 
 QUML_END_NAMESPACE_GW
