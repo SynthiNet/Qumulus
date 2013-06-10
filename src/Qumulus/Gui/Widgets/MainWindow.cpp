@@ -95,7 +95,7 @@ MainWindow::MainWindow() :
             mEditorView, &EditorView::zoom);
 
     // Expand sidebar
-    mSideBar->expandAll();
+    // mSideBar->expandAll();
 }
 
 MainWindow::~MainWindow() {
@@ -159,15 +159,15 @@ void MainWindow::populateToolbar() {
 
     // Aggregation and submenu.
     mAggregationItem = new ToolBarItem(
-            ElementItem("Composition", 
+            ElementItem("Composition",
                     QIcon(":/data/img/toolbar/containment.png"),
                     QKeySequence(tr("N")),
                     [&]{setCursorState(CursorState::Composition);}));
 
     mAggregationMenu = new ToolBarMenu();
     mAggregationMenu->addItem(
-            ElementItem("Aggregation", 
-                    QIcon(":/data/img/toolbar/aggregation.png"), 
+            ElementItem("Aggregation",
+                    QIcon(":/data/img/toolbar/aggregation.png"),
                     QKeySequence(tr("G")),
                     [&]{setCursorState(CursorState::Aggregation);}));
     mAggregationItem->setMenu(mAggregationMenu);
@@ -215,7 +215,7 @@ void MainWindow::createMenus() {
                     this, tr("Save Diagram"), "",
                     tr("UML Diagram (*.uml)"));
                 if(fName.isNull()) return; // No filename chosen.
-                if(!fName.contains(QRegExp(R"(\.(uml)$)", 
+                if(!fName.contains(QRegExp(R"(\.(uml)$)",
                         Qt::CaseInsensitive))) {
                     fName += ".uml";
                 }
@@ -231,7 +231,7 @@ void MainWindow::createMenus() {
                 this, tr("Save Diagram"), "",
                 tr("UML Diagram (*.uml)"));
             if(fName.isNull()) return; // No filename chosen.
-            if(!fName.contains(QRegExp(R"(\.(uml)$)", 
+            if(!fName.contains(QRegExp(R"(\.(uml)$)",
                     Qt::CaseInsensitive))) {
                 fName += ".uml";
             }
@@ -316,10 +316,10 @@ void MainWindow::createMenus() {
     connect(mQuitAction, &QAction::triggered, [&]{close();});
     // connect(mQuitAction, &QAction::triggered, [&]{
     //         if(mDiagram->isModified()) {
-    //             if(QMessageBox::Yes == 
-    //                     QMessageBox::question(this, "Are you sure?", 
+    //             if(QMessageBox::Yes ==
+    //                     QMessageBox::question(this, "Are you sure?",
     //                         "Your document contains unsaved changes, "
-    //                         "are you sure you want to quit?", 
+    //                         "are you sure you want to quit?",
     //                         QMessageBox::Yes|QMessageBox::No)){
     //                 QApplication::exit();
     //             }
@@ -511,10 +511,10 @@ void MainWindow::createCursors() {
 
 void MainWindow::closeEvent(QCloseEvent* event) {
     if(mDiagram->isModified()) {
-        if(QMessageBox::Yes == 
-                QMessageBox::question(this, "Are you sure?", 
+        if(QMessageBox::Yes ==
+                QMessageBox::question(this, "Are you sure?",
                     "Your document contains unsaved changes, "
-                    "are you sure you want to quit?", 
+                    "are you sure you want to quit?",
                     QMessageBox::Yes|QMessageBox::No)){
             event->accept();
         } else {
