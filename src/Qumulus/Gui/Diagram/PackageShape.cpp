@@ -15,7 +15,7 @@
 
 QUML_BEGIN_NAMESPACE_GD
 
-PackageShape::PackageShape(QuUK::Element* e, 
+PackageShape::PackageShape(QuUK::Element* e,
         DiagramElement* p) :
         SelectableShape(e, p) {
     constexpr int kPackageZOrdering = -2;
@@ -32,7 +32,7 @@ QuUK::Package* PackageShape::modelElement() const {
 }
 
 void PackageShape::updateSizeConstraints() {
-    setMinimumSize({100, 10 + std::max(packageNameWidth(), 50)});
+    setMinimumSize({10 + std::max(packageNameWidth(), 50), 50});
 }
 
 void PackageShape::resize(double w, double h) {
@@ -42,7 +42,7 @@ void PackageShape::resize(double w, double h) {
     setSize({w, h});
 }
 
-void PackageShape::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, 
+void PackageShape::paint(QPainter* painter, const QStyleOptionGraphicsItem* option,
         QWidget* widget) {
     updateSizeConstraints();
     resize(size());
@@ -55,7 +55,7 @@ void PackageShape::paint(QPainter* painter, const QStyleOptionGraphicsItem* opti
     QFont font = sharedStyle()->font();
     font.setBold(true);
     painter->setFont(font);
-    painter->drawText(0, 12, width(), height(), 
+    painter->drawText(0, 12, width(), height(),
             Qt::AlignTop | Qt::AlignHCenter,
             modelElement()->name());
 
