@@ -13,7 +13,7 @@
 
 QUML_BEGIN_NAMESPACE_GD
 
-PrimitiveShape::PrimitiveShape(QuUK::Element* e, DiagramElement* p) : 
+PrimitiveShape::PrimitiveShape(QuUK::Element* e, DiagramElement* p) :
         CompartmentableShape(e, p),
         mCompartment(new Compartment(this)) {
     addCompartment(mCompartment);
@@ -35,8 +35,10 @@ void PrimitiveShape::updateSizeConstraints() {
     setMinimumSize({10 + std::max(90, primitiveNameWidth()), 40});
 }
 
-void PrimitiveShape::paint(QPainter* painter, 
+void PrimitiveShape::paint(QPainter* painter,
         const QStyleOptionGraphicsItem* option, QWidget* widget) {
+    updateSizeConstraints();
+    resize(size());
     CompartmentableShape::paint(painter, option, widget);
 
     QFont stereotypeFont = sharedStyle()->font();
@@ -49,7 +51,7 @@ void PrimitiveShape::paint(QPainter* painter,
     QFont nameFont = sharedStyle()->font();
     nameFont.setBold(true);
     painter->setFont(nameFont);
-    painter->drawText(0, height() / 2, width(), height() / 2, 
+    painter->drawText(0, height() / 2, width(), height() / 2,
             Qt::AlignHCenter | Qt::AlignTop,
             modelElement()->name());
 
