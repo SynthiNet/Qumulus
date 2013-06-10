@@ -32,7 +32,7 @@ QuUK::Package* PackageShape::modelElement() const {
 }
 
 void PackageShape::updateSizeConstraints() {
-    setMinimumSize({10 + std::max(packageNameWidth(), 50), 50});
+    setMinimumSize({10 + std::max(packageNameWidth(), 90), 50});
 }
 
 void PackageShape::resize(double w, double h) {
