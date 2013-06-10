@@ -17,8 +17,8 @@
 
 QUML_BEGIN_NAMESPACE_UK
 
-Operation::Operation(QString name, Class* c) : 
-        mClass(c), 
+Operation::Operation(QString name, Class* c) :
+        mClass(c),
         mQuery(false) {
     setName(name);
     if(c) c->addOperation(this);
@@ -53,7 +53,7 @@ int Operation::index() const {
 QString Operation::qualifiedName() const {
     if(!mClass) return "";
     QString s = mClass->qualifiedName();
-    return s == "" ? s : s + separator() + name(); 
+    return s == "" ? s : s + separator() + name();
 }
 
 QString Operation::toString() const {
@@ -108,6 +108,13 @@ void Operation::writeXml(QXmlStreamWriter& writer) const {
     }
 
     writer.writeEndElement();
+}
+
+void Operation::readXml(QDomNode node, QuLC::XmlModelReader& reader) {
+    (void)node;
+    (void)reader;
+
+    NYI();
 }
 
 QUML_END_NAMESPACE_UK

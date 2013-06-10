@@ -102,4 +102,11 @@ void Class::writeXml(QXmlStreamWriter& writer) const {
     writer.writeEndElement();
 }
 
+void Class::readXml(QDomNode node, QuLC::XmlModelReader& reader) {
+    (void)node;
+    (void)reader;
+
+    NYI();
+}
+
 QUML_END_NAMESPACE_UK

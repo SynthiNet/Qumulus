@@ -29,4 +29,11 @@ void PrimitiveType::writeXml(QXmlStreamWriter& writer) const {
     writer.writeEndElement();
 }
 
+void PrimitiveType::readXml(QDomNode node, QuLC::XmlModelReader& reader) {
+    (void)node;
+    (void)reader;
+
+    NYI();
+}
+
 QUML_END_NAMESPACE_UK

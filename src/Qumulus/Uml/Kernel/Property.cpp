@@ -14,7 +14,7 @@
 
 QUML_BEGIN_NAMESPACE_UK
 
-Property::Property(QString name, Class* c) : 
+Property::Property(QString name, Class* c) :
         mClass(c),
         mAssociation(0) {
     if(c) c->addAttribute(this);
@@ -33,7 +33,7 @@ int Property::index() const {
 QString Property::qualifiedName() const {
     if(!mClass) return "";
     QString s = mClass->qualifiedName();
-    return s == "" ? s : s + separator() + name(); 
+    return s == "" ? s : s + separator() + name();
 }
 
 QString Property::toString() const {
@@ -76,6 +76,13 @@ void Property::writeXml(QXmlStreamWriter& writer) const {
     writer.writeAttribute("readonly", readOnly() ? "true" : "false");
 
     writer.writeEndElement();
+}
+
+void Property::readXml(QDomNode node, QuLC::XmlModelReader& reader) {
+    (void)node;
+    (void)reader;
+
+    NYI();
 }
 
 QUML_END_NAMESPACE_UK

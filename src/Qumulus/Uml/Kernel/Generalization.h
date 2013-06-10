@@ -18,7 +18,7 @@ class Generalization : public DirectedRelationship {
 public:
     Generalization();
     Generalization(Classifier* general, Classifier* specific);
-    
+
     Classifier* general() const;
     void setGeneral(Classifier*);
 
@@ -26,6 +26,7 @@ public:
     void setSpecific(Classifier*);
 
     void writeXml(QXmlStreamWriter& writer) const override;
+    void readXml(QDomNode node, QuLC::XmlModelReader& reader) override;
 
     QUML_CLONABLE(Generalization);
 };

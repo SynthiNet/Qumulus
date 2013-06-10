@@ -31,7 +31,7 @@ int EnumerationLiteral::index() const {
 QString EnumerationLiteral::qualifiedName() const {
     if(!mEnumeration) return "";
     QString s = mEnumeration->qualifiedName();
-    return s == "" ? s : s + separator() + name(); 
+    return s == "" ? s : s + separator() + name();
 }
 
 void EnumerationLiteral::writeXml(QXmlStreamWriter& writer) const {
@@ -39,6 +39,13 @@ void EnumerationLiteral::writeXml(QXmlStreamWriter& writer) const {
     writer.writeAttribute("id", uniqueId());
     writer.writeAttribute("name", name());
     writer.writeEndElement();
+}
+
+void EnumerationLiteral::readXml(QDomNode node, QuLC::XmlModelReader& reader) {
+    (void)node;
+    (void)reader;
+
+    NYI();
 }
 
 QUML_END_NAMESPACE_UK

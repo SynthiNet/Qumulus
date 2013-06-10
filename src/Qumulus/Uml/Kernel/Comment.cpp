@@ -21,5 +21,11 @@ void Comment::writeXml(QXmlStreamWriter& writer) const {
     writer.writeTextElement("Comment", body());
 }
 
+void Comment::readXml(QDomNode node, QuLC::XmlModelReader& reader) {
+    (void)reader;
+
+    setBody(node.toElement().text());
+}
+
 QUML_END_NAMESPACE_UK
 

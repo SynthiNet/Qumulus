@@ -38,4 +38,12 @@ void Association::writeXml(QXmlStreamWriter& writer) const {
     NYI();
 }
 
+void Association::readXml(QDomNode node, QuLC::XmlModelReader& reader) {
+    (void)node;
+    (void)reader;
+
+    NYI();
+}
+
+
 QUML_END_NAMESPACE_UK

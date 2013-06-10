@@ -14,6 +14,7 @@
 #include <Lib/Core/Functional.h>
 #include <Lib/Core/UniqueId.h>
 #include <Lib/Core/Signal.h>
+#include <Lib/Core/XmlModelReader.h>
 
 #include <QtCore/QSet>
 #include <QtCore/QList>
@@ -96,6 +97,7 @@ public:
     static Element* byId(const QString& s);
 
     virtual void writeXml(QXmlStreamWriter& writer) const = 0;
+    virtual void readXml(QDomNode node, QuLC::XmlModelReader& reader) = 0;
 
     QUML_CLONABLE_ABSTRACT(Element)
 public:
