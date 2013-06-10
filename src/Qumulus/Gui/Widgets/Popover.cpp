@@ -5,6 +5,7 @@
  */
 
 #include "Popover.h"
+#include "PopoverClass.h"
 #include <algorithm>
 #include <QtGui/QPainter>
 #include <QtGui/QPixmap>
@@ -19,13 +20,13 @@
 
 QUML_BEGIN_NAMESPACE_GW
 
-Popover::Popover(QWidget* parent, QPoint pos, Qt::Orientation orientation) : 
+Popover::Popover(QWidget* parent, QPoint pos, Qt::Orientation orientation) :
         QWidget(parent), mLayout(new QVBoxLayout()) {
-    setWindowFlags(Qt::Popup | Qt::Window);
+    setWindowFlags(Qt::Popup | Qt::Window | Qt::CustomizeWindowHint);
     setAttribute(Qt::WA_DeleteOnClose);
 
-    int kWidth = 400;
-    int kHeight = 200;
+    int kWidth = 300;
+    int kHeight = 300;
 
     QPoint mouse = pos;
 
@@ -37,8 +38,8 @@ Popover::Popover(QWidget* parent, QPoint pos, Qt::Orientation orientation) :
     }
 
     // We need to find a suitable position for the window.
-    auto location = findWindowLocation(pos, kWidth, kHeight, orientation, 
-            QApplication::desktop()->availableGeometry(mouse)); 
+    auto location = findWindowLocation(pos, kWidth, kHeight, orientation,
+            QApplication::desktop()->availableGeometry(mouse));
 
     setGeometry(location.first.x(), location.first.y(), 0, 0);
     setFixedSize(kWidth, kHeight);
@@ -46,7 +47,6 @@ Popover::Popover(QWidget* parent, QPoint pos, Qt::Orientation orientation) :
 
     setLayout(mLayout);
     mLayout->setAlignment(Qt::AlignTop);
-    mLayout->addWidget(new QPushButton("MANGO CHUTNEY!"));
 
     // Calculate offset of triangle tip.
     int offset;
@@ -59,6 +59,25 @@ Popover::Popover(QWidget* parent, QPoint pos, Qt::Orientation orientation) :
     generateMask(location.second, offset);
 
     setFocus();
+}
+
+void Popover::setupUi(PopoverType type) {
+    mType = type;
+    switch(mType) {
+    default:
+        mForm = new PopoverClass();
+        mForm->setupUi();
+        mLayout->addWidget(dynamic_cast<QWidget*>(mForm));
+        setFixedSize(dynamic_cast<QWidget*>(mForm)->width() + 20,
+                dynamic_cast<QWidget*>(mForm)->height() + 20);
+    }
+}
+
+void Popover::bindModel(QuGD::Shape* s) {
+    switch(mType) {
+    default:
+        mForm->bindModel(s);
+    }
 }
 
 void Popover::resizeEvent(QResizeEvent*) {}
@@ -139,7 +158,7 @@ void Popover::generateMask(Direction direction, int offset) {
     setMask(*mMask);
 }
 
-QPair<QPoint, Popover::Direction> Popover::findWindowLocation(QPoint origin, 
+QPair<QPoint, Popover::Direction> Popover::findWindowLocation(QPoint origin,
         int width, int height, Qt::Orientation orientation, QRect available) {
     QPair<QPoint, Direction> ret = qMakePair(QPoint(0,0), Left);
     bool flipped = false;
@@ -183,6 +202,8 @@ QPair<QPoint, Popover::Direction> Popover::findWindowLocation(QPoint origin,
 
 void Popover::focusOutEvent(QFocusEvent* e) {
     (void) e;
+    if(mForm && mForm->isInFocus())
+        return;
     emit lostFocus();
     close();
 }

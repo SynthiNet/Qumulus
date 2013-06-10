@@ -42,8 +42,8 @@
 
 QUML_BEGIN_NAMESPACE_GW
 
-EditorView::EditorView(MainWindow* parent, QuGD::Diagram* d) : 
-        QGraphicsView(parent), 
+EditorView::EditorView(MainWindow* parent, QuGD::Diagram* d) :
+        QGraphicsView(parent),
         mScene(new QGraphicsScene(this)),
         mPopover(nullptr),
         mDiagram(d),
@@ -70,7 +70,7 @@ EditorView::EditorView(MainWindow* parent, QuGD::Diagram* d) :
     mSelectionRect->setVisible(false);
     mScene->addItem(mSelectionRect);
 
-    connect(mScene, &QGraphicsScene::selectionChanged, 
+    connect(mScene, &QGraphicsScene::selectionChanged,
             this, &EditorView::selectionChanged);
 
     // Setup buttons
@@ -158,27 +158,27 @@ void EditorView::selectionChanged() {
     if(scene()->selectedItems().size() != 1) {
         mAttributeButtonItem->setVisible(false);
         mOperationButtonItem->setVisible(false);
-        mLiteralButtonItem->setVisible(false); 
+        mLiteralButtonItem->setVisible(false);
     } else {
         auto p = scene()->selectedItems()[0];
 
         if(dynamic_cast<QuGD::ClassShape*>(p)) {
             mAttributeButtonItem->setVisible(true);
             mOperationButtonItem->setVisible(true);
-            mLiteralButtonItem->setVisible(false); 
+            mLiteralButtonItem->setVisible(false);
 
             mAttributeButtonItem->setPos(p->pos() - QPointF{36, 0});
             mOperationButtonItem->setPos(p->pos() - QPointF{36, -36});
         } else if(dynamic_cast<QuGD::EnumShape*>(p)) {
             mAttributeButtonItem->setVisible(false);
             mOperationButtonItem->setVisible(false);
-            mLiteralButtonItem->setVisible(true); 
+            mLiteralButtonItem->setVisible(true);
 
             mLiteralButtonItem->setPos(p->pos() - QPointF{36, 0});
         } else {
             mAttributeButtonItem->setVisible(false);
             mOperationButtonItem->setVisible(false);
-            mLiteralButtonItem->setVisible(false); 
+            mLiteralButtonItem->setVisible(false);
         }
     }
 }
@@ -192,7 +192,7 @@ void EditorView::updateButtonsPosition() {
             mOperationButtonItem->setPos(p->pos() - QPointF{36, -36});
         } else if(dynamic_cast<QuGD::EnumShape*>(p)) {
             mLiteralButtonItem->setPos(p->pos() - QPointF{36, 0});
-        } 
+        }
     }
 }
 
@@ -204,7 +204,7 @@ void EditorView::mousePressEvent(QMouseEvent* e) {
         QGraphicsView::mousePressEvent(e);
     } else {
         mIsDragging = true;
-    }       
+    }
 }
 
 void EditorView::mouseReleaseEvent(QMouseEvent* e) {
@@ -236,7 +236,7 @@ void EditorView::mouseReleaseEvent(QMouseEvent* e) {
     beginPoint = rect.topLeft();
     auto sizePoint = rect.bottomRight() - rect.topLeft();
     delta = QSizeF(sizePoint.x(), sizePoint.y());
-    
+
 
     switch(state) {
     case CursorState::Normal:
@@ -250,7 +250,7 @@ void EditorView::mouseReleaseEvent(QMouseEvent* e) {
             return;
         } else if(mSource && shape && shape->acceptsAssociationTarget()) {
             auto assoc = new QuUK::Association(
-                    dynamic_cast<QuUK::Classifier*>(mSource->modelElement()), 
+                    dynamic_cast<QuUK::Classifier*>(mSource->modelElement()),
                     dynamic_cast<QuUK::Classifier*>(shape->modelElement()));
             assoc->setAggregation(QuUK::AggregationKind::Shared);
             auto ashape = mDiagram->createEdge(assoc, mSource, shape);
@@ -287,7 +287,7 @@ void EditorView::mouseReleaseEvent(QMouseEvent* e) {
             return;
         } else if(mSource && shape && shape->acceptsAssociationTarget()) {
             auto assoc = new QuUK::Association(
-                    dynamic_cast<QuUK::Classifier*>(mSource->modelElement()), 
+                    dynamic_cast<QuUK::Classifier*>(mSource->modelElement()),
                     dynamic_cast<QuUK::Classifier*>(shape->modelElement()));
             assoc->setAggregation(QuUK::AggregationKind::Composite);
             auto ashape = mDiagram->createEdge(assoc, mSource, shape);
@@ -315,7 +315,7 @@ void EditorView::mouseReleaseEvent(QMouseEvent* e) {
             return;
         } else if(mSource && shape && shape->acceptsGeneralizationTarget()) {
             auto gen = new QuUK::Generalization(
-                    dynamic_cast<QuUK::Classifier*>(mSource->modelElement()), 
+                    dynamic_cast<QuUK::Classifier*>(mSource->modelElement()),
                     dynamic_cast<QuUK::Classifier*>(shape->modelElement()));
             auto gshape = mDiagram->createEdge(gen, mSource, shape);
             gshape->setVisible(true);
@@ -355,7 +355,7 @@ void EditorView::mouseReleaseEvent(QMouseEvent* e) {
             return;
         } else if(mSource && shape && shape->acceptsAssociationTarget()) {
             auto assoc = new QuUK::Association(
-                    dynamic_cast<QuUK::Classifier*>(mSource->modelElement()), 
+                    dynamic_cast<QuUK::Classifier*>(mSource->modelElement()),
                     dynamic_cast<QuUK::Classifier*>(shape->modelElement()));
             auto ashape = mDiagram->createEdge(assoc, mSource, shape);
             ashape->setVisible(true);
@@ -472,9 +472,18 @@ void EditorView::wheelEvent(QWheelEvent* e) {
 void EditorView::mouseDoubleClickEvent(QMouseEvent* e) {
     mScrollable = false;
     mDiagram->setModified();
-    auto popover = new Popover(this, e->globalPos());
-    popover->setVisible(true);
-    connect(popover, &Popover::lostFocus, [&]{mScrollable = true;});
+
+    // Check what's selected.
+    auto selected = mScene->itemAt(mapToScene(e->pos()), QTransform());
+
+    if(dynamic_cast<QuGD::ClassShape*>(selected)) {
+        auto popover = new Popover(this, e->globalPos());
+        popover->setupUi(Popover::PopoverType::Class);
+        popover->setVisible(true);
+        popover->bindModel(dynamic_cast<QuGD::Shape*>(selected));
+        connect(popover, &Popover::lostFocus, [&]{mScrollable = true;});
+    }
+
     QGraphicsView::mouseDoubleClickEvent(e);
 }
 
