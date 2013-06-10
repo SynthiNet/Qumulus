@@ -478,9 +478,24 @@ void EditorView::mouseDoubleClickEvent(QMouseEvent* e) {
 
     Popover* popover = nullptr;
     if(dynamic_cast<QuGD::ClassShape*>(selected)) {
-        popover = new Popover(this, e->globalPos());
-        popover->setupUi(Popover::PopoverType::Class);
-        popover->bindModel(dynamic_cast<QuGD::Shape*>(selected));
+        auto operation =
+            dynamic_cast<QuGD::ClassShape*>(selected)->highlightedOperation();
+        auto attribute =
+            dynamic_cast<QuGD::ClassShape*>(selected)->highlightedAttribute();
+
+        if(operation) {
+            popover = new Popover(this, e->globalPos());
+            popover->setupUi(Popover::PopoverType::Operation);
+            popover->bindModel(dynamic_cast<QuGD::Shape*>(selected));
+        } else if(attribute) {
+            popover = new Popover(this, e->globalPos());
+            popover->setupUi(Popover::PopoverType::Attribute);
+            popover->bindModel(dynamic_cast<QuGD::Shape*>(selected));
+        } else {
+            popover = new Popover(this, e->globalPos());
+            popover->setupUi(Popover::PopoverType::Class);
+            popover->bindModel(dynamic_cast<QuGD::Shape*>(selected));
+        }
     } else if(dynamic_cast<QuGD::CommentShape*>(selected)) {
         popover = new Popover(this, e->globalPos());
         popover->setupUi(Popover::PopoverType::Comment);
@@ -494,9 +509,18 @@ void EditorView::mouseDoubleClickEvent(QMouseEvent* e) {
         popover->setupUi(Popover::PopoverType::Primitive);
         popover->bindModel(dynamic_cast<QuGD::Shape*>(selected));
     } else if(dynamic_cast<QuGD::EnumShape*>(selected)) {
-        popover = new Popover(this, e->globalPos());
-        popover->setupUi(Popover::PopoverType::Enumeration);
-        popover->bindModel(dynamic_cast<QuGD::Shape*>(selected));
+        auto literal =
+            dynamic_cast<QuGD::EnumShape*>(selected)->highlightedLiteral();
+
+        if(literal) {
+            popover = new Popover(this, e->globalPos());
+            popover->setupUi(Popover::PopoverType::Literal);
+            popover->bindModel(dynamic_cast<QuGD::Shape*>(selected));
+        } else {
+            popover = new Popover(this, e->globalPos());
+            popover->setupUi(Popover::PopoverType::Enumeration);
+            popover->bindModel(dynamic_cast<QuGD::Shape*>(selected));
+        }
     }
 
     if(popover) {

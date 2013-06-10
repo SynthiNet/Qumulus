@@ -61,10 +61,13 @@
           </spacer>
          </item>
          <item>
-          <widget class="QRadioButton" name="radioButton">
+          <widget class="QRadioButton" name="publicButton">
            <property name="text">
             <string/>
            </property>
+           <attribute name="buttonGroup">
+            <string notr="true">visibilityGroup</string>
+           </attribute>
           </widget>
          </item>
          <item>
@@ -123,10 +126,13 @@
           </spacer>
          </item>
          <item>
-          <widget class="QRadioButton" name="radioButton_2">
+          <widget class="QRadioButton" name="protectedButton">
            <property name="text">
             <string/>
            </property>
+           <attribute name="buttonGroup">
+            <string notr="true">visibilityGroup</string>
+           </attribute>
           </widget>
          </item>
          <item>
@@ -185,10 +191,13 @@
           </spacer>
          </item>
          <item>
-          <widget class="QRadioButton" name="radioButton_3">
+          <widget class="QRadioButton" name="privateButton">
            <property name="text">
             <string/>
            </property>
+           <attribute name="buttonGroup">
+            <string notr="true">visibilityGroup</string>
+           </attribute>
           </widget>
          </item>
          <item>
@@ -252,10 +261,10 @@
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="QLineEdit" name="lineEdit"/>
+      <widget class="QLineEdit" name="nameField"/>
      </item>
      <item row="1" column="1">
-      <widget class="QComboBox" name="comboBox">
+      <widget class="QComboBox" name="typeBox">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
          <horstretch>0</horstretch>
@@ -287,7 +296,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEdit_2">
+        <widget class="QLineEdit" name="multiLowField">
          <property name="text">
           <string>1</string>
          </property>
@@ -301,7 +310,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEdit_3">
+        <widget class="QLineEdit" name="multiHighField">
          <property name="text">
           <string>1</string>
          </property>
@@ -341,21 +350,21 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_5">
      <item>
-      <widget class="QCheckBox" name="checkBox">
+      <widget class="QCheckBox" name="staticBox">
        <property name="text">
         <string>static</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QCheckBox" name="checkBox_2">
+      <widget class="QCheckBox" name="leafBox">
        <property name="text">
         <string>leaf</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QCheckBox" name="checkBox_3">
+      <widget class="QCheckBox" name="readonlyBox">
        <property name="text">
         <string>readonly</string>
        </property>
@@ -367,4 +376,11 @@
  </widget>
  <resources/>
  <connections/>
+ <buttongroups>
+  <buttongroup name="visibilityGroup">
+   <property name="exclusive">
+    <bool>true</bool>
+   </property>
+  </buttongroup>
+ </buttongroups>
 </ui>

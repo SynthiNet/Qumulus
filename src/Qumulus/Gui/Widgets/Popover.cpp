@@ -10,6 +10,7 @@
 #include "PopoverPackage.h"
 #include "PopoverPrimitive.h"
 #include "PopoverEnumeration.h"
+#include "PopoverAttribute.h"
 #include <algorithm>
 #include <QtGui/QPainter>
 #include <QtGui/QPixmap>
@@ -72,12 +73,18 @@ void Popover::setupUi(PopoverType type) {
         mForm = new PopoverComment();
         mForm->setupUi();
         break;
+    case Attribute:
+        mForm = new PopoverAttribute();
+        mForm->setupUi();
+        break;
     default:;
     }
 
     if(mForm) {
         mLayout->addWidget(dynamic_cast<QWidget*>(mForm));
-        auto location = findWindowLocation(mPos, kWidth, kHeight, mOrientation,
+        auto location = findWindowLocation(mPos,
+                dynamic_cast<QWidget*>(mForm)->width() + 20,
+                dynamic_cast<QWidget*>(mForm)->height() + 20, mOrientation,
                 QApplication::desktop()->availableGeometry(mMouse));
 
         setGeometry(location.first.x(), location.first.y(), 0, 0);
