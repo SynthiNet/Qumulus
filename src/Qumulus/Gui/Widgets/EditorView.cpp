@@ -476,11 +476,31 @@ void EditorView::mouseDoubleClickEvent(QMouseEvent* e) {
     // Check what's selected.
     auto selected = mScene->itemAt(mapToScene(e->pos()), QTransform());
 
+    Popover* popover = nullptr;
     if(dynamic_cast<QuGD::ClassShape*>(selected)) {
-        auto popover = new Popover(this, e->globalPos());
+        popover = new Popover(this, e->globalPos());
         popover->setupUi(Popover::PopoverType::Class);
-        popover->setVisible(true);
         popover->bindModel(dynamic_cast<QuGD::Shape*>(selected));
+    } else if(dynamic_cast<QuGD::CommentShape*>(selected)) {
+        popover = new Popover(this, e->globalPos());
+        popover->setupUi(Popover::PopoverType::Comment);
+        popover->bindModel(dynamic_cast<QuGD::Shape*>(selected));
+    } else if(dynamic_cast<QuGD::PackageShape*>(selected)) {
+        popover = new Popover(this, e->globalPos());
+        popover->setupUi(Popover::PopoverType::Package);
+        popover->bindModel(dynamic_cast<QuGD::Shape*>(selected));
+    } else if(dynamic_cast<QuGD::PrimitiveShape*>(selected)) {
+        popover = new Popover(this, e->globalPos());
+        popover->setupUi(Popover::PopoverType::Primitive);
+        popover->bindModel(dynamic_cast<QuGD::Shape*>(selected));
+    } else if(dynamic_cast<QuGD::EnumShape*>(selected)) {
+        popover = new Popover(this, e->globalPos());
+        popover->setupUi(Popover::PopoverType::Enumeration);
+        popover->bindModel(dynamic_cast<QuGD::Shape*>(selected));
+    }
+
+    if(popover) {
+        popover->setVisible(true);
         connect(popover, &Popover::lostFocus, [&]{mScrollable = true;});
     }
 

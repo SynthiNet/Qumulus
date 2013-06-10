@@ -46,7 +46,8 @@ public:
         Literal,
         Operation,
         Package,
-        Primitive
+        Primitive,
+        Enumeration
     };
 
 public:
@@ -54,11 +55,10 @@ public:
             Qt::Orientation orientation = Qt::Horizontal);
     void setupUi(PopoverType);
     void bindModel(QuGD::Shape*);
-    //Popover(QWidget* parent, QuGD::ClassShape* selected, QPoint pos, QPoint reversePos);
 
 protected:
     void resizeEvent(QResizeEvent* event) override;
-    void focusOutEvent(QFocusEvent * event) override;
+    void focusOutEvent(QFocusEvent*) override;
 
 private:
     void generateMask(Direction direction, int offset);
@@ -71,8 +71,13 @@ signals:
 private:
     QBitmap* mMask;
     QVBoxLayout* mLayout;
-    PopoverForm* mForm;
+    QPoint mMouse;
+    QPoint mPos;
+    Qt::Orientation mOrientation;
+    PopoverForm* mForm = nullptr;
     PopoverType mType;
+    constexpr static int kWidth = 400;
+    constexpr static int kHeight = 400;
 };
 
 QUML_END_NAMESPACE_GW
