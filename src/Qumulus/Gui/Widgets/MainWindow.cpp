@@ -21,6 +21,7 @@
 #include <Gui/Widgets/ToolBarMenu.h>
 #include <Gui/Widgets/MessageBox.h>
 #include <Gui/Core/QumulusApplication.h>
+#include <Gui/Core/XmlReader.h>
 #include <QtWidgets/QSplitter>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QAction>
@@ -199,13 +200,29 @@ void MainWindow::createMenus() {
     mHelpMenu = menuBar()->addMenu(tr("&Help"));
 
     // File Menu
-    mNewAction = new QAction(tr("&New"), this);
-    mNewAction->setShortcuts(QKeySequence::New);
-    // check mDiagram->isModified(); !
+    // mNewAction = new QAction(tr("&New"), this);
+    // mNewAction->setShortcuts(QKeySequence::New);
 
     mOpenAction = new QAction(tr("&Open..."), this);
     mOpenAction->setShortcuts(QKeySequence::Open);
-    // check mDiagram->isModified(); !
+    connect(mOpenAction, &QAction::triggered, [&]{
+            if(mFileName != "" || mDiagram->isModified()) {
+                mOpenAction->setEnabled(false);
+                return; // Load once until there is diagram clearing.
+            }
+            QString fName = QFileDialog::getOpenFileName(
+                this, tr("Open Diagram"), "", tr("UML Diagram (*.uml)"));
+            if(fName.isNull()) return;
+            if(!fName.contains(QRegExp(R"(\.(uml)$)", Qt::CaseInsensitive)))
+                fName += ".uml";
+            QuGC::XmlReader r;
+            r.loadFromXml(mDiagram, fName);
+            mFileName = fName;
+            mOpenAction->setEnabled(false);
+            });
+    mDiagram->diagramChanged += [this] {
+        mOpenAction->setEnabled(false);
+    };
 
     mSaveAction = new QAction(tr("&Save..."), this);
     mSaveAction->setShortcuts(QKeySequence::Save);
@@ -222,7 +239,8 @@ void MainWindow::createMenus() {
                 mFileName = fName;
             }
             mDiagram->saveToXml(mFileName);
-            mDiagram->clearModified();});
+            mDiagram->clearModified();
+            mOpenAction->setEnabled(false);});
 
     mSaveAsAction = new QAction(tr("Save &As..."), this);
     mSaveAsAction->setShortcuts(QKeySequence::SaveAs);
@@ -237,7 +255,8 @@ void MainWindow::createMenus() {
             }
             mFileName = fName;
             mDiagram->saveToXml(fName);
-            mDiagram->clearModified();});
+            mDiagram->clearModified();
+            mOpenAction->setEnabled(false);});
 
     // mCloseAction = new QAction(tr("Close"), this);
     // mCloseAction->setShortcuts(QKeySequence::Close);
@@ -316,8 +335,8 @@ void MainWindow::createMenus() {
     mQuitAction->setShortcuts(QKeySequence::Quit);
     connect(mQuitAction, &QAction::triggered, [&]{close();});
 
-    mFileMenu->addAction(mNewAction);
-    mFileMenu->addSeparator();
+    // mFileMenu->addAction(mNewAction);
+    // mFileMenu->addSeparator();
     mFileMenu->addAction(mOpenAction);
     mFileMenu->addAction(mSaveAction);
     mFileMenu->addAction(mSaveAsAction);

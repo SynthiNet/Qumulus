@@ -30,7 +30,7 @@ class ToolBarItem;
 
 enum CursorState {
     Normal,
-    Aggregation, 
+    Aggregation,
     Class,
     Comment,
     Composition,
@@ -100,14 +100,14 @@ private:
     QAction* mQuitAction;
 
     // File Menu
-    QAction* mNewAction;
+    // QAction* mNewAction;
     QAction* mOpenAction;
     QAction* mSaveAction;
     QAction* mSaveAsAction;
     // QAction* mCloseAction;
     QAction* mPrintAction;
     QAction* mExportAction;
-    
+
     // Edit Menu
     QAction* mUndoAction;
     QAction* mRedoAction;
@@ -118,13 +118,13 @@ private:
     // QAction* mDuplicateAction;
 
     // Insert Menu
-     
+
     // View Menu
     QAction* mCenterAction;
     QAction* mZoomInAction;
     QAction* mZoomOutAction;
     QAction* mUndoZoomAction;
-    
+
     // Help Menu
     QAction* mAboutAction;
 
