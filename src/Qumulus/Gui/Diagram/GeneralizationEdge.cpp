@@ -17,23 +17,23 @@ GeneralizationEdge::GeneralizationEdge(QuUK::Element* e, DiagramElement* p) :
 GeneralizationEdge::GeneralizationEdge(const GeneralizationEdge& e) :
         Edge(e) {}
 
-void GeneralizationEdge::paint(QPainter* p, 
-        const QStyleOptionGraphicsItem* o, 
+void GeneralizationEdge::paint(QPainter* p,
+        const QStyleOptionGraphicsItem* o,
         QWidget* w) {
     Edge::paint(p, o, w);
     Shape* t = target();
     Direction entry = targetEntry();
-    QPointF origin = {t->pos().x() + t->width() / 2, 
+    QPointF origin = {t->pos().x() + t->width() / 2,
             t->pos().y() + t->height() / 2};
 
     switch(entry) {
     case Up: {
         origin.ry() -= t->height() / 2;
         origin.rx() += 6;
-        QPolygonF poly({ 
+        QPolygonF poly({
             {origin.x(), origin.y()},
-            {origin.x()+5, origin.y()-10},
-            {origin.x()-5, origin.y()-10}
+            {origin.x()+10, origin.y()-20},
+            {origin.x()-10, origin.y()-20}
         });
         p->setBrush(Qt::white);
         p->drawPolygon(poly);
@@ -42,10 +42,10 @@ void GeneralizationEdge::paint(QPainter* p,
     case Down: {
         origin.ry() += t->height() / 2;
         origin.rx() += 6;
-        QPolygonF poly({ 
+        QPolygonF poly({
             {origin.x(), origin.y()},
-            {origin.x()+5, origin.y()+10},
-            {origin.x()-5, origin.y()+10}
+            {origin.x()+10, origin.y()+20},
+            {origin.x()-10, origin.y()+20}
         });
         p->setBrush(Qt::white);
         p->drawPolygon(poly);
@@ -54,10 +54,10 @@ void GeneralizationEdge::paint(QPainter* p,
     case Left: {
         origin.rx() -= t->width() / 2;
         origin.ry() += 6;
-        QPolygonF poly({ 
+        QPolygonF poly({
             {origin.x(), origin.y()},
-            {origin.x()-10, origin.y()+5},
-            {origin.x()-10, origin.y()-5}
+            {origin.x()-20, origin.y()+10},
+            {origin.x()-20, origin.y()-10}
         });
         p->setBrush(Qt::white);
         p->drawPolygon(poly);
@@ -66,10 +66,10 @@ void GeneralizationEdge::paint(QPainter* p,
     case Right: {
         origin.rx() += t->width() / 2;
         origin.ry() += 6;
-        QPolygonF poly({ 
+        QPolygonF poly({
             {origin.x(), origin.y()},
-            {origin.x()+10, origin.y()-5},
-            {origin.x()+10, origin.y()+5}
+            {origin.x()+20, origin.y()-10},
+            {origin.x()+20, origin.y()+10}
         });
         p->setBrush(Qt::white);
         p->drawPolygon(poly);

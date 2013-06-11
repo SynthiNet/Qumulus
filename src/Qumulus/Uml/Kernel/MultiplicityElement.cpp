@@ -17,18 +17,18 @@ MultiplicityElement::MultiplicityElement() :
 
 }
 
-MultiplicityElement::MultiplicityElement(unsigned l, QuLC::Unlimited u) : 
+MultiplicityElement::MultiplicityElement(unsigned l, QuLC::Unlimited u) :
         mLower(l),
         mUpper(u) {
 
 }
 
 
-bool MultiplicityElement::isMultivalued() const { 
-    return mUpper > 1; 
+bool MultiplicityElement::isMultivalued() const {
+    return mUpper > 1;
 }
 
-bool MultiplicityElement::includesCardinality(unsigned i) const { 
+bool MultiplicityElement::includesCardinality(unsigned i) const {
     return mLower <= i && i <= mUpper;
 }
 
@@ -43,13 +43,13 @@ QString MultiplicityElement::multiplicityString() const {
         str += "[*]";
     } else if(QuLC::unltd(mUpper) || mLower != mUpper) {
         str += "[";
-        str += mLower;
+        str += QString::number(mLower);
         str += "..";
-        str += mUpper;
+        str += QString(mUpper);
         str += "]";
     } else if(mLower != 1) {
         str += "[";
-        str += mLower;
+        str += QString::number(mLower);
         str += "]";
     }
 
