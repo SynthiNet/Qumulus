@@ -68,7 +68,9 @@ public:
     void removeElement(DiagramElement* e);
 
     QuUK::Package* rootPackage() const { return mRootPackage; }
+    void setRootPackage(QuUK::Package* r);
     const QList<QuUK::Comment*>& comments() const { return mComments; }
+    void setComments(const QList<QuUK::Comment*>& c);
 
     void setScene(QGraphicsScene* e);
     QGraphicsScene* scene() const { return mScene; }
