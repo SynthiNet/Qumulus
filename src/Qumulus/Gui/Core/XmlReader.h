@@ -13,6 +13,7 @@
 #include <Gui/Diagram/internal_base.h>
 
 #include <QtCore/QString>
+#include <QtXml/QDomElement>
 
 QUML_BEGIN_NAMESPACE_GD
 class Diagram;
@@ -25,6 +26,9 @@ public:
     XmlReader();
 
     void loadFromXml(QuGD::Diagram* diagram, const QString& path)
+            throw(QuLC::ParseException);
+
+    void readDiagram(QuGD::Diagram* diagram, QDomElement e)
             throw(QuLC::ParseException);
 private:
 };

@@ -80,7 +80,7 @@ QuUK::Element* XmlModelReader::loadElement(QDomElement e) {
         element = new QuUK::Package();
     } else if(tn == "Comment") {
         element = new QuUK::Comment();
-    } else if(tn == "Primitive") {
+    } else if(tn == "PrimitiveType") {
         element = new QuUK::PrimitiveType();
     } else if(tn == "Class") {
         element = new QuUK::Class();
@@ -97,6 +97,10 @@ QuUK::Element* XmlModelReader::loadElement(QDomElement e) {
     } else if(tn == "Association") {
         element = new QuUK::Association();
     }
+
+    if(!element)
+        throw QuLC::ParseException(qPrintable("Unknown diagram element " +
+                e.tagName()));
 
     element->readXml(e, *this);
 
