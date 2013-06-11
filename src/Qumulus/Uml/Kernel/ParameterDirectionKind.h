@@ -35,7 +35,7 @@ inline QString toString(ParameterDirectionKind k) {
     }
 }
 
-inline ParameterDirectionKind fromString(QString& s) {
+inline ParameterDirectionKind directionKindFromString(const QString& s) {
     if(s == "in")
         return ParameterDirectionKind::In;
     else if(s == "inout")

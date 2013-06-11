@@ -57,7 +57,7 @@ public:
     QString sidebarIcon() const override { return "class"; }
 
     void writeXml(QXmlStreamWriter& writer) const override;
-    void readXml(QDomNode node, QuLC::XmlModelReader& reader) override;
+    void readXml(QDomElement node, QuLC::XmlModelReader& reader) override;
 
     QUML_CLONABLE(Class);
 private:

@@ -9,6 +9,7 @@
 #include "Classifier.h"
 
 #include <QtCore/QXmlStreamWriter>
+#include <QtCore/QDebug>
 
 QUML_BEGIN_NAMESPACE_UK
 
@@ -38,7 +39,7 @@ void Association::writeXml(QXmlStreamWriter& writer) const {
     NYI();
 }
 
-void Association::readXml(QDomNode node, QuLC::XmlModelReader& reader) {
+void Association::readXml(QDomElement node, QuLC::XmlModelReader& reader) {
     (void)node;
     (void)reader;
 

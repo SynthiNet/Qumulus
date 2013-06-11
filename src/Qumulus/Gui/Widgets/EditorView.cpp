@@ -34,6 +34,8 @@
 #include <Gui/Diagram/GeneralizationEdge.h>
 #include <Gui/Diagram/ContainmentEdge.h>
 
+#include <Gui/Core/XmlReader.h>
+
 #include <Gui/Widgets/Popover.h>
 
 #include <cmath>
@@ -127,6 +129,9 @@ EditorView::EditorView(MainWindow* parent, QuGD::Diagram* d) :
     mLiteralButtonItem = mScene->addWidget(mLiteralButton);
     mLiteralButtonItem->setVisible(false);
     mLiteralButtonItem->setZValue(10);
+
+    QuGC::XmlReader r;
+    r.loadFromXml(mDiagram, "test.uml");
 }
 
 EditorView::~EditorView() noexcept {

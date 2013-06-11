@@ -36,7 +36,7 @@ public:
     QString sidebarText() const override { return name(); }
 
     void writeXml(QXmlStreamWriter& writer) const override;
-    void readXml(QDomNode node, QuLC::XmlModelReader& reader) override;
+    void readXml(QDomElement node, QuLC::XmlModelReader& reader) override;
 
     QUML_CLONABLE(EnumerationLiteral);
 private:

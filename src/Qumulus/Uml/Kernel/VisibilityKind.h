@@ -44,7 +44,7 @@ inline QString toString(VisibilityKind v) {
     }
 }
 
-inline VisibilityKind fromString(const QString& s) {
+inline VisibilityKind visibilityKindFromString(const QString& s) {
     if(s == "public")
         return VisibilityKind::Public;
     else if(s == "private")

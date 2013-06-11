@@ -31,7 +31,7 @@ public:
     void setAggregation(AggregationKind k) { mAggregation = k; }
 
     void writeXml(QXmlStreamWriter& writer) const override;
-    void readXml(QDomNode node, QuLC::XmlModelReader& reader) override;
+    void readXml(QDomElement node, QuLC::XmlModelReader& reader) override;
 
     QUML_CLONABLE(Association);
 private:

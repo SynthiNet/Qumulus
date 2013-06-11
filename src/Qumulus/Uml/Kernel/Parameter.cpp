@@ -10,6 +10,7 @@
 #include "Type.h"
 
 #include <QtCore/QXmlStreamWriter>
+#include <QtCore/QDebug>
 
 QUML_BEGIN_NAMESPACE_UK
 
@@ -80,11 +81,22 @@ void Parameter::writeXml(QXmlStreamWriter& writer) const {
     writer.writeEndElement();
 }
 
-void Parameter::readXml(QDomNode node, QuLC::XmlModelReader& reader) {
-    (void)node;
-    (void)reader;
+void Parameter::readXml(QDomElement node, QuLC::XmlModelReader& reader) {
+    qDebug() << "Load: " << node.tagName() << "[id=" <<
+        node.attribute("id", "") << "] name: " << node.attribute("name", "");
 
-    NYI();
+    setUniqueId(node.attribute("id"));
+    setName(node.attribute("name"));
+    setDirection(QuUK::directionKindFromString(
+                node.attribute("direction")));
+    reader.ensureLoaded(node.attribute("type"));
+    setType(dynamic_cast<Type*>(Element::byId(node.attribute("type"))));
+
+    setLowerBound(node.attribute("lower").toInt());
+    setUpperBound(node.attribute("upper") == "*" ? QuLC::Unlimited("*") :
+            QuLC::Unlimited(node.attribute("upper").toInt()));
+    setDefaultValue(node.attribute("default"));
+
 }
 
 QUML_END_NAMESPACE_UK

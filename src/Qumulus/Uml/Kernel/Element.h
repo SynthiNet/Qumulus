@@ -97,7 +97,7 @@ public:
     static Element* byId(const QString& s);
 
     virtual void writeXml(QXmlStreamWriter& writer) const = 0;
-    virtual void readXml(QDomNode node, QuLC::XmlModelReader& reader) = 0;
+    virtual void readXml(QDomElement node, QuLC::XmlModelReader& reader) = 0;
 
     QUML_CLONABLE_ABSTRACT(Element)
 public:

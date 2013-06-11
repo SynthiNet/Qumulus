@@ -9,6 +9,7 @@
 #include "Classifier.h"
 
 #include <QtCore/QXmlStreamWriter>
+#include <QtCore/QDebug>
 
 QUML_BEGIN_NAMESPACE_UK
 
@@ -45,11 +46,11 @@ void Generalization::writeXml(QXmlStreamWriter& writer) const {
     writer.writeEndElement();
 }
 
-void Generalization::readXml(QDomNode node, QuLC::XmlModelReader& reader) {
-    (void)node;
+void Generalization::readXml(QDomElement node, QuLC::XmlModelReader& reader) {
     (void)reader;
 
-    NYI();
+    qDebug() << "Load: " << node.tagName() << "[id=" <<
+        node.attribute("id", "") << "] name: " << node.attribute("name", "");
 }
 
 QUML_END_NAMESPACE_UK
