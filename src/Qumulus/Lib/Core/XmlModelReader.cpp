@@ -100,7 +100,7 @@ QuUK::Element* XmlModelReader::loadElement(QDomElement e) {
 
     if(!element)
         throw QuLC::ParseException(qPrintable("Unknown diagram element " +
-                node.tagName()));
+                e.tagName()));
 
     element->readXml(e, *this);
 
