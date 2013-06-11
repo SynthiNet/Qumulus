@@ -43,7 +43,7 @@ endif()
 
 # quml library
 add_library(quml STATIC ${QUML_ALL_SRC})
-qt5_use_modules(quml Core)
+qt5_use_modules(quml Core Xml)
 
 # Qumulus application
 add_executable(${QUMULUS} WIN32 MACOSX_BUNDLE
