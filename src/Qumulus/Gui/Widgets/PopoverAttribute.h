@@ -232,7 +232,7 @@ public:
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(typeBox->sizePolicy().hasHeightForWidth());
         typeBox->setSizePolicy(sizePolicy);
-        typeBox->setEditable(true);
+        typeBox->setEditable(false);
 
         formLayout->setWidget(1, QFormLayout::FieldRole, typeBox);
 
@@ -393,7 +393,6 @@ public:
                 s->update();});
 
         // populate TypeBox here.
-        typeBox->setEditable(false);
 
         multiLowField->setValidator(new QRegExpValidator(QRegExp("\\d*")));
         multiLowField->setText(QString::number(a->lowerBound()));
