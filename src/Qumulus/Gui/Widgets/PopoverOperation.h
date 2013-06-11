@@ -10,6 +10,7 @@
 #include "internal_base.h"
 #include "PopoverForm.h"
 #include <Uml/Kernel/Operation.h>
+#include <Uml/Kernel/Parameter.h>
 #include <Gui/Diagram/ClassShape.h>
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
@@ -374,6 +375,7 @@ public:
             label_5->hasFocus() ||
             nameField->hasFocus() ||
             typeBox->hasFocus() ||
+            typeBox->view()->hasFocus() ||
             line_2->hasFocus() ||
             staticBox->hasFocus() ||
             leafBox->hasFocus() ||
@@ -419,7 +421,41 @@ public:
                 s->update();});
 
         // typeBox
-        // TODO
+        typeBox->addItem("");
+        for(auto i : QuUK::Type::typeList()) {
+            typeBox->addItem(i->qualifiedName());
+        }
+        typeBox->setCurrentText(o->type() ? o->type()->qualifiedName() : "");
+        connect(typeBox, static_cast<void (QComboBox::*)(int)>(
+                    &QComboBox::currentIndexChanged),
+                [s,o,this](int i){
+                if(i == 0) {
+                    for(auto p : o->parameters()) {
+                        if(p->direction() == QuUK::ParameterDirectionKind::Return) {
+                            o->removeParameter(p);
+                            delete p;
+                            break;
+                        }
+                    }
+                } else {
+                    bool isSet = false;
+                    for(auto p : o->parameters()) {
+                        if(p->direction() == QuUK::ParameterDirectionKind::Return) {
+                            p->setType(QuUK::Type::typeList()[i-1]);
+                            isSet = true;
+                            break;
+                        }
+                    }
+
+                    if(!isSet) {
+                        auto param = new QuUK::Parameter("", o);
+                        param->setDirection(QuUK::ParameterDirectionKind::Return);
+                        param->setType(QuUK::Type::typeList()[i-1]);
+                        o->addParameter(param);
+                    }
+                }
+                s->update();});
+
 
         staticBox->setCheckState(o->isStatic() ? Qt::Checked : Qt::Unchecked);
         connect(staticBox, &QCheckBox::stateChanged, [o,s](int state){
