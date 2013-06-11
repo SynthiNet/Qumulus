@@ -249,6 +249,7 @@ void MainWindow::createMenus() {
             if(QPrintDialog(&printer).exec() == QDialog::Accepted) {
                 QPainter painter(&printer);
                 painter.setRenderHint(QPainter::Antialiasing);
+                mEditorView->scene()->clearSelection();
                 mEditorView->scene()->render(&painter);
             }});
 
@@ -314,18 +315,6 @@ void MainWindow::createMenus() {
     mQuitAction = new QAction(tr("&Quit"), this);
     mQuitAction->setShortcuts(QKeySequence::Quit);
     connect(mQuitAction, &QAction::triggered, [&]{close();});
-    // connect(mQuitAction, &QAction::triggered, [&]{
-    //         if(mDiagram->isModified()) {
-    //             if(QMessageBox::Yes ==
-    //                     QMessageBox::question(this, "Are you sure?",
-    //                         "Your document contains unsaved changes, "
-    //                         "are you sure you want to quit?",
-    //                         QMessageBox::Yes|QMessageBox::No)){
-    //                 QApplication::exit();
-    //             }
-    //         } else {
-    //             QApplication::exit();
-    //         }});
 
     mFileMenu->addAction(mNewAction);
     mFileMenu->addSeparator();
