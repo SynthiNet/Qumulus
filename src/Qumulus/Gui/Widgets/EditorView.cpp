@@ -77,12 +77,45 @@ EditorView::EditorView(MainWindow* parent, QuGD::Diagram* d) :
     mAttributeButton->setIconSize({24, 24});
     mAttributeButton->setFixedSize({32, 32});
     mAttributeButton->setToolTip("Attribute [A]");
+    mAttributeButton->setShortcut({Qt::Key_A});
+    connect(mAttributeButton, &QPushButton::clicked, [&]{
+            auto items = mScene->selectedItems();
+            if(items.size() == 1 && dynamic_cast<QuGD::ClassShape*>(items[0])) {
+                auto i = dynamic_cast<QuGD::ClassShape*>(items[0]);
+                new QuUK::Property("attribute" +
+                    QString::number(mDiagram->nextCounter()),
+                    dynamic_cast<QuUK::Class*>(i->modelElement()));
+                i->update();
+            }});
+
     mOperationButton->setIconSize({24, 24});
     mOperationButton->setFixedSize({32, 32});
     mOperationButton->setToolTip("Operation [O]");
+    mOperationButton->setShortcut({Qt::Key_O});
+    connect(mOperationButton, &QPushButton::clicked, [&]{
+            auto items = mScene->selectedItems();
+            if(items.size() == 1 && dynamic_cast<QuGD::ClassShape*>(items[0])) {
+                auto i = dynamic_cast<QuGD::ClassShape*>(items[0]);
+                new QuUK::Operation("operation" +
+                    QString::number(mDiagram->nextCounter()),
+                    dynamic_cast<QuUK::Class*>(i->modelElement()));
+                i->update();
+            }});
+
     mLiteralButton->setIconSize({24, 24});
     mLiteralButton->setFixedSize({32, 32});
     mLiteralButton->setToolTip("Literal [L]");
+    mLiteralButton->setShortcut({Qt::Key_L});
+    connect(mLiteralButton, &QPushButton::clicked, [&]{
+            auto items = mScene->selectedItems();
+            if(items.size() == 1 && dynamic_cast<QuGD::EnumShape*>(items[0])) {
+                auto i = dynamic_cast<QuGD::EnumShape*>(items[0]);
+                new QuUK::EnumerationLiteral("Literal" +
+                    QString::number(mDiagram->nextCounter()),
+                    dynamic_cast<QuUK::Enumeration*>(i->modelElement()));
+                i->update();
+            }});
+
 
     mAttributeButtonItem = mScene->addWidget(mAttributeButton);
     mAttributeButtonItem->setVisible(false);
