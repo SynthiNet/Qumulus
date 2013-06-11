@@ -19,16 +19,20 @@ Comment::~Comment() {
 }
 
 void Comment::writeXml(QXmlStreamWriter& writer) const {
-    writer.writeTextElement("Comment", body());
+    writer.writeStartElement("Comment");
+    writer.writeAttribute("id", uniqueId());
+    writer.writeCharacters(body());
+    writer.writeEndElement();
 }
 
 void Comment::readXml(QDomElement node, QuLC::XmlModelReader& reader) {
     (void)reader;
 
     qDebug() << "Load: " << node.tagName() << "[id=" <<
-        node.attribute("id", "") << "] name: " << node.attribute("name", "");
+        node.attribute("id", "") << "] body: " << node.text();
 
-    setBody(node.toElement().text());
+    setUniqueId(node.attribute("id"));
+    setBody(node.text());
 }
 
 QUML_END_NAMESPACE_UK

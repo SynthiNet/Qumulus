@@ -73,10 +73,17 @@ Diagram::~Diagram() {
 
 void Diagram::addElement(DiagramElement* e) {
     mElements.append(e);
-    if(Shape* p = dynamic_cast<Shape*>(e))
+
+    if(Shape* p = dynamic_cast<Shape*>(e)) {
         mScene->addItem(p);
-    if(Edge* p = dynamic_cast<Edge*>(e))
+        p->passRouter(mRouter);
+    }
+
+    if(Edge* p = dynamic_cast<Edge*>(e)) {
         mScene->addItem(p);
+        p->passRouter(mRouter);
+    }
+
     diagramChanged();
     mIsModified = true;
 }
@@ -107,7 +114,6 @@ void Diagram::setComments(const QList<QuUK::Comment*>& c) {
 PackageShape* Diagram::createShape(QuUK::Package* p) {
     auto pshape = new PackageShape(p, this);
     addElement(pshape);
-    pshape->passRouter(mRouter);
     p->setPackage(mRootPackage);
     return pshape;
 }
@@ -115,7 +121,6 @@ PackageShape* Diagram::createShape(QuUK::Package* p) {
 CommentShape* Diagram::createShape(QuUK::Comment* c) {
     auto cshape = new CommentShape(c, this);
     addElement(cshape);
-    cshape->passRouter(mRouter);
     mComments.append(c);
     return cshape;
 }
@@ -123,7 +128,6 @@ CommentShape* Diagram::createShape(QuUK::Comment* c) {
 PrimitiveShape* Diagram::createShape(QuUK::PrimitiveType* p) {
     auto pshape = new PrimitiveShape(p, this);
     addElement(pshape);
-    pshape->passRouter(mRouter);
     p->setPackage(mRootPackage);
     return pshape;
 }
@@ -131,7 +135,6 @@ PrimitiveShape* Diagram::createShape(QuUK::PrimitiveType* p) {
 ClassShape* Diagram::createShape(QuUK::Class* c) {
     auto cshape = new ClassShape(c, this);
     addElement(cshape);
-    cshape->passRouter(mRouter);
     c->setPackage(mRootPackage);
     return cshape;
 }
@@ -139,7 +142,6 @@ ClassShape* Diagram::createShape(QuUK::Class* c) {
 EnumShape* Diagram::createShape(QuUK::Enumeration* e) {
     auto eshape = new EnumShape(e, this);
     addElement(eshape);
-    eshape->passRouter(mRouter);
     e->setPackage(mRootPackage);
     return eshape;
 }
@@ -148,7 +150,6 @@ GeneralizationEdge* Diagram::createEdge(QuUK::Generalization* a, Shape* src,
         Shape* dst) {
     auto gedge = new GeneralizationEdge(a, this);
     addElement(gedge);
-    gedge->passRouter(mRouter);
     gedge->setSource(src);
     gedge->setTarget(dst);
     gedge->connect();
@@ -159,7 +160,6 @@ AssociationEdge* Diagram::createEdge(QuUK::Association* a, Shape* src,
         Shape* dst) {
     auto aedge = new AssociationEdge(a, this);
     addElement(aedge);
-    aedge->passRouter(mRouter);
     aedge->setSource(src);
     aedge->setTarget(dst);
     aedge->connect();
@@ -169,7 +169,6 @@ AssociationEdge* Diagram::createEdge(QuUK::Association* a, Shape* src,
 ContainmentEdge* Diagram::createPackageContainment(Shape* src, Shape* dst) {
     auto cedge = new ContainmentEdge(nullptr, this);
     addElement(cedge);
-    cedge->passRouter(mRouter);
     cedge->setSource(src);
     cedge->setTarget(dst);
     cedge->connect();
