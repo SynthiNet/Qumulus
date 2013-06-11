@@ -145,6 +145,7 @@ void AssociationEdge::paint(QPainter* p,
     default:
         break;
     }
-    }
+}
+
 QUML_END_NAMESPACE_GD
 
