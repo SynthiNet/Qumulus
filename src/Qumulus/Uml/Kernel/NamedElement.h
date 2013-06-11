@@ -36,6 +36,8 @@ public:
     void setName(const QString& n) { mName = n; elementChanged(); }
 
     VisibilityKind visibility() const { return mVisibility; }
+    // TODO: 2013-06-11 Frank Erens
+    // This should be called setVisibility. Oops.
     void setVisiblity(VisibilityKind v) { mVisibility = v; elementChanged(); }
 
     QUML_CLONABLE_ABSTRACT(NamedElement)

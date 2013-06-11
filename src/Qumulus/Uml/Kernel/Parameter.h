@@ -49,7 +49,7 @@ public:
     QString sidebarText() const override { return ""; }
 
     void writeXml(QXmlStreamWriter& writer) const override;
-    void readXml(QDomNode node, QuLC::XmlModelReader& reader) override;
+    void readXml(QDomElement node, QuLC::XmlModelReader& reader) override;
 
     QString toString() const;
 

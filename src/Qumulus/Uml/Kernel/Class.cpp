@@ -11,7 +11,9 @@
 #include "Operation.h"
 
 #include <Lib/Core/Functional.h>
+
 #include <QtCore/QXmlStreamWriter>
+#include <QtCore/QDebug>
 
 QUML_BEGIN_NAMESPACE_UK
 
@@ -102,9 +104,20 @@ void Class::writeXml(QXmlStreamWriter& writer) const {
     writer.writeEndElement();
 }
 
-void Class::readXml(QDomNode node, QuLC::XmlModelReader& reader) {
-    (void)node;
+void Class::readXml(QDomElement node, QuLC::XmlModelReader& reader) {
     (void)reader;
+
+    qDebug() << "Load: " << node.tagName() << "[id=" <<
+        node.attribute("id", "") << "] name: " << node.attribute("name", "");
+
+    setUniqueId(node.attribute("id"));
+    setName(node.attribute("name"));
+    setAbstract(node.attribute("abstract") == "true");
+    setFinal(node.attribute("final") == "true");
+
+    // LOAD GENERALIZATIONS
+    // LOAD ATTRIBUTES
+    // LOAD OPERATIONS
 
     NYI();
 }

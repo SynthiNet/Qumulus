@@ -6,6 +6,7 @@
 
 #include "Comment.h"
 #include <QtCore/QXmlStreamWriter>
+#include <QtCore/QDebug>
 
 QUML_BEGIN_NAMESPACE_UK
 
@@ -21,8 +22,11 @@ void Comment::writeXml(QXmlStreamWriter& writer) const {
     writer.writeTextElement("Comment", body());
 }
 
-void Comment::readXml(QDomNode node, QuLC::XmlModelReader& reader) {
+void Comment::readXml(QDomElement node, QuLC::XmlModelReader& reader) {
     (void)reader;
+
+    qDebug() << "Load: " << node.tagName() << "[id=" <<
+        node.attribute("id", "") << "] name: " << node.attribute("name", "");
 
     setBody(node.toElement().text());
 }

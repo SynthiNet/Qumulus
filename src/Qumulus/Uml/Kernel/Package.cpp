@@ -11,6 +11,7 @@
 #include <QtWidgets/QGraphicsRectItem>
 
 #include <QtCore/QXmlStreamWriter>
+#include <QtCore/QDebug>
 
 QUML_BEGIN_NAMESPACE_UK
 
@@ -60,9 +61,14 @@ void Package::writeXml(QXmlStreamWriter& writer) const {
     writer.writeEndElement();
 }
 
-void Package::readXml(QDomNode node, QuLC::XmlModelReader& reader) {
-    (void)node;
+void Package::readXml(QDomElement node, QuLC::XmlModelReader& reader) {
     (void)reader;
+
+    qDebug() << "Load: " << node.tagName() << "[id=" <<
+        node.attribute("id", "") << "] name: " << node.attribute("name", "");
+
+    setUniqueId(node.attribute("id"));
+    setName(node.attribute("name"));
 
     NYI();
 }

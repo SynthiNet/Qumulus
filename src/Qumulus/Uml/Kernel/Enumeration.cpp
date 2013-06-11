@@ -7,6 +7,7 @@
 #include "Enumeration.h"
 
 #include <QtCore/QXmlStreamWriter>
+#include <QtCore/QDebug>
 
 QUML_BEGIN_NAMESPACE_UK
 
@@ -59,9 +60,16 @@ void Enumeration::writeXml(QXmlStreamWriter& writer) const {
     writer.writeEndElement();
 }
 
-void Enumeration::readXml(QDomNode node, QuLC::XmlModelReader& reader) {
-    (void)node;
+void Enumeration::readXml(QDomElement node, QuLC::XmlModelReader& reader) {
     (void)reader;
+
+    qDebug() << "Load: " << node.tagName() << "[id=" <<
+        node.attribute("id", "") << "] name: " << node.attribute("name", "");
+
+    setUniqueId(node.attribute("id"));
+    setName(node.attribute("name"));
+
+    // LOAD LITERALS
 
     NYI();
 }

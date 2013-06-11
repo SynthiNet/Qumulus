@@ -33,6 +33,8 @@
 #include <Gui/Diagram/AssociationEdge.h>
 #include <Gui/Diagram/GeneralizationEdge.h>
 
+#include <Gui/Core/XmlReader.h>
+
 #include <Gui/Widgets/Popover.h>
 
 #include <cmath>
@@ -127,54 +129,8 @@ EditorView::EditorView(MainWindow* parent, QuGD::Diagram* d) :
     mLiteralButtonItem->setVisible(false);
     mLiteralButtonItem->setZValue(10);
 
-    // FIXME: this is temporary testing code!
-    auto package = new QuUK::Package("Uml");
-    auto pshape = mDiagram->createShape(package);
-    pshape->setVisible(true);
-    pshape->setPos(-200, -100);
-
-    // FIXME: this is temporary testing code!
-    auto boolean = new QuUK::PrimitiveType("bool");
-    auto ptshape = mDiagram->createShape(boolean);
-    boolean->setPackage(package);
-    ptshape->setPos(-200, 0);
-    ptshape->setVisible(true);
-
-    // FIXME: this is temporary testing code!
-    auto classs = new QuUK::Class("Classy");
-    auto oper = new QuUK::Operation("naam", classs);
-    oper->setStatic(true);
-    oper->setVisiblity(QuUK::VisibilityKind::Public);
-    auto ret = new QuUK::Parameter("", oper);
-    ret->setDirection(QuUK::ParameterDirectionKind::Return);
-    ret->setType(boolean);
-    (new QuUK::Parameter("par1", oper))->setDirection(QuUK::ParameterDirectionKind::Out);
-    (new QuUK::Parameter("par2", oper))->setType(boolean);
-    new QuUK::Property("naamGeinspireerdDoorHetWerkVanMarxVanTweeEeuwenTerug", classs);
-    auto clshape = mDiagram->createShape(classs);
-    classs->setPackage(package);
-    clshape->setPos(20, 0);
-    clshape->setVisible(true);
-
-    // FIXME: this is temporary testing code!
-    auto visibilityKind = new QuUK::Enumeration("VisibilityKind");
-    new QuUK::EnumerationLiteral("Public", visibilityKind);
-    new QuUK::EnumerationLiteral("Protected", visibilityKind);
-    new QuUK::EnumerationLiteral("Private", visibilityKind);
-    new QuUK::EnumerationLiteral("FILE_NOT_FOUND", visibilityKind);
-    auto eshape = mDiagram->createShape(visibilityKind);
-    visibilityKind->setPackage(package);
-    eshape->setPos(-200, 50);
-    eshape->setVisible(true);
-
-    // FIXME: this is temporary testing code!
-    auto comment = new QuUK::Comment(
-            "VisibilityKind is an enumeration type that defines literals to "
-            "determine the visibility of elements in a model.");
-    auto cshape = mDiagram->createShape(comment);
-    cshape->setVisible(true);
-    cshape->setPos(-200, 200);
-
+    QuGC::XmlReader r;
+    r.loadFromXml(mDiagram, "test.uml");
 }
 
 EditorView::~EditorView() noexcept {

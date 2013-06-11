@@ -110,9 +110,18 @@ void Operation::writeXml(QXmlStreamWriter& writer) const {
     writer.writeEndElement();
 }
 
-void Operation::readXml(QDomNode node, QuLC::XmlModelReader& reader) {
-    (void)node;
+void Operation::readXml(QDomElement node, QuLC::XmlModelReader& reader) {
     (void)reader;
+
+    setUniqueId(node.attribute("id"));
+    setName(node.attribute("name"));
+    setVisiblity(visibilityKindFromString(node.attribute("visibility")));
+    setLeaf(node.attribute("leaf") == "true");
+    setStatic(node.attribute("static") == "true");
+
+    // LOAD EXCEPTIONS
+
+    // LOAD PARAMETERS
 
     NYI();
 }
