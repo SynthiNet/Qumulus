@@ -215,8 +215,14 @@ void MainWindow::createMenus() {
             if(fName.isNull()) return;
             if(!fName.contains(QRegExp(R"(\.(uml)$)", Qt::CaseInsensitive)))
                 fName += ".uml";
-            QuGC::XmlReader r;
-            r.loadFromXml(mDiagram, fName);
+            try {
+                QuGC::XmlReader r;
+                r.loadFromXml(mDiagram, fName);
+            } catch(const QuLC::ParseException& ex) {
+                MessageBox::critical(this,
+                    "Error while opening file", ex.what());
+                return;
+            }
             mFileName = fName;
             mOpenAction->setEnabled(false);
             });
