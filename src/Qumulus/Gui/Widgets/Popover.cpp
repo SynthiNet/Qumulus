@@ -11,6 +11,8 @@
 #include "PopoverPrimitive.h"
 #include "PopoverEnumeration.h"
 #include "PopoverAttribute.h"
+#include "PopoverOperation.h"
+#include "PopoverLiteral.h"
 #include <algorithm>
 #include <QtGui/QPainter>
 #include <QtGui/QPixmap>
@@ -77,7 +79,14 @@ void Popover::setupUi(PopoverType type) {
         mForm = new PopoverAttribute();
         mForm->setupUi();
         break;
-    default:;
+    case Literal:
+        mForm = new PopoverLiteral();
+        mForm->setupUi();
+        break;
+    case Operation:
+        mForm = new PopoverOperation();
+        mForm->setupUi();
+        break;
     }
 
     if(mForm) {
