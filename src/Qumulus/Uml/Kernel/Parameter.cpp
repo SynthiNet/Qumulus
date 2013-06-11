@@ -89,8 +89,11 @@ void Parameter::readXml(QDomElement node, QuLC::XmlModelReader& reader) {
     setName(node.attribute("name"));
     setDirection(QuUK::directionKindFromString(
                 node.attribute("direction")));
-    reader.ensureLoaded(node.attribute("type"));
-    setType(dynamic_cast<Type*>(Element::byId(node.attribute("type"))));
+
+    if(node.attribute("type") != "") {
+        reader.ensureLoaded(node.attribute("type"));
+        setType(dynamic_cast<Type*>(Element::byId(node.attribute("type"))));
+    }
 
     setLowerBound(node.attribute("lower").toInt());
     setUpperBound(node.attribute("upper") == "*" ? QuLC::Unlimited("*") :

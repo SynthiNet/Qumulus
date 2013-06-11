@@ -11,6 +11,7 @@
 #include <Uml/Kernel/PrimitiveType.h>
 #include <Uml/Kernel/Class.h>
 #include <Uml/Kernel/Operation.h>
+#include <Uml/Kernel/Parameter.h>
 #include <Uml/Kernel/Property.h>
 #include <Uml/Kernel/Enumeration.h>
 #include <Uml/Kernel/EnumerationLiteral.h>
@@ -50,8 +51,7 @@ void XmlModelReader::ensureLoaded(QString uniqueid) {
     if(!QuUK::Element::byId(uniqueid)) {
         auto x = elementById(mRootNode, uniqueid);
         ensureLoaded(x.parentNode().toElement().attribute("id"));
-
-        // LOAD ELEMENT HERE?
+        loadElement(x.toElement());
     }
 }
 
@@ -62,8 +62,8 @@ QDomElement XmlModelReader::elementById(QDomElement e, QString id) const {
             auto x = children.at(i).toElement();
             if(x.hasAttribute("id") && x.attribute("id") == id) {
                 return x;
-            } else if(e.hasChildNodes()) {
-                auto y = elementById(e, id);
+            } else if(x.hasChildNodes()) {
+                auto y = elementById(x, id);
                 if(!y.isNull()) return y;
             }
         }
@@ -86,7 +86,9 @@ QuUK::Element* XmlModelReader::loadElement(QDomElement e) {
         element = new QuUK::Class();
     } else if(tn == "Operation") {
         element = new QuUK::Operation("");
-    } else if(tn == "Attribute") {
+    } else if(tn == "Parameter") {
+        element = new QuUK::Parameter("");
+    } else if(tn == "Property") {
         element = new QuUK::Property("");
     } else if(tn == "Enumeration") {
         element = new QuUK::Enumeration();

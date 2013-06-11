@@ -96,6 +96,7 @@ void Operation::writeXml(QXmlStreamWriter& writer) const {
     writer.writeAttribute("visibility", QuUK::toString(visibility()));
     writer.writeAttribute("leaf", leaf() ? "true" : "false");
     writer.writeAttribute("static", isStatic() ? "true" : "false");
+    writer.writeAttribute("query", isQuery() ? "true" : "false");
 
     for(auto& x : raisedExceptions()) {
         writer.writeStartElement("Exception");
@@ -111,19 +112,27 @@ void Operation::writeXml(QXmlStreamWriter& writer) const {
 }
 
 void Operation::readXml(QDomElement node, QuLC::XmlModelReader& reader) {
-    (void)reader;
-
     setUniqueId(node.attribute("id"));
     setName(node.attribute("name"));
     setVisiblity(visibilityKindFromString(node.attribute("visibility")));
     setLeaf(node.attribute("leaf") == "true");
     setStatic(node.attribute("static") == "true");
-
-    // LOAD EXCEPTIONS
+    setQuery(node.attribute("query") == "true");
 
     // LOAD PARAMETERS
+    QDomNodeList children = node.childNodes();
 
-    NYI();
+    for(int i = 0; i < children.size(); ++i) {
+        auto e = children.at(i).toElement();
+
+        if(e.tagName() == "Parameter") {
+            auto p = reader.loadElement(e);
+            addParameter(dynamic_cast<Parameter*>(p));
+        } else {
+            throw QuLC::ParseException(qPrintable(
+                        "Operations cannot contain a "+e.tagName()));
+        }
+    }
 }
 
 QUML_END_NAMESPACE_UK

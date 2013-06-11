@@ -51,6 +51,8 @@ void Generalization::readXml(QDomElement node, QuLC::XmlModelReader& reader) {
 
     qDebug() << "Load: " << node.tagName() << "[id=" <<
         node.attribute("id", "") << "] name: " << node.attribute("name", "");
+
+    NYI();
 }
 
 QUML_END_NAMESPACE_UK

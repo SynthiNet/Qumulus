@@ -70,8 +70,20 @@ void Enumeration::readXml(QDomElement node, QuLC::XmlModelReader& reader) {
     setName(node.attribute("name"));
 
     // LOAD LITERALS
+    QDomNodeList children = node.childNodes();
 
-    NYI();
+    for(int i = 0; i < children.size(); ++i) {
+        auto e = children.at(i).toElement();
+
+        if(e.tagName() == "Literal") {
+            auto p = reader.loadElement(e);
+            addLiteral(dynamic_cast<EnumerationLiteral*>(p));
+        } else {
+            throw QuLC::ParseException(qPrintable(
+                        "Enumerations cannot contain a"+e.tagName()));
+        }
+    }
+
 }
 
 QUML_END_NAMESPACE_UK

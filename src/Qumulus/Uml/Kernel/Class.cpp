@@ -118,6 +118,22 @@ void Class::readXml(QDomElement node, QuLC::XmlModelReader& reader) {
     // LOAD GENERALIZATIONS
     // LOAD ATTRIBUTES
     // LOAD OPERATIONS
+    QDomNodeList children = node.childNodes();
+
+    for(int i = 0; i < children.size(); ++i) {
+        auto e = children.at(i).toElement();
+
+        if(e.tagName() == "Property") {
+            auto p = reader.loadElement(e);
+            addAttribute(dynamic_cast<Property*>(p));
+        } else if(e.tagName() == "Operation") {
+            auto p = reader.loadElement(e);
+            addOperation(dynamic_cast<Operation*>(p));
+        } else {
+            throw QuLC::ParseException(qPrintable(
+                        "Classes cannot contain a "+e.tagName()));
+        }
+    }
 
     NYI();
 }

@@ -36,7 +36,7 @@ inline QString toString(ParameterDirectionKind k) {
 }
 
 inline ParameterDirectionKind directionKindFromString(const QString& s) {
-    if(s == "in")
+    if(s == "in" || s == "")
         return ParameterDirectionKind::In;
     else if(s == "inout")
         return ParameterDirectionKind::InOut;
@@ -45,7 +45,8 @@ inline ParameterDirectionKind directionKindFromString(const QString& s) {
     else if(s == "return")
         return ParameterDirectionKind::Return;
     else
-        throw QuLC::ParseException();
+        throw QuLC::ParseException(qPrintable(
+                    "Unknown direction kind: " + s));
 }
 
 QUML_END_NAMESPACE_UK

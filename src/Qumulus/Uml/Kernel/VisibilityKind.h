@@ -45,14 +45,15 @@ inline QString toString(VisibilityKind v) {
 }
 
 inline VisibilityKind visibilityKindFromString(const QString& s) {
-    if(s == "public")
+    if(s == "public" || s == "")
         return VisibilityKind::Public;
     else if(s == "private")
         return VisibilityKind::Private;
     else if(s == "protected")
         return VisibilityKind::Protected;
     else
-        throw QuLC::ParseException();
+        throw QuLC::ParseException(qPrintable(
+                    "Unknown visibility kind: " + s));
 }
 
 QUML_END_NAMESPACE_UK

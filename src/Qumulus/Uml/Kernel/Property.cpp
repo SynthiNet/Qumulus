@@ -71,19 +71,37 @@ void Property::writeXml(QXmlStreamWriter& writer) const {
     writer.writeAttribute("id", uniqueId());
     writer.writeAttribute("name", name());
     writer.writeAttribute("type", type() ? type()->uniqueId() : "");
+    writer.writeAttribute("visibility", QuUK::toString(visibility()));
     writer.writeAttribute("lower", QString::number(lowerBound()));
     writer.writeAttribute("upper", (QString)upperBound());
     writer.writeAttribute("default", getDefault());
+    writer.writeAttribute("static", isStatic() ? "true" : "false");
     writer.writeAttribute("readonly", readOnly() ? "true" : "false");
 
     writer.writeEndElement();
 }
 
 void Property::readXml(QDomElement node, QuLC::XmlModelReader& reader) {
-    (void)reader;
 
     qDebug() << "Load: " << node.tagName() << "[id=" <<
         node.attribute("id", "") << "] name: " << node.attribute("name", "");
+
+    setUniqueId(node.attribute("id"));
+    setName(node.attribute("name"));
+
+    if(node.attribute("type") != "") {
+        reader.ensureLoaded(node.attribute("type"));
+        setType(dynamic_cast<Type*>(Element::byId(node.attribute("type"))));
+    }
+
+    setVisiblity(visibilityKindFromString(node.attribute("visibility")));
+    setLowerBound(node.attribute("lower").toInt());
+    setUpperBound(node.attribute("upper") == "*" ? QuLC::Unlimited("*") :
+            QuLC::Unlimited(node.attribute("upper").toInt()));
+    setDefault(node.attribute("default"));
+    setStatic(node.attribute("static") == "true");
+    setReadOnly(node.attribute("readonly") == "true");
+
 }
 
 QUML_END_NAMESPACE_UK
