@@ -48,6 +48,7 @@ class Shape;
 
 class AssociationEdge;
 class GeneralizationEdge;
+class ContainmentEdge;
 
 class Diagram : public DiagramElement {
 public:
@@ -63,6 +64,7 @@ public:
 
     AssociationEdge* createEdge(QuUK::Association*, Shape*, Shape*);
     GeneralizationEdge* createEdge(QuUK::Generalization*, Shape*, Shape*);
+    ContainmentEdge* createPackageContainment(Shape*, Shape*);
 
     void addElement(DiagramElement* e);
     void removeElement(DiagramElement* e);

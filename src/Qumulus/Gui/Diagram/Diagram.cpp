@@ -16,6 +16,7 @@
 #include "EnumShape.h"
 #include "AssociationEdge.h"
 #include "GeneralizationEdge.h"
+#include "ContainmentEdge.h"
 
 #include <Lib/Core/Nyi.h>
 
@@ -163,6 +164,16 @@ AssociationEdge* Diagram::createEdge(QuUK::Association* a, Shape* src,
     aedge->setTarget(dst);
     aedge->connect();
     return aedge;
+}
+
+ContainmentEdge* Diagram::createPackageContainment(Shape* src, Shape* dst) {
+    auto cedge = new ContainmentEdge(nullptr, this);
+    addElement(cedge);
+    cedge->passRouter(mRouter);
+    cedge->setSource(src);
+    cedge->setTarget(dst);
+    cedge->connect();
+    return cedge;
 }
 
 QuGW::EditorView* Diagram::editorView() const {
