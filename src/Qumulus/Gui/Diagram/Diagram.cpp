@@ -94,6 +94,15 @@ void Diagram::setScene(QGraphicsScene* e) {
     mScene = e;
 }
 
+void Diagram::setRootPackage(QuUK::Package* r) {
+    delete mRootPackage;
+    mRootPackage = r;
+}
+
+void Diagram::setComments(const QList<QuUK::Comment*>& c) {
+    mComments = c;
+}
+
 PackageShape* Diagram::createShape(QuUK::Package* p) {
     auto pshape = new PackageShape(p, this);
     addElement(pshape);
