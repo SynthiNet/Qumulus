@@ -11,6 +11,7 @@
 #include "PopoverForm.h"
 #include <Uml/Kernel/Property.h>
 #include <Gui/Diagram/ClassShape.h>
+#include <Uml/Kernel/Type.h>
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
@@ -347,6 +348,7 @@ public:
             label_5->hasFocus() ||
             nameField->hasFocus() ||
             typeBox->hasFocus() ||
+            typeBox->view()->hasFocus() ||
             label_6->hasFocus() ||
             label_7->hasFocus() ||
             multiLowField->hasFocus() ||
@@ -392,7 +394,20 @@ public:
                 a->setName(str);
                 s->update();});
 
-        // populate TypeBox here.
+        typeBox->addItem("");
+        for(auto i : QuUK::Type::typeList()) {
+            typeBox->addItem(i->qualifiedName());
+        }
+        typeBox->setCurrentText(a->type() ? a->type()->qualifiedName() : "");
+        connect(typeBox, static_cast<void (QComboBox::*)(int)>(
+                    &QComboBox::currentIndexChanged),
+                [s,a,this](int i){
+                if(i == 0) {
+                    a->setType(nullptr);
+                } else {
+                    a->setType(QuUK::Type::typeList()[i-1]);
+                }
+                s->update();});
 
         multiLowField->setValidator(new QRegExpValidator(QRegExp("\\d*")));
         multiLowField->setText(QString::number(a->lowerBound()));
