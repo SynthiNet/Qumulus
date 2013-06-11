@@ -32,6 +32,7 @@
 #include <QtWidgets/QWidget>
 #include <QtGui/QRegExpValidator>
 #include <QtCore/QRegExp>
+#include <QtCore/QDebug>
 
 QUML_BEGIN_NAMESPACE_GW
 
@@ -76,6 +77,7 @@ public:
     QPushButton* addButton;
     QPushButton* removeButton;
     QButtonGroup* buttonGroup;
+    int counter = 0;
 
     void setupUi() {
         if(objectName().isEmpty())
@@ -472,8 +474,137 @@ public:
                 o->setQuery(state == Qt::Checked);
                 s->update();});
 
-        // parameterTable
-        // TODO
+        for(auto p : o->parameters()) {
+            if(p->direction() == QuUK::ParameterDirectionKind::Return)
+                continue;
+
+            auto name = new QTableWidgetItem(p->name(), 0);
+            name->setToolTip(name->text());
+            auto type = new QTableWidgetItem(p->type() ?
+                    p->type()->qualifiedName() : "", 1);
+            type->setToolTip(type->text());
+            QTableWidgetItem* direction = nullptr;
+            switch(p->direction()){
+            case QuUK::ParameterDirectionKind::In:
+                direction = new QTableWidgetItem("In", 2);
+                break;
+            case QuUK::ParameterDirectionKind::Out:
+                direction = new QTableWidgetItem("Out", 2);
+                break;
+            case QuUK::ParameterDirectionKind::InOut:
+                direction = new QTableWidgetItem("InOut", 2);
+                break;
+            default:;
+            }
+            direction->setToolTip(direction->text());
+            parameterTable->setRowCount(parameterTable->rowCount() + 1);
+            parameterTable->setItem(parameterTable->rowCount()-1,0,name);
+            parameterTable->setItem(parameterTable->rowCount()-1,1,type);
+            parameterTable->setItem(parameterTable->rowCount()-1,2,direction);
+        }
+
+        connect(parameterTable, &QTableWidget::cellChanged, [this,o,s](int r, int c){
+                QString paramName = parameterTable->item(r, 0)->toolTip();
+                QString origVal = parameterTable->item(r, c)->toolTip();
+                QString currVal = parameterTable->item(r, c)->text();
+                switch(c) {
+                case 0: // Name
+                    for(auto p : o->parameters()) {
+                        if(p->name() == paramName) {
+                            p->setName(currVal);
+                            parameterTable->item(r, c)->setToolTip(currVal);
+                        }
+                    }
+                    break;
+                case 1: // Type
+                    if(currVal == "") {
+                        for(auto p : o->parameters()) {
+                            if(p->name() == paramName) {
+                                p->setType(nullptr);
+                                parameterTable->item(r, c)->setToolTip(currVal);
+                            }
+                        }
+                    } else {
+                        QuUK::Type* t = nullptr;
+                        for(auto type : QuUK::Type::typeList()) {
+                            if(type->qualifiedName() == currVal) {
+                                t = type;
+                                break;
+                            }
+                        }
+
+                        if(t) {
+                            for(auto p : o->parameters()) {
+                                if(p->name() == paramName) {
+                                    p->setType(t);
+                                    parameterTable->item(r, c)->setToolTip(currVal);
+                                }
+                            }
+                        } else {
+                            parameterTable->item(r, c)->setText(origVal);
+                            return;
+                        }
+                    }
+                    break;
+                case 2: // Direction
+                    QuUK::ParameterDirectionKind dir;
+                    if(currVal == "In") {
+                        dir = QuUK::ParameterDirectionKind::In;
+                    } else if(currVal == "Out") {
+                        dir = QuUK::ParameterDirectionKind::Out;
+                    } else if(currVal == "InOut") {
+                        dir = QuUK::ParameterDirectionKind::InOut;
+                    } else {
+                        parameterTable->item(r, c)->setText(origVal);
+                        return;
+                    }
+
+                    for(auto p : o->parameters()) {
+                        if(p->name() == paramName) {
+                            p->setDirection(dir);
+                            parameterTable->item(r, c)->setToolTip(currVal);
+                        }
+                    }
+                    break;
+                default:;
+                }
+                s->update();
+                });
+
+        connect(addButton, &QPushButton::clicked, [this,o,s]{
+                auto param = new QuUK::Parameter("parameter" +
+                    QString::number(counter++), o);
+                auto name = new QTableWidgetItem(param->name(), 0);
+                name->setToolTip(param->name());
+                auto type = new QTableWidgetItem("", 1);
+                type->setToolTip("");
+                auto direction = new QTableWidgetItem("In", 2);
+                direction->setToolTip("In");
+                parameterTable->setRowCount(parameterTable->rowCount() + 1);
+                parameterTable->setItem(parameterTable->rowCount()-1,0,name);
+                parameterTable->setItem(parameterTable->rowCount()-1,1,type);
+                parameterTable->setItem(parameterTable->rowCount()-1,2,direction);
+                s->update();});
+
+        connect(removeButton, &QPushButton::clicked, [this,o,s]{
+                auto selected = parameterTable->selectedItems();
+                if(selected.size() == 0)
+                    return;
+                auto item = selected[0];
+                int row = parameterTable->row(item);
+                qDebug() << row;
+                QString deleteName = parameterTable->item(row, 0)->text();
+                qDebug() << deleteName;
+                for(auto p : o->parameters()) {
+                    if(p->name() == deleteName) {
+                        o->removeParameter(p);
+                        delete p;
+                        parameterTable->removeRow(row);
+                        break;
+                    }
+                }
+                s->update();
+                });
     }
 };
 
