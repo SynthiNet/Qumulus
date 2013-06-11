@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>277</width>
-    <height>47</height>
+    <height>48</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -26,14 +26,14 @@
       <enum>QFormLayout::ExpandingFieldsGrow</enum>
      </property>
      <item row="0" column="0">
-      <widget class="QLabel" name="label_4">
+      <widget class="QLabel" name="nameLabel">
        <property name="text">
         <string>Name</string>
        </property>
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="QLineEdit" name="lineEdit"/>
+      <widget class="QLineEdit" name="nameField"/>
      </item>
     </layout>
    </item>

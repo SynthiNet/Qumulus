@@ -366,10 +366,13 @@ public:
         switch(a->visibility()) {
         case QuUK::VisibilityKind::Public:
             publicButton->setChecked(true);
+            break;
         case QuUK::VisibilityKind::Protected:
             protectedButton->setChecked(true);
+            break;
         case QuUK::VisibilityKind::Private:
             privateButton->setChecked(true);
+            break;
         }
 
         connect(visibilityGroup,
@@ -390,10 +393,38 @@ public:
                 s->update();});
 
         // populate TypeBox here.
+        typeBox->setEditable(false);
 
-        // multiLowField->setValidator(new QRegExpValidator(QRegExp("\\d*")));
-        multiLowField->setText(QString(a->lowerBound()));
+        multiLowField->setValidator(new QRegExpValidator(QRegExp("\\d*")));
+        multiLowField->setText(QString::number(a->lowerBound()));
+        connect(multiLowField, &QLineEdit::textEdited, [a,s](const QString& str){
+                a->setLowerBound(str.toInt());
+                s->update();});
 
+        multiHighField->setValidator(new QRegExpValidator(QRegExp("(\\d*|\\*)")));
+        multiHighField->setText(unltd(a->upperBound()) ? "*" :
+                QString::number(a->upperBound()));
+        connect(multiHighField, &QLineEdit::textEdited, [a,s](const QString& str){
+                if(str == "*")
+                    a->setUpperBound("*");
+                else
+                    a->setUpperBound(str.toInt());
+                s->update();});
+
+        staticBox->setCheckState(a->isStatic() ? Qt::Checked : Qt::Unchecked);
+        connect(staticBox, &QCheckBox::stateChanged, [a,s](int state){
+                a->setStatic(state == Qt::Checked);
+                s->update();});
+
+        leafBox->setCheckState(a->leaf() ? Qt::Checked : Qt::Unchecked);
+        connect(leafBox, &QCheckBox::stateChanged, [a,s](int state){
+                a->setLeaf(state == Qt::Checked);
+                s->update();});
+
+        readonlyBox->setCheckState(a->readOnly() ? Qt::Checked : Qt::Unchecked);
+        connect(readonlyBox, &QCheckBox::stateChanged, [a,s](int state){
+                a->setReadOnly(state == Qt::Checked);
+                s->update();});
     }
 };
 
