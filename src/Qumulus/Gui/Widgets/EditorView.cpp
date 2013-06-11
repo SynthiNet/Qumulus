@@ -532,6 +532,7 @@ void EditorView::mouseDoubleClickEvent(QMouseEvent* e) {
     if(popover) {
         popover->setVisible(true);
         connect(popover, &Popover::lostFocus, [&]{mScrollable = true;});
+        connect(popover, &Popover::destroyed, [&]{mScrollable = true;});
     }
 
     QGraphicsView::mouseDoubleClickEvent(e);
