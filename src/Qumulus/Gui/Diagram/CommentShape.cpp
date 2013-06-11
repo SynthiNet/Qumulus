@@ -14,9 +14,10 @@
 
 QUML_BEGIN_NAMESPACE_GD
 
-CommentShape::CommentShape(QuUK::Element* e, 
+CommentShape::CommentShape(QuUK::Element* e,
         DiagramElement* p) :
         SelectableShape(e, p) {
+    updateSizeConstraints();
     resize(0,0);
 }
 
@@ -29,7 +30,7 @@ QuUK::Comment* CommentShape::modelElement() const {
     return dynamic_cast<QuUK::Comment*>(SelectableShape::modelElement());
 }
 
-void CommentShape::paint(QPainter* painter, 
+void CommentShape::paint(QPainter* painter,
         const QStyleOptionGraphicsItem* option, QWidget* widget) {
     updateSizeConstraints();
     resize(size());
@@ -50,8 +51,8 @@ void CommentShape::paint(QPainter* painter,
     QFont font = sharedStyle()->font();
     painter->setFont(font);
 
-    painter->drawText(5, 15, width()-10, height()-15, 
-            Qt::AlignLeft | Qt::AlignTop | Qt::TextWordWrap, 
+    painter->drawText(5, 15, width()-10, height()-15,
+            Qt::AlignLeft | Qt::AlignTop | Qt::TextWordWrap,
             dynamic_cast<QuUK::Comment*>(modelElement())->body());
 
     SelectableShape::paint(painter, option, widget);
