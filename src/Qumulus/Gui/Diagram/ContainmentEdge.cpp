@@ -26,8 +26,9 @@ void ContainmentEdge::paint(QPainter* p,
     QPointF origin = {t->pos().x() + t->width() / 2,
             t->pos().y() + t->height() / 2};
 
-    if(target()->boundingRect().contains(source()->boundingRect()))
-        return;
+    // if(target()->boundingRect().contains(source()->boundingRect()))
+        // return;
+    // This doesn't quite work...
 
     switch(entry) {
     case Up: {
