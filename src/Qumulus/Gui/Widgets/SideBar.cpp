@@ -34,6 +34,9 @@ SideBar::SideBar(MainWindow* parent, QuGD::Diagram* d) :
         expandAll();
     };
 #endif
+#ifdef Q_OS_WIN
+    setEnabled(false);
+#endif
 }
 
 SideBar::~SideBar() {
