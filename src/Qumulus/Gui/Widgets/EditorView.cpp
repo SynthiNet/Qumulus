@@ -32,6 +32,7 @@
 #include <Gui/Diagram/PrimitiveShape.h>
 #include <Gui/Diagram/AssociationEdge.h>
 #include <Gui/Diagram/GeneralizationEdge.h>
+#include <Gui/Diagram/ContainmentEdge.h>
 
 #include <Gui/Core/XmlReader.h>
 
@@ -316,8 +317,24 @@ void EditorView::mouseReleaseEvent(QMouseEvent* e) {
     }
     case CursorState::Interface:
         break;
-    case CursorState::PackageMembership:
-        break;
+    case CursorState::PackageMembership: {
+        auto selected = mScene->itemAt(mapToScene(e->pos()), QTransform());
+        QuGD::Shape* shape = dynamic_cast<QuGD::Shape*>(selected);
+        if(!mSource && shape &&
+                dynamic_cast<QuUK::PackageableElement*>(shape->modelElement())) {
+            mSource = shape;
+            return;
+        } else if(mSource && dynamic_cast<QuGD::PackageShape*>(shape)) {
+            dynamic_cast<QuUK::PackageableElement*>(mSource->modelElement())->
+                setPackage(dynamic_cast<QuUK::Package*>(shape->modelElement()));
+            auto pshape = mDiagram->createPackageContainment(mSource, shape);
+            pshape->setVisible(true);
+            mSource = nullptr;
+            break;
+        } else {
+            break;
+        }
+    }
     case CursorState::Package: {
         QString name = "Package" + QString::number(mDiagram->nextCounter());
         auto packageElement = new QuUK::Package(name);
