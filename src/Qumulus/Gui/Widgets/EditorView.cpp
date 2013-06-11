@@ -434,22 +434,34 @@ void EditorView::mouseMoveEvent(QMouseEvent* e) {
         mSelectionRect->setVisible(true);
     }
 
-    for(auto i : scene()->selectedItems()) {
-        if(auto p = dynamic_cast<QuGD::SelectableShape*>(i)) {
-            if(p->shouldShowBDiag(mapToScene(e->pos()))) {
-                QApplication::setOverrideCursor(Qt::SizeBDiagCursor);
-                mDiagram->setModified();
-                mCursorOverride = true;
-            } else if(p->shouldShowFDiag(mapToScene(e->pos()))) {
-                QApplication::setOverrideCursor(Qt::SizeFDiagCursor);
-                mDiagram->setModified();
-                mCursorOverride = true;
-            } else {
-                mCursorOverride = false;
-                QApplication::restoreOverrideCursor();
-                mDiagram->setModified();
+    // God damn it Qt, another bug. Qt will not set a cursor for a child if the
+    // parent ever had a cursor, even if you clear it explicitly.
+    // It will however do the correct thing if you switch focus to another widget
+    // (by clicking on the sidebar for example) and then switching back.
+    if(mMainWindow->cursor().shape() == Qt::ArrowCursor) {
+        for(auto i : scene()->selectedItems()) {
+            if(auto p = dynamic_cast<QuGD::SelectableShape*>(i)) {
+                if(p->shouldShowBDiag(mapToScene(e->pos()))) {
+                    mMainWindow->unsetCursor();
+                    setCursor(Qt::SizeBDiagCursor);
+                    mDiagram->setModified();
+                    mCursorOverride = true;
+                } else if(p->shouldShowFDiag(mapToScene(e->pos()))) {
+                    mMainWindow->unsetCursor();
+                    setCursor(Qt::SizeFDiagCursor);
+                    mDiagram->setModified();
+                    mCursorOverride = true;
+                } else {
+                    mMainWindow->unsetCursor();
+                    setCursor(Qt::ArrowCursor);
+                    mCursorOverride = true;
+                    mDiagram->setModified();
+                }
             }
         }
+    } else {
+        if(mCursorOverride)
+            unsetCursor();
     }
 
     QGraphicsView::mouseMoveEvent(e);

@@ -457,6 +457,7 @@ void MainWindow::createMenus() {
 void MainWindow::setCursorState(CursorState c) {
     mCursorState = c;
     mEditorView->resetSelection();
+    mEditorView->unsetCursor();
 
     switch(c) {
     case Normal:
