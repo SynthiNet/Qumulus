@@ -28,10 +28,10 @@ SideBar::SideBar(MainWindow* parent, QuGD::Diagram* d) :
     setSizePolicy(sideBarSizePolicy);
     setModel(mModel);
     header()->close();
-    mDiagram->diagramChanged += [this] {
-        collapseAll();
-        expandAll();
-    };
+    // mDiagram->diagramChanged += [this] {
+    //     collapseAll();
+    //     expandAll();
+    // };
 }
 
 SideBar::~SideBar() {
