@@ -483,19 +483,9 @@ public:
             auto type = new QTableWidgetItem(p->type() ?
                     p->type()->qualifiedName() : "", 1);
             type->setToolTip(type->text());
-            QTableWidgetItem* direction = nullptr;
-            switch(p->direction()){
-            case QuUK::ParameterDirectionKind::In:
-                direction = new QTableWidgetItem("In", 2);
-                break;
-            case QuUK::ParameterDirectionKind::Out:
-                direction = new QTableWidgetItem("Out", 2);
-                break;
-            case QuUK::ParameterDirectionKind::InOut:
-                direction = new QTableWidgetItem("InOut", 2);
-                break;
-            default:;
-            }
+            QTableWidgetItem* direction = new QTableWidgetItem(
+                    QuUK::toString(p->direction()), 2);
+
             direction->setToolTip(direction->text());
             parameterTable->setRowCount(parameterTable->rowCount() + 1);
             parameterTable->setItem(parameterTable->rowCount()-1,0,name);
@@ -548,13 +538,9 @@ public:
                     break;
                 case 2: // Direction
                     QuUK::ParameterDirectionKind dir;
-                    if(currVal == "In") {
-                        dir = QuUK::ParameterDirectionKind::In;
-                    } else if(currVal == "Out") {
-                        dir = QuUK::ParameterDirectionKind::Out;
-                    } else if(currVal == "InOut") {
-                        dir = QuUK::ParameterDirectionKind::InOut;
-                    } else {
+                    try {
+                        dir = QuUK::directionKindFromString(currVal);
+                    } catch(QuLC::ParseException&) {
                         parameterTable->item(r, c)->setText(origVal);
                         return;
                     }
@@ -578,8 +564,8 @@ public:
                 name->setToolTip(param->name());
                 auto type = new QTableWidgetItem("", 1);
                 type->setToolTip("");
-                auto direction = new QTableWidgetItem("In", 2);
-                direction->setToolTip("In");
+                auto direction = new QTableWidgetItem("in", 2);
+                direction->setToolTip("in");
                 parameterTable->setRowCount(parameterTable->rowCount() + 1);
                 parameterTable->setItem(parameterTable->rowCount()-1,0,name);
                 parameterTable->setItem(parameterTable->rowCount()-1,1,type);
