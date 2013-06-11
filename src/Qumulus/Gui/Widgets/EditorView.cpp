@@ -130,8 +130,8 @@ EditorView::EditorView(MainWindow* parent, QuGD::Diagram* d) :
     mLiteralButtonItem->setVisible(false);
     mLiteralButtonItem->setZValue(10);
 
-    QuGC::XmlReader r;
-    r.loadFromXml(mDiagram, "test.uml");
+    // QuGC::XmlReader r;
+    // r.loadFromXml(mDiagram, "test.uml");
 }
 
 EditorView::~EditorView() noexcept {
