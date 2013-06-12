@@ -18,7 +18,7 @@
 
 QUML_BEGIN_NAMESPACE_GD
 
-EnumShape::EnumShape(QuUK::Element* e, DiagramElement* p) : 
+EnumShape::EnumShape(QuUK::Element* e, DiagramElement* p) :
         CompartmentableShape(e, p), mHeader(new Compartment()),
         mBody(new Compartment()) {
     addCompartment(mHeader);
@@ -38,7 +38,7 @@ QuUK::Enumeration* EnumShape::modelElement() const {
             CompartmentableShape::modelElement());
 }
 
-void EnumShape::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, 
+void EnumShape::paint(QPainter* painter, const QStyleOptionGraphicsItem* option,
         QWidget* widget) {
     updateSizeConstraints();
     resize(size());
@@ -55,7 +55,7 @@ void EnumShape::paint(QPainter* painter, const QStyleOptionGraphicsItem* option,
     QFont nameFont = sharedStyle()->font();
     nameFont.setBold(true);
     painter->setFont(nameFont);
-    painter->drawText(0, mHeader->height() / 2, width(), mHeader->height(), 
+    painter->drawText(0, mHeader->height() / 2, width(), mHeader->height(),
             Qt::AlignHCenter | Qt::AlignTop,
             modelElement()->name());
 
@@ -68,7 +68,7 @@ void EnumShape::paint(QPainter* painter, const QStyleOptionGraphicsItem* option,
 
     for(auto& a : modelElement()->literals()) {
         if(a == highlightedLiteral()) {
-            painter->fillRect(1, th + 1, width() - 2, delta - 2, 
+            painter->fillRect(1, th + 1, width() - 2, delta - 2,
                     QColor(200, 240, 255));
         }
 
@@ -80,8 +80,8 @@ void EnumShape::paint(QPainter* painter, const QStyleOptionGraphicsItem* option,
 }
 
 void EnumShape::updateSizeConstraints() {
-    float fheight = QFontMetrics(sharedStyle()->font()).height() * 1.2; 
-    float bheight = std::max(30.0f, 
+    float fheight = QFontMetrics(sharedStyle()->font()).height() * 1.2;
+    float bheight = std::max(30.0f,
             modelElement()->literals().size() * fheight) + 10;
 
     setMinimumSize({std::max(190, enumNameWidth()) + 10, bheight + 40});
@@ -130,16 +130,16 @@ void EnumShape::hoverMoveEvent(QGraphicsSceneHoverEvent* event) {
 }
 
 
-QVariant EnumShape::itemChange(GraphicsItemChange change, 
+QVariant EnumShape::itemChange(GraphicsItemChange change,
         const QVariant& value) {
     if(change == QGraphicsItem::ItemSelectedChange) {
         if(!value.toBool()) {
             mHighlightedLiteral = nullptr;
             update();
-        } 
-    } 
+        }
+    }
 
-    return SelectableShape::itemChange(change, value); 
+    return SelectableShape::itemChange(change, value);
 }
 
 void EnumShape::writeXml(QXmlStreamWriter& writer) const {
@@ -150,6 +150,7 @@ void EnumShape::writeXml(QXmlStreamWriter& writer) const {
     writer.writeAttribute("width", QString::number(width()));
     writer.writeAttribute("height", QString::number(height()));
     writer.writeAttribute("modelelement", modelElement()->uniqueId());
+    writer.writeAttribute("visible", isVisible() ? "true" : "false");
 
     writer.writeEndElement();
 }

@@ -17,7 +17,7 @@
 
 QUML_BEGIN_NAMESPACE_GD
 
-ClassShape::ClassShape(QuUK::Element* e, DiagramElement* p) : 
+ClassShape::ClassShape(QuUK::Element* e, DiagramElement* p) :
         CompartmentableShape(e, p),
         mHeadCompartment(new Compartment(this)),
         mAttributeCompartment(new Compartment(this)),
@@ -40,13 +40,13 @@ QuUK::Class* ClassShape::modelElement() const {
 }
 
 void ClassShape::updateSizeConstraints() {
-    float fheight = QFontMetrics(sharedStyle()->font()).height() * 1.2; 
-    float aheight = std::max(30.0f, 
+    float fheight = QFontMetrics(sharedStyle()->font()).height() * 1.2;
+    float aheight = std::max(30.0f,
             modelElement()->attributes().size() * fheight) + 10;
-    float oheight = std::max(30.0f, 
+    float oheight = std::max(30.0f,
             modelElement()->operations().size() * fheight) + 10;
 
-    setMinimumSize({std::max(190, classNameWidth()) + 10, 
+    setMinimumSize({std::max(190, classNameWidth()) + 10,
             20 + aheight + oheight});
     mHeadCompartment->setMinimumHeight(20);
     mHeadCompartment->setMaximumHeight(20);
@@ -54,7 +54,7 @@ void ClassShape::updateSizeConstraints() {
     mOperationCompartment->setMinimumHeight(oheight);
 }
 
-void ClassShape::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, 
+void ClassShape::paint(QPainter* painter, const QStyleOptionGraphicsItem* option,
         QWidget* widget) {
     updateSizeConstraints();
     resize(size());
@@ -63,7 +63,7 @@ void ClassShape::paint(QPainter* painter, const QStyleOptionGraphicsItem* option
 
     QFont nameFont = sharedStyle()->font();
     nameFont.setBold(true);
-    if(modelElement()->abstract()) 
+    if(modelElement()->abstract())
         nameFont.setItalic(true);
 
     painter->setFont(nameFont);
@@ -81,13 +81,13 @@ void ClassShape::paint(QPainter* painter, const QStyleOptionGraphicsItem* option
 
     for(auto& a : modelElement()->attributes()) {
         if(a == highlightedAttribute()) {
-            painter->fillRect(1, th + 1, width() - 2, delta - 2, 
+            painter->fillRect(1, th + 1, width() - 2, delta - 2,
                     QColor(200, 240, 255));
         }
         painter->setFont(a->isStatic() ? staticFeatureFont : featureFont);
         painter->drawText(2, th, width() - 2, delta,
                 Qt::AlignLeft | Qt::AlignVCenter,
-                met.elidedText(a->toString(), 
+                met.elidedText(a->toString(),
                         Qt::ElideRight, width() - 4));
         th += delta;
     }
@@ -96,13 +96,13 @@ void ClassShape::paint(QPainter* painter, const QStyleOptionGraphicsItem* option
 
     for(auto& o : modelElement()->operations()) {
         if(o == highlightedOperation()) {
-            painter->fillRect(1, th + 1, width() - 2, delta - 2, 
+            painter->fillRect(1, th + 1, width() - 2, delta - 2,
                     QColor(200, 240, 255));
         }
         painter->setFont(o->isStatic() ? staticFeatureFont : featureFont);
         painter->drawText(2, th, width() - 2, delta,
                 Qt::AlignLeft | Qt::AlignVCenter,
-                met.elidedText(o->toString(), 
+                met.elidedText(o->toString(),
                         Qt::ElideRight, width() - 4));
         th += delta;
     }
@@ -130,7 +130,7 @@ void ClassShape::hoverMoveEvent(QGraphicsSceneHoverEvent* event) {
         mHighlightedOperation = nullptr;
     } else {
         QRectF arect(0, 20, width(), mAttributeCompartment->height());
-        QRectF orect(0, 20 + mAttributeCompartment->height(), 
+        QRectF orect(0, 20 + mAttributeCompartment->height(),
                 width(), mOperationCompartment->height());
 
         if(arect.contains(event->pos())) {
@@ -173,17 +173,17 @@ void ClassShape::hoverMoveEvent(QGraphicsSceneHoverEvent* event) {
     SelectableShape::hoverMoveEvent(event);
 }
 
-QVariant ClassShape::itemChange(GraphicsItemChange change, 
+QVariant ClassShape::itemChange(GraphicsItemChange change,
         const QVariant& value) {
     if(change == QGraphicsItem::ItemSelectedChange) {
         if(!value.toBool()) {
             mHighlightedAttribute = nullptr;
             mHighlightedOperation = nullptr;
             update();
-        } 
-    } 
+        }
+    }
 
-    return SelectableShape::itemChange(change, value); 
+    return SelectableShape::itemChange(change, value);
 }
 
 void ClassShape::writeXml(QXmlStreamWriter& writer) const {
@@ -194,6 +194,7 @@ void ClassShape::writeXml(QXmlStreamWriter& writer) const {
     writer.writeAttribute("width", QString::number(width()));
     writer.writeAttribute("height", QString::number(height()));
     writer.writeAttribute("modelelement", modelElement()->uniqueId());
+    writer.writeAttribute("visible", isVisible() ? "true" : "false");
 
     writer.writeEndElement();
 }

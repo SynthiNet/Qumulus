@@ -73,6 +73,7 @@ void PrimitiveShape::writeXml(QXmlStreamWriter& writer) const {
     writer.writeAttribute("width", QString::number(width()));
     writer.writeAttribute("height", QString::number(height()));
     writer.writeAttribute("modelelement", modelElement()->uniqueId());
+    writer.writeAttribute("visible", isVisible() ? "true" : "false");
 
     writer.writeEndElement();
 }

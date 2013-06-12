@@ -110,7 +110,7 @@ void XmlReader::readDiagram(QuGD::Diagram* diagram, QDomElement e)
                     node.attribute("y").toFloat());
             s->resize(node.attribute("width").toFloat(),
                     node.attribute("height").toFloat());
-            s->setVisible(true);
+            s->setVisible(node.attribute("visible") == "true");
         }
 
         if(!diagelem)
