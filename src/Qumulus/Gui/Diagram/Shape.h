@@ -14,8 +14,8 @@
 #include <QtWidgets/QGraphicsItemGroup>
 #include <libavoid/geomtypes.h>
 
-namespace Avoid { 
-    class ShapeRef; 
+namespace Avoid {
+    class ShapeRef;
     class Router;
 }
 
@@ -55,15 +55,16 @@ public:
 
     Avoid::ShapeRef* shapeRef() { return mShapeRef; }
 
-    void setOwningElement(DiagramElement* e); 
+    void setOwningElement(DiagramElement* e);
 
     QUML_CLONABLE_ABSTRACT(Shape);
 
 protected:
-    void setSize(QSizeF s);
+    void setSize(QSizeF s, bool overrideCall = false);
 
 private:
     QSizeF mSize = QSizeF();
+    QPointF mPrevPos = QPointF();
     QSizeF mMinimumSize = QSizeF();
     QSizeF mMaximumSize = QSizeF();
     QSizeF mSizeHint = QSizeF();

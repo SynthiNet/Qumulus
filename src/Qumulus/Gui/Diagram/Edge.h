@@ -13,8 +13,8 @@
 #include <QtWidgets/QGraphicsItemGroup>
 #include <libavoid/geomtypes.h>
 
-namespace Avoid { 
-    class ConnRef; 
+namespace Avoid {
+    class ConnRef;
     class Router;
     class ConnEnd;
 }
@@ -34,7 +34,7 @@ public:
     Edge(const Edge&);
 
     Shape* source() const { return mSource; }
-    void setSource(Shape* e); 
+    void setSource(Shape* e);
 
     Shape* target() const { return mTarget; }
     void setTarget(Shape* e);
@@ -45,6 +45,7 @@ public:
     void resize(double, double) {}
 
     QPainterPath shape() const override;
+    void calcShape();
     QRectF boundingRect() const override;
     void paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget*) override;
     void updateSizeConstraints();
@@ -62,6 +63,7 @@ private:
     Avoid::ConnEnd* mEnd = nullptr;
     Avoid::ConnRef* mConnectionReference = nullptr;
     Avoid::Router* mRouter = nullptr;
+    QPainterPath mShape;
 };
 
 QUML_END_NAMESPACE_GD

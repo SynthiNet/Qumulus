@@ -66,6 +66,7 @@ EditorView::EditorView(MainWindow* parent, QuGD::Diagram* d) :
     setFocusPolicy(Qt::StrongFocus);
     setMouseTracking(true);
     setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
+    setCacheMode(QGraphicsView::CacheBackground);
 
     mDiagram->setScene(mScene);
     mSelectionRect = new QGraphicsRectItem();

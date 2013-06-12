@@ -48,20 +48,27 @@ void Shape::setHeight(double h) {
 void Shape::passRouter(Avoid::Router* r) {
     mRouter = r;
     mShapeRef = new Avoid::ShapeRef(mRouter, mRoutingBox);
-    new Avoid::ShapeConnectionPin(mShapeRef, 1, 
+    new Avoid::ShapeConnectionPin(mShapeRef, 1,
             Avoid::ATTACH_POS_CENTRE, Avoid::ATTACH_POS_CENTRE);
+    setSize(mSize, true);
 }
 
-void Shape::setSize(QSizeF s) {
+void Shape::setSize(QSizeF s, bool overrideCall) {
+    if(!overrideCall) {
+        if(mSize == s && mPrevPos == pos())
+            return;
+    }
+
     mSize = s;
 
-
     if(mRouter && mShapeRef) {
-        mRoutingBox = {{pos().x()-10, pos().y()-10}, 
+        mRoutingBox = {{pos().x()-10, pos().y()-10},
                 {pos().x() + width()+20, pos().y() + height()+20}};
         mRouter->moveShape(mShapeRef, mRoutingBox);
         mRouter->processTransaction();
     }
+
+    mPrevPos = pos();
 }
 
 QSizeF Shape::optimalSize() const {
