@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Qumulus Help - Creating diagram elements</title>
+
+        <link rel="stylesheet" href="style.css" type="text/css" />
+    </head>
+
+    <body>
+        <h1>Creating diagram elements</h1>
+
+        <p>
+        You activate element entry mode by pressing one of the buttons on the
+        toolbar, or by pressing the coinciding shortcut key. You can cancel entry
+        mode by pressing Escape.
+        </p>
+
+        <table>
+            <tr>
+                <th>Toolbar</th>
+                <th>Cursor</th>
+                <th>Shortcut</th>
+                <th>Name</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td class="img">
+                    <img src="img/toolbar/class.png" />
+                </td>
+                <td class="img">
+                    <img src="img/cursor/class.png" />
+                </td>
+                <td class="img">C</td>
+                <td>Class</td>
+                <td>
+                    Classes are the most versatile and commonly
+                    used element in a diagram. A class can contain attributes and 
+                    operations. Classes can have associations and generalizations.
+                </td>
+            </tr>
+            <tr>
+                <td class="img">
+                    <img src="img/toolbar/enum.png" />
+                </td>
+                <td class="img">
+                    <img src="img/cursor/enum.png" />
+                </td>
+                <td class="img">E</td>
+                <td>Enumeration</td>
+                <td>
+                    An enumeration is a data type which can
+                    take on a fixed list of values, its literals. Enumerations cannot have
+                    generalizations. A class may associate with an enum, but not the other
+                    way around.
+                </td>
+            </tr>
+        </tr>
+        <tr>
+            <td class="img">
+                <img src="img/toolbar/primitive.png" />
+            </td>
+            <td class="img">
+                <img src="img/cursor/primitive.png" />
+            </td>
+            <td class="img">D</td>
+            <td>Primitive</td>
+            <td>
+                A primitive is the simplest data type. It only has a name. Primitives
+                are used to represent very simple data types, such as the built-in
+                numeric and string types in a language. A primitive has no
+                relationships. A class may derive from or associate with a primitive.
+            </td>
+        </tr>
+        <tr>
+            <td class="img">
+                <img src="img/toolbar/package.png" />
+            </td>
+            <td class="img">
+                <img src="img/cursor/package.png" />
+            </td>
+            <td class="img">P</td>
+            <td>Package</td>
+            <td>
+                A package is a way to group related elements together. A package may
+                contain classes, primitives, enumerations, or other packages. A
+                package does not have any relationships besides containment.
+            </td>
+        </tr>
+        <tr>
+            <td class="img">
+                <img src="img/toolbar/comment.png" />
+            </td>
+            <td class="img">
+                <img src="img/cursor/comment.png" />
+            </td>
+            <td class="img">H</td>
+            <td>Comment</td>
+            <td>
+                Comments are short remarks that can be placed on the diagram. Comments
+                are completely detached from the rest of the model; there are no
+                relationships with any other elements. Comments also cannot be put
+                into a package.
+            </td>
+        </tr>
+    </table>
+
+    <p>
+    In element entry mode, you can create a default sized element by simply
+    clicking, or you can click and drag to create a custom sized element.
+    </p>
+
+</body>
+</html>

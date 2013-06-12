@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Qumulus Help - Connecting diagram elements</title>
+
+        <link rel="stylesheet" href="style.css" type="text/css" />
+    </head>
+
+    <body>
+        <h1>Connecting diagram elements</h1>
+
+        <p>
+        You activate relationship entry mode by pressing one of the buttons on the
+        toolbar, or by pressing the coinciding shortcut key. You can cancel entry
+        mode by pressing Escape.
+        </p>
+
+        <table>
+            <tr>
+                <th>Toolbar</th>
+                <th>Cursor</th>
+                <th>Shortcut</th>
+                <th>Name</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td class="img">
+                    <img src="img/toolbar/inheritance.png" />
+                </td>
+                <td class="img">
+                    <img src="img/cursor/inheritance.png" />
+                </td>
+                <td class="img">I</td>
+                <td>Inheritance</td>
+                <td>
+                    An inheritance or generalization is a relationship between two classes 
+                    where one is more general and one is more specific. Any instance of
+                    the specific class is also an instance of the general class. The
+                    specific class inherits all of the attributes and operations of the
+                    general class. The arrow points to the general class.
+                </td>
+            </tr>
+            <tr>
+                <td class="img">
+                    <img src="img/toolbar/aggregation.png" />
+                </td>
+                <td class="img">
+                    <img src="img/cursor/aggregation.png" />
+                </td>
+                <td class="img">N</td>
+                <td>Composition</td>
+                <td>
+                    A composition is a relationship between classes where one class
+                    contains, as a property, a reference to an instance of another class.
+                    This relation indicates that the referring class has ownership over
+                    the instance of the target class. In languages with explicit resource
+                    management, this usually means the owning class is responsible for
+                    cleaning up the resources allocated for the instance.
+                </td>
+            </tr>
+        </tr>
+        <tr>
+            <td class="img">
+                <img src="img/toolbar/containment.png" />
+            </td>
+            <td class="img">
+                <img src="img/cursor/containment.png" />
+            </td>
+            <td class="img">G</td>
+            <td>Aggregation</td>
+            <td>
+                An aggregration indicates a relationship similar to a composition but
+                does not imply ownership. 
+            </td>
+        </tr>
+        <tr>
+            <td class="img">
+                <img src="img/toolbar/package-membership.png" />
+            </td>
+            <td class="img">
+                <img src="img/cursor/package-membership.png" />
+            </td>
+            <td class="img">M</td>
+            <td>Package Membership</td>
+            <td>
+                Package membership indicates an enumeration, primitive type or class
+                being a member of a given package.
+            </td>
+        </tr>
+        <tr>
+            <td class="img">
+                <img src="img/toolbar/association.png" />
+            </td>
+            <td class="img">
+                <img src="img/cursor/association.png" />
+            </td>
+            <td class="img">R</td>
+            <td>Association</td>
+            <td>
+                An association is a kind of generic relationship indicated two classes
+                are related or need each other for their full implementation.
+                Compositions and aggregations are kinds of associations.
+            </td>
+        </tr>
+    </table>
+
+    <p>
+    You create a relationship by first clicking the source, and then clicking
+    the target.
+    </p>
+
+    <p>
+    Clicking an invalid source or target, will immediately cancel the 
+    relationship mode.
+    </p>
+
+</body>
+</html>
