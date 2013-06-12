@@ -62,15 +62,20 @@ void Package::writeXml(QXmlStreamWriter& writer) const {
 }
 
 void Package::readXml(QDomElement node, QuLC::XmlModelReader& reader) {
-    (void)reader;
-
     qDebug() << "Load: " << node.tagName() << "[id=" <<
-        node.attribute("id", "") << "] name: " << node.attribute("name", "");
+        node.attribute("id") << "] name: " << node.attribute("name", "");
 
     setUniqueId(node.attribute("id"));
     setName(node.attribute("name"));
 
-    NYI();
+    QDomNodeList children = node.childNodes();
+    for(int i = 0; i < children.size(); ++i) {
+        auto e = children.at(i).toElement();
+
+        auto p = reader.loadElement(e);
+        dynamic_cast<PackageableElement*>(p)->setPackage(this);
+    }
+
 }
 
 QUML_END_NAMESPACE_UK

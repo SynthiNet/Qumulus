@@ -118,6 +118,9 @@ void XmlReader::readDiagram(QuGD::Diagram* diagram, QDomElement e)
                     QuUK::Element::byId(node.attribute("modelelement")));
             diagelem = new QuGD::GeneralizationEdge(m, diagram);
         } else if(node.tagName() == "Containment") {
+            auto m = dynamic_cast<QuUK::Classifier*>(
+                    QuUK::Element::byId(node.attribute("modelelement")));
+            diagelem = new QuGD::ContainmentEdge(m, diagram);
         }
 
         diagelem->setUniqueId(node.attribute("id"));
