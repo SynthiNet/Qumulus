@@ -47,12 +47,12 @@ void Generalization::writeXml(QXmlStreamWriter& writer) const {
 }
 
 void Generalization::readXml(QDomElement node, QuLC::XmlModelReader& reader) {
-    (void)reader;
+    reader.ensureLoaded(node.attribute("general"));
 
-    qDebug() << "Load: " << node.tagName() << "[id=" <<
-        node.attribute("id", "") << "] name: " << node.attribute("name", "");
+    setUniqueId(node.attribute("id"));
+    setGeneral(dynamic_cast<Classifier*>(Element::byId(node.attribute("id"))));
 
-    NYI();
 }
+
 
 QUML_END_NAMESPACE_UK

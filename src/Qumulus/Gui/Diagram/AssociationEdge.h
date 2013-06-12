@@ -18,7 +18,7 @@ public:
     AssociationEdge(QuUK::Element* e = 0, DiagramElement* p = 0);
     AssociationEdge(const AssociationEdge&);
 
-    void writeXml(QXmlStreamWriter&) const override {}
+    void writeXml(QXmlStreamWriter&) const override;
     void paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget*) override;
 
     QUML_CLONABLE(AssociationEdge);

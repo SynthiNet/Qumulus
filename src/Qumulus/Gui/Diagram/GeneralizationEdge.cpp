@@ -5,7 +5,11 @@
  */
 
 #include "GeneralizationEdge.h"
+
+#include <Uml/Kernel/Element.h>
+
 #include <QtGui/QPainter>
+#include <QtCore/QXmlStreamWriter>
 #include <QtCore/QDebug>
 
 QUML_BEGIN_NAMESPACE_GD
@@ -77,5 +81,18 @@ void GeneralizationEdge::paint(QPainter* p,
     }
     }
 }
+
+void GeneralizationEdge::writeXml(QXmlStreamWriter& writer) const {
+    writer.writeStartElement("Generalization");
+
+    writer.writeAttribute("id", uniqueId());
+    writer.writeAttribute("source", source()->uniqueId());
+    writer.writeAttribute("target", target()->uniqueId());
+    writer.writeAttribute("modelelement", modelElement()->uniqueId());
+    writer.writeAttribute("visible", isVisible() ? "true" : "false");
+
+    writer.writeEndElement();
+}
+
 QUML_END_NAMESPACE_GD
 

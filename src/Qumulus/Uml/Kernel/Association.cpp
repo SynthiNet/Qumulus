@@ -35,15 +35,26 @@ void Association::setTargetType(Classifier* c) {
 }
 
 void Association::writeXml(QXmlStreamWriter& writer) const {
-    (void)writer;
-    NYI();
+    writer.writeStartElement("Association");
+
+    writer.writeAttribute("id", uniqueId());
+    writer.writeAttribute("source", source()->uniqueId());
+    writer.writeAttribute("target", target()->uniqueId());
+    writer.writeAttribute("aggregation", toString(aggregation()));
+
+    writer.writeEndElement();
 }
 
 void Association::readXml(QDomElement node, QuLC::XmlModelReader& reader) {
-    (void)node;
-    (void)reader;
+    reader.ensureLoaded(node.attribute("source"));
+    reader.ensureLoaded(node.attribute("target"));
 
-    NYI();
+    setUniqueId(node.attribute("id"));
+    setSource(dynamic_cast<Classifier*>(
+                Element::byId(node.attribute("source"))));
+    setTarget(dynamic_cast<Classifier*>(
+                Element::byId(node.attribute("target"))));
+    setAggregation(aggregationKindFromString(node.attribute("aggregation")));
 }
 
 

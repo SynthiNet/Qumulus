@@ -8,12 +8,17 @@
 
 #include <Lib/Core/XmlModelReader.h>
 
+#include <Uml/Kernel/Association.h>
+
 #include <Gui/Diagram/Diagram.h>
 #include <Gui/Diagram/ClassShape.h>
 #include <Gui/Diagram/PrimitiveShape.h>
 #include <Gui/Diagram/EnumShape.h>
 #include <Gui/Diagram/CommentShape.h>
 #include <Gui/Diagram/PackageShape.h>
+#include <Gui/Diagram/AssociationEdge.h>
+#include <Gui/Diagram/GeneralizationEdge.h>
+#include <Gui/Diagram/ContainmentEdge.h>
 
 #include <QtCore/QFile>
 #include <QtCore/QDebug>
@@ -71,6 +76,7 @@ void XmlReader::loadFromXml(QuGD::Diagram* diagram, const QString& path)
 
     diagram->setRootPackage(r.rootPackage());
     diagram->setComments(r.comments());
+    diagram->setAssociations(r.associations());
 
     readDiagram(diagram, diagElem);
 
@@ -103,7 +109,19 @@ void XmlReader::readDiagram(QuGD::Diagram* diagram, QDomElement e)
             auto m = dynamic_cast<QuUK::Package*>(
                     QuUK::Element::byId(node.attribute("modelelement")));
             diagelem = new QuGD::PackageShape(m, diagram);
+        } else if(node.tagName() == "Association") {
+            auto m = dynamic_cast<QuUK::Association*>(
+                    QuUK::Element::byId(node.attribute("modelelement")));
+            diagelem = new QuGD::AssociationEdge(m, diagram);
+        } else if(node.tagName() == "Generalization") {
+            auto m = dynamic_cast<QuUK::Classifier*>(
+                    QuUK::Element::byId(node.attribute("modelelement")));
+            diagelem = new QuGD::GeneralizationEdge(m, diagram);
+        } else if(node.tagName() == "Containment") {
         }
+
+        diagelem->setUniqueId(node.attribute("id"));
+        diagram->addElement(diagelem);
 
         if(auto s = dynamic_cast<QuGD::Shape*>(diagelem)) {
             s->setPos(node.attribute("x").toFloat(),
@@ -113,11 +131,19 @@ void XmlReader::readDiagram(QuGD::Diagram* diagram, QDomElement e)
             s->setVisible(node.attribute("visible") == "true");
         }
 
+        if(auto e = dynamic_cast<QuGD::Edge*>(diagelem)) {
+            e->setSource(static_cast<QuGD::Shape*>(
+                        QuGD::DiagramElement::byId(node.attribute("source"))));
+            e->setTarget(static_cast<QuGD::Shape*>(
+                        QuGD::DiagramElement::byId(node.attribute("target"))));
+            e->connect();
+            e->setVisible(node.attribute("visible") == "true");
+        }
+
         if(!diagelem)
             throw QuLC::ParseException(qPrintable("Unknown diagram element " +
                     node.tagName()));
 
-        diagram->addElement(diagelem);
     }
 }
 QUML_END_NAMESPACE_GC

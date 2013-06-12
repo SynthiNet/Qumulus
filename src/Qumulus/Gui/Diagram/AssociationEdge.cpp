@@ -7,6 +7,8 @@
 #include "AssociationEdge.h"
 #include <Uml/Kernel/Association.h>
 #include <Uml/Kernel/Element.h>
+
+#include <QtCore/QXmlStreamWriter>
 #include <QtGui/QPainter>
 
 QUML_BEGIN_NAMESPACE_GD
@@ -145,6 +147,18 @@ void AssociationEdge::paint(QPainter* p,
     default:
         break;
     }
+}
+
+void AssociationEdge::writeXml(QXmlStreamWriter& writer) const {
+    writer.writeStartElement("Association");
+
+    writer.writeAttribute("id", uniqueId());
+    writer.writeAttribute("source", source()->uniqueId());
+    writer.writeAttribute("target", target()->uniqueId());
+    writer.writeAttribute("modelelement", modelElement()->uniqueId());
+    writer.writeAttribute("visible", isVisible() ? "true" : "false");
+
+    writer.writeEndElement();
 }
 
 QUML_END_NAMESPACE_GD

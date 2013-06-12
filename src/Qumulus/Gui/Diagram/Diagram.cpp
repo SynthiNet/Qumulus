@@ -111,6 +111,10 @@ void Diagram::setComments(const QList<QuUK::Comment*>& c) {
     mComments = c;
 }
 
+void Diagram::setAssociations(const QList<QuUK::Association*>& a) {
+    mAssociations = a;
+}
+
 PackageShape* Diagram::createShape(QuUK::Package* p) {
     auto pshape = new PackageShape(p, this);
     addElement(pshape);
@@ -163,6 +167,7 @@ AssociationEdge* Diagram::createEdge(QuUK::Association* a, Shape* src,
     aedge->setSource(src);
     aedge->setTarget(dst);
     aedge->connect();
+    mAssociations.append(a);
     return aedge;
 }
 
@@ -204,6 +209,10 @@ bool Diagram::saveToXml(const QString& file) const {
         x->writeXml(writer);
     }
 
+    for(auto& x : mAssociations) {
+        x->writeXml(writer);
+    }
+
     writer.writeEndElement();
 
     writer.writeStartElement("diagram");
@@ -217,10 +226,6 @@ bool Diagram::saveToXml(const QString& file) const {
     writer.writeEndElement();
 
     return true;
-}
-
-void Diagram::loadFromXml(const QString& file) throw(QuLC::ParseException) {
-    (void)file;
 }
 
 QUML_END_NAMESPACE_GD

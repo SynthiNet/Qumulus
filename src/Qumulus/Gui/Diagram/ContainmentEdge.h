@@ -18,7 +18,7 @@ public:
     ContainmentEdge(QuUK::Element* e = 0, DiagramElement* p = 0);
     ContainmentEdge(const ContainmentEdge&);
 
-    void writeXml(QXmlStreamWriter&) const override {}
+    void writeXml(QXmlStreamWriter&) const override;
     void paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget*) override;
 
     QUML_CLONABLE(ContainmentEdge);

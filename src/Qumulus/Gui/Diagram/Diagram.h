@@ -74,6 +74,11 @@ public:
     const QList<QuUK::Comment*>& comments() const { return mComments; }
     void setComments(const QList<QuUK::Comment*>& c);
 
+    const QList<QuUK::Association*>& associations() const {
+        return mAssociations;
+    }
+    void setAssociations(const QList<QuUK::Association*>& a);
+
     void setScene(QGraphicsScene* e);
     QGraphicsScene* scene() const { return mScene; }
     QuGW::EditorView* editorView() const;
@@ -81,7 +86,6 @@ public:
     unsigned nextCounter() { return mCounter++; }
 
     bool saveToXml(const QString& file) const;
-    void loadFromXml(const QString& file) throw(QuLC::ParseException);
 
     void writeXml(QXmlStreamWriter&) const override {}
 
@@ -99,6 +103,7 @@ private:
     bool mIsModified = false;
     QuUK::Package* mRootPackage;
     QList<QuUK::Comment*> mComments;
+    QList<QuUK::Association*> mAssociations;
     Avoid::Router* mRouter;
 };
 

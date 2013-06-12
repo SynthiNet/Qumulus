@@ -39,6 +39,11 @@ void XmlModelReader::loadFromXml() throw(QuLC::ParseException) {
             } else {
                 if(x.tagName() == "Comment") {
                     mComments.append(static_cast<QuUK::Comment*>(e));
+                } else if(x.tagName() == "Association") {
+                    mAssociations.append(static_cast<QuUK::Association*>(e));
+                } else {
+                    throw QuLC::ParseException(
+                            qPrintable("Unknown tag " + x.tagName()));
                 }
             }
         }

@@ -6,6 +6,7 @@
 
 #include "ContainmentEdge.h"
 #include <QtGui/QPainter>
+#include <QtCore/QXmlStreamWriter>
 #include <QtCore/QDebug>
 
 QUML_BEGIN_NAMESPACE_GD
@@ -77,5 +78,17 @@ void ContainmentEdge::paint(QPainter* p,
     }
     }
 }
+
+void ContainmentEdge::writeXml(QXmlStreamWriter& writer) const {
+    writer.writeStartElement("Containment");
+
+    writer.writeAttribute("id", uniqueId());
+    writer.writeAttribute("source", source()->uniqueId());
+    writer.writeAttribute("target", target()->uniqueId());
+    writer.writeAttribute("visible", isVisible() ? "true" : "false");
+
+    writer.writeEndElement();
+}
+
 QUML_END_NAMESPACE_GD
 

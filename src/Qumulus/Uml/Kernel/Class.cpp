@@ -129,13 +129,15 @@ void Class::readXml(QDomElement node, QuLC::XmlModelReader& reader) {
         } else if(e.tagName() == "Operation") {
             auto p = reader.loadElement(e);
             addOperation(dynamic_cast<Operation*>(p));
+        } else if(e.tagName() == "Generalization") {
+            auto p = reader.loadElement(e);
+            addGeneralization(dynamic_cast<Generalization*>(p));
+            dynamic_cast<Generalization*>(p)->setSpecific(this);
         } else {
             throw QuLC::ParseException(qPrintable(
                         "Classes cannot contain a "+e.tagName()));
         }
     }
-
-    NYI();
 }
 
 QUML_END_NAMESPACE_UK

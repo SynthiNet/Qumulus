@@ -22,6 +22,7 @@ QUML_BEGIN_NAMESPACE_UK
 class Element;
 class Package;
 class Comment;
+class Association;
 
 QUML_END_NAMESPACE_UK
 
@@ -37,6 +38,7 @@ public:
 
     QuUK::Package* rootPackage() const { return mRootPackage; }
     QList<QuUK::Comment*> comments() const { return mComments; }
+    QList<QuUK::Association*> associations() const { return mAssociations; }
 
     QuUK::Element* loadElement(QDomElement e);
 private:
@@ -48,6 +50,7 @@ private:
     QDomElement mRootNode;
     QuUK::Package* mRootPackage;
     QList<QuUK::Comment*> mComments;
+    QList<QuUK::Association*> mAssociations;
 };
 
 QUML_END_NAMESPACE_LC

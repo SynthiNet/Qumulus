@@ -18,7 +18,7 @@ public:
     GeneralizationEdge(QuUK::Element* e = 0, DiagramElement* p = 0);
     GeneralizationEdge(const GeneralizationEdge&);
 
-    void writeXml(QXmlStreamWriter&) const override {}
+    void writeXml(QXmlStreamWriter&) const override;
     void paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget*) override;
 
     QUML_CLONABLE(GeneralizationEdge);
