@@ -77,6 +77,7 @@ void Enumeration::readXml(QDomElement node, QuLC::XmlModelReader& reader) {
 
         if(e.tagName() == "Literal") {
             auto p = reader.loadElement(e);
+            dynamic_cast<EnumerationLiteral*>(p)->setEnumeration(this);
             addLiteral(dynamic_cast<EnumerationLiteral*>(p));
         } else {
             throw QuLC::ParseException(qPrintable(

@@ -125,9 +125,11 @@ void Class::readXml(QDomElement node, QuLC::XmlModelReader& reader) {
 
         if(e.tagName() == "Property") {
             auto p = reader.loadElement(e);
+            dynamic_cast<Property*>(p)->setClass(this);
             addAttribute(dynamic_cast<Property*>(p));
         } else if(e.tagName() == "Operation") {
             auto p = reader.loadElement(e);
+            dynamic_cast<Operation*>(p)->setClass(this);
             addOperation(dynamic_cast<Operation*>(p));
         } else if(e.tagName() == "Generalization") {
             auto p = reader.loadElement(e);
