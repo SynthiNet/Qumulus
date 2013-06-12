@@ -17,6 +17,7 @@ QUML_BEGIN_NAMESPACE_GD
 CommentShape::CommentShape(QuUK::Element* e,
         DiagramElement* p) :
         SelectableShape(e, p) {
+    updateSizeConstraints();
     resize(0,0);
 }
 

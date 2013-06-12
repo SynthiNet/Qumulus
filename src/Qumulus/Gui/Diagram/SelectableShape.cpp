@@ -24,7 +24,7 @@
 
 QUML_BEGIN_NAMESPACE_GD
 
-SelectableShape::SelectableShape(QuUK::Element* e, DiagramElement* p) : 
+SelectableShape::SelectableShape(QuUK::Element* e, DiagramElement* p) :
     Shape(e, p) {
     setFlag(QGraphicsItem::ItemIsSelectable);
     setFlag(QGraphicsItem::ItemIsMovable);
@@ -33,7 +33,7 @@ SelectableShape::SelectableShape(QuUK::Element* e, DiagramElement* p) :
 
 SelectableShape::SelectableShape(const SelectableShape& c) : Shape(c) {}
 
-void SelectableShape::paint(QPainter* p, const QStyleOptionGraphicsItem*, 
+void SelectableShape::paint(QPainter* p, const QStyleOptionGraphicsItem*,
             QWidget*) {
 
     if(isSelected()) {
@@ -45,7 +45,7 @@ void SelectableShape::paint(QPainter* p, const QStyleOptionGraphicsItem*,
     }
 }
 
-bool SelectableShape::isInsideCircle(int x, int y, int cx, 
+bool SelectableShape::isInsideCircle(int x, int y, int cx,
         int cy, int cw, int ch) const {
     QRegion region(cx, cy, cw, ch);
     return region.contains({x, y});
@@ -63,7 +63,7 @@ bool SelectableShape::shouldShowBDiag(QPointF p) const {
     int x = mapFromScene(p).x();
     int y = mapFromScene(p).y();
 
-    if(isInsideCircle(x, y, -4, height()-2, 9, 9) || 
+    if(isInsideCircle(x, y, -4, height()-2, 9, 9) ||
             isInsideCircle(x, y, width()-2, -4, 9, 9)) {
         return true;
     } else {
@@ -83,7 +83,7 @@ bool SelectableShape::shouldShowFDiag(QPointF p) const {
     int x = mapFromScene(p).x();
     int y = mapFromScene(p).y();
 
-    if(isInsideCircle(x, y, -4, -4, 9, 9) || 
+    if(isInsideCircle(x, y, -4, -4, 9, 9) ||
             isInsideCircle(x, y, width()-2, height()-2, 9, 9)) {
         return true;
     } else {
@@ -170,7 +170,7 @@ void SelectableShape::mouseMoveEvent(QGraphicsSceneMouseEvent *e) {
 
         if(qApp->activeWindow())
             qApp->activeWindow()->undoStack()->push(
-                    new QuGC::ResizeUndoCommand(this, pos(), {x, y}, 
+                    new QuGC::ResizeUndoCommand(this, pos(), {x, y},
                         size(), {w, h}));
     } else {
         Shape::mouseMoveEvent(e);
@@ -181,7 +181,7 @@ QRectF SelectableShape::boundingRect() const {
     return {-7,-7,width()+14,height()+14};
 }
 
-QVariant SelectableShape::itemChange(GraphicsItemChange c, 
+QVariant SelectableShape::itemChange(GraphicsItemChange c,
         const QVariant& v) {
     switch(c) {
     case QGraphicsItem::ItemSelectedChange:
@@ -189,7 +189,7 @@ QVariant SelectableShape::itemChange(GraphicsItemChange c,
             setZValue(zValue()+1);
         } else {
             setZValue(zValue()-1);
-        } 
+        }
         break;
     case QGraphicsItem::ItemPositionChange:
         if(mDragPosition == DragPosition::None) {
@@ -208,7 +208,7 @@ QVariant SelectableShape::itemChange(GraphicsItemChange c,
     }
 
 
-    return Shape::itemChange(c, v); 
+    return Shape::itemChange(c, v);
 }
 
 QUML_END_NAMESPACE_GD
