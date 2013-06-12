@@ -54,6 +54,9 @@ Diagram::Diagram() :
     s->setFontName("sans-serif");
     s->setFontSize(kFontSize);
     mRootPackage->setRootPackage(true);
+    mRouter->setRoutingOption(Avoid::penaliseOrthogonalSharedPathsAtConnEnds, true);
+    mRouter->setRoutingPenalty(Avoid::fixedSharedPathPenalty, 9999);
+    mRouter->setRoutingPenalty(Avoid::crossingPenalty, 9999);
     mRootPackage->childElementChanged += [this] {
         diagramChanged();
     };
