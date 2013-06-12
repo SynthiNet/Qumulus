@@ -17,6 +17,7 @@
 #include <Uml/Kernel/EnumerationLiteral.h>
 #include <Uml/Kernel/Generalization.h>
 #include <Uml/Kernel/Association.h>
+#include <QtCore/QDebug>
 
 QUML_BEGIN_NAMESPACE_LC
 
@@ -105,7 +106,7 @@ QuUK::Element* XmlModelReader::loadElement(QDomElement e) {
         element = new QuUK::Association();
     }
 
-    if(!element)
+    if(element == nullptr)
         throw QuLC::ParseException(qPrintable("Unknown diagram element " +
                 e.tagName()));
 
@@ -116,7 +117,7 @@ QuUK::Element* XmlModelReader::loadElement(QDomElement e) {
 
 bool XmlModelReader::isPackagable(QString name) const {
     return name == "Package" ||
-        name == "Primitive" ||
+        name == "PrimitiveType" ||
         name == "Enumeration" ||
         name == "Class";
 }
