@@ -77,9 +77,12 @@ install(DIRECTORY "${QT5_PLUGIN_DIR}/platforms"
     DESTINATION ${QT_PLUGIN_DEST_DIR} COMPONENT Runtime)
 install(DIRECTORY "${QT5_PLUGIN_DIR}/printsupport" 
     DESTINATION ${QT_PLUGIN_DEST_DIR} COMPONENT Runtime)
+install(DIRECTORY "${QT5_PLUGIN_DIR}/accessible" 
+    DESTINATION ${QT_PLUGIN_DEST_DIR} COMPONENT Runtime)
+
 
 # Install qt.conf file
-INSTALL(CODE "
+install(CODE "
     file(WRITE 
         \"\${CMAKE_INSTALL_PREFIX}/${QT_CONFIG_DEST_DIR}/qt.conf\" 
         \"
