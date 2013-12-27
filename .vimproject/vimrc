@@ -127,7 +127,8 @@ fun! s:ReadTemplateHelper(tpl)
   let l:year = strftime("%Y")
 
   exe "0r ".g:ProjectRoot."/.vimproject/tpl/".a:tpl
-  exe "silent %s/COPYRIGHT HERE/Author: ".l:author
+  exe "silent %s/COPYRIGHT HERE/Copyright (c) ".l:year." ".l:author.
+       \ " <".l:email.">"
 
   exe "silent! %s/HEADER_GUARD_HERE/".s:GenerateHeaderGuard()
   exe "silent! %s/HEADER_HERE/".escape(s:GenerateHeaderName(), '/')
