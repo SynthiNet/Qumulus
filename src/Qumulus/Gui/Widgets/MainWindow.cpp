@@ -161,7 +161,7 @@ void MainWindow::populateToolbar() {
     // Aggregation and submenu.
     mAggregationItem = new ToolBarItem(
             ElementItem("Composition",
-                    QIcon(":/data/img/toolbar/containment.png"),
+                    QIcon(":/data/img/toolbar/composition.png"),
                     QKeySequence(tr("N")),
                     [&]{setCursorState(CursorState::Composition);}));
 
@@ -473,7 +473,7 @@ void MainWindow::setCursorState(CursorState c) {
         setCursor(mCursors["comment"]);
         break;
     case Composition:
-        setCursor(mCursors["containment"]);
+        setCursor(mCursors["composition"]);
         break;
     case Enum:
         setCursor(mCursors["enum"]);
@@ -506,8 +506,8 @@ void MainWindow::createCursors() {
         QCursor(QPixmap(":/data/img/cursor/class.png"), -1, -1);
     mCursors["comment"] =
         QCursor(QPixmap(":/data/img/cursor/comment.png"), -1, -1);
-    mCursors["containment"] =
-        QCursor(QPixmap(":/data/img/cursor/containment.png"), -1, -1);
+    mCursors["composition"] =
+        QCursor(QPixmap(":/data/img/cursor/composition.png"), -1, -1);
     mCursors["enum"] =
         QCursor(QPixmap(":/data/img/cursor/enum.png"), -1, -1);
     mCursors["inheritance"] =
