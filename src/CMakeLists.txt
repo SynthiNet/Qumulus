@@ -37,7 +37,7 @@ if(WIN32)
 endif()
 
 # More errors
-if(APPLE)    
+if(APPLE AND 0)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror -pedantic-errors")
 endif()
 
