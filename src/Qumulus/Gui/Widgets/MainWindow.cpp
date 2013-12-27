@@ -534,11 +534,6 @@ void MainWindow::closeEvent(QCloseEvent* event) {
             event->accept();
         } else {
             event->ignore();
-#ifdef Q_OS_MAC
-            // Ugly workaround for a Qt5 bug on OS X.
-            QTimer::singleShot(0,this,SLOT(hide()));
-            QTimer::singleShot(10,this,SLOT(show()));
-#endif
         }
     } else {
         event->accept();
