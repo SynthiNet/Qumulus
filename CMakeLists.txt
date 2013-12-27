@@ -123,10 +123,10 @@ set(GTEST_HAS_TR1_TUPLE 0)
 
 # Qt Mac Extras
 if(APPLE)
-    add_subdirectory(deps/QtMacExtras)
-    set(QTMACEXTRAS_LIBRARIES QtMacExtras)
-    set(QTMACEXTRAS_INCLUDE_DIRS ${CMAKE_SOURCE_DIR}/deps)
-    set(QTMACEXTRAS_LIBRARY_DIR ${CMAKE_BINARY_DIR}/deps/QtMacExtras)
+    #add_subdirectory(deps/QtMacExtras)
+    #set(QTMACEXTRAS_LIBRARIES QtMacExtras)
+    #set(QTMACEXTRAS_INCLUDE_DIRS ${CMAKE_SOURCE_DIR}/deps)
+    #set(QTMACEXTRAS_LIBRARY_DIR ${CMAKE_BINARY_DIR}/deps/QtMacExtras)
 endif()
 
 # libavoid
