@@ -371,8 +371,19 @@ void MainWindow::createMenus() {
     // mPasteAction->setShortcuts(QKeySequence::Paste);
 
     mDeleteAction = new QAction(tr("&Delete"), this);
+
+#ifdef Q_OS_MAC
+    // FIXME
+    // Due a "P2" regression in Qt since 5.1, the backspace/delete key doesn't
+    // work on OS X. No fix available yet, so I'm binding delete to
+    // Cmd+Backspace for now
+    // SeySayux 2013-12-31
+    mDeleteAction->setShortcuts({QKeySequence("Ctrl+Backspace")});
+#else
     mDeleteAction->setShortcuts({QKeySequence(Qt::Key_Backspace),
             QKeySequence(Qt::Key_Delete)});
+#endif
+
     connect(mDeleteAction, &QAction::triggered, [&]{
             if(QApplication::focusWidget() == mEditorView) {
                 for(auto i : mEditorView->scene()->selectedItems()) {
