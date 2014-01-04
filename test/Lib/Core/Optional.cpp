@@ -1,11 +1,11 @@
 /*
- * Qumulus UML Editor 
+ * Qumulus UML Editor
  * Author: Frank Erens
  *
  */
 
 #include <gtest/gtest.h>
-#include <Lib/Core/All.h>
+#include <Lib/Core/Optional.h>
 
 namespace {
 
