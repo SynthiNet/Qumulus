@@ -19,9 +19,7 @@ endif()
 # Include path
 include_directories(
     Qumulus 
-    ${QTMACEXTRAS_INCLUDE_DIRS}
     ${LIBAVOID_INCLUDE_DIRS}
-    ${Qt5Gui_PRIVATE_INCLUDE_DIRS}
 )
 
 # Compiled-in resources
@@ -36,14 +34,9 @@ if(WIN32)
         "-o${CMAKE_BINARY_DIR}/winicon.o" )
 endif()
 
-# More errors
-if(APPLE AND 0)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror -pedantic-errors")
-endif()
-
 # quml library
 add_library(quml STATIC ${QUML_ALL_SRC})
-qt5_use_modules(quml Core Xml)
+target_link_libraries(quml Qt5::Core Qt5::Xml)
 
 # Qumulus application
 add_executable(${QUMULUS} WIN32 MACOSX_BUNDLE
@@ -54,11 +47,14 @@ add_executable(${QUMULUS} WIN32 MACOSX_BUNDLE
     ${QUMULUS_WINICON}
 )
 
-target_link_libraries(${QUMULUS} quml 
+target_link_libraries(${QUMULUS} 
+    quml 
+    ${LIBAVOID_LIBRARIES}
     ${Qt5Core_QTMAIN_LIBRARIES}
-    ${QTMACEXTRAS_LIBRARIES}
-    ${LIBAVOID_LIBRARIES})
-qt5_use_modules(${QUMULUS} Widgets PrintSupport Svg Xml)
+    Qt5::Widgets
+    Qt5::PrintSupport
+    Qt5::Svg
+    Qt5::Xml)
 
 if(APPLE)
     set_target_properties(${QUMULUS} PROPERTIES

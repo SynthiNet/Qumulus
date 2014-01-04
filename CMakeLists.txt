@@ -5,7 +5,7 @@
 #
 ###############################################################################
 
-cmake_minimum_required(VERSION 2.8.8)
+cmake_minimum_required(VERSION 2.8.11)
 project(Qumulus)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake")
 
@@ -120,14 +120,6 @@ endif()
 # Gtest options -- does not compile on Clang without these.
 set(GTEST_USE_OWN_TR1_TUPLE 1)
 set(GTEST_HAS_TR1_TUPLE 0)
-
-# Qt Mac Extras
-if(APPLE)
-    #add_subdirectory(deps/QtMacExtras)
-    #set(QTMACEXTRAS_LIBRARIES QtMacExtras)
-    #set(QTMACEXTRAS_INCLUDE_DIRS ${CMAKE_SOURCE_DIR}/deps)
-    #set(QTMACEXTRAS_LIBRARY_DIR ${CMAKE_BINARY_DIR}/deps/QtMacExtras)
-endif()
 
 # libavoid
 add_subdirectory(deps/libavoid)

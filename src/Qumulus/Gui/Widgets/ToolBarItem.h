@@ -17,9 +17,6 @@
 #include <Gui/Widgets/ElementItem.h>
 #include <Gui/Widgets/ToolBarMenu.h>
 #include <Lib/Core/Ptr.h>
-#ifdef Q_OS_MAC
-#include <QtMacExtras/QMacNativeWidget>
-#endif
 
 QUML_BEGIN_NAMESPACE_GW
 

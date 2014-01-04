@@ -12,11 +12,7 @@
 #include <QtCore/QString>
 #include <QtWidgets/QAction>
 #include <QtGui/QIcon>
-// #ifdef Q_OS_MAC
-// #include <QtMacExtras/QMacNativeToolBar>
-// #else
 #include <QtWidgets/QToolBar>
-// #endif
 #include <Lib/Core/Ptr.h>
 #include <Gui/Widgets/ToolBarItem.h>
 
