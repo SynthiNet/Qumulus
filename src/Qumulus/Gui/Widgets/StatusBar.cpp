@@ -1,7 +1,20 @@
 /*
  * Qumulus UML editor
- * Author: Frank Erens
- * Author: Randy Thiemann
+ * Copyright (c) 2014 Frank Erens <frank@synthi.net>
+ * Copyright (c) 2014 Randy Thiemann <uselinuxnow@gmail.com>
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
  *
  */
 
@@ -26,7 +39,7 @@ StatusBar::StatusBar(QWidget* parent) : QStatusBar(parent),
 #endif
     setFixedHeight(24);
     addPermanentWidget(mZoomBox);
-    mZoomBox->addItems({"25 %", "50 %", "75 %", "100 %", 
+    mZoomBox->addItems({"25 %", "50 %", "75 %", "100 %",
             "200 %", "300 %", "400 %"});
     mZoomBox->setCurrentIndex(3);
     mZoomBox->setMaximumWidth(75);
@@ -35,8 +48,8 @@ StatusBar::StatusBar(QWidget* parent) : QStatusBar(parent),
     addPermanentWidget(mSpacer);
 #endif
 
-    connect(mZoomBox, 
-            static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), 
+    connect(mZoomBox,
+            static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
             [&](int value){mZoom->setValue(value);});
     connect(mZoom,
             &ZoomSlider::valueChanged,
@@ -84,7 +97,7 @@ void StatusBar::mouseMoveEvent(QMouseEvent *event) {
 
 void StatusBar::mousePressEvent(QMouseEvent *event) {
      if(event->button() == Qt::LeftButton) {
-         mDragPosition = event->globalPos() - 
+         mDragPosition = event->globalPos() -
                 window()->frameGeometry().topLeft();
          event->accept();
      }
