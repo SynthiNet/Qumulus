@@ -36,6 +36,7 @@
 #include <Gui/Widgets/ElementItem.h>
 #include <Gui/Widgets/ToolBarMenu.h>
 #include <Gui/Widgets/MessageBox.h>
+#include <Gui/Widgets/Mac/MacToolBar.h>
 #include <Gui/Core/QumulusApplication.h>
 #include <Gui/Core/XmlReader.h>
 #include <QtWidgets/QSplitter>
@@ -53,7 +54,11 @@ QUML_BEGIN_NAMESPACE_GW
 
 MainWindow::MainWindow() :
         mDiagram(new QuGD::Diagram()),
-        mToolBar(new ToolBar(this)),
+#ifdef Q_OS_MAC
+        mToolBar(new Mac::MacToolBar(this)),
+#else
+        mToolBar(new QtToolBar(this)),
+#endif
         mSideBar(new SideBar(this, mDiagram)),
         mSplitter(new QSplitter(this)),
         mStatusBar(new StatusBar(this)),
@@ -120,8 +125,6 @@ MainWindow::~MainWindow() {
 }
 
 void MainWindow::populateToolbar() {
-    mToolBar->showInWindow(this);
-
 
     // Class and submenu.
     mClassItem = new ToolBarItem(
@@ -206,6 +209,9 @@ void MainWindow::populateToolbar() {
                     [&]{setCursorState(CursorState::Association);}));
     mRelationshipItem->setMenu(mRelationshipMenu);
     mToolBar->addWidget(mRelationshipItem);
+
+    // Keep this as last
+    mToolBar->showInWindow(this);
 }
 
 void MainWindow::createMenus() {

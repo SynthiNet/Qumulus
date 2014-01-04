@@ -36,28 +36,35 @@ class MainWindow;
 
 class ToolBar : public QObject {
     Q_OBJECT
+public:
+    constexpr static const char* kToolBarName = "QumulusToolBar";
 
 public:
-    ToolBar(QObject* parent = 0);
-    void showInWindow(MainWindow* w);
-    MainWindow* window();
+    ToolBar(QObject* parent = 0) : QObject(parent) {}
+    virtual ~ToolBar() {}
+    virtual void showInWindow(MainWindow* w) = 0;
+    MainWindow* window() const { return mWindow; }
 
     // TODO: make this return QAction*
-    void addWidget(ToolBarItem* item);
-    void addSeparator();
+    virtual void addWidget(ToolBarItem* item) = 0;
+    virtual void addSeparator() = 0;
 
-#ifdef Q_OS_MAC_disabled
-    void addFlexibleSpace();
-    NSToolbar* nativeToolbar() const { return mToolBar->nativeToolbar(); }
-#endif
-
-private:
-#ifdef Q_OS_MAC_disabled
-    uptr<QMacNativeToolBar> mToolBar;
-#else
-    uptr<QToolBar> mToolBar;
-#endif
+protected:
     MainWindow* mWindow;
+};
+
+class QtToolBar : public ToolBar {
+    Q_OBJECT
+public:
+    QtToolBar(QObject* parent = 0);
+    ~QtToolBar() {}
+    void showInWindow(MainWindow* w) override;
+
+    void addWidget(ToolBarItem* item) override;
+    void addSeparator() override;
+private:
+    QToolBar* mToolBar;
+
 };
 
 QUML_END_NAMESPACE_GW

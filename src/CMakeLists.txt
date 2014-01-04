@@ -30,6 +30,10 @@ if(NOT APPLE)
     set(QUMULUS_GUI_ALL_MM_SRC "")
 endif()
 
+if(APPLE)
+    find_library(COCOA_LIBRARIES Cocoa)
+endif()
+
 # Include path
 include_directories(
     Qumulus 
@@ -64,6 +68,7 @@ add_executable(${QUMULUS} WIN32 MACOSX_BUNDLE
 target_link_libraries(${QUMULUS} 
     quml 
     ${LIBAVOID_LIBRARIES}
+    ${COCOA_LIBRARIES}
     ${Qt5Core_QTMAIN_LIBRARIES}
     Qt5::Widgets
     Qt5::PrintSupport

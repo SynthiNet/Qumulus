@@ -1,7 +1,6 @@
 /*
  * Qumulus UML editor
  * Copyright (c) 2014 Frank Erens <frank@synthi.net>
- * Copyright (c) 2014 Randy Thiemann <uselinuxnow@gmail.com>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,34 +13,38 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
- *
  */
 
-#include "ToolBar.h"
-#include <Gui/Widgets/MainWindow.h>
+#ifndef GUI_WIDGETS_MAC_MACTOOLBAR_H_
+#define GUI_WIDGETS_MAC_MACTOOLBAR_H_
+
+#include <Gui/Widgets/ToolBar.h>
+
+#include <QtCore/QList.h>
 
 QUML_BEGIN_NAMESPACE_GW
 
-QtToolBar::QtToolBar(QObject* parent) : ToolBar(parent),
-        mToolBar(new QToolBar(kToolBarName)) {
-    mToolBar->setFloatable(false);
-    mToolBar->setMovable(false);
-}
+namespace Mac {
 
-void QtToolBar::showInWindow(MainWindow* w) {
-    mWindow = w;
-    w->addToolBar(mToolBar);
-}
+class MacToolBar : public ToolBar {
+public:
+    MacToolBar(QObject* o);
+    ~MacToolBar();
 
+    void showInWindow(MainWindow* w) override;
 
-void QtToolBar::addWidget(ToolBarItem* item) {
-    mToolBar->addWidget(item);
-}
+    void addWidget(ToolBarItem* item) override;
+    void addSeparator() override;
 
-void QtToolBar::addSeparator() {
-    mToolBar->addSeparator();
-}
+    const QList<ToolBarItem*>& toolBarItems() const { return mToolBarItems; }
+private:
+    QList<ToolBarItem*> mToolBarItems;
+};
+
+};
 
 QUML_END_NAMESPACE_GW
+
+
+#endif /* GUI_WIDGETS_MAC_MACTOOLBAR_H_ */
 
