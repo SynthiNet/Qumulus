@@ -133,7 +133,7 @@ public:
         label = new QLabel(this);
         label->setObjectName(QStringLiteral("label"));
         QFont font;
-        font.setPointSize(11);
+        font.setPointSize(11 / kFontMacFactor);
         label->setFont(font);
         label->setAlignment(Qt::AlignCenter);
 

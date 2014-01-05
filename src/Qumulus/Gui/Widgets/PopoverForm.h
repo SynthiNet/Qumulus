@@ -24,6 +24,13 @@
 #include "internal_base.h"
 #include <Gui/Diagram/internal_base.h>
 
+// TODO: figure out where to put this
+#ifdef Q_OS_MAC
+constexpr double kFontMacFactor = 1.0;
+#else
+constexpr double kFontMacFactor = 1.3;
+#endif
+
 QUML_BEGIN_NAMESPACE_GD
 
 class Shape;
