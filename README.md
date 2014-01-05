@@ -16,29 +16,21 @@ Binaries are available for the following platforms:
 
 **All Platforms**:
 
-- Qt 5.0.2
-- CMake 2.8.8 or newer
+- Qt 5.2.0
+- CMake 2.8.11 or newer
 
 **Mac OS X**:
 
 - Xcode (with command line utilities)
 
-*Note*:
-> In order for cursors to work, you need to install a custom patch for Qt. The
-> patched version can be found at 
-> [http://ftp.synthi.net/builds/qt5/qcocoa/](http://ftp.synthi.net/builds/qt5/qcocoa/) .
-> Please also run the script qtplugin-fix-libraries.sh found in the same
-> directory on each of the patched plugins. Modify the script so `QT5` points to
-> your Qt 5 installation.
-
 **Linux**:
 
-- GCC 4.7.0 or newer
+- GCC 4.8.0 or newer
 - chrpath
 
 **Windows**:
 
-- MinGW 4.7.0 or newer
+- MinGW 4.8.0 or newer
 - Microsoft Visual C++
 
 *Note*:
@@ -60,12 +52,13 @@ Next, run CMake:
 A few options that can be passed to CMake:
 
 - `-DCMAKE_PREFIX_PATH=...`: Search path for libraries. E.g. if you have
-  installed Qt in `$HOME/Qt5/Qt5.0.2/clang_64`, you'd put that here.
+  installed Qt in `$HOME/Qt5/Qt5.2.0/clang_64`, you'd put that here.
+  Alternatively, add the `bin` folder of your Qt installation to your PATH.
 - `-DCMAKE_INSTALL_PREFIX=...`: Where to put the installed binaries. This can be
    a relative path, e.g. `./inst`
 - `-G`: Generator to be used. On Mac OS X and Linux this defaults to Makefiles.
   On Windows you'd probably want to use a specific generator, i.e. 
-  `"-GMinGW Makefiles"`
+  `-G"MinGW Makefiles"`
 
 Build and install the project:
 
