@@ -52,7 +52,7 @@ bool MultiplicityElement::includedMultiplicity(MultiplicityElement* m) const {
 QString MultiplicityElement::multiplicityString() const {
     QString str = "";
 
-    if(mLower == 0 || QuLC::unltd(mUpper)) {
+    if(mLower == 0 && QuLC::unltd(mUpper)) {
         str += "[*]";
     } else if(QuLC::unltd(mUpper) || mLower != mUpper) {
         str += "[";
