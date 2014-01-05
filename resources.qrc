@@ -2,7 +2,7 @@
 <RCC version="1.0">
   <qresource>
     <file>logo/qumulus-256.png</file>
-    <file>logo/uml/xmi-mac.iconset/icon_16x16.png</file>
+    <file>logo/uml/uml-mac.iconset/icon_16x16.png</file>
 
     <file>data/img/toolbar/class.png</file>
     <file>data/img/toolbar/enum.png</file>
