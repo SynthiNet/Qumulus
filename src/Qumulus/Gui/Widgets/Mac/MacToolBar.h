@@ -20,7 +20,7 @@
 
 #include <Gui/Widgets/ToolBar.h>
 
-#include <QtCore/QList.h>
+#include <QtCore/QList>
 
 QUML_BEGIN_NAMESPACE_GW
 
