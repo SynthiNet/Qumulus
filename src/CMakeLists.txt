@@ -100,48 +100,17 @@ install(CODE "
     " COMPONENT Runtime)
 
 # Deployment
-if(APPLE)
-    # Fix library references
-    install(CODE "
-        file(GLOB_RECURSE QTPLUGINS
-            \"\${CMAKE_INSTALL_PREFIX}/${QT_PLUGIN_DEST_DIR}/*${CMAKE_SHARED_LIBRARY_SUFFIX}\")
-        include(BundleUtilities)
-        fixup_bundle(\${CMAKE_INSTALL_PREFIX}/${QUMULUS}.app 
-            \"\${QTPLUGINS}\" 
-            \"${QT5_LIBRARY_DIR};${QTMACEXTRAS_LIBRARY_DIR};${LIBAVOID_LIBRARY_DIR}\")
-        " COMPONENT Runtime)
-elseif(WIN32)
-    # Install required libraries
-    install(CODE "
-        include(GetPrerequisites)
-
-        get_prerequisites(\${CMAKE_INSTALL_PREFIX}/${QUMULUS}.exe 
-            WINDOWS_LIBRARIES 1 1 \"\" \"\")
-        
-        foreach(lib \${WINDOWS_LIBRARIES})
-            find_program(lib_path_\${lib} \${lib})
-            if(NOT (\"\${lib_path_\${lib}}\" MATCHES \"NOTFOUND\"))
-                file(INSTALL \"\${lib_path_\${lib}}\" 
-                    DESTINATION \${CMAKE_INSTALL_PREFIX}/${BINARY_DEST})
-            endif()
-        endforeach()
-
-        " COMPONENT RUNTIME)
-
-    install(FILES ${QT5_LIBRARY_DIR}/libEGL.dll DESTINATION .)
-elseif(UNIX AND NOT APPLE)
-# Fix library references
-    install(CODE "
-        file(GLOB_RECURSE QTPLUGINS
-            \"\${CMAKE_INSTALL_PREFIX}/${QT_PLUGIN_DEST_DIR}/*${CMAKE_SHARED_LIBRARY_SUFFIX}\")
-        include(BundleUtilities)
-        fixup_bundle(\${CMAKE_INSTALL_PREFIX}/${BINARY_DEST}/${QUMULUS} 
-            \"\${QTPLUGINS}\" 
-            \"${QT5_LIBRARY_DIR};${LIBAVOID_LIBRARY_DIR}\")
-        " COMPONENT Runtime)
-        foreach(plugin ${QTPLUGINS})
-            execute_process(COMMAND chrpath -r '$ORIGIN/../..' "${plugin}")
-            message(STATUS "Fixing rpath for plugin ${plugin}")
-        endforeach()
+if(WIN32)
+    set(EXECUTABLE_SUFFIX .exe)
+elseif(APPLE)
+    set(EXECUTABLE_SUFFIX .app)
 endif()
 
+install(CODE "
+    file(GLOB_RECURSE QTPLUGINS
+        \"\${CMAKE_INSTALL_PREFIX}/${QT_PLUGIN_DEST_DIR}/*${CMAKE_SHARED_LIBRARY_SUFFIX}\")
+    include(BundleUtilities)
+    fixup_bundle(\${CMAKE_INSTALL_PREFIX}/${QUMULUS}${EXECUTABLE_SUFFIX}
+        \"\${QTPLUGINS}\"
+        \"${QT5_LIBRARY_DIR};${LIBAVOID_LIBRARY_DIR}\")
+    " COMPONENT RUNTIME)
